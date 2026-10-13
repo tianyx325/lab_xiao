@@ -1,0 +1,22 @@
+{{- define "main" -}}
+
+<div class="lab-list-page lab-list-page--post">
+  {{ partial "lab-list-header.html" (dict "title" .Title "lead" (partial "lab-section-lead.html" (dict "page" . "key" "post"))) }}
+
+  <div class="lab-list-body container">
+    {{ with .Content }}
+      <div class="article-style lab-list-intro">{{ . }}</div>
+    {{ end }}
+
+    <div class="lab-list-grid">
+      {{ $paginator := .Paginate .Pages }}
+      {{ range $index, $post := $paginator.Pages }}
+        {{ partial "functions/render_view" (dict "page" $ "item" . "view" ($.Params.view | default "card") "index" $index) }}
+      {{ end }}
+    </div>
+
+    {{ partial "pagination" . }}
+  </div>
+</div>
+
+{{- end -}}

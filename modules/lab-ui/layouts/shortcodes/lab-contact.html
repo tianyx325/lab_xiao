@@ -1,0 +1,90 @@
+{{- $lab := site.Params.lab | default dict -}}
+{{- $ui := $lab.ui | default dict -}}
+{{- $admit := $lab.admit | default dict -}}
+{{- $email := $lab.email | default "" -}}
+{{- $address := $lab.address | default "" -}}
+{{- $lat := printf "%v" ($lab.latitude | default "0") -}}
+{{- $lng := printf "%v" ($lab.longitude | default "0") -}}
+{{- $admitLead := $lab.admit_lead | default (printf "欢迎有志于相关研究的同学加入%s" ($lab.name | default "实验室")) -}}
+{{- $pageTitle := $ui.contact_title | default "联系与招生" -}}
+{{- $admitKind := $ui.admit_kind | default "招生信息" -}}
+{{- $contactKind := $ui.contact_kind | default "联系方式" -}}
+{{- $emailLabel := $ui.email_label | default "邮箱" -}}
+{{- $addressLabel := $ui.address_label | default "地址" -}}
+{{- $mapAria := $ui.map_aria | default "实验室位置地图" -}}
+{{- $map_provider := lower (site.Params.features.map.provider | default "mapnik") -}}
+{{- $map_zoom := site.Params.features.map.zoom | default "15" -}}
+{{- $map_api_key := site.Params.features.map.api_key | default "" -}}
+{{- $sections := $admit.sections | default slice -}}
+
+{{/* 本地 Leaflet：不依赖 jsDelivr；补强主题仅对 mapnik/mapbox 注入的逻辑 */}}
+{{ if and $map_provider (not (.Page.Scratch.Get "lab_leaflet_assets")) }}
+{{ .Page.Scratch.Set "lab_leaflet_assets" true }}
+<link rel="stylesheet" href="{{ "vendor/leaflet/leaflet.css" | relURL }}">
+<script src="{{ "vendor/leaflet/leaflet.js" | relURL }}"></script>
+{{ end }}
+
+<div class="lab-contact lab-list-page">
+  <header class="lab-list-header">
+    <div class="container">
+      <h1 class="lab-list-title">{{ $pageTitle }}</h1>
+      <p class="lab-list-lead">{{ $admitLead }}</p>
+    </div>
+  </header>
+
+  <div class="lab-list-body container">
+  <section class="lab-contact-panel">
+    <span class="lab-contact-kind">{{ $admitKind }}</span>
+    <div class="lab-contact-admit-grid">
+      {{- range $sections }}
+      <article class="lab-contact-admit-col">
+        <h2>{{ .title }}</h2>
+        {{ with .lead }}<p class="lab-contact-card-lead">{{ . }}</p>{{ end }}
+        <ul>
+          {{- if .show_email }}
+            {{- with $email }}<li><a class="lab-contact-mail" href="mailto:{{ . }}" title="点击复制邮箱">{{ . }}</a></li>{{ end }}
+          {{- end }}
+          {{- range .bullets }}
+          <li>{{ . }}</li>
+          {{- end }}
+        </ul>
+      </article>
+      {{- end }}
+    </div>
+  </section>
+
+  <section class="lab-contact-panel">
+    <span class="lab-contact-kind">{{ $contactKind }}</span>
+    <div class="lab-contact-ways">
+      <div class="lab-contact-ways-meta">
+        {{ with $email }}
+        <div class="lab-contact-ways-item">
+          <span class="lab-contact-info-label">{{ $emailLabel }}</span>
+          <a href="mailto:{{ . }}" title="点击复制邮箱">{{ . }}</a>
+        </div>
+        {{ end }}
+        {{ with $address }}
+        <div class="lab-contact-ways-item">
+          <span class="lab-contact-info-label">{{ $addressLabel }}</span>
+          <p>{{ . }}</p>
+        </div>
+        {{ end }}
+      </div>
+      {{ if $map_provider }}
+      <div class="lab-contact-ways-map">
+        <div class="d-none">
+          <input id="map-provider" value="{{ $map_provider }}">
+          <input id="map-lat" value="{{ $lat }}">
+          <input id="map-lng" value="{{ $lng }}">
+          <input id="map-dir" value="{{ $address }}">
+          <input id="map-zoom" value="{{ $map_zoom }}">
+          <input id="map-api-key" value="{{ $map_api_key }}">
+          <input id="map-leaflet-img" value="{{ "vendor/leaflet/images/" | relURL }}">
+        </div>
+        <div id="map" role="region" aria-label="{{ $mapAria }}"></div>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  </div>
+</div>

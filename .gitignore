@@ -1,0 +1,12 @@
+# IDEs
+.idea/
+
+# Hugo
+/resources/
+public/
+assets/jsconfig.json
+.hugo_build.lock
+_debug_*.py
+_v.py
+_v.txt
+_excel_preview.json

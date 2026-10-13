@@ -1,0 +1,52 @@
+/* Shared design tokens — site template.scss should only:
+   @import "lab/tokens";
+   Keep data/themes/minimal.toml primary in sync with $lab-blue.
+*/
+
+$lab-blue: #1565c0 !default;
+$lab-blue-wash: #f2f6fb !default;
+
+$lab-ink: #1a2332 !default;
+$lab-muted: #5e6876 !default;
+$lab-line: rgba(26, 35, 50, 0.1) !default;
+$lab-card-border: rgba(26, 35, 50, 0.1) !default;
+$lab-card-border-hover: rgba(21, 101, 192, 0.35) !default;
+$lab-card-bg: #fff !default;
+$lab-card-pad: 1.25rem 1.3rem 1.2rem !default;
+$lab-card-radius: 3px !default;
+$lab-card-shadow: 0 1px 0 rgba(26, 35, 50, 0.03) !default;
+$lab-card-shadow-hover: 0 12px 28px rgba(21, 101, 192, 0.08) !default;
+
+$lab-phi: 1.618 !default;
+$lab-card-ratio: unquote("#{$lab-phi} / 1") !default;
+
+$lab-content-width: 1160px !default;
+$lab-page-gutter: 0.65rem !default;
+$lab-card-gap: 0.85rem !default;
+
+$lab-text-xs: 0.8rem !default;
+$lab-text-sm: 0.875rem !default;
+$lab-text-base: 1rem !default;
+$lab-text-md: 1.125rem !default;
+$lab-text-lg: 1.25rem !default;
+$lab-text-xl: 1.5rem !default;
+/* Plain rem — avoid rem+vw (LibSass cannot mix units) */
+$lab-text-display: 2rem !default;
+
+$lab-leading-tight: 1.25 !default;
+$lab-leading-snug: 1.45 !default;
+$lab-leading-body: 1.65 !default;
+$lab-leading-loose: 1.75 !default;
+
+$lab-pub: #1565c0 !default;
+$lab-pub-wash: #eef4fb !default;
+$lab-research: #7b1fa2 !default;
+$lab-research-wash: #f7f0fb !default;
+$lab-project: #2e7d32 !default;
+$lab-project-wash: #f0f7f1 !default;
+$lab-award: #c79100 !default;
+$lab-award-wash: #fff8e7 !default;
+$lab-patent: #7b1fa2 !default;
+$lab-patent-wash: #f7f0fb !default;
+$lab-post: #2e7d32 !default;
+$lab-post-wash: #f0f7f1 !default;

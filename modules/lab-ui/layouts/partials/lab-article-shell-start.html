@@ -1,0 +1,21 @@
+{{- $typeClass := printf "lab-article--%s" .Section -}}
+<article class="lab-article {{ $typeClass }}">
+  <header class="lab-article-header">
+    <div class="container">
+      <h1 class="lab-article-title">{{ .Title }}</h1>
+      {{ with .Scratch.Get "lab_article_byline" }}
+      <p class="lab-article-byline">{{ . | safeHTML }}</p>
+      {{ end }}
+      {{ with .Scratch.Get "lab_article_dek" }}
+      <p class="lab-article-dek">{{ . | markdownify | emojify }}</p>
+      {{ end }}
+      {{ with .Scratch.Get "lab_article_meta" }}
+      <ul class="lab-article-meta" aria-label="摘要信息">
+        {{ range . }}
+        <li>{{ . }}</li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </div>
+  </header>
+  <div class="lab-article-body container">

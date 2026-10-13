@@ -1,0 +1,61 @@
+{{- define "main" -}}
+
+{{ $pub_type_csl := "" }}
+{{ $pub_type_display := "" }}
+{{ if .Params.publication_types }}
+  {{ if reflect.IsSlice .Params.publication_types }}
+    {{ $pub_type_csl = index .Params.publication_types 0 }}
+    {{ $pub_type_display = i18n (printf "pub_%s" (strings.Replace $pub_type_csl "-" "_")) | default (strings.Title $pub_type_csl) }}
+  {{ end }}
+{{ end }}
+
+{{ $byline := slice }}
+{{ if .Params.authors }}
+  {{ $byline = $byline | append (partial "lab-detail-authors.html" .) }}
+{{ end }}
+{{ with .Date }}
+  {{ $byline = $byline | append (.Format "2006-01") }}
+{{ end }}
+{{ with $.Params.publication_short }}
+  {{ $byline = $byline | append (. | plainify) }}
+{{ else }}
+  {{ with $.Params.publication }}
+    {{ $byline = $byline | append (. | plainify) }}
+  {{ end }}
+{{ end }}
+{{ with $pub_type_display }}
+  {{ $byline = $byline | append . }}
+{{ end }}
+{{ .Scratch.Set "lab_article_byline" (delimit $byline " · ") }}
+
+{{ partial "lab-article-shell-start.html" . }}
+
+    {{ with .Params.abstract }}
+    <div class="lab-article-abstract">{{ . | markdownify }}</div>
+    {{ end }}
+
+    {{ if .Content }}
+    <div class="article-style lab-article-content">{{ .Content }}</div>
+    {{ end }}
+
+    {{ with .Params.doi }}
+    <p class="lab-article-meta-line">DOI：<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">{{ . }}</a></p>
+    {{ end }}
+
+    {{ with .Params.tags }}
+    <p class="lab-article-tags">{{ delimit . " · " }}</p>
+    {{ end }}
+
+    {{ if or .Params.url_pdf .Params.url_code .Params.url_dataset .Params.url_poster .Params.url_video }}
+    <p class="lab-article-links">
+      {{ with .Params.url_pdf }}<a href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
+      {{ with .Params.url_code }}<a href="{{ . }}" target="_blank" rel="noopener">代码</a>{{ end }}
+      {{ with .Params.url_dataset }}<a href="{{ . }}" target="_blank" rel="noopener">数据</a>{{ end }}
+      {{ with .Params.url_poster }}<a href="{{ . }}" target="_blank" rel="noopener">海报</a>{{ end }}
+      {{ with .Params.url_video }}<a href="{{ . }}" target="_blank" rel="noopener">视频</a>{{ end }}
+    </p>
+    {{ end }}
+
+{{ partial "lab-article-shell-end.html" . }}
+
+{{- end -}}

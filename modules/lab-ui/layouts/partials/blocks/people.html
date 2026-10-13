@@ -1,0 +1,111 @@
+{{/* Shared people block — homepage + /people/ use the same card template */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{/* landing people 页 Section 可能为空；用路径判断，兼容 /lab/people/ 子路径部署 */}}
+{{ $is_list_page := or (eq $page.Section "people") (in $page.RelPermalink "/people/") }}
+{{ $lab := site.Params.lab | default dict }}
+{{ $ui := $lab.ui | default dict }}
+{{ $peopleLead := $block.content.subtitle | default "" }}
+{{ if not $peopleLead }}
+  {{ with $ui.people_lead }}
+    {{ $peopleLead = . }}
+  {{ else }}
+    {{ with $lab.name }}
+      {{ $peopleLead = printf "%s团队成员" . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<div class="lab-people{{ if $is_list_page }} lab-list-page{{ end }}">
+  {{ with $block.content.title }}
+    {{ if $is_list_page }}
+      {{ partial "lab-list-header.html" (dict "title" . "lead" $peopleLead) }}
+    {{ else }}
+  <header class="lab-people-header">
+    <h1 class="lab-people-title">{{ . | markdownify | emojify }}</h1>
+    {{ with $peopleLead }}
+    <p class="lab-people-lead">{{ . | markdownify | emojify }}</p>
+    {{ end }}
+  </header>
+    {{ end }}
+  {{ end }}
+
+  <div class="{{ if $is_list_page }}lab-list-body container{{ else }}lab-people-body{{ end }}">
+  {{ with $block.content.text }}
+  <div class="lab-people-intro">{{ . | emojify | $page.RenderString }}</div>
+  {{ end }}
+
+  {{ range $block.content.user_groups }}
+    {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice .) }}
+    {{ $sort_ascending := $block.content.sort_ascending | default true }}
+    {{ $sort_order := cond $sort_ascending "asc" "desc" }}
+    {{/* Sort by Title — Params.last_name collapses same-surname members (Hugo map sort) */}}
+    {{ $query = sort $query "Title" $sort_order }}
+    {{/* Lab director always first within the group */}}
+    {{ $directors := slice }}
+    {{ $others := slice }}
+    {{ range $query }}
+      {{ if in (.Params.role | default "" | string) "实验室负责人" }}
+        {{ $directors = $directors | append . }}
+      {{ else }}
+        {{ $others = $others | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $query = $directors | append $others }}
+
+    {{ if $query }}
+    <section class="lab-people-group">
+      {{ if gt (len $block.content.user_groups) 1 }}
+      <h2 class="lab-people-group-title">{{ . | markdownify }}</h2>
+      {{ end }}
+
+      <div class="lab-people-grid">
+        {{ range $query }}
+          {{ $avatar := (.Resources.ByType "image").GetMatch "*avatar*" }}
+          {{ $link := "" }}
+          {{ with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) }}
+            {{ $link = .RelPermalink }}
+          {{ end }}
+          {{ $src := "" }}
+          {{ if site.Params.features.avatar.gravatar }}
+            {{ $src = printf "https://s.gravatar.com/avatar/%s?s=480" (md5 .Params.email) }}
+          {{ else if $avatar }}
+            {{ $avatar_image := $avatar.Fill "480x480 Center" }}
+            {{ $src = $avatar_image.RelPermalink }}
+          {{ end }}
+
+          {{ $initial := substr .Title 0 1 }}
+          {{ if $link }}
+          <a class="lab-member-card" href="{{ $link }}">
+          {{ else }}
+          <article class="lab-member-card">
+          {{ end }}
+            <div class="lab-member-photo{{ if not $src }} is-placeholder{{ end }}">
+              {{ if $src }}
+              <img src="{{ $src }}" alt="{{ .Title }}" loading="lazy" width="360" height="360">
+              {{ else }}
+              <span class="lab-member-photo-initial" aria-hidden="true">{{ $initial }}</span>
+              {{ end }}
+            </div>
+            <div class="lab-member-meta">
+              <h3 class="lab-member-name">{{ .Title }}</h3>
+              {{ with .Params.role }}
+              <p class="lab-member-role">{{ . | plainify }}</p>
+              {{ end }}
+              {{ $focus := partial "lab-member-focus-line.html" . }}
+              {{ with $focus }}
+              <p class="lab-member-focus-line">{{ . }}</p>
+              {{ end }}
+            </div>
+          {{ if $link }}
+          </a>
+          {{ else }}
+          </article>
+          {{ end }}
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+  {{ end }}
+  </div>
+</div>

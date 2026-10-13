@@ -1,0 +1,18 @@
+{{- $lab := site.Params.lab | default dict -}}
+{{- $ui := $lab.ui | default dict -}}
+{{- $name := $lab.name | default site.Title -}}
+{{- $tagline := $lab.tagline | default "" -}}
+{{- $lead := $lab.lead | default "" -}}
+{{- $people := $lab.links.people | default "people/" -}}
+{{- $research := $lab.links.research | default "research/" -}}
+{{- $ctaPeople := $ui.cta_people | default "团队成员" -}}
+{{- $ctaResearch := $ui.cta_research | default "研究方向" -}}
+<div class="lab-hero">
+  <p class="lab-hero-brand">{{ $name }}</p>
+  {{ with $tagline }}<h1 class="lab-hero-title">{{ . }}</h1>{{ end }}
+  {{ with $lead }}<p class="lab-hero-lead">{{ . }}</p>{{ end }}
+  <p class="lab-hero-actions">
+    <a class="lab-hero-link" href="{{ $people | relURL }}">{{ $ctaPeople }}</a>
+    <a class="lab-hero-link" href="{{ $research | relURL }}">{{ $ctaResearch }}</a>
+  </p>
+</div>

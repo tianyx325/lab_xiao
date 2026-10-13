@@ -1,0 +1,20 @@
+{{/*
+  Resolve list-page lead text.
+  Usage: {{ partial "lab-section-lead.html" (dict "page" . "key" "publication") }}
+  Priority: page.Params.summary → lab.ui.section_leads.<key> → empty
+*/}}
+{{- $page := .page -}}
+{{- $key := .key | default "" -}}
+{{- $lab := site.Params.lab | default dict -}}
+{{- $ui := $lab.ui | default dict -}}
+{{- $leads := $ui.section_leads | default dict -}}
+{{- $lead := "" -}}
+{{- with $page.Params.summary -}}
+  {{- $lead = . -}}
+{{- end -}}
+{{- if and (not $lead) $key -}}
+  {{- with index $leads $key -}}
+    {{- $lead = . -}}
+  {{- end -}}
+{{- end -}}
+{{- $lead -}}

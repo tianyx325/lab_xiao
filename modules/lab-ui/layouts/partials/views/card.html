@@ -1,0 +1,99 @@
+{{ $item := .item }}
+
+{{ $link := $item.RelPermalink }}
+{{ $target := "" }}
+{{ if $item.Params.external_link }}
+  {{ $link = $item.Params.external_link }}
+  {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+{{ end }}
+
+{{ $summary := "" }}
+{{ if $item.Params.summary }}
+  {{ $summary = $item.Params.summary | plainify }}
+{{ end }}
+
+{{/* Lab members only: profiles in content/authors/ (have user_groups). */}}
+{{ $members := slice }}
+{{ range $item.Params.authors }}
+  {{ with site.GetPage (printf "/authors/%s" .) }}
+    {{ if isset .Params "user_groups" }}
+      {{ $members = $members | append (dict "name" .LinkTitle "href" .RelPermalink) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $year := $item.Date.Format "2006" }}
+{{ $badge := "" }}
+{{ $kind := "成果" }}
+{{ $typeClass := "lab-card--default" }}
+
+{{ if eq $item.Type "publication" }}
+  {{ $kind = "论文" }}
+  {{ $typeClass = "lab-card--publication" }}
+  {{ with $item.Params.publication_short }}
+    {{ $badge = . | plainify }}
+  {{ else }}
+    {{ with $item.Params.publication }}
+      {{ $badge = . | plainify }}
+    {{ end }}
+  {{ end }}
+{{ else if eq $item.Type "patent" }}
+  {{ $kind = "专利" }}
+  {{ $typeClass = "lab-card--patent" }}
+  {{ $badge = partial "lab-status-label.html" (dict "kind" "patent" "page" $item) }}
+{{ else if eq $item.Type "award" }}
+  {{ $kind = "奖项" }}
+  {{ $typeClass = "lab-card--award" }}
+  {{ with $item.Params.tags }}
+    {{ $badge = index . 0 }}
+  {{ end }}
+{{ else if eq $item.Type "post" }}
+  {{ $kind = "新闻" }}
+  {{ $typeClass = "lab-card--post" }}
+{{ else if eq $item.Type "project" }}
+  {{ $kind = "项目" }}
+  {{ $typeClass = "lab-card--project" }}
+  {{ $badge = partial "lab-status-label.html" (dict "kind" "project" "page" $item) }}
+{{ else if eq $item.Type "research" }}
+  {{ $kind = "方向" }}
+  {{ $typeClass = "lab-card--research" }}
+{{ end }}
+
+{{ if eq $item.Type "research" }}
+<a class="lab-research-card" href="{{ $link }}" {{ $target | safeHTMLAttr }}>
+  <span class="lab-research-card-kind">{{ $kind }}</span>
+  <div class="lab-research-card-title">{{ $item.Title }}</div>
+  <p class="lab-research-card-summary">{{ with $summary }}{{ . }}{{ else }}&nbsp;{{ end }}</p>
+</a>
+{{ else }}
+<article class="card-simple view-card lab-card {{ $typeClass }}">
+  <a class="lab-card-cover" href="{{ $link }}" {{ $target | safeHTMLAttr }} aria-label="{{ $item.Title }}"></a>
+
+  <div class="lab-card-top">
+    <span class="lab-card-kind">{{ $kind }}</span>
+    <span class="lab-card-facts">
+      {{- with $year -}}<span class="lab-card-year">{{ . }}</span>{{- end -}}
+      {{- if and $year $badge -}}<span class="lab-card-sep" aria-hidden="true">·</span>{{- end -}}
+      {{- with $badge -}}<span class="lab-card-badge">{{ . }}</span>{{- end -}}
+    </span>
+  </div>
+
+  <div class="lab-card-main">
+    <div class="lab-card-authors">
+      {{ with $members }}
+        {{ range $i, $m := . }}
+          {{- if $i }}<span class="lab-card-author-sep"> · </span>{{ end -}}
+          <a class="lab-card-author-link" href="{{ $m.href }}">{{ $m.name }}</a>
+        {{ end }}
+      {{ else }}
+        <span class="lab-card-authors-empty">&nbsp;</span>
+      {{ end }}
+    </div>
+    <div class="lab-card-title">{{ $item.Title }}</div>
+  </div>
+
+  <div class="lab-card-summary">
+    {{ with $summary }}{{ . }}{{ else }}&nbsp;{{ end }}
+  </div>
+</article>
+{{ end }}

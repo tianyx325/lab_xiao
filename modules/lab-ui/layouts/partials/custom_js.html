@@ -1,0 +1,11 @@
+{{/* Lab site helpers */}}
+{{- $scripts := slice "js/lab-mailto.js" "js/lab-member-works.js" -}}
+{{- range $scripts -}}
+  {{- with resources.Get . -}}
+    {{- $js := . -}}
+    {{- if hugo.IsProduction -}}
+      {{- $js = $js | minify | fingerprint "md5" -}}
+    {{- end -}}
+<script src="{{ $js.RelPermalink }}" defer></script>
+  {{- end -}}
+{{- end -}}

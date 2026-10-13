@@ -1,0 +1,41 @@
+{{- define "main" -}}
+
+{{ $byline := slice }}
+{{ if .Params.authors }}
+  {{ $byline = $byline | append (partial "lab-detail-authors.html" .) }}
+{{ end }}
+{{ with .Date }}
+  {{ $byline = $byline | append (.Format "2006-01") }}
+{{ end }}
+{{ with .Params.tags }}
+  {{ $byline = $byline | append (delimit . " · ") }}
+{{ end }}
+{{ .Scratch.Set "lab_article_byline" (delimit $byline " · ") }}
+
+{{ $meta := slice }}
+{{ with .Params.project_code }}
+  {{ $meta = $meta | append (printf "编号 %s" .) }}
+{{ end }}
+{{ with partial "lab-status-label.html" (dict "kind" "project" "page" .) }}
+  {{ $meta = $meta | append . }}
+{{ end }}
+{{ with .Date }}
+  {{ $meta = $meta | append (.Format "2006") }}
+{{ end }}
+{{ .Scratch.Set "lab_article_meta" $meta }}
+
+{{ partial "lab-article-shell-start.html" . }}
+
+    {{ if .Content }}
+    <div class="article-style lab-article-content">{{ .Content }}</div>
+    {{ end }}
+
+    {{ with .Params.external_link }}
+    <p class="lab-article-links">
+      <a href="{{ . }}" target="_blank" rel="noopener">项目主页</a>
+    </p>
+    {{ end }}
+
+{{ partial "lab-article-shell-end.html" . }}
+
+{{- end -}}

@@ -1,0 +1,194 @@
+# SITE SETUP
+# Guide: https://docs.hugoblox.com/tutorial/
+# Documentation: https://docs.hugoblox.com/
+# This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
+
+# ---------------------------------------------------------------------------
+# Lab identity — SINGLE SOURCE OF TRUTH for branding / contact / UI chrome
+# After editing `lab:`, run:  py -3 scripts/sync_lab_identity.py
+# (syncs hugo.yaml title, languages.yaml, marketing.seo, footer.copyright)
+# Theme primary color: also keep data/themes/minimal.toml in sync with $lab-blue
+# ---------------------------------------------------------------------------
+lab:
+  name: 智能感知与决策实验室
+  name_en: IPD Lab
+  org_name: 西安理工大学计算机科学与技术学院
+  org_url: https://jsj.xaut.edu.cn/
+  email: zhaolin.xiao@xaut.edu.cn
+  address: 西安理工大学金花校区教3楼417室
+  latitude: '34.2560'
+  longitude: '108.9880'
+  tagline: 感知更清晰，决策更智能
+  lead: 面向智能感知与自主决策，做能落地的视觉与智能体研究
+  seo_description: 本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。
+  admit_lead: 欢迎有志于智能感知与决策研究的同学加入实验室
+  research_home_count: 3
+  links:
+    people: people/
+    research: research/
+  ui:
+    cta_people: 团队成员
+    cta_research: 研究方向
+    # 空则自动为「{name}团队成员」
+    people_lead: ''
+    contact_title: 联系与招生
+    admit_kind: 招生信息
+    contact_kind: 联系方式
+    email_label: 邮箱
+    address_label: 地址
+    map_aria: 实验室位置地图
+    section_leads:
+      publication: 发表的期刊与会议论文
+      project: 承担的科研项目
+      patent: 授权发明专利
+      award: 相关奖项与荣誉
+      research: 主要研究方向与课题布局
+      post: 学术动态与活动
+  admit:
+    sections:
+      - title: 硕士 / 博士
+        lead: 常年招募计算机视觉、图像处理、人工智能方向研究生。
+        bullets:
+          - 提升意愿强烈，迎难而上
+          - 扎实数学基础与英语读写能力
+          - 具备较强编程实践能力
+          - 本硕连读、本博连读优先
+      - title: 优秀本科生
+        lead: 欢迎参与科研项目与科技竞赛的低年级同学。
+        bullets:
+          - 面向 1–3 年级本科生
+          - 每年招收约 3–5 名
+          - 可参与课题研究与竞赛辅导
+          - 邮件联系并附简要自我介绍
+      - title: 申请方式
+        lead: 请将材料发送至导师邮箱，我们将尽快回复。
+        show_email: true
+        bullets:
+          - 标题：报考咨询-姓名-本科学校-类型
+          - 附件：个人简历、成绩单
+          - 论文 / 项目 / 竞赛经历（如有）
+
+# Appearance
+
+appearance:
+  theme_day: minimal
+  theme_night:
+  font: native
+  font_size: M
+
+# SEO
+
+marketing:
+  seo:
+    site_type: Organization
+    local_business_type: ''
+    # DERIVED from lab.* — do not edit by hand; run sync_lab_identity.py
+    org_name: '智能感知与决策实验室'
+    description: '本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。'
+    twitter: ''
+
+  analytics:
+    google_analytics: ''
+    baidu_tongji: ''
+    google_tag_manager: ''
+    microsoft_clarity: ''
+  verification:
+    google: ''
+    baidu: ''
+
+# Site header
+
+header:
+  navbar:
+    enable: true
+    align: r
+    show_logo: true
+    show_language: false
+    show_day_night: true
+    show_search: true
+    highlight_active_link: true
+
+# Hide "Published with Hugo Blox Builder" footer text
+i_am_a_sponsor: true
+power_ups:
+  hide_published_with: true
+
+# Site footer
+
+footer:
+  copyright:
+    # DERIVED from lab.* — do not edit by hand; run sync_lab_identity.py
+    notice: '© {year} 智能感知与决策实验室 · <a href="https://jsj.xaut.edu.cn/">西安理工大学计算机科学与技术学院</a>'
+    license:
+      enable: false
+      allow_derivatives: false
+      share_alike: true
+      allow_commercial: false
+
+# Localization
+
+locale:
+  date_format: '2006-01-02'
+  time_format: '15:04'
+  address_format: en-us
+
+# Site features
+
+features:
+  syntax_highlighter:
+    enable: false
+    extra_languages:
+      - r
+      - latex
+  math:
+    enable: false
+  privacy_pack:
+    enable: false
+  repository:
+    # 上线前改为真实仓库地址；不需要可留空
+    url: ''
+    content_dir: content
+    branch: main
+  avatar:
+    gravatar: false
+    shape: square
+  comment:
+    provider: ''
+    disqus:
+      shortname: ''
+      show_count: true
+    commento:
+      url: ''
+    giscus:
+      repo: ''
+      repo_id: ''
+      category: ''
+      category_id: ''
+  search:
+    provider: wowchemy
+    algolia:
+      app_id: ''
+      api_key: ''
+      index_name: ''
+      show_logo: false
+  map:
+    # 须为 mapnik/mapbox 之一，Hugo Blox 才会注入 Leaflet；
+    # 实际底图由 assets/js/wowchemy-map.js 使用高德瓦片（国内可访问）
+    provider: 'mapnik'
+    api_key: ''
+    zoom: 15
+
+# Extensions
+
+extensions:
+  decap_cms:
+    branch: main
+    local_backend: false
+  academicons:
+    enable: true
+
+# Citation style
+
+publications:
+  date_format: '2006年1月'
+  citation_style: apa
