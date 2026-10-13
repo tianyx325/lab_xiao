@@ -1,0 +1,8 @@
+# Languages
+#   Documentation: https://docs.hugoblox.com/reference/language/
+
+zh:
+  languageCode: zh-Hans
+  title: 智能感知与决策实验室
+  params:
+    description: 本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。

@@ -1,0 +1,36 @@
+# Navigation Links
+main:
+  - name: 首页
+    url: /
+    weight: 10
+  - name: 成员
+    url: people
+    weight: 20
+  - name: 方向
+    url: research
+    weight: 30
+  - name: 项目
+    url: project
+    weight: 40
+  - name: 成果
+    identifier: publications
+    url: publication
+    weight: 50
+  - name: 论文
+    parent: publications
+    url: publication
+    weight: 51
+  - name: 专利
+    parent: publications
+    url: patent
+    weight: 52
+  - name: 奖项
+    parent: publications
+    url: award
+    weight: 53
+  - name: 新闻
+    url: post
+    weight: 60
+  - name: 联系
+    url: contact
+    weight: 70

@@ -1,0 +1,13 @@
+{{/* Shared list-page title band — people / research / pubs / contact */}}
+{{ $title := .title | default "" }}
+{{ $lead := .lead | default "" }}
+<header class="lab-list-header">
+  <div class="container">
+    {{ with $title }}
+    <h1 class="lab-list-title">{{ . | markdownify | emojify }}</h1>
+    {{ end }}
+    {{ with $lead }}
+    <p class="lab-list-lead">{{ . | markdownify | emojify }}</p>
+    {{ end }}
+  </div>
+</header>

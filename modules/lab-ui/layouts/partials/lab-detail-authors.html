@@ -1,0 +1,25 @@
+{{- /* Resolve author usernames / names to display links when possible */ -}}
+{{- $page := . -}}
+{{- with $page.Params.authors -}}
+  {{- $names := slice -}}
+  {{- range . -}}
+    {{- $a := . -}}
+    {{- $label := printf "%v" $a -}}
+    {{- $href := "" -}}
+    {{- with site.GetPage (printf "/authors/%s" $a) -}}
+      {{- $label = .Title -}}
+      {{- $href = .RelPermalink -}}
+    {{- else -}}
+      {{- with site.GetPage (printf "/author/%s" ($a | urlize)) -}}
+        {{- $label = .Title -}}
+        {{- $href = .RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if $href -}}
+      {{- $names = $names | append (printf "<a href=\"%s\">%s</a>" $href $label) -}}
+    {{- else -}}
+      {{- $names = $names | append $label -}}
+    {{- end -}}
+  {{- end -}}
+  {{- delimit $names "、" | safeHTML -}}
+{{- end -}}

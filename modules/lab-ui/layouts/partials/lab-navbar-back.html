@@ -1,0 +1,23 @@
+{{- /* Back-to-list slot — always reserved on the right; link only on detail pages. */ -}}
+{{- $href := "" -}}
+{{- $label := "" -}}
+{{- $detailSections := slice "publication" "patent" "award" "project" "post" "research" -}}
+{{- if and (eq .Section "authors") .File (ne (path.Base .File.Dir) "authors") -}}
+  {{- $href = "/people/" | relLangURL -}}
+  {{- $label = "返回成员列表" -}}
+{{- else if and (in $detailSections .Section) (eq .Kind "page") -}}
+  {{- $kind := partial "lab-detail-kind.html" . -}}
+  {{- with .Parent -}}
+    {{- $href = .RelPermalink -}}
+  {{- else -}}
+    {{- $href = printf "/%s/" $.Section | relLangURL -}}
+  {{- end -}}
+  {{- $label = printf "返回%s列表" $kind -}}
+{{- end -}}
+<li class="nav-item lab-navbar-back-item">
+  {{- if and $href $label -}}
+  <a class="nav-link lab-navbar-back" href="{{ $href }}">{{ $label }}</a>
+  {{- else -}}
+  <span class="nav-link lab-navbar-back is-empty" aria-hidden="true">&nbsp;</span>
+  {{- end -}}
+</li>

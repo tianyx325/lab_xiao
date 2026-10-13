@@ -1,0 +1,27 @@
+{{/* Shared status / badge label for project & patent cards and meta bars.
+    Usage: {{ partial "lab-status-label.html" (dict "kind" "project" "page" .) }}
+    Returns plain text (may be empty). */}}
+{{- $kind := .kind | default "" -}}
+{{- $p := .page -}}
+{{- $out := "" -}}
+{{- if eq $kind "project" -}}
+  {{- $tags := $p.Params.tags | default slice -}}
+  {{- if in $tags "重点项目" -}}{{- $out = "重点" -}}
+  {{- else if in $tags "面上项目" -}}{{- $out = "面上" -}}
+  {{- else if in $tags "省级基金" -}}{{- $out = "省级" -}}
+  {{- else if in $tags "国家自然科学基金" -}}{{- $out = "国自然" -}}
+  {{- end -}}
+  {{- $st := $p.Params.project_status | default "" -}}
+  {{- if eq $st "ongoing" -}}
+    {{- if $out -}}{{- $out = printf "%s · 在研" $out -}}{{- else -}}{{- $out = "在研" -}}{{- end -}}
+  {{- else if eq $st "completed" -}}
+    {{- if $out -}}{{- $out = printf "%s · 结题" $out -}}{{- else -}}{{- $out = "已结题" -}}{{- end -}}
+  {{- end -}}
+{{- else if eq $kind "patent" -}}
+  {{- if eq ($p.Params.patent_status | default "") "granted" -}}
+    {{- $out = "已授权" -}}
+  {{- else -}}
+    {{- $out = "发明专利" -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

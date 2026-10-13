@@ -1,0 +1,26 @@
+{{- /* Research cards from content/research/* (section root excluded via RegularPages). */ -}}
+{{- $rawCount := .Get "count" | default "" -}}
+{{- $count := 0 -}}
+{{- if $rawCount -}}
+  {{- $count = int $rawCount -}}
+{{- else -}}
+  {{- $count = int (site.Params.lab.research_home_count | default 3) -}}
+{{- end -}}
+{{- $pages := where site.RegularPages "Section" "research" -}}
+{{- $pages = sort $pages "Weight" "asc" -}}
+{{- if not $pages -}}
+  {{- $pages = where (where site.Pages "Section" "research") "Kind" "page" -}}
+  {{- $pages = sort $pages "Weight" "asc" -}}
+{{- end -}}
+{{- if gt $count 0 -}}
+  {{- $pages = first $count $pages -}}
+{{- end -}}
+<div class="research-cards">
+  {{- range $pages -}}
+  <a class="lab-research-card" href="{{ .RelPermalink }}">
+    <span class="lab-research-card-kind">方向</span>
+    <div class="lab-research-card-title">{{ .Title }}</div>
+    <p class="lab-research-card-summary">{{ with .Params.summary }}{{ . | plainify }}{{ else }}{{ .Summary | plainify | truncate 48 }}{{ end }}</p>
+  </a>
+  {{- end -}}
+</div>

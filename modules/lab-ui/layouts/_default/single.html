@@ -1,0 +1,30 @@
+{{- define "main" -}}
+
+{{ $byline := slice }}
+{{ with .Date }}
+  {{ if in (slice "post") $.Section }}
+    {{ $byline = $byline | append (.Format "2006-01-02") }}
+  {{ else }}
+    {{ $byline = $byline | append (.Format "2006-01") }}
+  {{ end }}
+{{ end }}
+{{ if .Params.authors }}
+  {{ $byline = $byline | append (partial "lab-detail-authors.html" .) }}
+{{ end }}
+{{ with .Params.tags }}
+  {{ $byline = $byline | append (delimit . " · ") }}
+{{ end }}
+{{ with .Params.categories }}
+  {{ $byline = $byline | append (delimit . " · ") }}
+{{ end }}
+{{ .Scratch.Set "lab_article_byline" (delimit $byline " · ") }}
+
+{{ partial "lab-article-shell-start.html" . }}
+
+    {{ if .Content }}
+    <div class="article-style lab-article-content">{{ .Content }}</div>
+    {{ end }}
+
+{{ partial "lab-article-shell-end.html" . }}
+
+{{- end -}}
