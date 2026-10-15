@@ -31,8 +31,7 @@
 {{ $resource := partial "blox-core/functions/get_featured_image.html" $item }}
 {{ $anchor := $item.Params.image.focal_point | default "Smart" }}
 {{ with $resource }}
-  {{ $image := .Fill (printf "720x480 %s" $anchor) }}
-  {{ if ne $image.MediaType.SubType "gif" }}{{ $image = $image.Process "webp" }}{{ end }}
+  {{ $image := .Fill (printf "560x374 %s webp q72" $anchor) }}
   {{ $mediaURL = $image.RelPermalink }}
 {{ end }}
 
