@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>深度估计 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tag/%E6%B7%B1%E5%BA%A6%E4%BC%B0%E8%AE%A1/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tag/%E6%B7%B1%E5%BA%A6%E4%BC%B0%E8%AE%A1/index.xml" rel="self" type="application/rss+xml"/><description>深度估计</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Tue, 13 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/icon_hu3458017263254920961.png</url><title>深度估计</title><link>https://tianyx325.github.io/lab_xiao/tag/%E6%B7%B1%E5%BA%A6%E4%BC%B0%E8%AE%A1/</link></image><item><title>深度估计</title><link>https://tianyx325.github.io/lab_xiao/research/depth/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/research/depth/</guid><description>&lt;p>面向常规与降质场景，研究单目及事件相机条件下的三维深度感知方法。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ul>
+&lt;li>单目深度估计与语义引导方法&lt;/li>
+&lt;li>弱光环境下的鲁棒深度估计&lt;/li>
+&lt;li>事件相机深度估计与多模态融合&lt;/li>
+&lt;/ul></description></item><item><title>光场深度估计及优化方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-2016jq6069/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-2016jq6069/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：陕西省自然科学基础研究计划&lt;br>
+&lt;strong>项目编号&lt;/strong>：2016JQ6069&lt;br>
+&lt;strong>起止时间&lt;/strong>：2016/01 – 2017/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;p>本项目旨在研究基于光场信息的深度估计与优化方法，实现高精度三维场景理解。&lt;/p></description></item></channel></rss>

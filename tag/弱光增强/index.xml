@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>弱光增强 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%BC%B1%E5%85%89%E5%A2%9E%E5%BC%BA/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tag/%E5%BC%B1%E5%85%89%E5%A2%9E%E5%BC%BA/index.xml" rel="self" type="application/rss+xml"/><description>弱光增强</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Tue, 13 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/icon_hu3458017263254920961.png</url><title>弱光增强</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%BC%B1%E5%85%89%E5%A2%9E%E5%BC%BA/</link></image><item><title>弱光视觉增强</title><link>https://tianyx325.github.io/lab_xiao/research/low-light/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/research/low-light/</guid><description>&lt;p>面向低照度、复杂光照等降质场景，研究视觉信息的恢复、增强与鲁棒感知。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ul>
+&lt;li>低照度图像 / 视频增强与去噪&lt;/li>
+&lt;li>弱光条件下的特征表达与光流 / 运动估计&lt;/li>
+&lt;li>面向下游任务（如对焦、匹配、重建）的增强方法&lt;/li>
+&lt;/ul></description></item><item><title>弱光图像增强算法定制开发</title><link>https://tianyx325.github.io/lab_xiao/project/ruo-guang-tu-xiang-zeng-qiang-suan-fa-ding-zhi-kai-fa/</link><pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/ruo-guang-tu-xiang-zeng-qiang-suan-fa-ding-zhi-kai-fa/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：西北工业大学&lt;br>
+&lt;strong>起止时间&lt;/strong>：2026/03 – 2026/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：在研&lt;/p></description></item><item><title>CEDFlow: Latent Contour Enhancement for Dark Optical Flow Estimation</title><link>https://tianyx325.github.io/lab_xiao/publication/cedflow-aaai-2024/</link><pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publication/cedflow-aaai-2024/</guid><description/></item><item><title>面向弱光自动对焦的光场特征计算增强理论与方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：国家自然科学基金面上项目&lt;br>
+&lt;strong>项目编号&lt;/strong>：62371389&lt;br>
+&lt;strong>起止时间&lt;/strong>：2024/01 – 2027/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：在研&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;p>本项目旨在研究弱光环境下光场特征增强与自动对焦方法，提高复杂光照条件下图像质量和成像性能。&lt;/p></description></item><item><title>隐特征监督的孪生网络弱光光流估计</title><link>https://tianyx325.github.io/lab_xiao/publication/cjig-2024-siamese-lowlight/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publication/cjig-2024-siamese-lowlight/</guid><description/></item></channel></rss>

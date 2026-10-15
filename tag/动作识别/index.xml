@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>动作识别 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tag/%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/index.xml" rel="self" type="application/rss+xml"/><description>动作识别</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Tue, 13 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/icon_hu3458017263254920961.png</url><title>动作识别</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/</link></image><item><title>人体动作识别</title><link>https://tianyx325.github.io/lab_xiao/research/action/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/research/action/</guid><description>&lt;p>面向人体行为理解，研究基于骨骼点与视觉特征的动作识别方法。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ul>
+&lt;li>基于骨骼点的人体动作识别&lt;/li>
+&lt;li>动作序列建模与时空特征学习&lt;/li>
+&lt;li>真实场景下的鲁棒行为理解&lt;/li>
+&lt;/ul></description></item></channel></rss>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/</link><atom:link href="https://tianyx325.github.io/lab_xiao/index.xml" rel="self" type="application/rss+xml"/><description>智能感知与决策实验室</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Mon, 24 Oct 2022 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/icon_hu3458017263254920961.png</url><title>智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/</link></image><item><title>大模型和智能体应用</title><link>https://tianyx325.github.io/lab_xiao/research/agent/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/research/agent/</guid><description>&lt;p>面向大语言模型与智能体，研究任务规划、工具调用与应用落地方法。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ul>
+&lt;li>大模型在垂直场景中的应用与评测&lt;/li>
+&lt;li>单智能体 / 多智能体协作与任务分配&lt;/li>
+&lt;li>复杂任务下的规划、推理与决策&lt;/li>
+&lt;/ul></description></item><item><title>弱光视觉增强</title><link>https://tianyx325.github.io/lab_xiao/research/low-light/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/research/low-light/</guid><description>&lt;p>面向低照度、复杂光照等降质场景，研究视觉信息的恢复、增强与鲁棒感知。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ul>
+&lt;li>低照度图像 / 视频增强与去噪&lt;/li>
+&lt;li>弱光条件下的特征表达与光流 / 运动估计&lt;/li>
+&lt;li>面向下游任务（如对焦、匹配、重建）的增强方法&lt;/li>
+&lt;/ul></description></item><item><title>深度估计</title><link>https://tianyx325.github.io/lab_xiao/research/depth/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/research/depth/</guid><description>&lt;p>面向常规与降质场景，研究单目及事件相机条件下的三维深度感知方法。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ul>
+&lt;li>单目深度估计与语义引导方法&lt;/li>
+&lt;li>弱光环境下的鲁棒深度估计&lt;/li>
+&lt;li>事件相机深度估计与多模态融合&lt;/li>
+&lt;/ul></description></item><item><title>人体动作识别</title><link>https://tianyx325.github.io/lab_xiao/research/action/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/research/action/</guid><description>&lt;p>面向人体行为理解，研究基于骨骼点与视觉特征的动作识别方法。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ul>
+&lt;li>基于骨骼点的人体动作识别&lt;/li>
+&lt;li>动作序列建模与时空特征学习&lt;/li>
+&lt;li>真实场景下的鲁棒行为理解&lt;/li>
+&lt;/ul></description></item><item><title>登终南·望群峰——记实验室南五台秋日团建活动</title><link>https://tianyx325.github.io/lab_xiao/post/south-wutai-zhongnan-mountains/</link><pubDate>Thu, 15 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/post/south-wutai-zhongnan-mountains/</guid><description>&lt;p>
+&lt;figure class="lab-content-figure" >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100">&lt;img alt="登山合影"
+srcset="https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/01_hu13500003075733919604.webp 400w, https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/01_hu8872946008572320877.webp 760w, https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/01_hu4486912145682892182.webp 1200w"
+sizes="(max-width: 760px) 100vw, 760px"
+src="https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/01_hu8872946008572320877.webp"
+width="760"
+height="570"
+loading="lazy"
+decoding="async"
+data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>&lt;strong>秋日登高，尽览终南秀色&lt;/strong>&lt;/p>
+&lt;p>南五台作为终南山的著名胜景，以“奇峰、古寺、云海、秋色”闻名。活动当日，天高云淡，微风拂面，正是登高的好时节。大家沿着山径拾级而上，虽山路蜿蜒、台阶陡峭，但成员们相互鼓励、彼此扶持，一路欢声笑语，共同向山顶进发。&lt;/p>
+&lt;p>
+&lt;figure class="lab-content-figure" >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100">&lt;img alt="风景1"
+srcset="https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/02_hu14661443526037541489.webp 400w, https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/02_hu11500582303907431924.webp 760w, https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/02_hu11889756189606059387.webp 1200w"
+sizes="(max-width: 760px) 100vw, 760px"
+src="https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/02_hu11500582303907431924.webp"
+width="760"
+height="570"
+loading="lazy"
+decoding="async"
+data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>行至高处，远眺层峦叠嶂，群山连绵，秋叶斑斓，云雾缭绕间尽显终南山的壮阔与灵秀。山顶红墙金顶的古建筑在苍翠与秋黄的交织中格外醒目，大家纷纷驻足，用镜头记录下这秀美的自然风光与攀登的喜悦。&lt;/p>
+&lt;p>
+&lt;figure class="lab-content-figure" >
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100">&lt;img alt="风景2"
+srcset="https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/03_hu1463548463833267012.webp 400w, https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/03_hu15002009858470253597.webp 760w, https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/03_hu13569210580765048330.webp 1200w"
+sizes="(max-width: 760px) 100vw, 760px"
+src="https://tianyx325.github.io/lab_xiao/lab_xiao/post/south-wutai-zhongnan-mountains/03_hu15002009858470253597.webp"
+width="760"
+height="570"
+loading="lazy"
+decoding="async"
+data-zoomable />&lt;/div>
+&lt;/div>&lt;/figure>
+&lt;/p>
+&lt;p>&lt;strong>合影留念，定格青春时光&lt;/strong>&lt;/p>
+&lt;p>在“终南山·南五台”标志牌前，全体成员合影留念。大家比出大拇指，笑容灿烂，展现了实验室团队蓬勃向上的朝气与团结奋进的精神面貌。正如标志牌上“我愿和你在此许下海誓山盟”的浪漫寓意，这次攀登也见证了大家携手同行的深厚情谊。前排成员手持的绿色对勾标识，更象征着我们科研路上“攻坚克难、使命必达”的坚定信念。&lt;/p>
+&lt;p>&lt;strong>凝心聚力，共赴科研新程&lt;/strong>&lt;/p>
+&lt;p>“会当凌绝顶，一览众山小。”此次南五台之行，不仅让大家在繁忙的科研学习之余放松了身心，领略了大自然的壮美，更在攀登中磨砺了意志，增强了实验室的向心力。&lt;/p>
+&lt;p>未来，实验室全体成员将继续保持这份攀登的勇气与协作的默契，在科研道路上勇攀高峰，再创佳绩！&lt;/p></description></item><item><title>联系</title><link>https://tianyx325.github.io/lab_xiao/contact/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/contact/</guid><description/></item><item><title>全国高校网络文化技术创新大会自主研发应用二等奖</title><link>https://tianyx325.github.io/lab_xiao/award/china-boguan-2026/</link><pubDate>Sun, 20 Sep 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/award/china-boguan-2026/</guid><description>&lt;p>&lt;strong>奖项名称&lt;/strong>：全国高校网络文化技术创新大会自主研发应用二等奖&lt;br>
+&lt;strong>获奖年份&lt;/strong>：2026&lt;br>
+&lt;strong>获奖人&lt;/strong>：肖照林 田云祥
+&lt;strong>级别&lt;/strong>：国家级&lt;/p></description></item><item><title>欢迎2026级新生加入实验室</title><link>https://tianyx325.github.io/lab_xiao/post/2026-welcome/</link><pubDate>Tue, 01 Sep 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/post/2026-welcome/</guid><description>&lt;p>欢迎2026级新生同学加入智能感知与决策实验室。&lt;/p></description></item><item><title>多源光场成像系统标定方法</title><link>https://tianyx325.github.io/lab_xiao/project/duo-yuan-guang-chang-cheng-xiang-xi-tong-biao-ding-fang-fa/</link><pubDate>Fri, 01 May 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/duo-yuan-guang-chang-cheng-xiang-xi-tong-biao-ding-fang-fa/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：西北工业大学&lt;br>
+&lt;strong>起止时间&lt;/strong>：2026/05 – 2026/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：在研&lt;/p></description></item><item><title>弱光图像增强算法定制开发</title><link>https://tianyx325.github.io/lab_xiao/project/ruo-guang-tu-xiang-zeng-qiang-suan-fa-ding-zhi-kai-fa/</link><pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/ruo-guang-tu-xiang-zeng-qiang-suan-fa-ding-zhi-kai-fa/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：西北工业大学&lt;br>
+&lt;strong>起止时间&lt;/strong>：2026/03 – 2026/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：在研&lt;/p></description></item><item><title>基于 Transformer 的双分支人脸图像关键点检测方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2023109720647/</link><pubDate>Fri, 26 Sep 2025 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2023109720647/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL202310972064.7&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,魏倩影,郝雯,金海燕&lt;br>
+&lt;strong>申请日&lt;/strong>：2023-08-03&lt;br>
+&lt;strong>授权日&lt;/strong>：2025-09-26&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于计算机视觉与人工智能技术领域，具体涉及基于Transformer的双分支人脸图像关键点检测方法。&lt;/p></description></item><item><title>光场重聚焦特征学习的多聚焦图像融合方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2023110395016/</link><pubDate>Fri, 08 Aug 2025 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2023110395016/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL202311039501.6&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,鲁世昱,金海燕,李秀秀&lt;br>
+&lt;strong>申请日&lt;/strong>：2023-08-17&lt;br>
+&lt;strong>授权日&lt;/strong>：2025-08-08&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于多聚焦图像处理技术领域，特别是涉及一种基于光场重聚焦特征学习的多聚焦图像融合方法。&lt;/p></description></item><item><title>一种结合图像语义与坐标关系的特征误匹配检测方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2021116140810/</link><pubDate>Fri, 28 Mar 2025 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2021116140810/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL202111614081.0&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,李锐源,金海燕&lt;br>
+&lt;strong>申请日&lt;/strong>：2021-12-27&lt;br>
+&lt;strong>授权日&lt;/strong>：2025-03-28&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于人工智能领域，具体涉及一种结合图像语义与坐标关系的特征误匹配检测方法。&lt;/p></description></item><item><title>陕西省技术发明奖二等奖</title><link>https://tianyx325.github.io/lab_xiao/award/shaanxi-tech-invention-2025/</link><pubDate>Wed, 01 Jan 2025 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/award/shaanxi-tech-invention-2025/</guid><description>&lt;p>&lt;strong>奖项名称&lt;/strong>：陕西省技术发明奖二等奖&lt;br>
+&lt;strong>获奖年份&lt;/strong>：2025&lt;br>
+&lt;strong>获奖人&lt;/strong>：肖照林&lt;br>
+&lt;strong>级别&lt;/strong>：省级&lt;/p>
+&lt;p>2025 年陕西省技术发明奖二等奖「复杂场景下视频语义分析理解关键技术研究及应用」，排名第三。&lt;/p></description></item><item><title>一种基于光场角度域变化矩阵的特征点检测方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2021103833727/</link><pubDate>Fri, 09 Feb 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2021103833727/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL202110383372.7&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,张晶瑞,金海燕&lt;br>
+&lt;strong>申请日&lt;/strong>：2021-04-09&lt;br>
+&lt;strong>授权日&lt;/strong>：2024-02-09&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于计算机视觉与计算摄影学领域，具体涉及一种基于光场角度域变化矩阵的特征点检测方法。&lt;/p></description></item><item><title>一种面向电力巡检视频的绝缘子缺损自动检测算法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2020104527245/</link><pubDate>Tue, 06 Feb 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2020104527245/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL202010452724.5&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,杨志林,金海燕,杨秀红&lt;br>
+&lt;strong>申请日&lt;/strong>：2020-05-26&lt;br>
+&lt;strong>授权日&lt;/strong>：2024-02-06&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于图像处理、机器视觉及人工智能技术领域，涉及一种面向电力巡检视频的绝缘子缺损自动检测算法。&lt;/p></description></item><item><title>一种证件数字图像的光场防篡改采集装置及防篡改方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2021103812222/</link><pubDate>Fri, 02 Feb 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2021103812222/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL202110381222.2&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,苏展,金海燕&lt;br>
+&lt;strong>申请日&lt;/strong>：2021-04-09&lt;br>
+&lt;strong>授权日&lt;/strong>：2024-02-02&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于计算机摄影学以及数字图像处理技术领域，具体涉及一种证件数字图像的光场防篡改采集装置，还涉及一种证件数字图像的光场防篡改方法。&lt;/p></description></item><item><title>CEDFlow: Latent Contour Enhancement for Dark Optical Flow Estimation</title><link>https://tianyx325.github.io/lab_xiao/publication/cedflow-aaai-2024/</link><pubDate>Thu, 01 Feb 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publication/cedflow-aaai-2024/</guid><description/></item><item><title>面向弱光自动对焦的光场特征计算增强理论与方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：国家自然科学基金面上项目&lt;br>
+&lt;strong>项目编号&lt;/strong>：62371389&lt;br>
+&lt;strong>起止时间&lt;/strong>：2024/01 – 2027/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：在研&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;p>本项目旨在研究弱光环境下光场特征增强与自动对焦方法，提高复杂光照条件下图像质量和成像性能。&lt;/p></description></item><item><title>隐特征监督的孪生网络弱光光流估计</title><link>https://tianyx325.github.io/lab_xiao/publication/cjig-2024-siamese-lowlight/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publication/cjig-2024-siamese-lowlight/</guid><description/></item><item><title>基于 Yolo-v4 网络结构光伏面板暗斑缺陷检测方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2021106394882/</link><pubDate>Tue, 02 May 2023 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2021106394882/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL202110639488.2&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,吴国华,金海燕&lt;br>
+&lt;strong>申请日&lt;/strong>：2021-06-08&lt;br>
+&lt;strong>授权日&lt;/strong>：2023-05-02&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于光伏面板缺陷检测方法技术领域，涉及一种基于Yolo-v4网络结构光伏面板暗斑缺陷检测方法。&lt;/p></description></item><item><title>基于孪生卷积网络和特征混合的 sift 误匹配检测方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2021103397944/</link><pubDate>Fri, 07 Apr 2023 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2021103397944/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL202110339794.4&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,李锐源,金海燕&lt;br>
+&lt;strong>申请日&lt;/strong>：2021-03-30&lt;br>
+&lt;strong>授权日&lt;/strong>：2023-04-07&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于计算机图像处理技术领域，具体涉及基于孪生卷积网络和特征混合的sift误匹配检测方法。&lt;/p></description></item><item><title>中国发明协会创新创业奖二等奖</title><link>https://tianyx325.github.io/lab_xiao/award/china-invention-association-2023/</link><pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/award/china-invention-association-2023/</guid><description>&lt;p>&lt;strong>奖项名称&lt;/strong>：中国发明协会创新创业奖二等奖&lt;br>
+&lt;strong>获奖年份&lt;/strong>：2023&lt;br>
+&lt;strong>获奖人&lt;/strong>：肖照林&lt;br>
+&lt;strong>级别&lt;/strong>：国家级&lt;/p>
+&lt;p>2023 年中国发明协会创新创业奖二等奖「复杂场景下可视数据语义分析关键技术及应用」，排名第二。&lt;/p></description></item><item><title>成员</title><link>https://tianyx325.github.io/lab_xiao/people/</link><pubDate>Mon, 24 Oct 2022 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/people/</guid><description/></item><item><title>基于生成对抗网络的光场图像轴向超分辨方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2019106504175/</link><pubDate>Tue, 04 Oct 2022 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2019106504175/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL201910650417.5&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,刘崟海,金海燕,蔡磊,杨秀红&lt;br>
+&lt;strong>申请日&lt;/strong>：2019-07-18&lt;br>
+&lt;strong>授权日&lt;/strong>：2022-10-04&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于光场成像技术领域，具体涉及一种基于生成对抗网络的光场轴向重聚焦图像超分辨方法。&lt;/p></description></item><item><title>一种基于 EPI 的光场图像超分辨的方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2019107640228/</link><pubDate>Tue, 04 Oct 2022 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2019107640228/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL201910764022.8&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,刘崟海,金海燕,杨秀红,蔡磊&lt;br>
+&lt;strong>申请日&lt;/strong>：2019-08-19&lt;br>
+&lt;strong>授权日&lt;/strong>：2022-10-04&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于计算机数字图像处理技术领域，具体涉及一种基于EPI的光场图像超分辨的方法。&lt;/p></description></item><item><title>相机阵列光场采集及自由视点光场重建</title><link>https://tianyx325.github.io/lab_xiao/project/xiang-ji-zhen-lie-guang-chang-cai-ji-ji-zi-you-shi-dian-guan/</link><pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/xiang-ji-zhen-lie-guang-chang-cai-ji-ji-zi-you-shi-dian-guan/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：西北工业大学&lt;br>
+&lt;strong>起止时间&lt;/strong>：2022/06 – 2023/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p></description></item><item><title>A Light Field FDL-HCGH Feature in Scale-Disparity Space</title><link>https://tianyx325.github.io/lab_xiao/publication/tip-2022-fdl-hcgh/</link><pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publication/tip-2022-fdl-hcgh/</guid><description/></item><item><title>小鼠视频多维特征值的提取方法及视频分类方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2018104727899/</link><pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2018104727899/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL201810472789.9&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,刘欢,金海燕&lt;br>
+&lt;strong>申请日&lt;/strong>：2018-05-17&lt;br>
+&lt;strong>授权日&lt;/strong>：2021-10-22&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于计算机数字图像处理技术领域，涉及一种小鼠视频多维特征值的提取方法及视频分类方法。&lt;/p></description></item><item><title>光伏面板红外成像的热斑缺陷检测算法开发</title><link>https://tianyx325.github.io/lab_xiao/project/guang-fu-mian-ban-hong-wai-cheng-xiang-de-re-ban-que-xian-ji/</link><pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/guang-fu-mian-ban-hong-wai-cheng-xiang-de-re-ban-que-xian-ji/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：鉴微（西安）智能科技有限公司&lt;br>
+&lt;strong>起止时间&lt;/strong>：2021/06 – 2022/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p></description></item><item><title>高分辨率动态光场获取及计算理论与方法</title><link>https://tianyx325.github.io/lab_xiao/project/proj-62031023/</link><pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-62031023/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：国家自然科学基金重点项目-（子课题）&lt;br>
+&lt;strong>项目编号&lt;/strong>：62031023&lt;br>
+&lt;strong>起止时间&lt;/strong>：2021/01 – 2025/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;p>本项目旨在研究高分辨率动态光场数据获取、表示与计算方法，实现复杂场景下高质量光场信息处理。&lt;/p></description></item><item><title>光场特征提取与应用方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/guang-chang-te-zheng-ti-qu-yu-ying-yong-fang-fa-yan-jiu/</link><pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/guang-chang-te-zheng-ti-qu-yu-ying-yong-fang-fa-yan-jiu/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：陕西省2020年度留学人员科技活动择优资助项目（优秀类）&lt;br>
+&lt;strong>起止时间&lt;/strong>：2021/01 – 2022/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;p>本项目旨在研究光场数据特征提取与表示方法，探索其在计算机视觉任务中的应用。&lt;/p></description></item><item><title>陕西省计算机学会技术发明一等奖</title><link>https://tianyx325.github.io/lab_xiao/award/shaanxi-cs-invention-2021/</link><pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/award/shaanxi-cs-invention-2021/</guid><description>&lt;p>&lt;strong>奖项名称&lt;/strong>：陕西省计算机学会技术发明一等奖&lt;br>
+&lt;strong>获奖年份&lt;/strong>：2021&lt;br>
+&lt;strong>获奖人&lt;/strong>：肖照林&lt;br>
+&lt;strong>级别&lt;/strong>：省级&lt;/p>
+&lt;p>2021 年陕西省计算机学会技术发明一等奖「面向视频监控的可视计算关键技术研究与应用」，排名第二。&lt;/p></description></item><item><title>一种基于高斯混合模型的宽吻海豚 click 信号检测方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2018104477624/</link><pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2018104477624/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL 2018104477624&lt;br>
+&lt;strong>发明人&lt;/strong>：金海燕,张萌,肖照林,李秀秀&lt;br>
+&lt;strong>申请日&lt;/strong>：2018-05-11&lt;br>
+&lt;strong>授权日&lt;/strong>：2020-07-24&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于声音信号处理技术领域，具体涉及一种基于高斯混合模型的宽吻海豚click信号检测方法。&lt;/p></description></item><item><title>机动车行驶证电子篡改检测算法开发</title><link>https://tianyx325.github.io/lab_xiao/project/ji-dong-che-xing-shi-zheng-dian-zi-cuan-gai-jian-ce-suan-fa/</link><pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/ji-dong-che-xing-shi-zheng-dian-zi-cuan-gai-jian-ce-suan-fa/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：广州荣邦科技有限公司&lt;br>
+&lt;strong>起止时间&lt;/strong>：2020/03 – 2021/09&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p></description></item><item><title>一种三维表面光场编码生成及识别的装置与方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2016105703924/</link><pubDate>Fri, 27 Sep 2019 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2016105703924/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL201610570392.4&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,周果清,王庆&lt;br>
+&lt;strong>申请日&lt;/strong>：2016-07-19&lt;br>
+&lt;strong>授权日&lt;/strong>：2019-09-27&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于数字成像及光学技术领域，具体涉及一种三维表面光场编码信号生成及识别的装置，还涉及一种三维表面光场编码信号生成及识别的方法。&lt;/p></description></item><item><title>高角度分辨率光场获取装置与图像生成方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2016104163793/</link><pubDate>Tue, 24 Sep 2019 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2016104163793/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL201610416379.3&lt;br>
+&lt;strong>发明人&lt;/strong>：周果清,瞿婉新,王庆,肖照林&lt;br>
+&lt;strong>申请日&lt;/strong>：2016-06-14&lt;br>
+&lt;strong>授权日&lt;/strong>：2019-09-24&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明涉及计算机视觉、计算摄像学和光学工程领域。&lt;/p></description></item><item><title>一种基于超像素分割的视频摘要生成方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2018104563418/</link><pubDate>Tue, 23 Jul 2019 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2018104563418/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL201810456341.8&lt;br>
+&lt;strong>发明人&lt;/strong>：金海燕,李喻蒙,肖照林,李秀秀&lt;br>
+&lt;strong>申请日&lt;/strong>：2018-05-14&lt;br>
+&lt;strong>授权日&lt;/strong>：2019-07-23&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于图像处理技术领域，具体涉及一种基于超像素分割的视频摘要生成方法&lt;/p></description></item><item><title>多视环境中基于水平集函数演化的非刚性目标场景流估计方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2016108247124/</link><pubDate>Fri, 14 Jun 2019 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2016108247124/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL201610824712.4&lt;br>
+&lt;strong>发明人&lt;/strong>：李秀秀,郑江滨,金海燕,肖照林,赵明华&lt;br>
+&lt;strong>申请日&lt;/strong>：2016-09-14&lt;br>
+&lt;strong>授权日&lt;/strong>：2019-06-14&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明属于计算机视觉技术领域，具体涉及一种多视环境中基于水平集函数演化的非刚性目标场景流估计方法。&lt;/p></description></item><item><title>宽基线光场数据特征的提取与表示方法</title><link>https://tianyx325.github.io/lab_xiao/project/proj-2019jm-221/</link><pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-2019jm-221/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：陕西省自然科学基础研究计划&lt;br>
+&lt;strong>项目编号&lt;/strong>：2019JM-221&lt;br>
+&lt;strong>起止时间&lt;/strong>：2019/01 – 2020/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;p>本项目旨在研究宽基线光场数据特征提取与表示方法，提高复杂视角条件下的数据分析能力。&lt;/p></description></item><item><title>双平面光场局部不变性特征提取与匹配方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-61871319/</link><pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-61871319/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：国家自然科学基金面上项目&lt;br>
+&lt;strong>项目编号&lt;/strong>：61871319&lt;br>
+&lt;strong>起止时间&lt;/strong>：2019/01 – 2022/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;p>本项目旨在研究双平面光场局部不变特征提取与匹配方法，提高光场数据特征描述和匹配能力。&lt;/p></description></item><item><title>光场成像设备轴向分辨率测定装置与方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2016104162235/</link><pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2016104162235/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL201610416223.5&lt;br>
+&lt;strong>发明人&lt;/strong>：肖照林,王庆,周果清,李秀秀&lt;br>
+&lt;strong>申请日&lt;/strong>：2016-06-14&lt;br>
+&lt;strong>授权日&lt;/strong>：2018-11-16&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明涉及数字成像、计算摄影、图像处理、计算机视觉领域，具体涉及到光场采集装置的性能评价及参数标定。本发明的装置和方法可用于对光场成像设备(特别是双平面模型光场成像设备)的轴向分辨率进行测定。&lt;/p></description></item><item><title>爆炸场编码照明系统装置及标定</title><link>https://tianyx325.github.io/lab_xiao/project/bao-zha-chang-bian-ma-zhao-ming-xi-tong-zhuang-zhi-ji-biao-d/</link><pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/bao-zha-chang-bian-ma-zhao-ming-xi-tong-zhuang-zhi-ji-biao-d/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：西北工业大学&lt;br>
+&lt;strong>起止时间&lt;/strong>：2018/01 – 2018/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p></description></item><item><title>海声成像数据处理及目标检测方法</title><link>https://tianyx325.github.io/lab_xiao/project/hai-sheng-cheng-xiang-shu-ju-chu-li-ji-mu-biao-jian-ce-fang/</link><pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/hai-sheng-cheng-xiang-shu-ju-chu-li-ji-mu-biao-jian-ce-fang/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：中科院声学所&lt;br>
+&lt;strong>起止时间&lt;/strong>：2018/01 – 2021/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p></description></item><item><title>可变角度采样数的光场采集装置</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2014106961638/</link><pubDate>Fri, 21 Jul 2017 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2014106961638/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL201410696163.8&lt;br>
+&lt;strong>发明人&lt;/strong>：王庆,张春萍,周果清,韩舒,肖照林&lt;br>
+&lt;strong>申请日&lt;/strong>：2014-11-26&lt;br>
+&lt;strong>授权日&lt;/strong>：2017-07-21&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明涉及计算机视觉和光学工程领域，具体地涉及一种光场采集装置。&lt;/p></description></item><item><title>家具施工工程协同管理控制软件</title><link>https://tianyx325.github.io/lab_xiao/project/jia-ju-shi-gong-gong-cheng-xie-tong-guan-li-kong-zhi-ruan-ji/</link><pubDate>Mon, 01 May 2017 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/jia-ju-shi-gong-gong-cheng-xie-tong-guan-li-kong-zhi-ruan-ji/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：臻希企业管理（上海）有限公司&lt;br>
+&lt;strong>起止时间&lt;/strong>：2017/05 – 2018/06&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p></description></item><item><title>光场成像的轴向超分辨率方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-61501370/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-61501370/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：国家自然科学基金青年项目&lt;br>
+&lt;strong>项目编号&lt;/strong>：61501370&lt;br>
+&lt;strong>起止时间&lt;/strong>：2016/01 – 2018/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;p>本项目旨在研究光场成像中的轴向超分辨率重建方法，提高三维成像分辨率和重建精度。&lt;/p></description></item><item><title>光场成像优化方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-buaa-vr-16kf-10/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-buaa-vr-16kf-10/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：虚拟现实技术与系统国家重点实验课题&lt;br>
+&lt;strong>项目编号&lt;/strong>：BUAA-VR-16KF-10&lt;br>
+&lt;strong>起止时间&lt;/strong>：2016/01 – 2017/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;p>本项目旨在研究光场成像过程中的优化方法，提高光场图像质量和应用性能。&lt;/p></description></item><item><title>光场深度估计及优化方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-2016jq6069/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-2016jq6069/</guid><description>&lt;p>&lt;strong>项目类型&lt;/strong>：陕西省自然科学基础研究计划&lt;br>
+&lt;strong>项目编号&lt;/strong>：2016JQ6069&lt;br>
+&lt;strong>起止时间&lt;/strong>：2016/01 – 2017/12&lt;br>
+&lt;strong>负责人&lt;/strong>：肖照林&lt;br>
+&lt;strong>状态&lt;/strong>：已结题&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;p>本项目旨在研究基于光场信息的深度估计与优化方法，实现高精度三维场景理解。&lt;/p></description></item><item><title>Aliasing Detection and Reduction in Plenoptic Imaging</title><link>https://tianyx325.github.io/lab_xiao/publication/cvpr-2014-aliasing/</link><pubDate>Sun, 01 Jun 2014 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publication/cvpr-2014-aliasing/</guid><description/></item><item><title>高分辨率实时全景高动态范围图像获取装置与方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2010102577956/</link><pubDate>Wed, 30 Nov 2011 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2010102577956/</guid><description>&lt;p>&lt;strong>专利类型&lt;/strong>：发明专利&lt;br>
+&lt;strong>专利号&lt;/strong>：ZL201010257795.6&lt;br>
+&lt;strong>发明人&lt;/strong>：王庆,周果清,肖照林,吴文杰,李磊,纪超&lt;br>
+&lt;strong>申请日&lt;/strong>：2010-08-19&lt;br>
+&lt;strong>授权日&lt;/strong>：2011-11-30&lt;br>
+&lt;strong>状态&lt;/strong>：已授权&lt;/p>
+&lt;p>本发明涉及图像处理领域和虚拟现实领域，尤其是一种用于获取360°全景数字图像的装置及方法。&lt;/p></description></item><item><title/><link>https://tianyx325.github.io/lab_xiao/admin/config.yml</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/admin/config.yml</guid><description/></item></channel></rss>
