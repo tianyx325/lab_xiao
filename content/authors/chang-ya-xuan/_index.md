@@ -7,9 +7,11 @@ role: 研二
 organizations:
   - name: 西安理工大学计算机科学与技术学院
     url: 'https://jsj.xaut.edu.cn/'
-bio: "研究方向为事件相机弱光求深度。"
-research_focus: "事件相机弱光求深度"
+bio: "研究方向为事件相机弱光深度估计。"
+research_focus: "事件相机弱光深度估计"
 highlight_name: false
+research:
+  - depth
 user_groups:
   - 研二
 email: "yaoyao-002@163.com"
@@ -21,6 +23,4 @@ social:
 
 **常雅璇**，西安理工大学计算机科学与技术学院**硕士研究生**（研二），导师：肖照林教授。
 
-主要研究方向为**事件相机弱光求深度**。
-
-目前主要学习研究事件相机弱光求深度
+**研究方向：** 事件相机弱光深度估计

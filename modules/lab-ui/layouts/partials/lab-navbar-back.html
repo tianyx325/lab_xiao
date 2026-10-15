@@ -1,4 +1,4 @@
-{{- /* Back-to-list slot — always reserved on the right; link only on detail pages. */ -}}
+{{- /* Fixed-width back slot on every page so the navbar does not shift. */ -}}
 {{- $href := "" -}}
 {{- $label := "" -}}
 {{- $detailSections := slice "publication" "patent" "award" "project" "post" "research" -}}
@@ -14,10 +14,13 @@
   {{- end -}}
   {{- $label = printf "返回%s列表" $kind -}}
 {{- end -}}
+{{- if and $href $label -}}
 <li class="nav-item lab-navbar-back-item">
-  {{- if and $href $label -}}
-  <a class="nav-link lab-navbar-back" href="{{ $href }}">{{ $label }}</a>
-  {{- else -}}
-  <span class="nav-link lab-navbar-back is-empty" aria-hidden="true">&nbsp;</span>
-  {{- end -}}
+  <a class="nav-link lab-navbar-back" href="{{ $href }}" aria-label="{{ $label }}">返回</a>
 </li>
+{{- else -}}
+<li class="nav-item lab-navbar-back-item lab-navbar-back-item--empty" aria-hidden="true">
+  {{/* Same glyph as visible state so reserved width never changes */}}
+  <span class="nav-link lab-navbar-back is-empty">返回</span>
+</li>
+{{- end -}}

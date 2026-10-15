@@ -1,0 +1,20 @@
+{{- /* Free-text research line: Params.research_focus, else bio parse. Sets Scratch lab_member_focus_text. */ -}}
+{{- $focus := "" -}}
+{{- with .Params.research_focus -}}
+  {{- $focus = printf "%s" . -}}
+{{- end -}}
+{{- if not $focus -}}
+  {{- $bio := printf "%s" (.Params.bio | default "") -}}
+  {{- $bio = replaceRE `\s+` " " $bio -}}
+  {{- $bio = replaceRE `^\s+|\s+$` "" $bio -}}
+  {{- if hasPrefix $bio "研究方向为" -}}
+    {{- $focus = replace $bio "研究方向为" "" 1 -}}
+  {{- else if hasPrefix $bio "研究方向：" -}}
+    {{- $focus = replace $bio "研究方向：" "" 1 -}}
+  {{- else if hasPrefix $bio "研究方向:" -}}
+    {{- $focus = replace $bio "研究方向:" "" 1 -}}
+  {{- end -}}
+  {{- $focus = replaceRE `[。.\s]+$` "" $focus -}}
+{{- end -}}
+{{- if eq $focus "待补充" -}}{{- $focus = "" -}}{{- end -}}
+{{- .Scratch.Set "lab_member_focus_text" $focus -}}

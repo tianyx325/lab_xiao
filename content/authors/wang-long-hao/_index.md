@@ -7,9 +7,11 @@ role: 研二
 organizations:
   - name: 西安理工大学计算机科学与技术学院
     url: 'https://jsj.xaut.edu.cn/'
-bio: "研究方向为Skeleton-based Human Action Recognition。"
-research_focus: "Skeleton-based Human Action Recognition"
+bio: "研究方向为基于骨骼的人体动作识别。"
+research_focus: "基于骨骼的人体动作识别"
 highlight_name: false
+research:
+  - action
 user_groups:
   - 研二
 email: "wlh2312087@163.com"
@@ -21,6 +23,8 @@ social:
 
 **王龙豪**，西安理工大学计算机科学与技术学院**硕士研究生**（研二），导师：肖照林教授。
 
-主要研究方向为**Skeleton-based Human Action Recognition**。
+**研究方向：** 基于骨骼的人体动作识别
 
-宠辱不惊，闲看庭前花开花落；去留无意，漫随天外云卷云舒。
+**个人**
+
+> 宠辱不惊，闲看庭前花开花落；去留无意，漫随天外云卷云舒。

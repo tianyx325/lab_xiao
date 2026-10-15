@@ -10,6 +10,8 @@ organizations:
 bio: "研究方向为弱光图像增强。"
 research_focus: "弱光图像增强"
 highlight_name: false
+research:
+  - low-light
 user_groups:
   - 研三
 email: "xkx.kayle@qq.com"
@@ -21,6 +23,8 @@ social:
 
 **薛凯旋**，西安理工大学计算机科学与技术学院**硕士研究生**（研三），导师：肖照林教授。
 
-主要研究方向为**弱光图像增强**。
+**研究方向：** 弱光图像增强
 
-我是这个领域的专家
+**个人**
+
+- 我是这个领域的专家

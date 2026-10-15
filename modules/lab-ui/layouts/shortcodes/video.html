@@ -1,0 +1,17 @@
+{{- /* Lab override: show video as a link only (no player embed). */ -}}
+{{- $src := .Get "src" | default (.Get 0) -}}
+{{- $title := .Get "title" | default "视频" -}}
+{{- $href := $src -}}
+{{- with (.Page.Resources.ByType "video").GetMatch $src -}}
+  {{- $href = .RelPermalink -}}
+{{- else -}}
+  {{- with resources.GetMatch (path.Join "media" $src) -}}
+    {{- $href = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+<p class="lab-video-link">
+  <a href="{{ $href }}" target="_blank" rel="noopener">{{ $title }}</a>
+  {{- if and $href (ne $title $href) -}}
+  <span class="lab-article-video-url">{{ $href }}</span>
+  {{- end -}}
+</p>

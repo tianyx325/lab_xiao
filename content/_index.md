@@ -28,7 +28,7 @@ sections:
   - block: markdown
     content:
       title:
-      text: '{{< lab-section-head title="导师团队" more="全部成员" href="people/" >}}'
+      text: '{{< lab-section-head title="导师团队" more="全部" href="people/" >}}'
     design:
       columns: '1'
       css_class: lab-block-head

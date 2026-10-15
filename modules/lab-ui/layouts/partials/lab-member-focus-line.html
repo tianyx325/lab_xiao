@@ -1,23 +1,20 @@
-{{/* Short research line for member cards. Prefer Params.research_focus; fall back to bio parse. */}}
-{{- $focus := "" -}}
-{{- with .Params.research_focus -}}
-  {{- $focus = printf "%s" . -}}
-{{- end -}}
-{{- if not $focus -}}
-  {{- $bio := printf "%s" (.Params.bio | default "") -}}
-  {{- $bio = replaceRE `\s+` " " $bio -}}
-  {{- $bio = replaceRE `^\s+|\s+$` "" $bio -}}
-  {{- if hasPrefix $bio "研究方向为" -}}
-    {{- $focus = replace $bio "研究方向为" "" 1 -}}
-  {{- else if hasPrefix $bio "研究方向：" -}}
-    {{- $focus = replace $bio "研究方向：" "" 1 -}}
-  {{- else if hasPrefix $bio "研究方向:" -}}
-    {{- $focus = replace $bio "研究方向:" "" 1 -}}
+{{/* Card focus line: advisors = free-text (original); students = official research list. */}}
+{{- $isAdvisor := in (.Params.user_groups | default slice) "导师" -}}
+{{- if $isAdvisor -}}
+  {{- partial "lab-member-focus-text.html" . -}}
+  {{- $focus := .Scratch.Get "lab_member_focus_text" | default "" -}}
+  {{- /* Original card logic: first clause only */ -}}
+  {{- $focus = replaceRE `[;；].*$` "" $focus -}}
+  {{- $focus = replaceRE `^\s+|\s+$` "" $focus -}}
+  {{- with $focus -}}{{ . | truncate 18 }}{{- end -}}
+{{- else -}}
+  {{- partial "lab-member-research-pages.html" . -}}
+  {{- $pages := .Scratch.Get "lab_member_research_pages" | default slice -}}
+  {{- $titles := slice -}}
+  {{- range $pages -}}
+    {{- $titles = $titles | append .Title -}}
   {{- end -}}
-  {{- $focus = replaceRE `[。.\s]+$` "" $focus -}}
-  {{- if eq $focus "待补充" -}}{{- $focus = "" -}}{{- end -}}
+  {{- if gt (len $titles) 0 -}}
+    {{- delimit $titles " · " -}}
+  {{- end -}}
 {{- end -}}
-{{- /* Card: first clause only */ -}}
-{{- $focus = replaceRE `[;；].*$` "" $focus -}}
-{{- $focus = replaceRE `^\s+|\s+$` "" $focus -}}
-{{- with $focus -}}{{ . | truncate 18 }}{{- end -}}

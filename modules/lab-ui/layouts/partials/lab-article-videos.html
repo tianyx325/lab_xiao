@@ -1,0 +1,30 @@
+{{- /* Video links only (no embed). Sources: Params.videos[], Params.url_video */ -}}
+{{- $items := slice -}}
+{{- with .Params.url_video -}}
+  {{- $items = $items | append (dict "title" "视频" "url" .) -}}
+{{- end -}}
+{{- with .Params.videos -}}
+  {{- range . -}}
+    {{- if reflect.IsMap . -}}
+      {{- $u := .url | default .link | default "" -}}
+      {{- if $u -}}
+        {{- $items = $items | append (dict "title" (.title | default .name | default "视频") "url" $u) -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $items = $items | append (dict "title" "视频" "url" .) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $items -}}
+<section class="lab-article-videos" aria-label="视频链接">
+  <h2 class="lab-article-media-title">视频</h2>
+  <ul class="lab-article-video-list">
+    {{- range $items -}}
+    <li>
+      <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+      <span class="lab-article-video-url">{{ .url }}</span>
+    </li>
+    {{- end -}}
+  </ul>
+</section>
+{{- end -}}

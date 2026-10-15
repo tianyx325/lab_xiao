@@ -7,9 +7,11 @@ role: 研二
 organizations:
   - name: 西安理工大学计算机科学与技术学院
     url: 'https://jsj.xaut.edu.cn/'
-bio: "研究方向为大模型智能体相关。"
-research_focus: "大模型智能体相关"
+bio: "研究方向为大模型与智能体。"
+research_focus: "大模型与智能体"
 highlight_name: false
+research:
+  - agent
 user_groups:
   - 研二
 email: "zgzzgz524@gmail.com"
@@ -21,6 +23,8 @@ social:
 
 **赵官正**，西安理工大学计算机科学与技术学院**硕士研究生**（研二），导师：肖照林教授。
 
-主要研究方向为**大模型智能体相关**。
+**研究方向：** 大模型与智能体
 
-性格开朗活泼
+**个人**
+
+- 性格开朗活泼

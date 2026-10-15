@@ -7,9 +7,12 @@ role: 博一
 organizations:
   - name: 西安理工大学计算机科学与技术学院
     url: 'https://jsj.xaut.edu.cn/'
-bio: "研究方向为Monocular Depth estimation in low light environment. Use a semantic approach for rare objects.。"
-research_focus: "Monocular Depth estimation in low light environment. Use a semantic approach for rare objects."
+bio: "研究方向为Monocular depth estimation in low-light environments。"
+research_focus: "Monocular depth estimation in low-light environments"
 highlight_name: false
+research:
+  - depth
+  - low-light
 user_groups:
   - 博士生
 email: "juliochinaone@gmail.com"
@@ -21,6 +24,10 @@ social:
 
 **Julianno**，西安理工大学计算机科学与技术学院**博士研究生**（博一），导师：肖照林教授。
 
-主要研究方向为**Monocular Depth estimation in low light environment. Use a semantic approach for rare objects.**。
+**研究方向：** Monocular depth estimation in low-light environments
 
-I hold a Master's degree in Computer Science, with a strong foundation in Artificial Intelligence and deep learning. I am committed to advancing my academic expertise, tackling challenging problems, and contributing to scientific innovation through rigorous research and continuous learning.
+**学术背景**
+
+- 持有计算机科学硕士学位
+- 具备人工智能与深度学习基础
+- 致力于通过严谨研究推进相关方向的学术工作

@@ -63,15 +63,23 @@ function initMap() {
   const zoom = parseInt(val('map-zoom', '15'), 10) || 15;
   const address = val('map-dir', '');
   const apiKey = val('map-api-key', '');
-  const imgBase = val('map-leaflet-img', '/vendor/leaflet/images/');
-
+  // Absolute image dir (must end with /). Do NOT use Icon.Default.mergeOptions
+  // with full URLs — Default._getIconUrl prepends imagePath (often CDN),
+  // producing broken paths like cdn.../images//vendor/leaflet/images/...
+  const imgBase = val('map-leaflet-img', '/vendor/leaflet/images/').replace(/\/?$/, '/');
   if (L.Icon && L.Icon.Default) {
-    L.Icon.Default.mergeOptions({
-      iconUrl: imgBase + 'marker-icon.png',
-      iconRetinaUrl: imgBase + 'marker-icon-2x.png',
-      shadowUrl: imgBase + 'marker-shadow.png',
-    });
+    L.Icon.Default.imagePath = imgBase;
   }
+  const markerIcon = L.icon({
+    iconUrl: imgBase + 'marker-icon.png',
+    iconRetinaUrl: imgBase + 'marker-icon-2x.png',
+    shadowUrl: imgBase + 'marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+    shadowSize: [41, 41],
+  });
 
   if (provider === 'google' && typeof GMaps !== 'undefined') {
     const map = new GMaps({
@@ -130,7 +138,7 @@ function initMap() {
 
   const map = L.map(mapEl).setView([viewLat, viewLng], zoom);
   tileLayer.addTo(map);
-  const marker = L.marker([viewLat, viewLng]).addTo(map);
+  const marker = L.marker([viewLat, viewLng], { icon: markerIcon }).addTo(map);
   const amapLink =
     'https://uri.amap.com/marker?position=' +
     viewLng +

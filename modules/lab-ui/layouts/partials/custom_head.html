@@ -1,0 +1,12 @@
+{{- /* Load Fancybox when page bundle has gallery/ images (head runs before body). */ -}}
+{{- $gal := (.Resources.ByType "image").Match "gallery/*" -}}
+{{- if not $gal -}}
+  {{- $gal = (.Resources.ByType "image").Match "gallery/**" -}}
+{{- end -}}
+{{- if $gal -}}
+  {{- .Store.Set "has_gallery" true -}}
+  {{- $css := site.Data.assets.css -}}
+  {{- with $css.fancybox -}}
+    {{- printf "<link rel=\"stylesheet\" href=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\" media=\"print\" onload=\"this.media='all'\">" (printf .url .version) .sri | safeHTML -}}
+  {{- end -}}
+{{- end -}}

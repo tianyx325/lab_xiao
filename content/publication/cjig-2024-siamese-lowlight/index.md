@@ -11,7 +11,7 @@ publication_types: ["article-journal"]
 publication: "*中国图象图形学报*, 29(1):231-242"
 publication_short: "中国图象图形学报 2024"
 abstract: 提出隐特征监督的孪生网络方法，用于弱光条件下的光流估计。
-summary: 弱光条件下的光流估计
+summary: "针对弱光条件下光流易退化问题，构建隐特征监督的孪生网络，在低照度视频上实现更稳健的运动估计与特征对齐。"
 tags:
 - 弱光增强
 - 光流
