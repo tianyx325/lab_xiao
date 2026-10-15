@@ -31,15 +31,15 @@
   <div class="lab-gallery-viewport" data-lab-gallery-viewport tabindex="0">
     <div class="lab-gallery-track">
       {{- range $gallery -}}
-        {{- $full := . -}}
         {{- $thumb := . -}}
+        {{- $lite := . -}}
         {{- if ne .MediaType.SubType "gif" -}}
-          {{- $thumb = .Fill "480x360 Center" -}}
-          {{- $thumb = $thumb.Process "webp" -}}
+          {{- $thumb = .Fill "360x270 Center webp q70" -}}
+          {{- $lite = .Resize "1400x webp q75" -}}
         {{- end -}}
         {{- $caption := .Title | default (path.Base .Name) -}}
       <figure class="lab-gallery-item">
-        <a data-fancybox="{{ $album }}" href="{{ $full.RelPermalink }}" data-caption="{{ $caption | plainify }}">
+        <a data-fancybox="{{ $album }}" href="{{ $lite.RelPermalink }}" data-caption="{{ $caption | plainify }}">
           <img src="{{ $thumb.RelPermalink }}" alt="{{ $caption | plainify }}" loading="lazy" decoding="async" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}">
         </a>
       </figure>

@@ -1,0 +1,46 @@
+{{/* Lab override: smaller responsive images for faster detail pages. */}}
+{{ $destination := .Destination }}
+{{ $is_remote := strings.HasPrefix $destination "http" }}
+{{ $caption := .Title | default "" }}
+{{ $alt := .Text | default ($caption | plainify) }}
+{{ $id := anchorize ($caption | plainify) }}
+
+{{- $img := "" -}}
+{{- if not $is_remote -}}
+  {{- $img = (.Page.Resources.ByType "image").GetMatch $destination -}}
+  {{- if not $img -}}
+    {{- $img = resources.Get (path.Join "media" $destination) -}}
+  {{- end -}}
+{{- end -}}
+
+<figure class="lab-content-figure" {{ with $id }}id="figure-{{ . }}"{{ end }}>
+  <div class="d-flex justify-content-center">
+    <div class="w-100">
+      {{- if $img -}}
+        {{- $isSVG := eq $img.MediaType.SubType "svg" -}}
+        {{- $isGIF := eq $img.MediaType.SubType "gif" -}}
+        {{- if $isSVG | or $isGIF -}}
+          <img alt="{{ $alt }}" src="{{ $img.RelPermalink }}" loading="lazy" decoding="async" data-zoomable />
+        {{- else -}}
+          {{- $img_lg := $img.Resize "1200x webp q75" -}}
+          {{- $img_md := $img.Resize "760x webp q72" -}}
+          {{- $img_sm := $img.Resize "400x webp q70" -}}
+          <img alt="{{ $alt }}"
+               srcset="{{ $img_sm.RelPermalink }} 400w, {{ $img_md.RelPermalink }} 760w, {{ $img_lg.RelPermalink }} 1200w"
+               sizes="(max-width: 760px) 100vw, 760px"
+               src="{{ $img_md.RelPermalink }}"
+               width="{{ $img_md.Width }}"
+               height="{{ $img_md.Height }}"
+               loading="lazy"
+               decoding="async"
+               data-zoomable />
+        {{- end -}}
+      {{- else -}}
+        <img src="{{ $destination | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async" data-zoomable />
+      {{- end -}}
+    </div>
+  </div>
+  {{- with $caption -}}
+  <figcaption>{{ . | markdownify | emojify }}</figcaption>
+  {{- end -}}
+</figure>
