@@ -1,0 +1,50 @@
+{{- /* Bottom gallery: images in page-bundle folder gallery/ (excludes featured*). */ -}}
+{{- $images := (.Resources.ByType "image").Match "gallery/*" -}}
+{{- if not $images -}}
+  {{- $images = (.Resources.ByType "image").Match "gallery/**" -}}
+{{- end -}}
+{{- $gallery := slice -}}
+{{- range $images -}}
+  {{- $base := path.Base .Name -}}
+  {{- if not (strings.Contains (lower $base) "featured") -}}
+    {{- $gallery = $gallery | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- if $gallery -}}
+  {{- .Store.Set "has_gallery" true -}}
+  {{- $album := printf "lab-%s" (.RelPermalink | anchorize) -}}
+  {{- $count := len $gallery -}}
+<section class="lab-article-gallery" aria-label="图集" data-lab-gallery-root{{ if le $count 3 }} data-lab-gallery-short{{ end }}>
+  <div class="lab-gallery-head">
+    <h2 class="lab-article-media-title">图集</h2>
+    {{- if gt $count 3 -}}
+    <div class="lab-gallery-nav" role="group" aria-label="图集翻页">
+      <button type="button" class="lab-gallery-btn lab-gallery-prev" aria-label="上一组" disabled>
+        <span aria-hidden="true">‹</span>
+      </button>
+      <button type="button" class="lab-gallery-btn lab-gallery-next" aria-label="下一组">
+        <span aria-hidden="true">›</span>
+      </button>
+    </div>
+    {{- end -}}
+  </div>
+  <div class="lab-gallery-viewport" data-lab-gallery-viewport tabindex="0">
+    <div class="lab-gallery-track">
+      {{- range $gallery -}}
+        {{- $full := . -}}
+        {{- $thumb := . -}}
+        {{- if ne .MediaType.SubType "gif" -}}
+          {{- $thumb = .Fill "480x360 Center" -}}
+          {{- $thumb = $thumb.Process "webp" -}}
+        {{- end -}}
+        {{- $caption := .Title | default (path.Base .Name) -}}
+      <figure class="lab-gallery-item">
+        <a data-fancybox="{{ $album }}" href="{{ $full.RelPermalink }}" data-caption="{{ $caption | plainify }}">
+          <img src="{{ $thumb.RelPermalink }}" alt="{{ $caption | plainify }}" loading="lazy" decoding="async" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}">
+        </a>
+      </figure>
+      {{- end -}}
+    </div>
+  </div>
+</section>
+{{- end -}}

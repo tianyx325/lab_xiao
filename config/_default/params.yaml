@@ -118,7 +118,7 @@ power_ups:
 footer:
   copyright:
     # DERIVED from lab.* — do not edit by hand; run sync_lab_identity.py
-    notice: '© {year} 智能感知与决策实验室 · <a href="https://jsj.xaut.edu.cn/">西安理工大学计算机科学与技术学院</a>'
+    notice: '智能感知与决策实验室'
     license:
       enable: false
       allow_derivatives: false
@@ -172,9 +172,9 @@ features:
       index_name: ''
       show_logo: false
   map:
-    # 须为 mapnik/mapbox 之一，Hugo Blox 才会注入 Leaflet；
-    # 实际底图由 assets/js/wowchemy-map.js 使用高德瓦片（国内可访问）
-    provider: 'mapnik'
+    # amap：本地 Leaflet（lab-contact 注入）+ 高德瓦片；避免 mapnik 再拉 jsDelivr
+    # （CDN imagePath 会拼坏本地 marker 图标路径）
+    provider: 'amap'
     api_key: ''
     zoom: 15
 

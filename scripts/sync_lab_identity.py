@@ -69,10 +69,7 @@ def _yaml_escape(s: str) -> str:
 
 
 def _footer_notice(lab: dict[str, str]) -> str:
-    return (
-        f"© {{year}} {lab['name']} · "
-        f"<a href=\"{lab['org_url']}\">{lab['org_name']}</a>"
-    )
+    return lab["name"]
 
 
 def sync(root: Path, *, dry_run: bool) -> None:

@@ -1,6 +1,6 @@
 ---
 title: "基于 Transformer 的双分支人脸图像关键点检测方法"
-summary: "本发明属于计算机视觉与人工智能技术领域，具体涉及基于Transformer的双分支人脸图像关键点检测方法。"
+summary: "面向人脸分析，提出基于 Transformer 的双分支人脸关键点检测方法，提升复杂姿态与光照条件下的关键点定位精度。"
 date: 2025-09-26
 authors:
   - admin

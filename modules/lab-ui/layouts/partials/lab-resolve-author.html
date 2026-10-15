@@ -1,0 +1,19 @@
+{{- /*
+  Input: dict "id" <authors entry> "page" <page for Scratch>
+  Output Scratch on page: lab_author_name, lab_author_href ("" if not lab member)
+  Lab member = /authors/<id> with File + user_groups
+*/ -}}
+{{- $id := printf "%v" .id -}}
+{{- $page := .page -}}
+{{- $name := $id -}}
+{{- $href := "" -}}
+{{- with site.GetPage (printf "/authors/%s" $id) -}}
+  {{- if .File -}}
+    {{- $name = .LinkTitle -}}
+    {{- if isset .Params "user_groups" -}}
+      {{- $href = .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $page.Scratch.Set "lab_author_name" $name -}}
+{{- $page.Scratch.Set "lab_author_href" $href -}}

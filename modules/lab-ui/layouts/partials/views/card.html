@@ -12,20 +12,29 @@
   {{ $summary = $item.Params.summary | plainify }}
 {{ end }}
 
-{{/* Lab members only: profiles in content/authors/ (have user_groups). */}}
-{{ $members := slice }}
+{{/* All authors shown; only lab members (File + user_groups) are links. */}}
+{{ $authorItems := slice }}
 {{ range $item.Params.authors }}
-  {{ with site.GetPage (printf "/authors/%s" .) }}
-    {{ if isset .Params "user_groups" }}
-      {{ $members = $members | append (dict "name" .LinkTitle "href" .RelPermalink) }}
-    {{ end }}
-  {{ end }}
+  {{ partial "lab-resolve-author.html" (dict "id" . "page" $item) }}
+  {{ $an := $item.Scratch.Get "lab_author_name" }}
+  {{ $ah := $item.Scratch.Get "lab_author_href" }}
+  {{ $authorItems = $authorItems | append (dict "name" $an "href" $ah) }}
 {{ end }}
 
 {{ $year := $item.Date.Format "2006" }}
 {{ $badge := "" }}
 {{ $kind := "成果" }}
 {{ $typeClass := "lab-card--default" }}
+
+{{/* Optional featured image — only when provided; masked so text stays readable. */}}
+{{ $mediaURL := "" }}
+{{ $resource := partial "blox-core/functions/get_featured_image.html" $item }}
+{{ $anchor := $item.Params.image.focal_point | default "Smart" }}
+{{ with $resource }}
+  {{ $image := .Fill (printf "720x480 %s" $anchor) }}
+  {{ if ne $image.MediaType.SubType "gif" }}{{ $image = $image.Process "webp" }}{{ end }}
+  {{ $mediaURL = $image.RelPermalink }}
+{{ end }}
 
 {{ if eq $item.Type "publication" }}
   {{ $kind = "论文" }}
@@ -60,13 +69,25 @@
 {{ end }}
 
 {{ if eq $item.Type "research" }}
-<a class="lab-research-card" href="{{ $link }}" {{ $target | safeHTMLAttr }}>
+<a class="lab-research-card{{ if $mediaURL }} has-media{{ end }}" href="{{ $link }}" {{ $target | safeHTMLAttr }}>
+  {{ with $mediaURL }}
+  <span class="lab-card-media" aria-hidden="true">
+    <img src="{{ . }}" alt="" loading="lazy" decoding="async">
+    <span class="lab-card-media-mask"></span>
+  </span>
+  {{ end }}
   <span class="lab-research-card-kind">{{ $kind }}</span>
   <div class="lab-research-card-title">{{ $item.Title }}</div>
   <p class="lab-research-card-summary">{{ with $summary }}{{ . }}{{ else }}&nbsp;{{ end }}</p>
 </a>
 {{ else }}
-<article class="card-simple view-card lab-card {{ $typeClass }}">
+<article class="card-simple view-card lab-card {{ $typeClass }}{{ if $mediaURL }} has-media{{ end }}">
+  {{ with $mediaURL }}
+  <div class="lab-card-media" aria-hidden="true">
+    <img src="{{ . }}" alt="" loading="lazy" decoding="async">
+    <div class="lab-card-media-mask"></div>
+  </div>
+  {{ end }}
   <a class="lab-card-cover" href="{{ $link }}" {{ $target | safeHTMLAttr }} aria-label="{{ $item.Title }}"></a>
 
   <div class="lab-card-top">
@@ -80,10 +101,14 @@
 
   <div class="lab-card-main">
     <div class="lab-card-authors">
-      {{ with $members }}
+      {{ with $authorItems }}
         {{ range $i, $m := . }}
           {{- if $i }}<span class="lab-card-author-sep"> · </span>{{ end -}}
+          {{- if $m.href -}}
           <a class="lab-card-author-link" href="{{ $m.href }}">{{ $m.name }}</a>
+          {{- else -}}
+          <span class="lab-card-author-name">{{ $m.name }}</span>
+          {{- end -}}
         {{ end }}
       {{ else }}
         <span class="lab-card-authors-empty">&nbsp;</span>

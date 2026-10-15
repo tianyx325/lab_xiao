@@ -17,7 +17,21 @@
 {{- end -}}
 <div class="research-cards">
   {{- range $pages -}}
-  <a class="lab-research-card" href="{{ .RelPermalink }}">
+    {{- $mediaURL := "" -}}
+    {{- $resource := partial "blox-core/functions/get_featured_image.html" . -}}
+    {{- $anchor := .Params.image.focal_point | default "Smart" -}}
+    {{- with $resource -}}
+      {{- $image := .Fill (printf "720x480 %s" $anchor) -}}
+      {{- if ne $image.MediaType.SubType "gif" -}}{{- $image = $image.Process "webp" -}}{{- end -}}
+      {{- $mediaURL = $image.RelPermalink -}}
+    {{- end -}}
+  <a class="lab-research-card{{ if $mediaURL }} has-media{{ end }}" href="{{ .RelPermalink }}">
+    {{- with $mediaURL -}}
+    <span class="lab-card-media" aria-hidden="true">
+      <img src="{{ . }}" alt="" loading="lazy" decoding="async">
+      <span class="lab-card-media-mask"></span>
+    </span>
+    {{- end -}}
     <span class="lab-research-card-kind">方向</span>
     <div class="lab-research-card-title">{{ .Title }}</div>
     <p class="lab-research-card-summary">{{ with .Params.summary }}{{ . | plainify }}{{ else }}{{ .Summary | plainify | truncate 48 }}{{ end }}</p>

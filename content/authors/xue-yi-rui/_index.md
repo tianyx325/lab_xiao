@@ -7,9 +7,11 @@ role: 研一
 organizations:
   - name: 西安理工大学计算机科学与技术学院
     url: 'https://jsj.xaut.edu.cn/'
-bio: "研究方向为AI agent。"
-research_focus: "AI agent"
+bio: "研究方向为智能体。"
+research_focus: "智能体"
 highlight_name: false
+research:
+  - agent
 user_groups:
   - 研一
 email: "2903465406@qq.com"
@@ -19,4 +21,12 @@ social:
     link: 'mailto:2903465406@qq.com'
 ---
 
-目前就读于西安理工大学，硕士研究生一年级。研究兴趣主要包括人工智能、大语言模型及智能体等方向。具备一定的 Python编程基础，关注深度学习、智能体开发及相关技术的实践应用。注重在实践中积累经验、提升自身能力。
+**薛奕瑞**，西安理工大学计算机科学与技术学院**硕士研究生**（研一），导师：肖照林教授。
+
+**研究方向：** 智能体
+
+**学习与研究**
+
+- 研究兴趣：人工智能、大语言模型与智能体
+- 具备 Python 编程基础
+- 关注深度学习与智能体开发的实践应用

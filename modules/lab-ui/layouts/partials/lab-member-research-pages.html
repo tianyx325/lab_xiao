@@ -1,0 +1,15 @@
+{{- /* Resolve Params.research slugs → research pages; store on page Scratch. */ -}}
+{{- $pages := slice -}}
+{{- with .Params.research -}}
+  {{- range . -}}
+    {{- $slug := printf "%s" . -}}
+    {{- with site.GetPage (printf "/research/%s" $slug) -}}
+      {{- $pages = $pages | append . -}}
+    {{- else -}}
+      {{- with site.GetPage (printf "research/%s" $slug) -}}
+        {{- $pages = $pages | append . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- .Scratch.Set "lab_member_research_pages" $pages -}}

@@ -11,7 +11,7 @@ publication_types: ["article-journal"]
 publication: "*IEEE Transactions on Image Processing*, 31:6164-6174"
 publication_short: "IEEE TIP 2022"
 abstract: 提出尺度—视差空间中的光场 FDL-HCGH 特征描述方法。
-summary: 尺度—视差空间中的光场特征描述
+summary: "在尺度—视差空间中设计光场 FDL-HCGH 特征，增强光场数据的可区分性，支撑匹配、检索等下游视觉任务。"
 tags:
 - 光场
 - 特征匹配

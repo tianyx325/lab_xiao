@@ -1,25 +1,16 @@
-{{- /* Resolve author usernames / names to display links when possible */ -}}
+{{- /* Authors byline: lab members link to profile; others plain name only. */ -}}
 {{- $page := . -}}
 {{- with $page.Params.authors -}}
-  {{- $names := slice -}}
-  {{- range . -}}
-    {{- $a := . -}}
-    {{- $label := printf "%v" $a -}}
-    {{- $href := "" -}}
-    {{- with site.GetPage (printf "/authors/%s" $a) -}}
-      {{- $label = .Title -}}
-      {{- $href = .RelPermalink -}}
-    {{- else -}}
-      {{- with site.GetPage (printf "/author/%s" ($a | urlize)) -}}
-        {{- $label = .Title -}}
-        {{- $href = .RelPermalink -}}
-      {{- end -}}
-    {{- end -}}
+  {{- $n := len . -}}
+  {{- range $i, $a := . -}}
+    {{- partial "lab-resolve-author.html" (dict "id" $a "page" $page) -}}
+    {{- $name := $page.Scratch.Get "lab_author_name" -}}
+    {{- $href := $page.Scratch.Get "lab_author_href" -}}
     {{- if $href -}}
-      {{- $names = $names | append (printf "<a href=\"%s\">%s</a>" $href $label) -}}
+      <a href="{{ $href }}">{{ $name }}</a>
     {{- else -}}
-      {{- $names = $names | append $label -}}
+      {{ $name }}
     {{- end -}}
+    {{- if lt (add $i 1) $n -}}、{{- end -}}
   {{- end -}}
-  {{- delimit $names "、" | safeHTML -}}
 {{- end -}}

@@ -11,7 +11,7 @@ publication_types: ["paper-conference"]
 publication: "In *IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*"
 publication_short: "CVPR 2014"
 abstract: 针对全光场成像中的混叠问题，提出检测与抑制方法。
-summary: 全光场成像混叠检测与抑制
+summary: "围绕全光场成像中的混叠伪影，研究检测与抑制方法，改善重聚焦与视点合成中的成像质量与细节保真度。"
 tags:
 - 光场
 - 计算摄影

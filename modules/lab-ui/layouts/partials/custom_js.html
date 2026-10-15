@@ -1,5 +1,5 @@
 {{/* Lab site helpers */}}
-{{- $scripts := slice "js/lab-mailto.js" "js/lab-member-works.js" -}}
+{{- $scripts := slice "js/lab-mailto.js" "js/lab-member-works.js" "js/lab-gallery.js" -}}
 {{- range $scripts -}}
   {{- with resources.Get . -}}
     {{- $js := . -}}

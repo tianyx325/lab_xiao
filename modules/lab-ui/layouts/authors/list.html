@@ -1,10 +1,11 @@
 {{- define "main" -}}
 
-{{/* Lab member profile — centered identity; fallback for taxonomy-only names. */}}
+{{/* Taxonomy-only names (not in content/authors/) have no profile — send to members list. */}}
 {{ if not .File }}
-<div class="universal-wrapper pt-3">
-  <h1>{{ .Title }}</h1>
-</div>
+{{ $people := "/people/" | relLangURL }}
+<script>location.replace({{ $people | jsonify }});</script>
+<noscript><meta http-equiv="refresh" content="0; url={{ $people }}"></noscript>
+<p class="universal-wrapper pt-3"><a href="{{ $people }}">返回成员列表</a></p>
 {{ else }}
 {{- $person := .Params -}}
 {{- $avatar := (.Resources.ByType "image").GetMatch "*avatar*" -}}
@@ -26,28 +27,24 @@
 {{- $labOrg := "" -}}
 {{- with site.Params.lab -}}{{- $labOrg = .org_name | default "" -}}{{- end -}}
 
-{{- /* Prefer Params.research_focus; fall back to bio parse. Body Content untouched. */ -}}
-{{- $focusText := printf "%s" ($person.research_focus | default "") -}}
-{{- $focusParsed := false -}}
-{{- if $focusText -}}
-  {{- $focusParsed = true -}}
-{{- else -}}
-  {{- $bioRaw := printf "%s" ($person.bio | default "") -}}
-  {{- $bioRaw = replaceRE `\s+` " " $bioRaw -}}
-  {{- $bioRaw = replaceRE `^\s+|\s+$` "" $bioRaw -}}
-  {{- if hasPrefix $bioRaw "研究方向为" -}}
-    {{- $focusText = replace $bioRaw "研究方向为" "" 1 -}}
-    {{- $focusParsed = true -}}
-  {{- else if hasPrefix $bioRaw "研究方向：" -}}
-    {{- $focusText = replace $bioRaw "研究方向：" "" 1 -}}
-    {{- $focusParsed = true -}}
-  {{- else if hasPrefix $bioRaw "研究方向:" -}}
-    {{- $focusText = replace $bioRaw "研究方向:" "" 1 -}}
-    {{- $focusParsed = true -}}
+{{- $isAdvisor := in (.Params.user_groups | default slice) "导师" -}}
+{{- /* Students: official research list tags. Advisors: free-text split (original). Body always free-text. */ -}}
+{{- $researchPages := slice -}}
+{{- $focusTopics := slice -}}
+{{- if $isAdvisor -}}
+  {{- partial "lab-member-focus-text.html" . -}}
+  {{- $focusText := .Scratch.Get "lab_member_focus_text" | default "" -}}
+  {{- if $focusText -}}
+    {{- $norm := replaceRE `[;；、，,]` "|" $focusText -}}
+    {{- range (split $norm "|") -}}
+      {{- $topic := replaceRE `^\s+|\s+$` "" . -}}
+      {{- if $topic -}}{{- $focusTopics = $focusTopics | append $topic -}}{{- end -}}
+    {{- end -}}
   {{- end -}}
-  {{- $focusText = replaceRE `[。.\s]+$` "" $focusText -}}
+{{- else -}}
+  {{- partial "lab-member-research-pages.html" . -}}
+  {{- $researchPages = .Scratch.Get "lab_member_research_pages" | default (slice) -}}
 {{- end -}}
-{{- $showFocus := and $focusParsed $focusText (ne $focusText "待补充") -}}
 
 <div class="lab-member-profile lab-list-page">
   <div class="lab-member-identity-band">
@@ -63,36 +60,34 @@
           {{ end }}
         </div>
 
-        <div class="lab-member-identity-main">
-          <h1 class="lab-member-identity-name">{{ .Title }}</h1>
+        <div class="lab-member-identity-side">
+          <div class="lab-member-identity-main">
+            <h1 class="lab-member-identity-name">{{ .Title }}</h1>
 
-          {{- /* Line 1: email · role */ -}}
-          {{- $email := $person.email | default "" -}}
-          {{- if and (not $email) $person.social -}}
-            {{- range $person.social -}}
-              {{- if and (not $email) .link (eq (urls.Parse .link).Scheme "mailto") -}}
-                {{- $email = replaceRE `^mailto:` "" .link -}}
+            {{- /* Line 1: email · role */ -}}
+            {{- $email := $person.email | default "" -}}
+            {{- if and (not $email) $person.social -}}
+              {{- range $person.social -}}
+                {{- if and (not $email) .link (eq (urls.Parse .link).Scheme "mailto") -}}
+                  {{- $email = replaceRE `^mailto:` "" .link -}}
+                {{- end -}}
               {{- end -}}
             {{- end -}}
-          {{- end -}}
-          {{- if or $email $person.role -}}
-          <p class="lab-member-identity-meta">
-            {{- with $person.role -}}<span class="lab-member-identity-role">{{ . | markdownify | emojify }}</span>{{- end -}}
-            {{- with $email -}}
-            <a class="lab-member-identity-email" href="mailto:{{ . }}" title="点击复制邮箱">{{ . }}</a>
+            {{- if or $email $person.role -}}
+            <p class="lab-member-identity-meta">
+              {{- with $person.role -}}<span class="lab-member-identity-role">{{ . | markdownify | emojify }}</span>{{- end -}}
+              {{- with $email -}}
+              <a class="lab-member-identity-email" href="mailto:{{ . }}" title="点击复制邮箱">{{ . }}</a>
+              {{- end -}}
+            </p>
             {{- end -}}
-          </p>
-          {{- end -}}
 
-          {{- /* Line 2: research focus */ -}}
-          {{- if $showFocus -}}
-          {{- $norm := replaceRE `[;；、，,]` "|" $focusText -}}
-          {{- $topics := split $norm "|" -}}
-          <div class="lab-member-identity-focus">
-            <ul class="lab-member-focus-topics" role="list">
-              {{- range $topics -}}
-                {{- $topic := replaceRE `^\s+|\s+$` "" . -}}
-                {{- if $topic -}}
+            {{- /* Line 2: research tags */ -}}
+            {{- if and $isAdvisor (gt (len $focusTopics) 0) -}}
+            <div class="lab-member-identity-focus">
+              <ul class="lab-member-focus-topics" role="list">
+                {{- range $focusTopics -}}
+                  {{- $topic := . -}}
                   {{- $href := "" -}}
                   {{- $tl := lower $topic -}}
                   {{- if or (in $topic "动作识别") (in $topic "骨骼") (in $tl "skeleton") (in $tl "action recognition") -}}
@@ -104,20 +99,30 @@
                   {{- else if or (in $topic "智能体") (in $topic "大模型") (in $tl "agent") -}}
                     {{- $href = "/research/agent/" -}}
                   {{- end -}}
-                  <li class="lab-member-focus-topic" role="listitem">
-                    {{- if $href -}}
-                    <a class="lab-member-focus-tag" href="{{ $href | relLangURL }}">{{ $topic }}</a>
-                    {{- else -}}
-                    <span class="lab-member-focus-tag">{{ $topic }}</span>
-                    {{- end -}}
-                  </li>
+                <li class="lab-member-focus-topic" role="listitem">
+                  {{- if $href -}}
+                  <a class="lab-member-focus-tag" href="{{ $href | relLangURL }}">{{ $topic }}</a>
+                  {{- else -}}
+                  <span class="lab-member-focus-tag">{{ $topic }}</span>
+                  {{- end -}}
+                </li>
                 {{- end -}}
-              {{- end -}}
-            </ul>
+              </ul>
+            </div>
+            {{- else if and (not $isAdvisor) (gt (len $researchPages) 0) -}}
+            <div class="lab-member-identity-focus">
+              <ul class="lab-member-focus-topics" role="list">
+                {{- range $researchPages -}}
+                <li class="lab-member-focus-topic" role="listitem">
+                  <a class="lab-member-focus-tag" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </li>
+                {{- end -}}
+              </ul>
+            </div>
+            {{- else if and (not $email) (not $person.role) $person.bio -}}
+            <p class="lab-member-identity-bio">{{ $person.bio | markdownify | emojify }}</p>
+            {{- end -}}
           </div>
-          {{- else if and (not $email) (not $person.role) $person.bio -}}
-          <p class="lab-member-identity-bio">{{ $person.bio | markdownify | emojify }}</p>
-          {{- end -}}
 
           {{- /* Hide org when it matches lab.org_name (redundant for most students) */ -}}
           {{- $orgShown := false -}}

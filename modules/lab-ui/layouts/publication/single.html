@@ -46,13 +46,12 @@
     <p class="lab-article-tags">{{ delimit . " · " }}</p>
     {{ end }}
 
-    {{ if or .Params.url_pdf .Params.url_code .Params.url_dataset .Params.url_poster .Params.url_video }}
+    {{ if or .Params.url_pdf .Params.url_code .Params.url_dataset .Params.url_poster }}
     <p class="lab-article-links">
       {{ with .Params.url_pdf }}<a href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
       {{ with .Params.url_code }}<a href="{{ . }}" target="_blank" rel="noopener">代码</a>{{ end }}
       {{ with .Params.url_dataset }}<a href="{{ . }}" target="_blank" rel="noopener">数据</a>{{ end }}
       {{ with .Params.url_poster }}<a href="{{ . }}" target="_blank" rel="noopener">海报</a>{{ end }}
-      {{ with .Params.url_video }}<a href="{{ . }}" target="_blank" rel="noopener">视频</a>{{ end }}
     </p>
     {{ end }}
 
