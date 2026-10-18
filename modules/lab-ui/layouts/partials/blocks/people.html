@@ -107,5 +107,10 @@
     </section>
     {{ end }}
   {{ end }}
+  {{ if not $is_list_page }}
+  <div class="lab-section-more">
+    <a class="lab-outcomes-more" href="{{ "people/" | relURL }}">查看更多导师</a>
+  </div>
+  {{ end }}
   </div>
 </div>

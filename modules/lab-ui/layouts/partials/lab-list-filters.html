@@ -1,0 +1,20 @@
+{{- /* Minimal filter row for list headers.
+     Usage: partial "lab-list-filters.html" (dict
+       "placeholder" "…"
+       "selects" (slice (dict "label" "类型" "group" "pubtype" "all" "类型" "options" $opts))
+     )
+*/ -}}
+{{- $placeholder := .placeholder | default "搜索…" -}}
+{{- $selects := .selects | default slice -}}
+<div class="lab-list-filters" role="search">
+  <input type="search" class="filter-search lab-filter-control" placeholder="{{ $placeholder }}" aria-label="搜索"
+    autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
+  {{- range $selects }}
+  <select class="lab-filter-select lab-filter-control" data-filter-group="{{ .group }}" aria-label="{{ .label }}">
+    <option value="*">{{ .all | default .label }}</option>
+    {{- range .options }}
+    <option value="{{ .value }}">{{ .text }}</option>
+    {{- end }}
+  </select>
+  {{- end }}
+</div>

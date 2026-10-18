@@ -1,28 +1,30 @@
 {{- define "main" -}}
 
-{{ $byline := slice }}
-{{ if .Params.authors }}
-  {{ $byline = $byline | append (partial "lab-detail-authors.html" .) }}
+{{/* Build metadata tags. 「类型」不在详情页展示；授权状态单独保留。 */}}
+{{ $metaTags := slice }}
+{{ with .Params.patent_number }}
+  {{ $metaTags = $metaTags | append (dict "label" "专利号" "value" .) }}
+{{ end }}
+{{ with .Params.application_date }}
+  {{ $metaTags = $metaTags | append (dict "label" "申请日" "value" (. | time.Format "2006-01-02")) }}
 {{ end }}
 {{ with .Date }}
-  {{ $byline = $byline | append (.Format "2006-01") }}
+  {{ $metaTags = $metaTags | append (dict "label" "授权日" "value" (.Format "2006-01-02")) }}
 {{ end }}
-{{ with .Params.tags }}
-  {{ $byline = $byline | append (delimit . " · ") }}
-{{ end }}
-{{ .Scratch.Set "lab_article_byline" (delimit $byline " · ") }}
-
-{{ $meta := slice }}
-{{ with .Params.patent_number }}
-  {{ $meta = $meta | append . }}
+{{ if .Params.authors }}
+  {{ $authors := partial "lab-detail-authors.html" . }}
+  {{ $metaTags = $metaTags | append (dict "label" "发明人" "value" ($authors | safeHTML)) }}
 {{ end }}
 {{ with partial "lab-status-label.html" (dict "kind" "patent" "page" .) }}
-  {{ $meta = $meta | append . }}
+  {{ $metaTags = $metaTags | append (dict "label" "状态" "value" .) }}
 {{ end }}
-{{ with .Date }}
-  {{ $meta = $meta | append (.Format "2006") }}
+{{ with .Params.url_patent }}
+  {{ $metaTags = $metaTags | append (dict "label" "全文" "href" .) }}
 {{ end }}
-{{ .Scratch.Set "lab_article_meta" $meta }}
+{{ with .Params.url_pdf }}
+  {{ $metaTags = $metaTags | append (dict "label" "PDF" "href" .) }}
+{{ end }}
+{{ .Scratch.Set "lab_article_meta_tags" $metaTags }}
 
 {{ partial "lab-article-shell-start.html" . }}
 

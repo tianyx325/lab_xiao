@@ -1,22 +1,53 @@
 {{- define "main" -}}
 
-<div class="lab-list-page lab-list-page--post">
-  {{ partial "lab-list-header.html" (dict "title" .Title "lead" (partial "lab-section-lead.html" (dict "page" . "key" "post"))) }}
+{{- $pages := .Pages.ByDate.Reverse -}}
+{{- range $pages -}}
+  {{- $.Scratch.SetInMap "years" (print (.Date.Format "2006")) (print (.Date.Format "2006")) -}}
+{{- end -}}
+{{- $yearOpts := slice -}}
+{{- with $.Scratch.GetSortedMapValues "years" -}}
+  {{- range sort . "" "desc" -}}
+    {{- $yearOpts = $yearOpts | append (dict "value" (printf ".year-%s" .) "text" .) -}}
+  {{- end -}}
+{{- end -}}
+{{- range $pages -}}
+  {{- range (.Params.categories | default slice) -}}
+    {{- $.Scratch.SetInMap "cats" (. | urlize) . -}}
+  {{- end -}}
+{{- end -}}
+{{- $catOpts := slice -}}
+{{- range $slug, $label := ($.Scratch.Get "cats" | default dict) -}}
+  {{- $catOpts = $catOpts | append (dict "value" (printf ".cat-%s" $slug) "text" $label) -}}
+{{- end -}}
+{{- $selects := slice -}}
+{{- if $catOpts -}}
+  {{- $selects = $selects | append (dict "label" "分类" "group" "cat" "all" "分类" "options" $catOpts) -}}
+{{- end -}}
+{{- $selects = $selects | append (dict "label" "年份" "group" "year" "all" "年份" "options" $yearOpts) -}}
 
+<div class="lab-list-page lab-list-page--post">
+  {{ partial "lab-list-header.html" (dict
+    "title" .Title
+    "lead" (partial "lab-section-lead.html" (dict "page" . "key" "post"))
+    "filters" (dict "placeholder" "搜索新闻…" "selects" $selects)
+  ) }}
   <div class="lab-list-body container">
     {{ with .Content }}
-      <div class="article-style lab-list-intro">{{ . }}</div>
+    <div class="article-style lab-list-intro">{{ . }}</div>
     {{ end }}
-
-    <div class="lab-list-grid">
-      {{ $paginator := .Paginate .Pages }}
-      {{ range $index, $post := $paginator.Pages }}
-        {{ partial "functions/render_view" (dict "page" $ "item" . "view" ($.Params.view | default "card") "index" $index) }}
+    <div class="lab-list-grid" data-lab-filter-root data-page-size="12">
+      {{ range $index, $item := $pages }}
+        {{ $classes := slice (printf "year-%s" (.Date.Format "2006")) }}
+        {{ range (.Params.categories | default slice) }}
+          {{ $classes = $classes | append (printf "cat-%s" (. | urlize)) }}
+        {{ end }}
+        <div class="lab-list-item {{ delimit $classes " " }}">
+          {{ partial "functions/render_view" (dict "page" $ "item" . "view" ($.Params.view | default "card") "index" $index) }}
+        </div>
       {{ end }}
     </div>
-
-    {{ partial "pagination" . }}
   </div>
 </div>
+{{ partial "lab-list-filter-script.html" . }}
 
 {{- end -}}

@@ -22,8 +22,10 @@ removePathAccents: true
 
 enableGitInfo: false
 summaryLength: 30
+# List pages (project / patent / publication / award / post): 12 per page (3×4 grid)
+paginate: 12
 pagination:
-  pagerSize: 10
+  pagerSize: 12
 enableEmoji: true
 enableRobotsTXT: true
 footnotereturnlinkcontents: <sup>^</sup>

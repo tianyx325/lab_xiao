@@ -1,0 +1,30 @@
+{{- define "main" -}}
+
+{{/* Build metadata tags */}}
+{{ $metaTags := slice }}
+{{ with .Date }}
+  {{ $metaTags = $metaTags | append (dict "label" "获奖年份" "value" (.Format "2006")) }}
+{{ end }}
+{{ if .Params.authors }}
+  {{ $authors := partial "lab-detail-authors.html" . }}
+  {{ $metaTags = $metaTags | append (dict "label" "获奖人" "value" ($authors | safeHTML)) }}
+{{ end }}
+{{ $levelKeys := slice "国家级" "省级" "市级" "校级" }}
+{{ with .Params.tags }}
+  {{ range . }}
+    {{ $label := "类别" }}
+    {{ if in $levelKeys . }}{{ $label = "级别" }}{{ end }}
+    {{ $metaTags = $metaTags | append (dict "label" $label "value" .) }}
+  {{ end }}
+{{ end }}
+{{ .Scratch.Set "lab_article_meta_tags" $metaTags }}
+
+{{ partial "lab-article-shell-start.html" . }}
+
+    {{ if .Content }}
+    <div class="article-style lab-article-content">{{ .Content }}</div>
+    {{ end }}
+
+{{ partial "lab-article-shell-end.html" . }}
+
+{{- end -}}

@@ -1,0 +1,28 @@
+{{- /* Metadata tags. rows: one centered line per group. items: a single wrapping line. */ -}}
+{{- $rows := .rows -}}
+{{- if not $rows -}}
+  {{- $items := .items | default slice -}}
+  {{- if $items -}}
+    {{- $rows = slice $items -}}
+  {{- end -}}
+{{- end -}}
+{{- if $rows -}}
+<div class="lab-meta-tags{{ if gt (len $rows) 1 }} lab-meta-tags--rows{{ end }}">
+  {{- range $row := $rows }}
+  {{- if $row }}
+  <div class="lab-meta-tags-row">
+    {{- range $row }}
+    {{- if .href }}
+    <a class="lab-meta-tag lab-meta-tag-link" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }}</a>
+    {{- else }}
+    <div class="lab-meta-tag">
+      <span class="lab-meta-tag-label">{{ .label }}</span>
+      <span class="lab-meta-tag-value">{{ .value | safeHTML }}</span>
+    </div>
+    {{- end }}
+    {{- end }}
+  </div>
+  {{- end }}
+  {{- end }}
+</div>
+{{- end -}}

@@ -1,0 +1,114 @@
+<script>
+(function () {
+  var root = document.querySelector('[data-lab-filter-root]');
+  if (!root) return;
+  var pageSize = parseInt(root.getAttribute('data-page-size') || '12', 10);
+  if (!pageSize || pageSize < 1) pageSize = 12;
+  var items = Array.prototype.slice.call(root.querySelectorAll('.lab-list-item'));
+  var search = document.querySelector('.lab-list-filters .filter-search');
+  var selects = Array.prototype.slice.call(document.querySelectorAll('.lab-list-filters .lab-filter-select'));
+  var page = 1;
+
+  var empty = document.createElement('p');
+  empty.className = 'lab-filter-empty';
+  empty.setAttribute('hidden', '');
+  empty.textContent = '没有匹配的内容';
+
+  var nav = document.createElement('nav');
+  nav.className = 'lab-pagination';
+  nav.setAttribute('aria-label', '列表分页');
+  nav.setAttribute('hidden', '');
+  var list = document.createElement('ul');
+  list.className = 'lab-pagination-list';
+  nav.appendChild(list);
+  root.insertAdjacentElement('afterend', nav);
+  root.insertAdjacentElement('afterend', empty);
+
+  function matched() {
+    return items.filter(function (item) {
+      return !item.classList.contains('is-filtered-out');
+    });
+  }
+
+  function button(label, opts) {
+    var li = document.createElement('li');
+    li.className = 'lab-pagination-item';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'lab-pagination-link' + (opts.text ? ' lab-pagination-link--text' : '');
+    btn.textContent = label;
+    if (opts.disabled) {
+      btn.classList.add('is-disabled');
+      btn.disabled = true;
+    }
+    if (opts.current) {
+      btn.classList.add('is-current');
+      btn.setAttribute('aria-current', 'page');
+    }
+    if (opts.goto) {
+      btn.addEventListener('click', function () {
+        page = opts.goto;
+        render();
+        var header = document.querySelector('.lab-list-header');
+        if (header && header.scrollIntoView) header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+    li.appendChild(btn);
+    return li;
+  }
+
+  function render() {
+    var hits = matched();
+    var pages = Math.max(1, Math.ceil(hits.length / pageSize));
+    if (page > pages) page = pages;
+    if (page < 1) page = 1;
+    var start = (page - 1) * pageSize;
+    hits.forEach(function (item, i) {
+      item.classList.toggle('is-paged-out', i < start || i >= start + pageSize);
+    });
+
+    if (hits.length === 0) empty.removeAttribute('hidden');
+    else empty.setAttribute('hidden', '');
+
+    list.textContent = '';
+    if (pages <= 1) {
+      nav.setAttribute('hidden', '');
+      return;
+    }
+    nav.removeAttribute('hidden');
+    list.appendChild(button('上一页', { text: true, disabled: page === 1, goto: page === 1 ? 0 : page - 1 }));
+    for (var n = 1; n <= pages; n++) {
+      list.appendChild(button(String(n), { current: n === page, goto: n === page ? 0 : n }));
+    }
+    list.appendChild(button('下一页', { text: true, disabled: page === pages, goto: page === pages ? 0 : page + 1 }));
+  }
+
+  function applyFilter(resetPage) {
+    var q = (search && search.value ? search.value : '').trim().toLowerCase();
+    var groups = {};
+    selects.forEach(function (sel) {
+      groups[sel.getAttribute('data-filter-group')] = sel.value || '*';
+    });
+    items.forEach(function (item) {
+      var ok = true;
+      Object.keys(groups).forEach(function (g) {
+        var v = groups[g];
+        if (v && v !== '*' && !item.classList.contains(v.replace(/^\./, ''))) ok = false;
+      });
+      if (ok && q) {
+        var text = (item.textContent || '').toLowerCase();
+        if (text.indexOf(q) === -1) ok = false;
+      }
+      item.classList.toggle('is-filtered-out', !ok);
+    });
+    if (resetPage) page = 1;
+    render();
+  }
+
+  if (search) search.addEventListener('input', function () { applyFilter(true); });
+  selects.forEach(function (sel) {
+    sel.addEventListener('change', function () { applyFilter(true); });
+  });
+  applyFilter(false);
+})();
+</script>
