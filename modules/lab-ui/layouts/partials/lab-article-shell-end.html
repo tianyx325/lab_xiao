@@ -1,4 +1,6 @@
     {{ partial "lab-article-videos.html" . }}
+    {{ if eq .Section "post" }}
     {{ partial "lab-article-gallery.html" . }}
+    {{ end }}
   </div>
 </article>

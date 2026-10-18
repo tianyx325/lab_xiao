@@ -42,7 +42,7 @@
         {{ with .lead }}<p class="lab-contact-card-lead">{{ . }}</p>{{ end }}
         <ul>
           {{- if .show_email }}
-            {{- with $email }}<li><a class="lab-contact-mail" href="mailto:{{ . }}" title="点击复制邮箱">{{ . }}</a></li>{{ end }}
+            {{- with $email }}<li>{{ $emailLabel }}：<a class="lab-contact-mail" href="mailto:{{ . }}" title="点击复制邮箱">{{ . }}</a></li>{{ end }}
           {{- end }}
           {{- range .bullets }}
           <li>{{ . }}</li>

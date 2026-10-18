@@ -1,7 +1,74 @@
 {{- define "main" -}}
 
-<div class="lab-list-page">
-  {{ partial "lab-list-header.html" (dict "title" .Title "lead" (partial "lab-section-lead.html" (dict "page" . "key" .Section))) }}
+{{- $section := .Section -}}
+{{- $pages := .Pages.ByDate.Reverse -}}
+
+{{- /* Collect year options */ -}}
+{{- range $pages -}}
+  {{- $.Scratch.SetInMap "years" (print (.Date.Format "2006")) (print (.Date.Format "2006")) -}}
+{{- end -}}
+{{- $yearOpts := slice -}}
+{{- with $.Scratch.GetSortedMapValues "years" -}}
+  {{- range sort . "" "desc" -}}
+    {{- $yearOpts = $yearOpts | append (dict "value" (printf ".year-%s" .) "text" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Section-specific secondary select (status / category) */ -}}
+{{- $selects := slice -}}
+{{- $placeholder := "搜索标题、摘要…" -}}
+{{- $filterable := false -}}
+
+{{- if or (eq $section "project") (eq $section "patent") (eq $section "award") (eq $section "post") -}}
+  {{- $filterable = true -}}
+{{- end -}}
+{{- if eq $section "project" -}}
+  {{- $placeholder = "搜索项目…" -}}
+  {{- $selects = $selects | append (dict "label" "状态" "group" "status" "all" "状态" "options" (slice
+    (dict "value" ".status-ongoing" "text" "在研")
+    (dict "value" ".status-completed" "text" "已结题")
+  )) -}}
+{{- else if eq $section "patent" -}}
+  {{- $placeholder = "搜索专利…" -}}
+  {{- $selects = $selects | append (dict "label" "状态" "group" "status" "all" "状态" "options" (slice
+    (dict "value" ".status-granted" "text" "已授权")
+  )) -}}
+{{- else if eq $section "award" -}}
+  {{- $placeholder = "搜索奖项…" -}}
+{{- else if eq $section "post" -}}
+  {{- $placeholder = "搜索新闻…" -}}
+  {{- range $pages -}}
+    {{- range (.Params.categories | default slice) -}}
+      {{- $slug := . | urlize -}}
+      {{- $.Scratch.SetInMap "cats" $slug . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $catOpts := slice -}}
+  {{- range $slug, $label := ($.Scratch.Get "cats" | default dict) -}}
+    {{- $catOpts = $catOpts | append (dict "value" (printf ".cat-%s" $slug) "text" $label) -}}
+  {{- end -}}
+  {{- if $catOpts -}}
+    {{- $selects = $selects | append (dict "label" "分类" "group" "cat" "all" "分类" "options" $catOpts) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $filterable -}}
+  {{- $selects = $selects | append (dict "label" "年份" "group" "year" "all" "年份" "options" $yearOpts) -}}
+{{- end -}}
+
+<div class="lab-list-page lab-list-page--{{ $section }}">
+  {{ if $filterable }}
+    {{ partial "lab-list-header.html" (dict
+      "title" .Title
+      "lead" (partial "lab-section-lead.html" (dict "page" . "key" $section))
+      "filters" (dict "placeholder" $placeholder "selects" $selects)
+    ) }}
+  {{ else }}
+    {{ partial "lab-list-header.html" (dict
+      "title" .Title
+      "lead" (partial "lab-section-lead.html" (dict "page" . "key" $section))
+    ) }}
+  {{ end }}
 
   <div class="lab-list-body container">
     {{ with .Content }}
@@ -12,10 +79,28 @@
       {{ partial "functions/render_view" (dict "page" $ "item" . "view" (printf "%s-start" ($.Params.view | default "card")) "index" 0) }}
     {{ end }}
 
-    <div class="lab-list-grid">
-      {{ $paginator := .Paginate .Pages }}
-      {{ range $index, $post := $paginator.Pages }}
-        {{ partial "functions/render_view" (dict "page" $ "item" . "view" ($.Params.view | default "card") "index" $index) }}
+    <div class="lab-list-grid"{{ if $filterable }} data-lab-filter-root data-page-size="12"{{ end }}>
+      {{ if $filterable }}
+        {{ range $index, $item := $pages }}
+          {{ $classes := slice (printf "year-%s" (.Date.Format "2006")) }}
+          {{ if eq $section "project" }}
+            {{ with .Params.project_status }}{{ $classes = $classes | append (printf "status-%s" .) }}{{ end }}
+          {{ else if eq $section "patent" }}
+            {{ with .Params.patent_status }}{{ $classes = $classes | append (printf "status-%s" .) }}{{ end }}
+          {{ else if eq $section "post" }}
+            {{ range (.Params.categories | default slice) }}
+              {{ $classes = $classes | append (printf "cat-%s" (. | urlize)) }}
+            {{ end }}
+          {{ end }}
+          <div class="lab-list-item {{ delimit $classes " " }}">
+            {{ partial "functions/render_view" (dict "page" $ "item" . "view" ($.Params.view | default "card") "index" $index) }}
+          </div>
+        {{ end }}
+      {{ else }}
+        {{ $paginator := .Paginate .Pages 12 }}
+        {{ range $index, $post := $paginator.Pages }}
+          {{ partial "functions/render_view" (dict "page" $ "item" . "view" ($.Params.view | default "card") "index" $index) }}
+        {{ end }}
       {{ end }}
     </div>
 
@@ -23,8 +108,14 @@
       {{ partial "functions/render_view" (dict "page" $ "item" . "view" (printf "%s-end" ($.Params.view | default "card")) "index" 0) }}
     {{ end }}
 
-    {{ partial "pagination" . }}
+    {{ if not $filterable }}
+      {{ partial "pagination" . }}
+    {{ end }}
   </div>
 </div>
+
+{{ if $filterable }}
+  {{ partial "lab-list-filter-script.html" . }}
+{{ end }}
 
 {{- end -}}

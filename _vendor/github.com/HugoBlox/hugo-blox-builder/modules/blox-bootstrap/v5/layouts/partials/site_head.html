@@ -160,7 +160,7 @@
     {{/* PostProcess must be last action in the pipeline */}}
     {{- $style = $style | resources.PostProcess -}}
   {{- end -}}
-  <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}?v=pub-abstract-2" />
 
   {{/* Load WC community block styles */}}
   {{ $wc_block_styles := resources.Match "scss/blocks/**.scss" }}

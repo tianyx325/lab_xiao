@@ -1,0 +1,38 @@
+{{- /*
+  List pagination (USWDS / W3C practices):
+  - labeled <nav>, prev / numbers / next
+  - aria-current on active page; clear link labels
+  - show all page numbers when TotalPages is small (typical for this site)
+*/ -}}
+{{- $pag := .Paginator -}}
+{{- if gt $pag.TotalPages 1 -}}
+<nav class="lab-pagination" aria-label="列表分页">
+  <ul class="lab-pagination-list">
+    <li class="lab-pagination-item">
+      {{- if $pag.HasPrev -}}
+      <a class="lab-pagination-link lab-pagination-link--text" href="{{ $pag.Prev.URL }}" rel="prev">上一页</a>
+      {{- else -}}
+      <span class="lab-pagination-link lab-pagination-link--text is-disabled" aria-disabled="true">上一页</span>
+      {{- end -}}
+    </li>
+
+    {{- range $pag.Pagers -}}
+    <li class="lab-pagination-item">
+      {{- if eq . $pag -}}
+      <a class="lab-pagination-link is-current" href="{{ .URL }}" aria-current="page" aria-label="第 {{ .PageNumber }} 页，共 {{ $pag.TotalPages }} 页">{{ .PageNumber }}</a>
+      {{- else -}}
+      <a class="lab-pagination-link" href="{{ .URL }}" aria-label="第 {{ .PageNumber }} 页">{{ .PageNumber }}</a>
+      {{- end -}}
+    </li>
+    {{- end -}}
+
+    <li class="lab-pagination-item">
+      {{- if $pag.HasNext -}}
+      <a class="lab-pagination-link lab-pagination-link--text" href="{{ $pag.Next.URL }}" rel="next">下一页</a>
+      {{- else -}}
+      <span class="lab-pagination-link lab-pagination-link--text is-disabled" aria-disabled="true">下一页</span>
+      {{- end -}}
+    </li>
+  </ul>
+</nav>
+{{- end -}}

@@ -1,28 +1,64 @@
 {{- define "main" -}}
 
-{{ $byline := slice }}
-{{ if .Params.authors }}
-  {{ $byline = $byline | append (partial "lab-detail-authors.html" .) }}
-{{ end }}
-{{ with .Date }}
-  {{ $byline = $byline | append (.Format "2006-01") }}
-{{ end }}
-{{ with .Params.tags }}
-  {{ $byline = $byline | append (delimit . " · ") }}
-{{ end }}
-{{ .Scratch.Set "lab_article_byline" (delimit $byline " · ") }}
+{{/* Split tags: 来源 / 级别 → header chips; research topics → keywords. */}}
+{{- $levelKeys := slice "面上项目" "重点项目" "青年项目" "青年科学基金" "优秀类" -}}
+{{- $metaTags := slice -}}
+{{- $keywords := slice -}}
+{{- $source := "" -}}
+{{- $level := "" -}}
 
-{{ $meta := slice }}
-{{ with .Params.project_code }}
-  {{ $meta = $meta | append (printf "编号 %s" .) }}
-{{ end }}
-{{ with partial "lab-status-label.html" (dict "kind" "project" "page" .) }}
-  {{ $meta = $meta | append . }}
-{{ end }}
-{{ with .Date }}
-  {{ $meta = $meta | append (.Format "2006") }}
-{{ end }}
-{{ .Scratch.Set "lab_article_meta" $meta }}
+{{- with .Params.funding -}}
+  {{- $source = . -}}
+{{- end -}}
+{{- with .Params.grant_type -}}
+  {{- $level = . -}}
+{{- end -}}
+
+{{- range $i, $tag := (.Params.tags | default slice) -}}
+  {{- $isLevel := in $levelKeys $tag -}}
+  {{- $isSource := or (in $tag "基金") (in $tag "实验课题") (in $tag "留学") (in $tag "自然科学基础研究") -}}
+  {{- if and (not $level) $isLevel -}}
+    {{- $level = $tag -}}
+  {{- else if and (not $source) $isSource -}}
+    {{- $source = $tag -}}
+  {{- else if and (not $source) (eq $i 0) (not $isLevel) -}}
+    {{/* First tag as partner / client when not a level word */}}
+    {{- $source = $tag -}}
+  {{- else if and (not $isLevel) (ne $tag $source) (ne $tag $level) -}}
+    {{- $keywords = $keywords | append $tag -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with .Params.project_code -}}
+  {{- $metaTags = $metaTags | append (dict "label" "编号" "value" .) -}}
+{{- end -}}
+{{- if and .Params.date .Params.date_end -}}
+  {{- $value := printf "%s – %s" (.Params.date | time.Format "2006/01") (.Params.date_end | time.Format "2006/01") -}}
+  {{- $metaTags = $metaTags | append (dict "label" "起止时间" "value" $value) -}}
+{{- else if .Params.date -}}
+  {{- $metaTags = $metaTags | append (dict "label" "起始" "value" (.Params.date | time.Format "2006/01")) -}}
+{{- end -}}
+{{- if .Params.authors -}}
+  {{- $authors := partial "lab-detail-authors.html" . -}}
+  {{- $metaTags = $metaTags | append (dict "label" "负责人" "value" ($authors | safeHTML)) -}}
+{{- end -}}
+{{- $st := .Params.project_status | default "" -}}
+{{- if eq $st "ongoing" -}}
+  {{- $metaTags = $metaTags | append (dict "label" "状态" "value" "在研") -}}
+{{- else if eq $st "completed" -}}
+  {{- $metaTags = $metaTags | append (dict "label" "状态" "value" "已结题") -}}
+{{- end -}}
+{{- with $source -}}
+  {{- $metaTags = $metaTags | append (dict "label" "来源" "value" .) -}}
+{{- end -}}
+{{- with $level -}}
+  {{- $metaTags = $metaTags | append (dict "label" "级别" "value" .) -}}
+{{- end -}}
+{{- with $keywords -}}
+  {{- $metaTags = $metaTags | append (dict "label" "关键词" "value" (delimit . " · ")) -}}
+{{- end -}}
+
+{{- .Scratch.Set "lab_article_meta_tags" $metaTags -}}
 
 {{ partial "lab-article-shell-start.html" . }}
 

@@ -12,13 +12,15 @@
   {{ $summary = $item.Params.summary | plainify }}
 {{ end }}
 
-{{/* All authors shown; only lab members (File + user_groups) are links. */}}
+{{/* Publications: cards list current lab members only. Others stay on the detail page. */}}
 {{ $authorItems := slice }}
 {{ range $item.Params.authors }}
   {{ partial "lab-resolve-author.html" (dict "id" . "page" $item) }}
   {{ $an := $item.Scratch.Get "lab_author_name" }}
   {{ $ah := $item.Scratch.Get "lab_author_href" }}
-  {{ $authorItems = $authorItems | append (dict "name" $an "href" $ah) }}
+  {{ if or (ne $item.Type "publication") $ah }}
+    {{ $authorItems = $authorItems | append (dict "name" $an "href" $ah) }}
+  {{ end }}
 {{ end }}
 
 {{ $year := $item.Date.Format "2006" }}

@@ -1,0 +1,25 @@
+{{- /* Homepage outcomes: 3 columns × N rows (default 2) + “查看更多…” links. */ -}}
+{{- $perCol := int (.Get "count" | default 2) -}}
+{{- $pubs := first $perCol (sort (where site.RegularPages "Section" "publication") "Date" "desc") -}}
+{{- $patents := first $perCol (sort (where site.RegularPages "Section" "patent") "Date" "desc") -}}
+{{- $awards := first $perCol (sort (where site.RegularPages "Section" "award") "Date" "desc") -}}
+{{- $cols := slice
+  (dict "title" "论文" "more" "查看更多论文" "href" "publication/" "pages" $pubs)
+  (dict "title" "专利" "more" "查看更多专利" "href" "patent/" "pages" $patents)
+  (dict "title" "奖项" "more" "查看更多奖项" "href" "award/" "pages" $awards)
+-}}
+<div class="lab-outcomes">
+  {{- range $cols -}}
+  <div class="lab-outcomes-col">
+    <h3 class="lab-outcomes-col-title">{{ .title }}</h3>
+    <div class="lab-outcomes-cards">
+      {{- range $i, $p := .pages -}}
+        {{ partial "functions/render_view" (dict "page" $ "item" $p "view" "card" "index" $i) }}
+      {{- else -}}
+        <p class="lab-outcomes-empty">暂无</p>
+      {{- end -}}
+    </div>
+    <a class="lab-outcomes-more" href="{{ .href | relURL }}">{{ .more }}</a>
+  </div>
+  {{- end -}}
+</div>

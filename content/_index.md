@@ -28,7 +28,7 @@ sections:
   - block: markdown
     content:
       title:
-      text: '{{< lab-section-head title="导师团队" more="全部" href="people/" >}}'
+      text: '{{< lab-section-head title="导师团队" >}}'
     design:
       columns: '1'
       css_class: lab-block-head
@@ -49,7 +49,7 @@ sections:
   - block: markdown
     content:
       title:
-      text: '{{< lab-section-head title="研究方向" more="全部" href="research/" >}}'
+      text: '{{< lab-section-head title="研究方向" >}}'
     design:
       columns: '1'
       css_class: lab-block-head
@@ -65,17 +65,24 @@ sections:
 
   - block: markdown
     content:
-      title: 学术成果
-      subtitle: ''
-      text: ''
+      title:
+      text: '{{< lab-section-head title="学术成果" >}}'
     design:
       columns: '1'
-      css_class: lab-major lab-pubs-title
+      css_class: lab-block-head
 
   - block: markdown
     content:
       title:
-      text: '{{< lab-section-head title="论文" more="全部" href="publication/" >}}'
+      text: '{{< lab-outcomes-grid count="2" >}}'
+    design:
+      columns: '1'
+      css_class: lab-outcomes-section
+
+  - block: markdown
+    content:
+      title:
+      text: '{{< lab-section-head title="新闻动态" >}}'
     design:
       columns: '1'
       css_class: lab-row-head
@@ -86,47 +93,11 @@ sections:
       count: 3
       filters:
         folders:
-          - publication
-    design:
-      view: card
-      columns: '1'
-      css_class: lab-row-body
-
-  - block: markdown
-    content:
-      title:
-      text: '{{< lab-section-head title="专利" more="全部" href="patent/" >}}'
-    design:
-      columns: '1'
-      css_class: lab-row-head
-
-  - block: collection
-    content:
-      title:
-      count: 3
-      filters:
-        folders:
-          - patent
-    design:
-      view: card
-      columns: '1'
-      css_class: lab-row-body
-
-  - block: markdown
-    content:
-      title:
-      text: '{{< lab-section-head title="奖项" more="全部" href="award/" >}}'
-    design:
-      columns: '1'
-      css_class: lab-row-head
-
-  - block: collection
-    content:
-      title:
-      count: 3
-      filters:
-        folders:
-          - award
+          - post
+      archive:
+        enable: true
+        text: 查看更多新闻
+        link: post/
     design:
       view: card
       columns: '1'

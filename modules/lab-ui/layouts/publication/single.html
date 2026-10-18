@@ -1,58 +1,107 @@
 {{- define "main" -}}
 
-{{ $pub_type_csl := "" }}
-{{ $pub_type_display := "" }}
-{{ if .Params.publication_types }}
-  {{ if reflect.IsSlice .Params.publication_types }}
-    {{ $pub_type_csl = index .Params.publication_types 0 }}
-    {{ $pub_type_display = i18n (printf "pub_%s" (strings.Replace $pub_type_csl "-" "_")) | default (strings.Title $pub_type_csl) }}
-  {{ end }}
-{{ end }}
+{{- $pub_type_display := "" -}}
+{{- if and .Params.publication_types (reflect.IsSlice .Params.publication_types) -}}
+  {{- $pub_type_csl := index .Params.publication_types 0 -}}
+  {{- $pub_type_display = i18n (printf "pub_%s" (strings.Replace $pub_type_csl "-" "_")) | default (strings.Title $pub_type_csl) -}}
+{{- end -}}
 
-{{ $byline := slice }}
-{{ if .Params.authors }}
-  {{ $byline = $byline | append (partial "lab-detail-authors.html" .) }}
-{{ end }}
-{{ with .Date }}
-  {{ $byline = $byline | append (.Format "2006-01") }}
-{{ end }}
-{{ with $.Params.publication_short }}
-  {{ $byline = $byline | append (. | plainify) }}
-{{ else }}
-  {{ with $.Params.publication }}
-    {{ $byline = $byline | append (. | plainify) }}
-  {{ end }}
-{{ end }}
-{{ with $pub_type_display }}
-  {{ $byline = $byline | append . }}
-{{ end }}
-{{ .Scratch.Set "lab_article_byline" (delimit $byline " · ") }}
+{{/* Venue and year stay separate chips. */}}
+{{- $venue := "" -}}
+{{- if .Params.publication_short -}}
+  {{- $venue = .Params.publication_short | plainify -}}
+{{- else if .Params.publication -}}
+  {{- $venue = .Params.publication | plainify -}}
+{{- end -}}
+
+{{- $authorRow := slice -}}
+{{- $factRow := slice -}}
+{{- $linkRow := slice -}}
+{{- if .Params.authors -}}
+  {{- $authors := partial "lab-detail-authors.html" . -}}
+  {{- $authorRow = $authorRow | append (dict "label" "作者" "value" ($authors | safeHTML)) -}}
+{{- end -}}
+{{- with .Date -}}
+  {{- $factRow = $factRow | append (dict "label" "年份" "value" (.Format "2006")) -}}
+{{- end -}}
+{{- if $venue -}}
+  {{- $factRow = $factRow | append (dict "label" "刊物" "value" $venue) -}}
+{{- end -}}
+{{- $vol := .Params.volume | default "" -}}
+{{- $iss := .Params.issue | default "" -}}
+{{- $pages := .Params.pages | default "" -}}
+{{- $cite := "" -}}
+{{- if and $vol $iss -}}
+  {{- $cite = printf "%s(%s)" $vol $iss -}}
+{{- else if $vol -}}
+  {{- $cite = printf "%s" $vol -}}
+{{- end -}}
+{{- if $pages -}}
+  {{- if $cite -}}
+    {{- $cite = printf "%s: %s" $cite $pages -}}
+  {{- else -}}
+    {{- $cite = printf "%s" $pages -}}
+  {{- end -}}
+{{- end -}}
+{{- if $cite -}}
+  {{- $factRow = $factRow | append (dict "label" "卷期" "value" $cite) -}}
+{{- end -}}
+{{- if $pub_type_display -}}
+  {{- $factRow = $factRow | append (dict "label" "类型" "value" $pub_type_display) -}}
+{{- end -}}
+{{- $paperHref := "" -}}
+{{- $pdfHref := "" -}}
+{{- with .Params.url_html -}}
+  {{- $paperHref = . -}}
+{{- end -}}
+{{- with .Params.url_pdf -}}
+  {{- $pdfLike := or (in (lower .) ".pdf") (or (in (lower .) "/pdf") (or (in (lower .) "pdfdirect") (or (in (lower .) "create_pdf") (in (lower .) "type=pdf")))) -}}
+  {{- if $pdfLike -}}
+    {{- $pdfHref = . -}}
+  {{- else if not $paperHref -}}
+    {{- $paperHref = . -}}
+  {{- end -}}
+{{- end -}}
+{{- with $paperHref -}}
+  {{- $linkRow = $linkRow | append (dict "label" "论文" "href" .) -}}
+{{- end -}}
+{{- with $pdfHref -}}
+  {{- $linkRow = $linkRow | append (dict "label" "PDF" "href" .) -}}
+{{- end -}}
+{{- with .Params.url_code -}}
+  {{- $linkRow = $linkRow | append (dict "label" "代码" "href" .) -}}
+{{- end -}}
+{{- with .Params.url_dataset -}}
+  {{- $linkRow = $linkRow | append (dict "label" "数据" "href" .) -}}
+{{- end -}}
+{{- with .Params.url_poster -}}
+  {{- $linkRow = $linkRow | append (dict "label" "海报" "href" .) -}}
+{{- end -}}
+{{- if and .Params.doi (ne .Params.doi "") -}}
+  {{- $doiHref := printf "https://doi.org/%s" .Params.doi -}}
+  {{- $linkRow = $linkRow | append (dict "label" "DOI" "href" $doiHref) -}}
+{{- end -}}
+{{- .Scratch.Set "lab_article_meta_rows" (slice $authorRow $factRow $linkRow) -}}
 
 {{ partial "lab-article-shell-start.html" . }}
 
-    {{ with .Params.abstract }}
-    <div class="lab-article-abstract">{{ . | markdownify }}</div>
+    {{ if or .Params.abstract .Params.tags }}
+    <div class="lab-article-abstract">
+      {{ with .Params.abstract }}
+      <span class="lab-article-abstract-label">摘要</span>
+      <div class="lab-article-abstract-body">{{ . | markdownify }}</div>
+      {{ end }}
+      {{ with .Params.tags }}
+      <div class="lab-article-keywords">
+        <span class="lab-article-abstract-label">关键词</span>
+        <p>{{ delimit . " · " }}</p>
+      </div>
+      {{ end }}
+    </div>
     {{ end }}
 
     {{ if .Content }}
     <div class="article-style lab-article-content">{{ .Content }}</div>
-    {{ end }}
-
-    {{ with .Params.doi }}
-    <p class="lab-article-meta-line">DOI：<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">{{ . }}</a></p>
-    {{ end }}
-
-    {{ with .Params.tags }}
-    <p class="lab-article-tags">{{ delimit . " · " }}</p>
-    {{ end }}
-
-    {{ if or .Params.url_pdf .Params.url_code .Params.url_dataset .Params.url_poster }}
-    <p class="lab-article-links">
-      {{ with .Params.url_pdf }}<a href="{{ . }}" target="_blank" rel="noopener">PDF</a>{{ end }}
-      {{ with .Params.url_code }}<a href="{{ . }}" target="_blank" rel="noopener">代码</a>{{ end }}
-      {{ with .Params.url_dataset }}<a href="{{ . }}" target="_blank" rel="noopener">数据</a>{{ end }}
-      {{ with .Params.url_poster }}<a href="{{ . }}" target="_blank" rel="noopener">海报</a>{{ end }}
-    </p>
     {{ end }}
 
 {{ partial "lab-article-shell-end.html" . }}
