@@ -1,6 +1,6 @@
 site: public
 glob: "**/*.html"
-bundle_dir: pagefind
+output_subdir: pagefind
 exclude_selectors:
   - ".nav-icons"
   - ".page-footer"
