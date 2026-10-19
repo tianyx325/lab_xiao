@@ -1,0 +1,24 @@
+{{/* SEO tags - override to support SVG icons */}}
+{{ $scr := .Scratch }}
+
+{{/* Progressive Web App (PWA) Icon */}}
+{{ $icon := resources.GetMatch "media/icon.svg" | default (resources.GetMatch "media/icon.png") }}
+{{ if $icon }}
+  {{ if eq $icon.MediaType.SubType "svg" }}
+<link rel="icon" type="image/svg+xml" href="{{ $icon.RelPermalink }}" />
+  {{ else }}
+<link rel="icon" type="image/png" href="{{ (partial "blox-core/functions/get_icon" 32).RelPermalink }}" />
+  {{ end }}
+{{ end }}
+
+{{ $icon_large := resources.GetMatch "media/icon.svg" | default (resources.GetMatch "media/icon.png") }}
+{{ if $icon_large }}
+  {{ if eq $icon_large.MediaType.SubType "svg" }}
+<link rel="apple-touch-icon" type="image/svg+xml" href="{{ $icon_large.RelPermalink }}" />
+  {{ else }}
+<link rel="apple-touch-icon" type="image/png" href="{{ (partial "blox-core/functions/get_icon" 180).RelPermalink }}" />
+  {{ end }}
+{{ end }}
+
+{{ $theme_color := ($scr.Get "primary") | default site.Params.appearance.primary_color | default "#fff" }}
+<meta name="theme-color" content="{{ $theme_color }}" />

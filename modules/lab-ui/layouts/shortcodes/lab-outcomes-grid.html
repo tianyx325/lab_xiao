@@ -4,9 +4,9 @@
 {{- $patents := first $perCol (sort (where site.RegularPages "Section" "patent") "Date" "desc") -}}
 {{- $awards := first $perCol (sort (where site.RegularPages "Section" "award") "Date" "desc") -}}
 {{- $cols := slice
-  (dict "title" "论文" "more" "查看更多论文" "href" "publication/" "pages" $pubs)
-  (dict "title" "专利" "more" "查看更多专利" "href" "patent/" "pages" $patents)
-  (dict "title" "奖项" "more" "查看更多奖项" "href" "award/" "pages" $awards)
+  (dict "title" "论文" "more" "查看更多" "href" "publication/" "pages" $pubs)
+  (dict "title" "专利" "more" "查看更多" "href" "patent/" "pages" $patents)
+  (dict "title" "奖项" "more" "查看更多" "href" "award/" "pages" $awards)
 -}}
 <div class="lab-outcomes">
   {{- range $cols -}}

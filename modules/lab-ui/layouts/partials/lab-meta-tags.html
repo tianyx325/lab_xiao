@@ -1,8 +1,11 @@
-{{- /* Metadata tags. rows: one centered line per group. items: a single wrapping line. */ -}}
-{{- $rows := .rows -}}
-{{- if not $rows -}}
-  {{- $items := .items | default slice -}}
-  {{- if $items -}}
+{{- /* Metadata tags. items: flat slice → one row; slice of slices → one row per group. */ -}}
+{{- $items := .items | default slice -}}
+{{- $rows := slice -}}
+{{- if $items -}}
+  {{- $first := index $items 0 -}}
+  {{- if reflect.IsSlice $first -}}
+    {{- $rows = $items -}}
+  {{- else -}}
     {{- $rows = slice $items -}}
   {{- end -}}
 {{- end -}}

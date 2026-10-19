@@ -1,0 +1,11 @@
+site: public
+glob: "**/*.html"
+bundle_dir: pagefind
+exclude_selectors:
+  - ".nav-icons"
+  - ".page-footer"
+  - ".site-footer"
+  - "nav"
+  - ".lab-pagination"
+  - ".lab-filter-control"
+root_selector: "[data-pagefind-body]"

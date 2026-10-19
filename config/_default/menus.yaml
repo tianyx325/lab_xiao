@@ -1,8 +1,5 @@
 # Navigation Links
 main:
-  - name: 首页
-    url: /
-    weight: 10
   - name: 成员
     url: people
     weight: 20
@@ -28,7 +25,7 @@ main:
     parent: publications
     url: award
     weight: 53
-  - name: 新闻
+  - name: 动态
     url: post
     weight: 60
   - name: 联系

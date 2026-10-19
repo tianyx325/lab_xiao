@@ -1,0 +1,13 @@
+{{- /* Collect year options from a page collection. Returns a slice of dicts with value/text. */ -}}
+{{- $pages := .pages -}}
+{{- $scratch := .scratch -}}
+{{- range $pages -}}
+  {{- $scratch.SetInMap "years" (print (.Date.Format "2006")) (print (.Date.Format "2006")) -}}
+{{- end -}}
+{{- $yearOpts := slice -}}
+{{- with $scratch.GetSortedMapValues "years" -}}
+  {{- range sort . "" "desc" -}}
+    {{- $yearOpts = $yearOpts | append (dict "value" (printf ".year-%s" .) "text" .) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $yearOpts -}}

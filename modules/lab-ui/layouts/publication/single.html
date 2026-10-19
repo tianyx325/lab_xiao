@@ -81,7 +81,7 @@
   {{- $doiHref := printf "https://doi.org/%s" .Params.doi -}}
   {{- $linkRow = $linkRow | append (dict "label" "DOI" "href" $doiHref) -}}
 {{- end -}}
-{{- .Scratch.Set "lab_article_meta_rows" (slice $authorRow $factRow $linkRow) -}}
+{{- .Scratch.Set "lab_article_meta_tags" (slice $authorRow $factRow $linkRow) -}}
 
 {{ partial "lab-article-shell-start.html" . }}
 
@@ -98,10 +98,6 @@
       </div>
       {{ end }}
     </div>
-    {{ end }}
-
-    {{ if .Content }}
-    <div class="article-style lab-article-content">{{ .Content }}</div>
     {{ end }}
 
 {{ partial "lab-article-shell-end.html" . }}

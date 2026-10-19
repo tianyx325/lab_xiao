@@ -1,0 +1,52 @@
+{{ $lab := site.Params.lab }}
+{{ $ui := $lab.ui | default dict }}
+{{ $emailLabel := $ui.email_label | default "邮箱" }}
+{{ $addressLabel := $ui.address_label | default "地址" }}
+<footer class="lab-footer">
+  <div class="lab-footer-inner">
+
+    <div class="lab-footer-brand">
+      <div class="lab-footer-brand-top">
+        <a href="{{ site.Home.RelPermalink }}" class="navbar-brand lab-footer-logo">
+          <span class="lab-logo"></span>
+          {{- $lab.name -}}
+        </a>
+      </div>
+      {{ with $lab.lead }}
+        <p class="lab-footer-desc">{{ . }}</p>
+      {{ end }}
+    </div>
+
+    <div class="lab-footer-contact">
+      <h4 class="lab-footer-heading">联系方式</h4>
+      <div class="lab-footer-contact-items">
+        {{ with $lab.email }}
+          <div class="lab-footer-contact-item">
+            <span class="lab-footer-contact-label">{{ $emailLabel }}</span>
+            <a href="mailto:{{ . }}" title="点击复制邮箱">{{ . }}</a>
+          </div>
+        {{ end }}
+        {{ with $lab.address }}
+          <div class="lab-footer-contact-item">
+            <span class="lab-footer-contact-label">{{- $addressLabel -}}</span>
+            <p>{{- . -}}</p>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="lab-footer-links">
+      <h4 class="lab-footer-heading">友情链接</h4>
+      <ul class="lab-footer-list">
+        <li><a href="https://www.xaut.edu.cn/" target="_blank" rel="noopener">西安理工大学</a></li>
+        <li><a href="https://jsj.xaut.edu.cn/" target="_blank" rel="noopener">计算机科学与技术学院</a></li>
+        <li><a href="https://gra.xaut.edu.cn/" target="_blank" rel="noopener">西安理工大学研究生院</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="lab-footer-bottom">
+    <span>&copy; {{ now.Year }} {{ $lab.name }}</span>
+  </div>
+</footer>

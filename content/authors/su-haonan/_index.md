@@ -4,6 +4,7 @@ first_name: 浩楠
 last_name: 苏
 superuser: false
 role: 教师
+sort: 1
 organizations:
   - name: 西安理工大学计算机科学与技术学院
     url: 'https://jsj.xaut.edu.cn/'
