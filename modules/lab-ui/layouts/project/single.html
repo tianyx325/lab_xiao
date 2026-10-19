@@ -62,16 +62,6 @@
 
 {{ partial "lab-article-shell-start.html" . }}
 
-    {{ if .Content }}
-    <div class="article-style lab-article-content">{{ .Content }}</div>
-    {{ end }}
-
-    {{ with .Params.external_link }}
-    <p class="lab-article-links">
-      <a href="{{ . }}" target="_blank" rel="noopener">项目主页</a>
-    </p>
-    {{ end }}
-
 {{ partial "lab-article-shell-end.html" . }}
 
 {{- end -}}

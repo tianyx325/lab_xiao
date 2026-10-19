@@ -1,0 +1,18 @@
+{{- /* Pagefind search widget. Include in templates where search is needed. */ -}}
+{{- if hugo.IsProduction -}}
+<link href="{{ "pagefind/pagefind-ui.css" | relURL }}" rel="stylesheet">
+<script src="{{ "pagefind/pagefind-ui.js" | relURL }}"></script>
+<div id="lab-pagefind-search"></div>
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  new PagefindUI({
+    element: "#lab-pagefind-search",
+    showSubResults: true,
+    showImages: false,
+    translations: {
+      placeholder: "搜索…"
+    }
+  });
+});
+</script>
+{{- end -}}

@@ -4,6 +4,7 @@ first_name: 雅璇
 last_name: 常
 superuser: false
 role: 研二
+sort: 1
 organizations:
   - name: 西安理工大学计算机科学与技术学院
     url: 'https://jsj.xaut.edu.cn/'

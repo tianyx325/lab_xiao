@@ -39,8 +39,19 @@
     {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice .) }}
     {{ $sort_ascending := $block.content.sort_ascending | default true }}
     {{ $sort_order := cond $sort_ascending "asc" "desc" }}
-    {{/* Sort by Title — Params.last_name collapses same-surname members (Hugo map sort) */}}
-    {{ $query = sort $query "Title" $sort_order }}
+    {{/* Sort by Params.sort if exists, otherwise by Title */}}
+    {{ $with_sort := slice }}
+    {{ $without_sort := slice }}
+    {{ range $query }}
+      {{ if .Params.sort }}
+        {{ $with_sort = $with_sort | append . }}
+      {{ else }}
+        {{ $without_sort = $without_sort | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $with_sort = sort $with_sort "Params.sort" $sort_order }}
+    {{ $without_sort = sort $without_sort "Title" $sort_order }}
+    {{ $query = $with_sort | append $without_sort }}
     {{/* Lab director always first within the group */}}
     {{ $directors := slice }}
     {{ $others := slice }}
@@ -59,7 +70,7 @@
       <h2 class="lab-people-group-title">{{ . | markdownify }}</h2>
       {{ end }}
 
-      <div class="lab-people-grid">
+      <div class="lab-people-grid{{ if gt (len $query) 5 }} is-many{{ end }}" data-count="{{ len $query }}">
         {{ range $query }}
           {{ $avatar := (.Resources.ByType "image").GetMatch "*avatar*" }}
           {{ $link := "" }}
@@ -109,7 +120,7 @@
   {{ end }}
   {{ if not $is_list_page }}
   <div class="lab-section-more">
-    <a class="lab-outcomes-more" href="{{ "people/" | relURL }}">查看更多导师</a>
+    <a class="lab-outcomes-more" href="{{ "people/" | relURL }}">查看更多</a>
   </div>
   {{ end }}
   </div>

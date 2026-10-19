@@ -12,6 +12,9 @@ superuser: true
 # Role/position（整段放在一行，或用引号包起来）
 role: "教授，副院长 / 实验室负责人"
 
+# Sort order within user group
+sort: 1
+
 # Organizations/Affiliations
 organizations:
   - name: 西安理工大学计算机科学与技术学院

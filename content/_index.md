@@ -12,17 +12,8 @@ sections:
       text: '{{< lab-hero >}}'
     design:
       columns: '1'
-      background:
-        image:
-          filename: welcome.png
-          filters:
-            brightness: 0.55
-          parallax: false
-          position: center
-          size: cover
-          text_color_light: true
       spacing:
-        padding: ['3rem', '1.5rem', '3rem', '1.5rem']
+        padding: ['5rem', '1.5rem', '5rem', '1.5rem']
       css_class: fullscreen lab-hero-section
   
   - block: markdown
@@ -96,7 +87,7 @@ sections:
           - post
       archive:
         enable: true
-        text: 查看更多新闻
+        text: 查看更多
         link: post/
     design:
       view: card

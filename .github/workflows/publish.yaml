@@ -45,6 +45,14 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: hugo --minify --baseURL "${{ env.SITE_BASE_URL }}"
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build Pagefind search index
+        run: npx pagefind@latest --site "./public" --glob "**/*.html"
+
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:

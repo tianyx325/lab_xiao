@@ -4,6 +4,7 @@ first_name: 欢欢
 last_name: 郭
 superuser: false
 role: 研三
+sort: 2
 organizations:
   - name: 西安理工大学计算机科学与技术学院
     url: 'https://jsj.xaut.edu.cn/'

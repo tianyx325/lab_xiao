@@ -9,12 +9,8 @@
       {{ with .Scratch.Get "lab_article_dek" }}
       <p class="lab-article-dek">{{ . | markdownify | emojify }}</p>
       {{ end }}
-      {{ if .Scratch.Get "lab_article_meta_rows" }}
-      {{ partial "lab-meta-tags.html" (dict "rows" (.Scratch.Get "lab_article_meta_rows")) }}
-      {{ else }}
       {{ with .Scratch.Get "lab_article_meta_tags" }}
       {{ partial "lab-meta-tags.html" (dict "items" .) }}
-      {{ end }}
       {{ end }}
     </div>
   </header>

@@ -1,0 +1,59 @@
+name: Check for broken links
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday at 6:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.135.0'
+          extended: true
+
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/hugo_cache_runner/
+          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.mod') }}
+          restore-keys: |
+            ${{ runner.os }}-hugomod-
+
+      - name: Build with Hugo
+        env:
+          HUGO_ENVIRONMENT: production
+        run: hugo --minify
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check links with linkinator
+        run: |
+          npx linkinator@latest ./public \
+            --recurse \
+            --skip "^(https?://)?(localhost|127\.0\.0\.1)" \
+            --skip "\.pdf$" \
+            --skip "\.xml$" \
+            --verbosity WARNING \
+            2>&1 | tee linkinator-report.txt
+
+      - name: Report results
+        if: always()
+        run: |
+          if grep -q "ERROR" linkinator-report.txt 2>/dev/null; then
+            echo "::warning::Broken links found. See workflow logs for details."
+            grep "ERROR" linkinator-report.txt || true
+          else
+            echo "No broken links found."
+          fi

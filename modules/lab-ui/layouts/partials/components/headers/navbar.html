@@ -18,17 +18,10 @@
     <div class="container-fluid lab-navbar-inner">
 
       {{if $show_logo}}
-      <div class="d-none d-lg-inline-flex">
-        <a class="navbar-brand" href="{{ site.Home.RelPermalink }}">
-          {{- if $has_logo -}}
-            <img src="{{ $logo.RelPermalink }}" alt="{{ site.Title }}"
-            {{with site.Params.header.image.width}}width="{{.}}"{{end}}
-            {{with site.Params.header.image.height}}height="{{.}}"{{end}}>
-          {{- else -}}
-            {{- site.Title -}}
-          {{- end -}}
-        </a>
-      </div>
+      <a class="navbar-brand lab-navbar-brand" href="{{ site.Home.RelPermalink }}">
+        <span class="lab-logo"></span>
+        {{- site.Title -}}
+      </a>
       {{end}}
 
       {{ if site.Menus.main }}
@@ -37,20 +30,6 @@
       <span><i class="fas fa-bars"></i></span>
       </button>
       {{ end }}
-
-      {{if $show_logo}}
-      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
-        <a class="navbar-brand" href="{{ site.Home.RelPermalink }}">
-        {{- if $has_logo -}}
-          <img src="{{ $logo.RelPermalink }}" alt="{{ site.Title }}"
-          {{with site.Params.header.image.width}}width="{{.}}"{{end}}
-          {{with site.Params.header.image.height}}height="{{.}}"{{end}}>
-        {{- else -}}
-          {{- site.Title -}}
-        {{- end -}}
-        </a>
-      </div>
-      {{end}}
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       {{ $align_menu := site.Params.header.navbar.align | default "l" }}

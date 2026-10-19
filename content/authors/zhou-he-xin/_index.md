@@ -4,6 +4,7 @@ first_name: 贺鑫
 last_name: 周
 superuser: false
 role: 研二
+sort: 5
 organizations:
   - name: 西安理工大学计算机科学与技术学院
     url: 'https://jsj.xaut.edu.cn/'

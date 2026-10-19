@@ -1,0 +1,12 @@
+{{/* Function to get website icon image. */}}
+{{/* Input: size (int) */}}
+{{/* Output: resource (obj) */}}
+
+{{ $icon := resources.GetMatch "media/icon.svg" | default (resources.GetMatch "media/icon.png") }}
+{{ if $icon }}
+  {{ if eq $icon.MediaType.SubType "svg" }}
+    {{- return $icon -}}
+  {{ else }}
+    {{- return ($icon.Fill (printf "%sx%s Center" (string .) (string .))) -}}
+  {{ end }}
+{{ end }}

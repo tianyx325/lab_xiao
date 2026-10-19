@@ -4,7 +4,7 @@
 {{ $target := "" }}
 {{ if $item.Params.external_link }}
   {{ $link = $item.Params.external_link }}
-  {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+  {{ $target = "target=\"_blank\" rel=\"noopener\" aria-label=\"在新窗口打开外部链接\"" }}
 {{ end }}
 
 {{ $summary := "" }}
@@ -12,13 +12,14 @@
   {{ $summary = $item.Params.summary | plainify }}
 {{ end }}
 
-{{/* Publications: cards list current lab members only. Others stay on the detail page. */}}
+{{/* Publications & patents: cards list current lab members only. Others stay on the detail page. */}}
 {{ $authorItems := slice }}
 {{ range $item.Params.authors }}
   {{ partial "lab-resolve-author.html" (dict "id" . "page" $item) }}
   {{ $an := $item.Scratch.Get "lab_author_name" }}
   {{ $ah := $item.Scratch.Get "lab_author_href" }}
-  {{ if or (ne $item.Type "publication") $ah }}
+  {{ $filterType := or (eq $item.Type "publication") (eq $item.Type "patent") }}
+  {{ if or (not $filterType) $ah }}
     {{ $authorItems = $authorItems | append (dict "name" $an "href" $ah) }}
   {{ end }}
 {{ end }}
@@ -29,13 +30,8 @@
 {{ $typeClass := "lab-card--default" }}
 
 {{/* Optional featured image — only when provided; masked so text stays readable. */}}
-{{ $mediaURL := "" }}
-{{ $resource := partial "blox-core/functions/get_featured_image.html" $item }}
-{{ $anchor := $item.Params.image.focal_point | default "Smart" }}
-{{ with $resource }}
-  {{ $image := .Fill (printf "560x374 %s webp q72" $anchor) }}
-  {{ $mediaURL = $image.RelPermalink }}
-{{ end }}
+{{ $mediaData := partial "lab-featured-image.html" $item }}
+{{ $mediaURL := $mediaData.src | default "" }}
 
 {{ if eq $item.Type "publication" }}
   {{ $kind = "论文" }}
@@ -69,38 +65,26 @@
   {{ $typeClass = "lab-card--research" }}
 {{ end }}
 
-{{ if eq $item.Type "research" }}
-<a class="lab-research-card{{ if $mediaURL }} has-media{{ end }}" href="{{ $link }}" {{ $target | safeHTMLAttr }}>
-  {{ with $mediaURL }}
-  <span class="lab-card-media" aria-hidden="true">
-    <img src="{{ . }}" alt="" loading="lazy" decoding="async">
-    <span class="lab-card-media-mask"></span>
-  </span>
-  {{ end }}
-  <span class="lab-research-card-kind">{{ $kind }}</span>
-  <div class="lab-research-card-title">{{ $item.Title }}</div>
-  <p class="lab-research-card-summary">{{ with $summary }}{{ . }}{{ else }}&nbsp;{{ end }}</p>
-</a>
-{{ else }}
 <article class="card-simple view-card lab-card {{ $typeClass }}{{ if $mediaURL }} has-media{{ end }}">
-  {{ with $mediaURL }}
+  {{ with $mediaData.src }}
   <div class="lab-card-media" aria-hidden="true">
-    <img src="{{ . }}" alt="" loading="lazy" decoding="async">
+    <img src="{{ . }}" srcset="{{ $mediaData.srcset }}" sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw" alt="" width="{{ $mediaData.width }}" height="{{ $mediaData.height }}" loading="lazy" decoding="async">
     <div class="lab-card-media-mask"></div>
   </div>
   {{ end }}
   <a class="lab-card-cover" href="{{ $link }}" {{ $target | safeHTMLAttr }} aria-label="{{ $item.Title }}"></a>
 
+  {{ if ne $typeClass "lab-card--research" }}
   <div class="lab-card-top">
-    <span class="lab-card-kind">{{ $kind }}</span>
     <span class="lab-card-facts">
-      {{- with $year -}}<span class="lab-card-year">{{ . }}</span>{{- end -}}
-      {{- if and $year $badge -}}<span class="lab-card-sep" aria-hidden="true">·</span>{{- end -}}
+      {{- with $year -}}<time class="lab-card-year" datetime="{{ $item.Date.Format "2006" }}">{{ . }}</time>{{- end -}}
       {{- with $badge -}}<span class="lab-card-badge">{{ . }}</span>{{- end -}}
     </span>
   </div>
+  {{ end }}
 
   <div class="lab-card-main">
+    {{ if or $authorItems (ne $typeClass "lab-card--research") }}
     <div class="lab-card-authors">
       {{ with $authorItems }}
         {{ range $i, $m := . }}
@@ -115,6 +99,7 @@
         <span class="lab-card-authors-empty">&nbsp;</span>
       {{ end }}
     </div>
+    {{ end }}
     <div class="lab-card-title">{{ $item.Title }}</div>
   </div>
 
@@ -122,4 +107,3 @@
     {{ with $summary }}{{ . }}{{ else }}&nbsp;{{ end }}
   </div>
 </article>
-{{ end }}

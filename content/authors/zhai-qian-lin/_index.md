@@ -4,6 +4,7 @@ first_name: 乾林
 last_name: 翟
 superuser: false
 role: 研一
+sort: 4
 organizations:
   - name: 西安理工大学计算机科学与技术学院
     url: 'https://jsj.xaut.edu.cn/'

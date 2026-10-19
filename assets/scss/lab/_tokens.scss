@@ -1,52 +1,144 @@
-/* Shared design tokens — site template.scss should only:
-   @import "lab/tokens";
-   Keep data/themes/minimal.toml primary in sync with $lab-blue.
-*/
+/* Design tokens — single source of truth.
+   Keep data/themes/minimal.toml primary in sync with $lab-blue. */
 
-$lab-blue: #1565c0 !default;
-$lab-blue-wash: #f2f6fb !default;
+/* ── Brand ── */
+$lab-blue: #4F46E5 !default;
+$lab-blue-wash: #EEF2FF !default;
+$lab-accent: #6366F1 !default;
+$lab-accent-wash: #EEF2FF !default;
 
+/* ── Neutral palette ── */
 $lab-ink: #1a2332 !default;
 $lab-muted: #5e6876 !default;
-$lab-line: rgba(26, 35, 50, 0.1) !default;
-$lab-card-border: rgba(26, 35, 50, 0.1) !default;
-$lab-card-border-hover: rgba(21, 101, 192, 0.35) !default;
-$lab-card-bg: #fff !default;
-$lab-card-pad: 1.25rem 1.3rem 1.2rem !default;
-$lab-card-radius: 3px !default;
-$lab-card-shadow: 0 1px 0 rgba(26, 35, 50, 0.03) !default;
-$lab-card-shadow-hover: 0 12px 28px rgba(21, 101, 192, 0.08) !default;
+$lab-white: #fff !default;
+$lab-page-bg: #F8F9FE !default;
 
-$lab-phi: 1.618 !default;
-$lab-card-ratio: unquote("#{$lab-phi} / 1") !default;
+/* ── Surfaces ── */
+$lab-navbar-bg: rgba(238, 242, 255, 0.85) !default;
+$lab-card-bg: $lab-white !default;
+$lab-card-border: rgba($lab-ink, 0.1) !default;
+$lab-card-border-hover: rgba($lab-blue, 0.35) !default;
+$lab-card-radius: 8px !default;
+$lab-card-pad: 1.5rem 1.5rem 1.4rem !default;
+$lab-card-shadow: none !default;
+$lab-card-shadow-hover: 0 4px 20px rgba($lab-blue, 0.06) !default;
 
+/* ── Motion ── */
+$lab-transition: 0.25s ease !default;
+
+/* ── Layout ── */
 $lab-content-width: 1160px !default;
-$lab-page-gutter: 0.65rem !default;
-$lab-card-gap: 0.85rem !default;
+$lab-page-gutter: 1.25rem !default;
+$lab-card-gap: 1.25rem !default;
+$lab-navbar-height: 70px !default;
+$lab-navbar-height-sm: 50px !default;
 
+/* ── State colors ── */
+$lab-placeholder-bg: #e8eaed !default;
+$lab-disabled-bg: #f7f8fa !default;
+
+/* ── Typography scale ── */
 $lab-text-xs: 0.8rem !default;
 $lab-text-sm: 0.875rem !default;
 $lab-text-base: 1rem !default;
 $lab-text-md: 1.125rem !default;
 $lab-text-lg: 1.25rem !default;
 $lab-text-xl: 1.5rem !default;
-/* Plain rem — avoid rem+vw (LibSass cannot mix units) */
-$lab-text-display: 2rem !default;
+$lab-text-display: 3rem !default;
 
 $lab-leading-tight: 1.25 !default;
 $lab-leading-snug: 1.45 !default;
 $lab-leading-body: 1.65 !default;
 $lab-leading-loose: 1.75 !default;
 
-$lab-pub: #1565c0 !default;
-$lab-pub-wash: #eef4fb !default;
-$lab-research: #7b1fa2 !default;
-$lab-research-wash: #f7f0fb !default;
-$lab-project: #2e7d32 !default;
-$lab-project-wash: #f0f7f1 !default;
-$lab-award: #c79100 !default;
-$lab-award-wash: #fff8e7 !default;
-$lab-patent: #7b1fa2 !default;
-$lab-patent-wash: #f7f0fb !default;
-$lab-post: #2e7d32 !default;
-$lab-post-wash: #f0f7f1 !default;
+/* ── Golden ratio (card proportions) ── */
+$lab-phi: 1.618 !default;
+$lab-card-ratio: unquote("#{$lab-phi} / 1") !default;
+
+/* ---------- CSS custom properties ---------- */
+
+:root {
+  /* Brand */
+  --lab-color-blue: #{$lab-blue};
+  --lab-color-blue-wash: #{$lab-blue-wash};
+  --lab-color-accent: #{$lab-accent};
+  --lab-color-accent-wash: #{$lab-accent-wash};
+
+  /* Neutral */
+  --lab-color-ink: #{$lab-ink};
+  --lab-color-muted: #{$lab-muted};
+  --lab-color-white: #{$lab-white};
+  --lab-color-page: #{$lab-page-bg};
+  --lab-color-surface: #{$lab-page-bg};
+  --lab-color-navbar-bg: #{$lab-navbar-bg};
+
+  /* Semantic */
+  --lab-color-text: #{$lab-ink};
+  --lab-color-text-secondary: #{$lab-muted};
+  --lab-color-link: #{$lab-blue};
+  --lab-color-line: #{rgba($lab-ink, 0.1)};
+  --lab-color-placeholder-bg: #{$lab-placeholder-bg};
+  --lab-color-disabled-bg: #{$lab-disabled-bg};
+
+  /* Borders */
+  --lab-color-border: #{rgba($lab-ink, 0.1)};
+  --lab-color-border-light: #{rgba($lab-ink, 0.08)};
+  --lab-color-border-ink-14: #{rgba($lab-ink, 0.14)};
+  --lab-color-border-ink-28: #{rgba($lab-ink, 0.28)};
+  --lab-color-border-blue-14: #{rgba($lab-blue, 0.14)};
+  --lab-color-border-blue-16: #{rgba($lab-blue, 0.16)};
+  --lab-color-border-blue-20: #{rgba($lab-blue, 0.2)};
+  --lab-color-border-blue-22: #{rgba($lab-blue, 0.22)};
+  --lab-color-border-blue-28: #{rgba($lab-blue, 0.28)};
+  --lab-color-border-blue-35: #{rgba($lab-blue, 0.35)};
+  --lab-color-border-blue-40: #{rgba($lab-blue, 0.4)};
+  --lab-color-border-blue-45: #{rgba($lab-blue, 0.45)};
+  --lab-color-border-blue-55: #{rgba($lab-blue, 0.55)};
+
+  /* Accent opacity scale */
+  --lab-color-accent-blue-04: #{rgba($lab-blue, 0.04)};
+  --lab-color-accent-blue-06: #{rgba($lab-blue, 0.06)};
+  --lab-color-accent-blue-10: #{rgba($lab-blue, 0.1)};
+  --lab-color-accent-blue-12: #{rgba($lab-blue, 0.12)};
+  --lab-color-accent-blue-14: #{rgba($lab-blue, 0.14)};
+  --lab-color-accent-blue-25: #{color-mix(in srgb, #{$lab-blue} 25%, transparent)};
+  --lab-color-accent-blue-35: #{color-mix(in srgb, #{$lab-blue} 35%, transparent)};
+
+  /* Text opacity */
+  --lab-color-text-on-dark: #{$lab-white};
+  --lab-color-text-on-dark-86: #{rgba(255, 255, 255, 0.86)};
+  --lab-color-text-on-dark-82: #{rgba(255, 255, 255, 0.82)};
+  --lab-color-text-ink-52: #{rgba($lab-ink, 0.52)};
+  --lab-color-text-ink-42: #{rgba($lab-ink, 0.42)};
+  --lab-color-text-ink-35: #{rgba($lab-ink, 0.35)};
+  --lab-color-text-ink-28: #{rgba($lab-ink, 0.28)};
+  --lab-color-text-muted-90: #{rgba($lab-muted, 0.9)};
+
+  /* Overlay / focus */
+  --lab-color-overlay-ink-92: #{rgba($lab-ink, 0.92)};
+  --lab-color-shadow-ink-18: #{rgba($lab-ink, 0.18)};
+  --lab-color-focus-ring: #{rgba($lab-blue, 0.25)};
+
+  /* Dark mode */
+  --lab-dark-surface: #{rgba(255, 255, 255, 0.03)};
+  --lab-dark-border: #{rgba(255, 255, 255, 0.12)};
+  --lab-dark-border-hover: #{rgba(255, 255, 255, 0.32)};
+  --lab-dark-text-muted: #{rgba(255, 255, 255, 0.5)};
+  --lab-dark-shadow: #{rgba(0, 0, 0, 0.25)};
+  --lab-color-footer-border: #{rgba(0, 0, 0, 0.2)};
+
+  /* Card */
+  --lab-card-bg: #{$lab-card-bg};
+  --lab-card-border: #{$lab-card-border};
+  --lab-card-border-hover: #{$lab-card-border-hover};
+  --lab-card-shadow: #{$lab-card-shadow};
+  --lab-card-shadow-hover: #{$lab-card-shadow-hover};
+  --lab-card-radius: #{$lab-card-radius};
+
+  /* Layout */
+  --lab-content-width: #{$lab-content-width};
+  --lab-page-gutter: #{$lab-page-gutter};
+  --lab-card-gap: #{$lab-card-gap};
+  --lab-navbar-height: #{$lab-navbar-height};
+  --lab-navbar-height-sm: #{$lab-navbar-height-sm};
+}
