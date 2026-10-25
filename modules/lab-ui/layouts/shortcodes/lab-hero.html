@@ -1,9 +1,17 @@
+{{- /*
+  Homepage hero. Identity from site.Params.lab.
+  Brand is always <h1> (tagline empty → brand is sole page title).
+*/ -}}
 {{- $lab := site.Params.lab | default dict -}}
 {{- $name := $lab.name | default site.Title -}}
 {{- $tagline := $lab.tagline | default "" -}}
 {{- $lead := $lab.lead | default "" -}}
 <div class="lab-hero">
-  <p class="lab-hero-brand">{{ $name }}</p>
-  {{ with $tagline }}<h1 class="lab-hero-title">{{ . }}</h1>{{ end }}
-  {{ with $lead }}<p class="lab-hero-lead">{{ . }}</p>{{ end }}
+  <h1 class="lab-hero-brand">{{- $name -}}</h1>
+  {{- with $tagline -}}
+  <p class="lab-hero-title">{{- . -}}</p>
+  {{- end -}}
+  {{- with $lead -}}
+  <p class="lab-hero-lead">{{- . -}}</p>
+  {{- end -}}
 </div>

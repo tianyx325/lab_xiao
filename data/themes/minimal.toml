@@ -1,16 +1,17 @@
-# Brand primary — keep in sync with modules/lab-ui .../_tokens.scss $lab-blue
+# Brand primary — keep in sync with assets/scss/lab/_tokens.scss $lab-blue
+# Ink / page — keep in sync with $lab-ink / $lab-page-bg / $lab-white
 name = "Minimal"
 
 [light]
   primary = "#4F46E5"
 
   menu_primary = "#fff"
-  menu_text = "#34495e"
+  menu_text = "#0f1a2a"
   menu_text_active = "#4F46E5"
-  menu_title = "#2b2b2b"
+  menu_title = "#0f1a2a"
 
-  home_section_odd = "rgb(255, 255, 255)"
-  home_section_even = "rgb(247, 247, 247)"
+  home_section_odd = "#ffffff"
+  home_section_even = "#F8FAFC"
 
 [dark]
   primary = "#4F46E5"

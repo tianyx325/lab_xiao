@@ -41,14 +41,20 @@ outputs:
   section: [HTML, RSS]
 imaging:
   resampleFilter: lanczos
-  quality: 75
   anchor: smart
+  jpeg:
+    quality: 75
+  webp:
+    quality: 75
+  avif:
+    quality: 75
 timeout: 600000
 taxonomies:
   tag: tags
   category: categories
   publication_type: publication_types
-  author: authors
+  # authors taxonomy disabled — member pages live in content/authors/;
+  # pubs use Params.authors + lab_author_aliases (avoids orphan /author/ terms)
 markup:
   _merge: deep
 related:

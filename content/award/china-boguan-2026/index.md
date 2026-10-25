@@ -1,6 +1,7 @@
 ---
 title: "全国高校网络文化技术创新大会自主研发应用二等奖"
 date: 2026-09-20
+award_date: 2026-09-20
 authors:
   - admin
   - tian-yunxiang

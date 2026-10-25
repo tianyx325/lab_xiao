@@ -17,12 +17,7 @@
 {{- $map_api_key := site.Params.features.map.api_key | default "" -}}
 {{- $sections := $admit.sections | default slice -}}
 
-{{/* 本地 Leaflet：不依赖 jsDelivr；补强主题仅对 mapnik/mapbox 注入的逻辑 */}}
-{{ if and $map_provider (not (.Page.Scratch.Get "lab_leaflet_assets")) }}
-{{ .Page.Scratch.Set "lab_leaflet_assets" true }}
-<link rel="stylesheet" href="{{ "vendor/leaflet/leaflet.css" | relURL }}">
-<script src="{{ "vendor/leaflet/leaflet.js" | relURL }}"></script>
-{{ end }}
+{{/* Leaflet assets: loaded in partials/custom_head.html for provider=amap */}}
 
 <div class="lab-contact lab-list-page">
   <header class="lab-list-header">
@@ -42,7 +37,7 @@
         {{ with .lead }}<p class="lab-contact-card-lead">{{ . }}</p>{{ end }}
         <ul>
           {{- if .show_email }}
-            {{- with $email }}<li>{{ $emailLabel }}：<a class="lab-contact-mail" href="mailto:{{ . }}" title="点击复制邮箱">{{ . }}</a></li>{{ end }}
+            {{- with $email }}<li>{{ $emailLabel }}：<a class="lab-contact-mail" href="mailto:{{ . }}">{{ . }}</a></li>{{ end }}
           {{- end }}
           {{- range .bullets }}
           <li>{{ . }}</li>
@@ -60,7 +55,7 @@
         {{ with $email }}
         <div class="lab-contact-ways-item">
           <span class="lab-contact-info-label">{{ $emailLabel }}</span>
-          <a href="mailto:{{ . }}" title="点击复制邮箱">{{ . }}</a>
+          <a href="mailto:{{ . }}">{{ . }}</a>
         </div>
         {{ end }}
         {{ with $address }}

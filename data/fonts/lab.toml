@@ -1,0 +1,13 @@
+# Lab type stack — Inter (Latin UI) + Noto Sans SC (Chinese).
+# Selected via config/_default/params.yaml → appearance.font: lab
+# Keep google_fonts weights in sync with $lab-weight-* in assets/scss/lab/_tokens.scss
+
+name = "Lab"
+
+# display=swap appended by site_head — do not include it here (avoids duplicate)
+google_fonts = "family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600"
+
+heading_font = "Inter, \"Noto Sans SC\""
+body_font = "Inter, \"Noto Sans SC\""
+nav_font = "Inter, \"Noto Sans SC\""
+mono_font = "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"

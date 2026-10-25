@@ -1,14 +1,22 @@
 {{/* Only show author boxes for lab members (content/authors + user_groups). */}}
 {{ if ne .Type "page" | and (not (or (eq site.Params.profile false) (eq .Params.profile false))) }}
 {{ if and (not .Params.authors) (.Scratch.Get "superuser_username") }}
-  {{ $author_page := site.GetPage (printf "/%s/%s" "authors" (.Scratch.Get "superuser_username")) }}
+  {{ $author_page := site.GetPage (printf "/authors/%s" (.Scratch.Get "superuser_username")) }}
   {{ if and $author_page.File (isset $author_page.Params "user_groups") }}
     {{ partial "page_author_card" (dict "author_page" $author_page) }}
   {{ end }}
 {{ else if .Params.authors }}
-  {{ range $author_obj := (.GetTerms "authors") }}
-    {{ if and $author_obj.Page.File (isset $author_obj.Page.Params "user_groups") }}
-      {{ partial "page_author_card" (dict "author_page" $author_obj.Page) }}
+  {{ $page := . }}
+  {{ range $a := .Params.authors }}
+    {{ $raw := printf "%v" $a }}
+    {{ $slug := $raw }}
+    {{ with site.Data.lab_author_aliases }}
+      {{ with index . $raw }}{{ $slug = . }}{{ end }}
+    {{ end }}
+    {{ with site.GetPage (printf "/authors/%s" $slug) }}
+      {{ if and .File (isset .Params "user_groups") }}
+        {{ partial "page_author_card" (dict "author_page" .) }}
+      {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}

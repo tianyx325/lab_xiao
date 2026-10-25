@@ -2,8 +2,8 @@
 {{- $more := .Get "more" | default "全部" -}}
 {{- $href := .Get "href" | default "" -}}
 <div class="section-head">
-  <h2>{{ $title }}</h2>
-  {{ with $href }}
-  <a href="{{ . | relURL }}">{{ $more }}</a>
-  {{ end }}
+  <h2>{{- $title -}}</h2>
+  {{- with $href -}}
+  <a href="{{ . | relURL }}">{{- $more -}}</a>
+  {{- end -}}
 </div>

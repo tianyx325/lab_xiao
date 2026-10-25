@@ -34,7 +34,7 @@ py -3 scripts/sync_lab_identity.py --dry-run
 - `languages.yaml` → `zh.title` / `zh.params.description`
 - `params.yaml` → `marketing.seo.org_name` / `description`、`footer.copyright.notice`
 
-主题色：`modules/lab-ui/assets/scss/lab/_tokens.scss` 的 `$lab-blue` 与 `data/themes/minimal.toml` 的 `primary` 保持一致。
+主题色：`assets/scss/lab/_tokens.scss` 的 `$lab-blue` 与 `data/themes/minimal.toml` 的 `primary` 保持一致。
 
 ## 成员 `content/authors/<slug>/_index.md`
 
@@ -50,12 +50,28 @@ py -3 scripts/sync_lab_identity.py --dry-run
 
 新建：`hugo new authors/zhang-san/_index.md`（需 archetype 可用）。
 
+## 作者 ID
+
+- 实验室成员：写 `content/authors/<slug>` 的 slug（如 `admin`、`su-haonan`）
+- 显示名 / 英文名映射见 `data/lab_author_aliases.yaml`（解析链接用）
+- 外协可写中文或英文全名；站点**不启用** authors taxonomy，避免孤儿 `/author/` 页
+
+## 奖项 `content/award/<slug>/index.md`
+
+| 字段 | 说明 |
+|------|------|
+| authors | 获奖人（成员用 slug） |
+| date / award_date | 保持一致；列表年份用 `date` |
+| tags | 如「国家级」「省级」 |
+| summary | 列表摘要 |
+
 ## 项目 `content/project/<slug>/index.md`
 
 | 字段 | 说明 |
 |------|------|
 | project_code | 课题号，导入 slug 依据 |
 | project_status | `ongoing` / `completed` |
+| funding / grant_type | 可选；缺省时从 tags 启发式推断 |
 | tags | 含「面上项目」「重点项目」等时卡片显示类型角标 |
 | summary | 列表摘要 |
 
@@ -63,6 +79,7 @@ py -3 scripts/sync_lab_identity.py --dry-run
 
 | 字段 | 说明 |
 |------|------|
+| authors | 发明人（成员用 slug；外协可用中文名） |
 | patent_number | 如 ZL…，导入 slug 依据 |
 | patent_status | `granted` → 卡片「已授权」 |
 | summary | 列表摘要 |

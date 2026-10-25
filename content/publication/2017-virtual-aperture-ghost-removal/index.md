@@ -4,7 +4,6 @@ authors:
 - "admin"
 - "周果清"
 date: "2017-01-01T00:00:00Z"
-doi: ""
 publication_types: ["article-journal"]
 publication: "西北工业大学学报"
 publication_short: "西北工业大学学报"

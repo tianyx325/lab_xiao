@@ -1,10 +1,8 @@
 {{- define "main" -}}
 
-{{/* Taxonomy-only names (not in content/authors/) have no profile — send to members list. */}}
+{{/* Taxonomy-only names (not in content/authors/) — head already meta-refreshes to /people/ */}}
 {{ if not .File }}
 {{ $people := "/people/" | relLangURL }}
-<script>location.replace({{ $people | jsonify }});</script>
-<noscript><meta http-equiv="refresh" content="0; url={{ $people }}"></noscript>
 <p class="universal-wrapper pt-3"><a href="{{ $people }}">返回成员列表</a></p>
 {{ else }}
 {{- $person := .Params -}}
@@ -17,7 +15,7 @@
   {{- $avatarImage := $avatar.Fill "320x320 Center" -}}
   {{- $src = $avatarImage.RelPermalink -}}
 {{- end -}}
-{{- $works := where .Pages ".IsNode" false -}}
+{{- $works := where .Pages ".IsPage" true -}}
 {{- /* Academic + projects: newest first by page Date */ -}}
 {{- $academic := where $works "Section" "in" (slice "publication" "patent" "award") -}}
 {{- $academic = $academic.ByDate.Reverse -}}
@@ -77,7 +75,7 @@
             <p class="lab-member-identity-meta">
               {{- with $person.role -}}<span class="lab-member-identity-role">{{ . | markdownify | emojify }}</span>{{- end -}}
               {{- with $email -}}
-              <a class="lab-member-identity-email" href="mailto:{{ . }}" title="点击复制邮箱">{{ . }}</a>
+              <a class="lab-member-identity-email" href="mailto:{{ . }}">{{ . }}</a>
               {{- end -}}
             </p>
             {{- end -}}
@@ -86,22 +84,24 @@
             {{- if and $isAdvisor (gt (len $focusTopics) 0) -}}
             <div class="lab-member-identity-focus">
               <ul class="lab-member-focus-topics" role="list">
+                {{- $researchAll := where site.RegularPages "Section" "research" -}}
                 {{- range $focusTopics -}}
                   {{- $topic := . -}}
                   {{- $href := "" -}}
-                  {{- $tl := lower $topic -}}
-                  {{- if or (in $topic "动作识别") (in $topic "骨骼") (in $tl "skeleton") (in $tl "action recognition") -}}
-                    {{- $href = "/research/action/" -}}
-                  {{- else if or (in $topic "深度") (in $tl "depth") (in $topic "事件相机") -}}
-                    {{- $href = "/research/depth/" -}}
-                  {{- else if or (in $topic "弱光") (in $topic "图像增强") (in $tl "low light") (in $tl "low-light") -}}
-                    {{- $href = "/research/low-light/" -}}
-                  {{- else if or (in $topic "智能体") (in $topic "大模型") (in $tl "agent") -}}
-                    {{- $href = "/research/agent/" -}}
+                  {{- range $researchAll -}}
+                    {{- if not $href -}}
+                      {{- $matched := or (in $topic .Title) (in .Title $topic) -}}
+                      {{- if not $matched -}}
+                        {{- range (.Params.tags | default slice) -}}
+                          {{- if or (in $topic .) (in . $topic) -}}{{- $matched = true -}}{{- end -}}
+                        {{- end -}}
+                      {{- end -}}
+                      {{- if $matched -}}{{- $href = .RelPermalink -}}{{- end -}}
+                    {{- end -}}
                   {{- end -}}
                 <li class="lab-member-focus-topic" role="listitem">
                   {{- if $href -}}
-                  <a class="lab-member-focus-tag" href="{{ $href | relLangURL }}">{{ $topic }}</a>
+                  <a class="lab-member-focus-tag" href="{{ $href }}">{{ $topic }}</a>
                   {{- else -}}
                   <span class="lab-member-focus-tag">{{ $topic }}</span>
                   {{- end -}}

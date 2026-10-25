@@ -10,8 +10,8 @@
 mounts:
   - source: modules/lab-ui/layouts
     target: layouts
-  - source: modules/lab-ui/assets
-    target: assets
+  # 可挂 static / archetypes；不要挂载本模块 assets/scss
+  # 设计 token 以站点 assets/scss/lab/_tokens.scss 为唯一来源
   - source: modules/lab-ui/static
     target: static
   - source: modules/lab-ui/archetypes
@@ -23,7 +23,7 @@ mounts:
 
 ## Shortcodes
 
-- `lab-hero` — 首页英雄区（`lab.name` / tagline / lead / `lab.ui.cta_*`）
+- `lab-hero` — 首页英雄区（`lab.name` / tagline / lead）
 - `lab-section-head` — 区块标题 +「全部」链接
 - `lab-research-cards` — 从 `content/research/` 取前 N 条（`count` 可覆盖）
 - `lab-research-lead` — 方向列表导语（`lab.seo_description`）

@@ -6,7 +6,6 @@ authors:
 - "周果清"
 - "杨恒"
 date: "2014-01-01T00:00:00Z"
-doi: ""
 publication_types: ["article-journal"]
 publication: "计算机辅助设计与图形学学报"
 publication_short: "计算机辅助设计与图形学学报"

@@ -7,7 +7,6 @@ authors:
 - "高阳"
 - "admin"
 date: "2017-01-01T00:00:00Z"
-doi: ""
 publication_types: ["article-journal"]
 publication: "西安理工大学学报"
 publication_short: "西安理工大学学报"

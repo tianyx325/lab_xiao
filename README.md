@@ -14,7 +14,7 @@ py -3 scripts\sync_lab_identity.py
 ```
 
 3. 替换 `content/`（成员、方向、项目、专利等）与 `assets/media/welcome.png`。
-4. 若改品牌色：改 `modules/lab-ui/assets/scss/lab/_tokens.scss` 的 `$lab-blue`，并同步 `data/themes/minimal.toml` 的 `primary`。
+4. 若改品牌色：改 `assets/scss/lab/_tokens.scss` 的 `$lab-blue`，并同步 `data/themes/minimal.toml` 的 `primary`。
 5. 字段约定见 [`docs/SCHEMA.md`](docs/SCHEMA.md)。
 
 首页 hero / 方向卡 / 联系页 / 列表导语均读 `params.lab`，不必改 HTML 硬编码文案。
@@ -68,5 +68,5 @@ py -3 scripts\import_projects_patents.py --xlsx-dir "D:\path\to\xlsx" --content 
 
 ## 设计
 
-- Token：`modules/lab-ui/assets/scss/lab/_tokens.scss`
+- Token：`assets/scss/lab/_tokens.scss`（站点唯一来源；`modules/lab-ui` 不挂载 SCSS）
 - 站点皮肤：`assets/scss/template.scss`（`@import "lab/tokens"`）
