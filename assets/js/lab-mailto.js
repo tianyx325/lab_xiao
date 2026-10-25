@@ -1,4 +1,4 @@
-/*! Click mailto: → copy address + toast (Windows often has no mail client). */
+/*! mailto: — copy address + toast; on touch also allow the native mail app. */
 (function () {
   function emailFromHref(href) {
     if (!href || href.indexOf("mailto:") !== 0) return "";
@@ -48,6 +48,14 @@
     });
   }
 
+  function isCoarsePointer() {
+    try {
+      return window.matchMedia("(pointer: coarse)").matches;
+    } catch (_) {
+      return "ontouchstart" in window;
+    }
+  }
+
   document.addEventListener(
     "click",
     function (e) {
@@ -56,7 +64,12 @@
       var email = emailFromHref(a.getAttribute("href") || "");
       if (!email) return;
 
-      e.preventDefault();
+      // Phones/tablets: let mailto: open the mail app; still copy as a convenience.
+      // Fine pointers (desktop): Windows often has no client — copy only.
+      if (!isCoarsePointer()) {
+        e.preventDefault();
+      }
+
       copyText(email)
         .then(function () {
           showToast("已复制邮箱：" + email);

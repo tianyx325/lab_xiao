@@ -540,7 +540,10 @@ body.page-wrapper {
 
   .lab-footer-list a,
   .lab-footer-contact-item a {
-    padding: 0.15rem 0;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.35rem 0;
   }
 
   .lab-footer-bottom {
@@ -957,7 +960,7 @@ a.lab-research-card.has-media:hover .lab-card-media-mask {
   padding-right: 0;
 }
 
-/* Mobile: brand truly centered; side controls stay clear above it */
+/* Mobile: brand centered; solid menu panel + dim backdrop (no content bleed) */
 @media (max-width: 991px) {
   #navbar-main .lab-navbar-inner {
     position: relative;
@@ -971,6 +974,11 @@ a.lab-research-card.has-media:hover .lab-card-media-mask {
     flex: 0 0 auto;
     position: relative;
     z-index: 2;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding-left: 0.35rem;
     padding-right: 0.35rem;
   }
@@ -983,10 +991,75 @@ a.lab-research-card.has-media:hover .lab-card-media-mask {
   }
 
   #navbar-main ul.nav-icons .nav-link {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
     padding-left: 0.45rem !important;
     padding-right: 0.45rem !important;
   }
 
+  /* Hide page chrome while menu open — absolute drawer can leave a 1–N px
+     gap at the fold (dvh vs layout viewport), which looked like footer/nav bleed. */
+  body:has(#navbar-content.show) {
+    overflow: hidden;
+  }
+
+  body:has(#navbar-content.show) .page-body,
+  body:has(#navbar-content.show) .page-footer {
+    visibility: hidden;
+  }
+
+  /* Full-viewport solid drawer (positioning parent is .lab-navbar-inner) */
+  #navbar-main .navbar-collapse.main-menu-item.show,
+  #navbar-main .navbar-collapse.main-menu-item.collapsing {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    width: 100%;
+    min-height: calc(100dvh - var(--lab-navbar-height-sm) + 4rem);
+    height: calc(100dvh - var(--lab-navbar-height-sm) + 4rem);
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1031 !important;
+    margin: 0;
+    padding: 0.35rem 0 0.85rem;
+    background: var(--lab-color-page) !important;
+    border-bottom: none;
+    box-shadow: none;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .navbar-nav {
+    width: 100%;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .nav-item {
+    width: 100%;
+    margin: 0;
+    padding: 0.15rem 1rem !important;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .nav-link {
+    display: block !important;
+    width: 100%;
+    padding: 0.65rem 0.35rem !important;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .dropdown-menu {
+    position: static !important;
+    float: none;
+    width: 100%;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
 }
 
 /* Three-column content cards — incomplete rows stay centered */
@@ -1414,18 +1487,16 @@ $lab-member-avatar-lg: 168px;
   gap: 0.65rem;
 }
 
-/* Name + role/email + tags: same height as avatar, spaced top/mid/bottom */
+/* Name + role/email + tags — grow with content (do not clip to avatar height) */
 .lab-member-identity-main {
   box-sizing: border-box;
   width: 100%;
-  height: $lab-member-avatar-sm;
-  max-height: $lab-member-avatar-sm;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.2rem;
-  overflow: hidden;
+  justify-content: flex-start;
+  gap: 0.45rem;
+  overflow: visible;
 }
 
 .lab-member-identity-name {
@@ -1764,9 +1835,7 @@ a.lab-member-focus-tag:hover {
     font-size: 3rem;
   }
   .lab-member-identity-main {
-    height: $lab-member-avatar-lg;
-    max-height: $lab-member-avatar-lg;
-    gap: 0.3rem;
+    gap: 0.55rem;
   }
   .lab-member-identity-name {
     font-size: $lab-text-xl !important;
@@ -2433,41 +2502,6 @@ a.lab-member-focus-tag:hover {
   }
 }
 
-/* Navbar back slot — fixed width on every page (visible or invisible) */
-$lab-navbar-back-slot: 3rem;
-
-.lab-navbar-back-item {
-  flex: 0 0 $lab-navbar-back-slot;
-  width: $lab-navbar-back-slot;
-  min-width: $lab-navbar-back-slot;
-  max-width: $lab-navbar-back-slot;
-  margin-right: 0 !important;
-  padding-right: 0 !important;
-  text-align: center;
-}
-
-#navbar-main .nav-link.lab-navbar-back,
-#navbar-main a.nav-link.lab-navbar-back {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  box-sizing: border-box;
-  font-size: $lab-text-sm !important;
-  font-weight: inherit;
-  letter-spacing: 0.06em;
-  line-height: 1.2;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  white-space: nowrap;
-}
-
-.nav-link.lab-navbar-back.is-empty {
-  visibility: hidden;
-  pointer-events: none;
-  user-select: none;
-}
-
 /* Homepage rhythm — keep contact map section padding */
 .home-section:not(.lab-hero-section):not(.lab-contact-section):not(.lab-block-head):not(.lab-row-head):not(.lab-pubs-title):not(.lab-people-section):not(.lab-major):not(.lab-outcomes-section):not(.lab-row-body):not(.lab-block-body) {
   padding-top: 0 !important;
@@ -3003,6 +3037,7 @@ $lab-home-sections: (
   .home-section.lab-row-body.lab-last .col-12:not(.section-heading) > .card-simple {
     flex: 1 1 100%;
     max-width: 100%;
+    min-width: 0;
   }
 
   .section-head {
@@ -3453,8 +3488,10 @@ button.lab-pagination-link {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .lab-people.lab-list-page .lab-people-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Flex grid — set card width (grid-template-columns was a no-op here) */
+  .lab-people.lab-list-page a.lab-member-card,
+  .lab-people.lab-list-page .lab-member-card {
+    width: calc((100% - (2 * var(--lab-card-gap))) / 3);
   }
 }
 
@@ -3715,5 +3752,44 @@ a.lab-meta-tag.lab-meta-tag-link:hover {
 a.lab-meta-tag-link:focus-visible {
   outline: 2px solid var(--lab-color-border-blue-40);
   outline-offset: 2px;
+}
+
+/* Search modal title (override uses h2 so page h1 stays unique) */
+.search-header h2 {
+  margin: 0;
+  line-height: 1;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Touch: do not keep “hovered” chrome after tap */
+@media (hover: none), (pointer: coarse) {
+  .lab-card.card-simple.view-card:hover,
+  a.lab-card.card-simple.view-card:hover,
+  a.lab-member-card:hover,
+  .lab-member-card:hover {
+    border-color: var(--lab-card-border) !important;
+    box-shadow: var(--lab-card-shadow);
+  }
+
+  .lab-card.card-simple.view-card:hover::after,
+  a.lab-card.card-simple.view-card:hover::after,
+  a.lab-member-card:hover::after,
+  .lab-member-card:hover::after {
+    border-color: transparent;
+  }
+
+  .navbar .nav-link:hover {
+    color: var(--lab-color-text) !important;
+  }
+
+  .navbar .nav-link:hover::after {
+    transform: scaleX(0);
+  }
+
+  .navbar .nav-link.active:hover,
+  .navbar .nav-item.active .nav-link:hover {
+    color: var(--lab-color-blue) !important;
+  }
 }
 
