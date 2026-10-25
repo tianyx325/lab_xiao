@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>国家自然科学基金 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%9B%BD%E5%AE%B6%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6%E5%9F%BA%E9%87%91/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tag/%E5%9B%BD%E5%AE%B6%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6%E5%9F%BA%E9%87%91/index.xml" rel="self" type="application/rss+xml"/><description>国家自然科学基金</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh</language><lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/logo.svg</url><title>国家自然科学基金</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%9B%BD%E5%AE%B6%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6%E5%9F%BA%E9%87%91/</link></image><item><title>面向弱光自动对焦的光场特征计算增强理论与方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</guid><description/></item><item><title>高分辨率动态光场获取及计算理论与方法</title><link>https://tianyx325.github.io/lab_xiao/project/proj-62031023/</link><pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-62031023/</guid><description>&lt;p>本项目为国家自然科学基金重点项目「高分辨率动态光场获取及计算理论与方法」（批准号 62031023）的子课题，总项目由西北工业大学王庆教授主持，肖照林担任子课题负责人。&lt;/p>
+&lt;p>项目针对动态光场获取与计算理论展开研究：侧重动态光场「全过程」压缩采样与计算重构，将现有静态光场理论拓展至动态光场理论。拟采用复合成像手段，采集并重构时—空—角域均为高分辨率的光场数据，探索动态光场的多尺度全过程成像及其时空优化理论，搭建高分辨率动态光场成像验证系统，面向高速流场以及爆炸场观测等示范应用。&lt;/p></description></item><item><title>双平面光场局部不变性特征提取与匹配方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-61871319/</link><pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-61871319/</guid><description>&lt;p>图像特征提取与匹配是计算机视觉的基础问题。传统光学成像仅记录二维成像平面的光强分布，降维采集难以充分保留高维场景信息，特征匹配多义性由此产生。本项目面向双平面光场，研究空间—角度采样下的局部不变性特征分析、提取与相似性度量，推动宽基线光场理论发展，并为缓解匹配多义性、支撑场景深度重建提供理论支撑。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>双平面光场局部不变性特征分析与提取理论&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>以传统图像局部不变性特征理论为基础，研究双平面光场空间—角度采样的局部不变性原理，构建光场局部不变性特征的分析理论。&lt;/li>
+&lt;li>针对光场传播过程，研究几何变换条件下特征的数学描述与提取方法，并生成光场特征分析数据集。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>双平面光场局部不变性特征的相似性度量&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>针对光场高维特征，研究尺度空间选择问题，提升特征可区分性。&lt;/li>
+&lt;li>以局部不变性原理为基础，研究距离度量与相似性计算方法。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>基于宽基线光场特征匹配的场景深度重建方法&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>针对宽基线光场数据，研究特征匹配计算，分析匹配多义性问题。&lt;/li>
+&lt;li>结合光场深度估计理论，研究基于宽基线光场的场景深度重建及优化方法。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>光场成像的轴向超分辨率方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-61501370/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-61501370/</guid><description>&lt;p>光场成像具有先拍摄后聚焦的可交互式重聚焦能力，轴向分辨率是衡量其数字重聚焦性能的重要指标。现有光场成像系统存在空间与角度采样的分辨率折衷瓶颈，导致图像质量与重聚焦能力受限。本项目属于计算摄影学领域的光场成像理论与方法研究，拟从数据处理阶段突破轴向分辨率不足问题，并为突破光场成像分辨率折衷瓶颈提供思路。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>双平面光场模型的成像轴向分辨率模型及评价&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>针对双平面模型光场成像系统，研究光场采样特性、数据处理及成像方法对轴向分辨率的影响，构建光场轴向分辨率模型。&lt;/li>
+&lt;li>针对光场重聚焦能力沿轴向的非线性变化特性，研究轴向分辨率的度量与量化评价方法。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>轴向超分辨率光场图像生成及优化方法&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在不改变硬件系统设计的前提下，研究高质量光场数据解耦及重采样方法，探寻适合轴向超分辨率的空频域成像算法。&lt;/li>
+&lt;li>在轴向超分辨率图像生成基础上，研究非均匀采样与欠采样对图像质量的影响，进一步探寻光场图像序列质量的优化方法。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>

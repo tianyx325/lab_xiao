@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>面上项目 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tag/%E9%9D%A2%E4%B8%8A%E9%A1%B9%E7%9B%AE/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tag/%E9%9D%A2%E4%B8%8A%E9%A1%B9%E7%9B%AE/index.xml" rel="self" type="application/rss+xml"/><description>面上项目</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh</language><lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/logo.svg</url><title>面上项目</title><link>https://tianyx325.github.io/lab_xiao/tag/%E9%9D%A2%E4%B8%8A%E9%A1%B9%E7%9B%AE/</link></image><item><title>面向弱光自动对焦的光场特征计算增强理论与方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</guid><description/></item><item><title>双平面光场局部不变性特征提取与匹配方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-61871319/</link><pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-61871319/</guid><description>&lt;p>图像特征提取与匹配是计算机视觉的基础问题。传统光学成像仅记录二维成像平面的光强分布，降维采集难以充分保留高维场景信息，特征匹配多义性由此产生。本项目面向双平面光场，研究空间—角度采样下的局部不变性特征分析、提取与相似性度量，推动宽基线光场理论发展，并为缓解匹配多义性、支撑场景深度重建提供理论支撑。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>双平面光场局部不变性特征分析与提取理论&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>以传统图像局部不变性特征理论为基础，研究双平面光场空间—角度采样的局部不变性原理，构建光场局部不变性特征的分析理论。&lt;/li>
+&lt;li>针对光场传播过程，研究几何变换条件下特征的数学描述与提取方法，并生成光场特征分析数据集。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>双平面光场局部不变性特征的相似性度量&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>针对光场高维特征，研究尺度空间选择问题，提升特征可区分性。&lt;/li>
+&lt;li>以局部不变性原理为基础，研究距离度量与相似性计算方法。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>基于宽基线光场特征匹配的场景深度重建方法&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>针对宽基线光场数据，研究特征匹配计算，分析匹配多义性问题。&lt;/li>
+&lt;li>结合光场深度估计理论，研究基于宽基线光场的场景深度重建及优化方法。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>

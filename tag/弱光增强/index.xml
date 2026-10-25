@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>弱光增强 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%BC%B1%E5%85%89%E5%A2%9E%E5%BC%BA/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tag/%E5%BC%B1%E5%85%89%E5%A2%9E%E5%BC%BA/index.xml" rel="self" type="application/rss+xml"/><description>弱光增强</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh</language><lastBuildDate>Tue, 13 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/logo.svg</url><title>弱光增强</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%BC%B1%E5%85%89%E5%A2%9E%E5%BC%BA/</link></image><item><title>弱光视觉增强</title><link>https://tianyx325.github.io/lab_xiao/research/low-light/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/research/low-light/</guid><description>&lt;p>面向低照度、高噪声与复杂光照等降质场景，本方向研究视觉信息的恢复、增强与鲁棒特征表达，使增强结果不仅「更好看」，更能服务对焦、匹配、光流与重建等下游任务。&lt;/p>
+&lt;h3 id="方向简介">方向简介&lt;/h3>
+&lt;p>弱光成像普遍存在信噪比低、细节淹没与颜色失真等问题。实验室从增强重建与任务驱动两条线推进：一方面提升图像/视频的可视质量，另一方面学习对下游几何与运动估计更友好的特征表示。相关工作覆盖暗光光流（如 CEDFlow、隐特征监督孪生网络等）以及国家自然科学基金面上项目「面向弱光自动对焦的光场特征计算增强理论与方法研究」等。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ul>
+&lt;li>低照度图像 / 视频增强、去噪与色彩校正&lt;/li>
+&lt;li>弱光条件下的特征表达、光流与运动估计&lt;/li>
+&lt;li>面向自动对焦、匹配与重建的增强与特征计算方法&lt;/li>
+&lt;li>光场等计算成像与弱光场景的结合&lt;/li>
+&lt;li>面向实际业务的弱光增强算法定制与系统验证&lt;/li>
+&lt;/ul>
+&lt;h3 id="关键问题">关键问题&lt;/h3>
+&lt;ul>
+&lt;li>极端低照度下细节与噪声难以兼顾，易过平滑或引入伪影&lt;/li>
+&lt;li>增强与下游任务目标不一致，导致「视觉更好、任务更差」&lt;/li>
+&lt;li>真实弱光数据分布复杂，评测与泛化仍具挑战&lt;/li>
+&lt;/ul>
+&lt;h3 id="技术路线">技术路线&lt;/h3>
+&lt;ul>
+&lt;li>在图像域与隐空间联合建模，强化轮廓、纹理与运动一致性&lt;/li>
+&lt;li>以任务损失（对焦、光流、匹配等）约束增强网络，实现任务导向增强&lt;/li>
+&lt;li>结合光场等多维成像信息，提升弱光条件下的特征可分性与稳定性&lt;/li>
+&lt;/ul></description></item><item><title>弱光图像增强算法定制开发</title><link>https://tianyx325.github.io/lab_xiao/project/ruo-guang-tu-xiang-zeng-qiang-suan-fa-ding-zhi-kai-fa/</link><pubDate>Sun, 01 Mar 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/ruo-guang-tu-xiang-zeng-qiang-suan-fa-ding-zhi-kai-fa/</guid><description/></item><item><title>面向弱光自动对焦的光场特征计算增强理论与方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</guid><description/></item></channel></rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>深度估计 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tag/%E6%B7%B1%E5%BA%A6%E4%BC%B0%E8%AE%A1/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tag/%E6%B7%B1%E5%BA%A6%E4%BC%B0%E8%AE%A1/index.xml" rel="self" type="application/rss+xml"/><description>深度估计</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh</language><lastBuildDate>Tue, 13 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/logo.svg</url><title>深度估计</title><link>https://tianyx325.github.io/lab_xiao/tag/%E6%B7%B1%E5%BA%A6%E4%BC%B0%E8%AE%A1/</link></image><item><title>深度估计</title><link>https://tianyx325.github.io/lab_xiao/research/depth/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/research/depth/</guid><description>&lt;p>面向常规与降质场景，本方向研究从二维观测恢复三维结构的深度估计方法，覆盖单目视觉、弱光条件以及事件相机等新型传感，服务三维感知、重建与决策前端。&lt;/p>
+&lt;h3 id="方向简介">方向简介&lt;/h3>
+&lt;p>深度估计是连接二维感知与三维理解的关键环节。实验室关注在纹理缺失、光照不良与快速运动等困难条件下仍可稳定工作的深度模型，并探索语义信息、多模态传感对几何估计的补充作用，为后续重建、导航与交互提供可靠的三维线索。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ul>
+&lt;li>单目深度估计与语义引导的几何推理&lt;/li>
+&lt;li>弱光、低纹理等降质场景下的鲁棒深度估计&lt;/li>
+&lt;li>事件相机深度估计及与常规相机的多模态融合&lt;/li>
+&lt;li>深度结果的一致性约束、尺度恢复与不确定性建模&lt;/li>
+&lt;li>面向重建、对焦与场景理解的深度应用验证&lt;/li>
+&lt;/ul>
+&lt;h3 id="关键问题">关键问题&lt;/h3>
+&lt;ul>
+&lt;li>单目设定下的尺度模糊与几何歧义&lt;/li>
+&lt;li>弱光与运动模糊导致的边界与细节退化&lt;/li>
+&lt;li>异源传感器（RGB / 事件等）的时空对齐与融合策略&lt;/li>
+&lt;li>深度误差在下游任务中的传播与可控性&lt;/li>
+&lt;/ul>
+&lt;h3 id="技术路线">技术路线&lt;/h3>
+&lt;ul>
+&lt;li>结合语义与几何先验，提升结构边界与平面区域的估计质量&lt;/li>
+&lt;li>针对弱光与事件数据设计鲁棒特征与训练策略&lt;/li>
+&lt;li>通过多任务学习与一致性损失，增强深度估计的稳定性与可迁移性&lt;/li>
+&lt;/ul></description></item><item><title>光场深度估计及优化方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-2016jq6069/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-2016jq6069/</guid><description/></item><item><title>基于光场分析的多线索融合深度估计方法</title><link>https://tianyx325.github.io/lab_xiao/publication/2015-lightfield-multicue-depth/</link><pubDate>Tue, 01 Dec 2015 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publication/2015-lightfield-multicue-depth/</guid><description/></item></channel></rss>

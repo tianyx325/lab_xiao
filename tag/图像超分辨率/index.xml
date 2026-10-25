@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>图像超分辨率 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%9B%BE%E5%83%8F%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tag/%E5%9B%BE%E5%83%8F%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87/index.xml" rel="self" type="application/rss+xml"/><description>图像超分辨率</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh</language><lastBuildDate>Fri, 01 Jan 2016 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/logo.svg</url><title>图像超分辨率</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%9B%BE%E5%83%8F%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87/</link></image><item><title>光场成像的轴向超分辨率方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-61501370/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-61501370/</guid><description>&lt;p>光场成像具有先拍摄后聚焦的可交互式重聚焦能力，轴向分辨率是衡量其数字重聚焦性能的重要指标。现有光场成像系统存在空间与角度采样的分辨率折衷瓶颈，导致图像质量与重聚焦能力受限。本项目属于计算摄影学领域的光场成像理论与方法研究，拟从数据处理阶段突破轴向分辨率不足问题，并为突破光场成像分辨率折衷瓶颈提供思路。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>双平面光场模型的成像轴向分辨率模型及评价&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>针对双平面模型光场成像系统，研究光场采样特性、数据处理及成像方法对轴向分辨率的影响，构建光场轴向分辨率模型。&lt;/li>
+&lt;li>针对光场重聚焦能力沿轴向的非线性变化特性，研究轴向分辨率的度量与量化评价方法。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>轴向超分辨率光场图像生成及优化方法&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在不改变硬件系统设计的前提下，研究高质量光场数据解耦及重采样方法，探寻适合轴向超分辨率的空频域成像算法。&lt;/li>
+&lt;li>在轴向超分辨率图像生成基础上，研究非均匀采样与欠采样对图像质量的影响，进一步探寻光场图像序列质量的优化方法。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>

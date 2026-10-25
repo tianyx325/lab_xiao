@@ -1,0 +1,1 @@
+/*! Navbar scroll shadow effect */(function(){var e=document.querySelector(".page-header.header--fixed");if(!e)return;function t(){window.scrollY>10?e.classList.add("scrolled"):e.classList.remove("scrolled")}window.addEventListener("scroll",t,{passive:!0}),t()})()

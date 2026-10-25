@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>光场成像 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%85%89%E5%9C%BA%E6%88%90%E5%83%8F/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tag/%E5%85%89%E5%9C%BA%E6%88%90%E5%83%8F/index.xml" rel="self" type="application/rss+xml"/><description>光场成像</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh</language><lastBuildDate>Fri, 01 May 2026 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/logo.svg</url><title>光场成像</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%85%89%E5%9C%BA%E6%88%90%E5%83%8F/</link></image><item><title>多源光场成像系统标定方法</title><link>https://tianyx325.github.io/lab_xiao/project/duo-yuan-guang-chang-cheng-xiang-xi-tong-biao-ding-fang-fa/</link><pubDate>Fri, 01 May 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/duo-yuan-guang-chang-cheng-xiang-xi-tong-biao-ding-fang-fa/</guid><description/></item><item><title>面向弱光自动对焦的光场特征计算增强理论与方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-62371389/</guid><description/></item><item><title>高分辨率动态光场获取及计算理论与方法</title><link>https://tianyx325.github.io/lab_xiao/project/proj-62031023/</link><pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-62031023/</guid><description>&lt;p>本项目为国家自然科学基金重点项目「高分辨率动态光场获取及计算理论与方法」（批准号 62031023）的子课题，总项目由西北工业大学王庆教授主持，肖照林担任子课题负责人。&lt;/p>
+&lt;p>项目针对动态光场获取与计算理论展开研究：侧重动态光场「全过程」压缩采样与计算重构，将现有静态光场理论拓展至动态光场理论。拟采用复合成像手段，采集并重构时—空—角域均为高分辨率的光场数据，探索动态光场的多尺度全过程成像及其时空优化理论，搭建高分辨率动态光场成像验证系统，面向高速流场以及爆炸场观测等示范应用。&lt;/p></description></item><item><title>光场成像的轴向超分辨率方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-61501370/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-61501370/</guid><description>&lt;p>光场成像具有先拍摄后聚焦的可交互式重聚焦能力，轴向分辨率是衡量其数字重聚焦性能的重要指标。现有光场成像系统存在空间与角度采样的分辨率折衷瓶颈，导致图像质量与重聚焦能力受限。本项目属于计算摄影学领域的光场成像理论与方法研究，拟从数据处理阶段突破轴向分辨率不足问题，并为突破光场成像分辨率折衷瓶颈提供思路。&lt;/p>
+&lt;h3 id="研究内容">研究内容&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>双平面光场模型的成像轴向分辨率模型及评价&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>针对双平面模型光场成像系统，研究光场采样特性、数据处理及成像方法对轴向分辨率的影响，构建光场轴向分辨率模型。&lt;/li>
+&lt;li>针对光场重聚焦能力沿轴向的非线性变化特性，研究轴向分辨率的度量与量化评价方法。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>轴向超分辨率光场图像生成及优化方法&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在不改变硬件系统设计的前提下，研究高质量光场数据解耦及重采样方法，探寻适合轴向超分辨率的空频域成像算法。&lt;/li>
+&lt;li>在轴向超分辨率图像生成基础上，研究非均匀采样与欠采样对图像质量的影响，进一步探寻光场图像序列质量的优化方法。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>光场成像优化方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-buaa-vr-16kf-10/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-buaa-vr-16kf-10/</guid><description/></item><item><title>光场深度估计及优化方法研究</title><link>https://tianyx325.github.io/lab_xiao/project/proj-2016jq6069/</link><pubDate>Fri, 01 Jan 2016 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/project/proj-2016jq6069/</guid><description/></item></channel></rss>

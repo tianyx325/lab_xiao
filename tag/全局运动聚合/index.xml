@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>全局运动聚合 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%85%A8%E5%B1%80%E8%BF%90%E5%8A%A8%E8%81%9A%E5%90%88/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tag/%E5%85%A8%E5%B1%80%E8%BF%90%E5%8A%A8%E8%81%9A%E5%90%88/index.xml" rel="self" type="application/rss+xml"/><description>全局运动聚合</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh</language><lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/logo.svg</url><title>全局运动聚合</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%85%A8%E5%B1%80%E8%BF%90%E5%8A%A8%E8%81%9A%E5%90%88/</link></image><item><title>隐特征监督的孪生网络弱光光流估计</title><link>https://tianyx325.github.io/lab_xiao/publication/cjig-2024-siamese-lowlight/</link><pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publication/cjig-2024-siamese-lowlight/</guid><description>
+&lt;figure id="figure-论文框架图">
+&lt;div class="d-flex justify-content-center">
+&lt;div class="w-100" >&lt;img alt="论文框架图" srcset="
+/lab_xiao/publication/cjig-2024-siamese-lowlight/framework_hu8252534014664416580.webp 400w,
+/lab_xiao/publication/cjig-2024-siamese-lowlight/framework_hu8907818841642879553.webp 760w,
+/lab_xiao/publication/cjig-2024-siamese-lowlight/framework_hu3438772554606551904.webp 1200w"
+src="https://tianyx325.github.io/lab_xiao/lab_xiao/publication/cjig-2024-siamese-lowlight/framework_hu8252534014664416580.webp"
+width="760"
+height="314"
+loading="lazy" data-zoomable />&lt;/div>
+&lt;/div>&lt;figcaption>
+论文框架图
+&lt;/figcaption>&lt;/figure></description></item></channel></rss>
