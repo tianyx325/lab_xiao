@@ -1,0 +1,76 @@
+# Map display / alternate names → content/authors/<slug>
+# Used by lab-resolve-author; prefer writing slugs in front matter.
+
+肖照林: admin
+肖 照林: admin
+照林 肖: admin
+常雅璇: chang-ya-xuan
+常 雅璇: chang-ya-xuan
+雅璇 常: chang-ya-xuan
+代雪洋: dai-xue-yang
+代 雪洋: dai-xue-yang
+雪洋 代: dai-xue-yang
+杜坤: du-kun
+杜 坤: du-kun
+坤 杜: du-kun
+郭欢欢: guo-huan-huan
+郭 欢欢: guo-huan-huan
+欢欢 郭: guo-huan-huan
+Julianno: julianno
+Julianno Julianno: julianno
+李鹏钦: li-peng-qin
+李 鹏钦: li-peng-qin
+鹏钦 李: li-peng-qin
+李文改: li-wen-gai
+李 文改: li-wen-gai
+文改 李: li-wen-gai
+苏浩楠: su-haonan
+苏 浩楠: su-haonan
+浩楠 苏: su-haonan
+田云祥: tian-yunxiang
+田 云祥: tian-yunxiang
+云祥 田: tian-yunxiang
+田朝扬: tian-zhao-yang
+田 朝扬: tian-zhao-yang
+朝扬 田: tian-zhao-yang
+王龙豪: wang-long-hao
+王 龙豪: wang-long-hao
+龙豪 王: wang-long-hao
+王新乐: wang-xin-le
+王 新乐: wang-xin-le
+新乐 王: wang-xin-le
+王熠: wang-yi
+王 熠: wang-yi
+熠 王: wang-yi
+薛凯旋: xue-kai-xuan
+薛 凯旋: xue-kai-xuan
+凯旋 薛: xue-kai-xuan
+薛奕瑞: xue-yi-rui
+薛 奕瑞: xue-yi-rui
+奕瑞 薛: xue-yi-rui
+翟乾林: zhai-qian-lin
+翟 乾林: zhai-qian-lin
+乾林 翟: zhai-qian-lin
+张恒昌: zhang-heng-chang
+张 恒昌: zhang-heng-chang
+恒昌 张: zhang-heng-chang
+赵官正: zhao-guan-zheng
+赵 官正: zhao-guan-zheng
+官正 赵: zhao-guan-zheng
+周广彬: zhou-guang-bin
+周 广彬: zhou-guang-bin
+广彬 周: zhou-guang-bin
+周贺鑫: zhou-he-xin
+周 贺鑫: zhou-he-xin
+贺鑫 周: zhou-he-xin
+Zhaolin Xiao: admin
+Xiao Zhaolin: admin
+Haonan Su: su-haonan
+Su Haonan: su-haonan
+Yunxiang Tian: tian-yunxiang
+Tian Yunxiang: tian-yunxiang
+Wengai Li: li-wen-gai
+Li Wengai: li-wen-gai
+Wen-gai Li: li-wen-gai
+Hengchang Zhang: zhang-heng-chang
+Zhang Hengchang: zhang-heng-chang

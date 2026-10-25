@@ -48,7 +48,7 @@
   {{ partial $block_path . }}
   </div>
 
-  <div class="page-body" id="main-content" data-pagefind-body>
+  <div class="page-body" id="main-content">
     {{/* Breadcrumb */}}
     {{/* Don't apply to Book layout as that has different breadcrumb placement. */}}
     {{ if .Params.show_breadcrumb | and (ne .Type "book") }}

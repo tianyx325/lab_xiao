@@ -1,3 +1,22 @@
+{{- /* Taxonomy-only author terms (no content/authors page) → members list */ -}}
+{{- if and (eq .Type "authors") (not .File) -}}
+  {{- $people := "/people/" | relLangURL -}}
+  <link rel="canonical" href="{{ $people | absURL }}">
+  <meta http-equiv="refresh" content="0;url={{ $people }}">
+  <meta name="robots" content="noindex, follow">
+{{- end -}}
+
+{{- /*
+  Local Leaflet for amap (高德瓦片).
+  Theme only CDN-injects Leaflet for mapnik/mapbox; shortcode <script>/<link>
+  inside markdown widgets are stripped — load here so wowchemy-map.js sees `L`.
+*/ -}}
+{{- $mapProvider := lower (site.Params.features.map.provider | default "") -}}
+{{- if eq $mapProvider "amap" -}}
+  <link rel="stylesheet" href="{{ "vendor/leaflet/leaflet.css" | relURL }}">
+  <script src="{{ "vendor/leaflet/leaflet.js" | relURL }}"></script>
+{{- end -}}
+
 {{- /* Load Fancybox when page bundle has gallery/ images (head runs before body). */ -}}
 {{- $gal := (.Resources.ByType "image").Match "gallery/*" -}}
 {{- if not $gal -}}

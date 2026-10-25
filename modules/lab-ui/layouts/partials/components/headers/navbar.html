@@ -20,7 +20,7 @@
       {{if $show_logo}}
       <a class="navbar-brand lab-navbar-brand" href="{{ site.Home.RelPermalink }}">
         <span class="lab-logo"></span>
-        {{- site.Title -}}
+        {{- site.Params.lab.name | default site.Title -}}
       </a>
       {{end}}
 
@@ -41,7 +41,7 @@
 
           {{ if .HasChildren }}
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{- .Pre -}}<span>{{ .Name | safeHTML }}</span>{{- .Post -}}
               <span class="caret"></span>
             </a>
@@ -148,7 +148,7 @@
         {{ $has_day_night_themes := (and site.Params.appearance.theme_day site.Params.appearance.theme_night) }}
         {{ if and $has_day_night_themes $show_day_night }}
         <li class="nav-item dropdown theme-dropdown">
-          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="{{ i18n "theme_selector" | default "Display preferences" }}">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="{{ i18n "theme_selector" | default "Display preferences" }}">
             <i class="fas fa-moon" aria-hidden="true"></i>
           </a>
           <div class="dropdown-menu">
@@ -169,7 +169,7 @@
         {{ if .IsTranslated | and $show_translations }}
         <li class="nav-item dropdown i18n-dropdown">
           <a href="#" class="nav-link {{ if $show_current_language }}dropdown-toggle{{end}}" data-toggle="dropdown"
-             aria-haspopup="true" aria-label="{{ i18n "languages" | default "Languages" }}">
+             aria-haspopup="true" aria-expanded="false" aria-label="{{ i18n "languages" | default "Languages" }}">
             <i class="fas fa-globe mr-1" aria-hidden="true"></i>
             {{- if $show_current_language -}}
               <span class="d-none d-lg-inline">{{ index site.Data.i18n.languages .Lang }}</span>

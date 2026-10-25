@@ -6,7 +6,6 @@ authors:
 - "王庆"
 - "杨恒"
 date: "2012-12-01T00:00:00Z"
-doi: ""
 publication_types: ["article-journal"]
 publication: "计算机应用与软件"
 publication_short: "计算机应用与软件"

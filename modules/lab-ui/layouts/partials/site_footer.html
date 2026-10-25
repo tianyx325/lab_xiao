@@ -1,4 +1,4 @@
-{{ $lab := site.Params.lab }}
+{{ $lab := site.Params.lab | default dict }}
 {{ $ui := $lab.ui | default dict }}
 {{ $emailLabel := $ui.email_label | default "邮箱" }}
 {{ $addressLabel := $ui.address_label | default "地址" }}
@@ -23,7 +23,7 @@
         {{ with $lab.email }}
           <div class="lab-footer-contact-item">
             <span class="lab-footer-contact-label">{{ $emailLabel }}</span>
-            <a href="mailto:{{ . }}" title="点击复制邮箱">{{ . }}</a>
+            <a href="mailto:{{ . }}">{{ . }}</a>
           </div>
         {{ end }}
         {{ with $lab.address }}
@@ -35,18 +35,21 @@
       </div>
     </div>
 
+    {{ with $lab.friend_links }}
     <div class="lab-footer-links">
       <h4 class="lab-footer-heading">友情链接</h4>
-      <ul class="lab-footer-list">
-        <li><a href="https://www.xaut.edu.cn/" target="_blank" rel="noopener">西安理工大学</a></li>
-        <li><a href="https://jsj.xaut.edu.cn/" target="_blank" rel="noopener">计算机科学与技术学院</a></li>
-        <li><a href="https://gra.xaut.edu.cn/" target="_blank" rel="noopener">西安理工大学研究生院</a></li>
+      <ul class="lab-footer-list lab-footer-links-grid">
+        {{ range . }}
+        <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></li>
+        {{ end }}
       </ul>
     </div>
+    {{ end }}
 
   </div>
 
   <div class="lab-footer-bottom">
-    <span>&copy; {{ now.Year }} {{ $lab.name }}</span>
+    {{- $notice := site.Params.footer.copyright.notice | default $lab.name -}}
+    <span>&copy; {{ now.Year }} {{ $notice }}</span>
   </div>
 </footer>

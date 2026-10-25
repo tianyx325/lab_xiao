@@ -7,7 +7,7 @@
 # Lab identity — SINGLE SOURCE OF TRUTH for branding / contact / UI chrome
 # After editing `lab:`, run:  py -3 scripts/sync_lab_identity.py
 # (syncs hugo.yaml title, languages.yaml, marketing.seo, footer.copyright)
-# Theme primary color: also keep data/themes/minimal.toml in sync with $lab-blue
+# Theme primary: keep data/themes/minimal.toml primary == assets/scss/lab/_tokens.scss $lab-blue
 # ---------------------------------------------------------------------------
 lab:
   name: 智能感知与决策实验室
@@ -23,12 +23,14 @@ lab:
   seo_description: 本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。
   admit_lead: 欢迎有志于智能感知与决策研究的同学加入实验室
   research_home_count: 3
-  links:
-    people: people/
-    research: research/
+  friend_links:
+    - name: 西安理工大学
+      url: https://www.xaut.edu.cn/
+    - name: 计算机科学与技术学院
+      url: https://jsj.xaut.edu.cn/
+    - name: 西安理工大学研究生院
+      url: https://gra.xaut.edu.cn/
   ui:
-    cta_people: 团队成员
-    cta_research: 研究方向
     # 空则自动为「{name}团队成员」
     people_lead: ''
     contact_title: 联系与招生
@@ -73,7 +75,8 @@ lab:
 appearance:
   theme_day: minimal
   theme_night:
-  font: native
+  # data/fonts/lab.toml — Inter + Noto Sans SC
+  font: lab
   font_size: M
 
 # SEO
@@ -104,7 +107,7 @@ header:
     align: r
     show_logo: true
     show_language: false
-    show_day_night: true
+    show_day_night: false
     show_search: true
     highlight_active_link: true
 
@@ -172,8 +175,8 @@ features:
       index_name: ''
       show_logo: false
   map:
-    # amap：本地 Leaflet（lab-contact 注入）+ 高德瓦片；避免 mapnik 再拉 jsDelivr
-    # （CDN imagePath 会拼坏本地 marker 图标路径）
+    # amap：custom_head 注入本地 Leaflet + wowchemy-map.js 用高德瓦片
+    # （主题仅对 mapnik/mapbox 拉 CDN；短代码内 script 会被 markdown 丢掉）
     provider: 'amap'
     api_key: ''
     zoom: 15

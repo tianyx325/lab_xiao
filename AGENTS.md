@@ -13,9 +13,11 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 ## Directory Structure
 
 - `content/` — Markdown content by section: `publication/`, `patent/`, `award/`, `project/`, `research/`, `post/`, `authors/`
-- `modules/lab-ui/layouts/` — Custom Hugo templates (44 files). Override the vendor theme.
-- `assets/scss/template.scss` — Main stylesheet (~3400 lines). All style changes go here.
-- `assets/scss/lab/` — Additional SCSS partials imported by template.scss.
+- `modules/lab-ui/layouts/` — Custom Hugo templates. Override the vendor theme.
+- `assets/scss/template.scss` — Main stylesheet. All style changes go here.
+- `assets/scss/lab/_tokens.scss` — Sole design-token source (`$lab-*` / `--lab-*`).
+- `assets/scss/lab/_type.scss` — Typography mixins (display/section titles).
+- `data/fonts/lab.toml` — Inter + Noto Sans SC (`appearance.font: lab`).
 - `config/_default/` — Hugo config split into `hugo.yaml`, `params.yaml`, `languages.yaml`, `menus.yaml`, `module.yaml`.
 
 ## Constraints
@@ -37,15 +39,16 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 | Section | Purpose | Key Front Matter |
 |---------|---------|-----------------|
 | publication | Academic papers | `publication_types`, `authors`, `abstract`, `doi` |
-| patent | Patents | `inventors`, `patent_number` |
-| award | Awards/honors | `recipients`, `award_date` |
+| patent | Patents | `authors` (inventors), `patent_number` |
+| award | Awards/honors | `authors` (display), `award_date` (keep in sync with `date`) |
 | project | Research projects | `external_link`, `image` |
 | research | Research directions | Used for overview cards |
 | post | News/blog posts | `authors`, `tags`, `categories` |
 
 ## SCSS Conventions
 
-- Design tokens: CSS custom properties (`--lab-*`) in `:root`, SCSS variables (`$lab-*`) for breakpoints and loop computation only.
-- Three-tier token system: primitives (`--color-blue-500`) → semantic (`--color-text-link`) → component (`--card-bg`).
-- Card accent colors generated via `@each` + Sass maps, not manual blocks.
-- Use `@layer` for specificity management: `reset, base, layout, components, utilities`.
+- Design tokens: define in `assets/scss/lab/_tokens.scss` only. Prefer `var(--lab-*)` in rules; use `$lab-*` for Sass math / maps.
+- Do not hardcode brand hex/rgba in `template.scss` — add a token, then reference it.
+- Brand purple (`$lab-blue`) is accent-only (links, active, focus); page atmosphere stays neutral.
+- Display/section titles: medium weight (`$lab-weight-display` / `$lab-weight-heading`) + tight tracking; use mixins from `_type.scss`.
+- Prefer quiet academic motion (color/opacity); avoid glow shadows and layout-shifting font-weight toggles.

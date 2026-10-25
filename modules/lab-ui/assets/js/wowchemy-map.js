@@ -55,7 +55,11 @@ function val(id, fallback) {
 
 function initMap() {
   const mapEl = document.getElementById('map');
-  if (!mapEl || typeof L === 'undefined') return;
+  if (!mapEl) return;
+  if (typeof L === 'undefined') {
+    console.warn('[lab-map] Leaflet (L) is not loaded; check custom_head amap assets.');
+    return;
+  }
 
   const provider = val('map-provider', 'mapnik');
   const lat = parseFloat(val('map-lat', '0'));

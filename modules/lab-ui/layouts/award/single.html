@@ -1,6 +1,5 @@
 {{- define "main" -}}
 
-{{/* Build metadata tags */}}
 {{ $metaTags := slice }}
 {{ with .Date }}
   {{ $metaTags = $metaTags | append (dict "label" "获奖年份" "value" (.Format "2006")) }}
@@ -19,8 +18,6 @@
 {{ end }}
 {{ .Scratch.Set "lab_article_meta_tags" $metaTags }}
 
-{{ partial "lab-article-shell-start.html" . }}
-
-{{ partial "lab-article-shell-end.html" . }}
+{{ partial "lab-build-meta-and-shell.html" . }}
 
 {{- end -}}

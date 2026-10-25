@@ -6,7 +6,6 @@ authors:
 - "田玉泉"
 - "admin"
 date: "2021-01-01T00:00:00Z"
-doi: ""
 publication_types: ["article-journal"]
 publication: "中国科技论文"
 publication_short: "中国科技论文"

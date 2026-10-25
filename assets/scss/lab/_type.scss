@@ -1,0 +1,27 @@
+/* Typography utilities — depend on assets/scss/lab/_tokens.scss only.
+   Import once from template.scss after tokens. */
+
+@mixin lab-font-sans {
+  font-family: $lab-font-sans;
+}
+
+@mixin lab-display-title {
+  @include lab-font-sans;
+  font-size: $lab-text-display;
+  font-weight: $lab-weight-display;
+  letter-spacing: $lab-tracking-display;
+  line-height: $lab-leading-display;
+}
+
+@mixin lab-section-title {
+  @include lab-font-sans;
+  font-size: $lab-text-heading;
+  font-weight: $lab-weight-heading;
+  letter-spacing: $lab-tracking-heading;
+  line-height: $lab-leading-tight;
+}
+
+/* Alias — same scale as section titles (list/page H1) */
+@mixin lab-page-title {
+  @include lab-section-title;
+}

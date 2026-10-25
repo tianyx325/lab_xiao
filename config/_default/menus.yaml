@@ -1,33 +1,33 @@
-# Navigation Links
+# Navigation Links — leading / keeps active-state matching stable under subpaths
 main:
   - name: 成员
-    url: people
+    url: /people/
     weight: 20
   - name: 方向
-    url: research
+    url: /research/
     weight: 30
   - name: 项目
-    url: project
+    url: /project/
     weight: 40
   - name: 成果
     identifier: publications
-    url: publication
+    url: /publication/
     weight: 50
   - name: 论文
     parent: publications
-    url: publication
+    url: /publication/
     weight: 51
   - name: 专利
     parent: publications
-    url: patent
+    url: /patent/
     weight: 52
   - name: 奖项
     parent: publications
-    url: award
+    url: /award/
     weight: 53
   - name: 动态
-    url: post
+    url: /post/
     weight: 60
   - name: 联系
-    url: contact
+    url: /contact/
     weight: 70

@@ -1,6 +1,5 @@
 {{- define "main" -}}
 
-{{/* Build metadata tags. 「类型」不在详情页展示；授权状态单独保留。 */}}
 {{ $metaTags := slice }}
 {{ with .Params.patent_number }}
   {{ $metaTags = $metaTags | append (dict "label" "专利号" "value" .) }}
@@ -26,8 +25,6 @@
 {{ end }}
 {{ .Scratch.Set "lab_article_meta_tags" $metaTags }}
 
-{{ partial "lab-article-shell-start.html" . }}
-
-{{ partial "lab-article-shell-end.html" . }}
+{{ partial "lab-build-meta-and-shell.html" . }}
 
 {{- end -}}

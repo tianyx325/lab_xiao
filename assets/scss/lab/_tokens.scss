@@ -1,35 +1,36 @@
 /* Design tokens — single source of truth.
-   Keep data/themes/minimal.toml primary in sync with $lab-blue. */
+   Keep data/themes/minimal.toml primary in sync with $lab-blue.
+   Typography stack lives in data/fonts/lab.toml (appearance.font: lab). */
 
-/* ── Brand ── */
+/* ── Brand (accent only — links, active, CTA; not page atmosphere) ── */
 $lab-blue: #4F46E5 !default;
+/* Soft cool wash — light presence, not atmosphere flood */
 $lab-blue-wash: #EEF2FF !default;
-$lab-accent: #6366F1 !default;
-$lab-accent-wash: #EEF2FF !default;
 
-/* ── Neutral palette ── */
-$lab-ink: #1a2332 !default;
-$lab-muted: #5e6876 !default;
+/* ── Neutral palette (cool white + deep ink; Outcome-adjacent, academic) ── */
+$lab-ink: #0f1a2a !default;
+$lab-muted: #5a6574 !default;
 $lab-white: #fff !default;
-$lab-page-bg: #F8F9FE !default;
+$lab-page-bg: #F8FAFC !default;
 
 /* ── Surfaces ── */
-$lab-navbar-bg: rgba(238, 242, 255, 0.85) !default;
+$lab-navbar-bg: rgba(248, 250, 252, 0.92) !default;
 $lab-card-bg: $lab-white !default;
 $lab-card-border: rgba($lab-ink, 0.1) !default;
-$lab-card-border-hover: rgba($lab-blue, 0.35) !default;
+$lab-card-border-hover: rgba($lab-blue, 0.28) !default;
 $lab-card-radius: 8px !default;
-$lab-card-pad: 1.5rem 1.5rem 1.4rem !default;
-$lab-card-shadow: none !default;
-$lab-card-shadow-hover: 0 4px 20px rgba($lab-blue, 0.06) !default;
+$lab-card-pad: 1rem 1.15rem !default;
+$lab-card-shadow: 0 1px 2px rgba($lab-ink, 0.04) !default;
+$lab-card-shadow-hover: 0 6px 18px rgba($lab-ink, 0.07) !default;
 
-/* ── Motion ── */
-$lab-transition: 0.25s ease !default;
+/* ── Motion (calm; color/opacity only) ── */
+$lab-transition: 0.32s cubic-bezier(0.22, 1, 0.36, 1) !default;
 
 /* ── Layout ── */
 $lab-content-width: 1160px !default;
 $lab-page-gutter: 1.25rem !default;
-$lab-card-gap: 1.25rem !default;
+$lab-card-gap: 1.5rem !default;
+$lab-read-width: 40rem !default;
 $lab-navbar-height: 70px !default;
 $lab-navbar-height-sm: 50px !default;
 
@@ -37,23 +38,35 @@ $lab-navbar-height-sm: 50px !default;
 $lab-placeholder-bg: #e8eaed !default;
 $lab-disabled-bg: #f7f8fa !default;
 
-/* ── Typography scale ── */
+/* ── Typography: stack + scale + weight + tracking ── */
+$lab-font-sans: "Inter", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif !default;
+
+$lab-weight-display: 500 !default;
+$lab-weight-heading: 500 !default;
+$lab-weight-body: 400 !default;
+$lab-weight-medium: 500 !default;
+$lab-weight-semibold: 600 !default;
+
+$lab-tracking-display: -0.02em !default;
+$lab-tracking-heading: -0.02em !default;
+$lab-tracking-body: 0.01em !default;
+
 $lab-text-xs: 0.8rem !default;
 $lab-text-sm: 0.875rem !default;
 $lab-text-base: 1rem !default;
 $lab-text-md: 1.125rem !default;
 $lab-text-lg: 1.25rem !default;
 $lab-text-xl: 1.5rem !default;
-$lab-text-display: 3rem !default;
+/* Display / section — Outcome-like presence; clamp for mobile robustness */
+$lab-text-heading: clamp(1.5rem, 2.4vw, 2rem) !default;
+$lab-text-display: clamp(2rem, 4vw, 2.75rem) !default;
+$lab-text-hero-lead: clamp(1.2rem, 2.1vw, 1.4rem) !default;
 
-$lab-leading-tight: 1.25 !default;
+$lab-leading-tight: 1.2 !default;
+$lab-leading-display: 1.15 !default;
 $lab-leading-snug: 1.45 !default;
 $lab-leading-body: 1.65 !default;
 $lab-leading-loose: 1.75 !default;
-
-/* ── Golden ratio (card proportions) ── */
-$lab-phi: 1.618 !default;
-$lab-card-ratio: unquote("#{$lab-phi} / 1") !default;
 
 /* ---------- CSS custom properties ---------- */
 
@@ -61,8 +74,6 @@ $lab-card-ratio: unquote("#{$lab-phi} / 1") !default;
   /* Brand */
   --lab-color-blue: #{$lab-blue};
   --lab-color-blue-wash: #{$lab-blue-wash};
-  --lab-color-accent: #{$lab-accent};
-  --lab-color-accent-wash: #{$lab-accent-wash};
 
   /* Neutral */
   --lab-color-ink: #{$lab-ink};
@@ -85,6 +96,7 @@ $lab-card-ratio: unquote("#{$lab-phi} / 1") !default;
   --lab-color-border-light: #{rgba($lab-ink, 0.08)};
   --lab-color-border-ink-14: #{rgba($lab-ink, 0.14)};
   --lab-color-border-ink-28: #{rgba($lab-ink, 0.28)};
+  --lab-color-border-blue-12: #{rgba($lab-blue, 0.12)};
   --lab-color-border-blue-14: #{rgba($lab-blue, 0.14)};
   --lab-color-border-blue-16: #{rgba($lab-blue, 0.16)};
   --lab-color-border-blue-20: #{rgba($lab-blue, 0.2)};
@@ -116,8 +128,10 @@ $lab-card-ratio: unquote("#{$lab-phi} / 1") !default;
 
   /* Overlay / focus */
   --lab-color-overlay-ink-92: #{rgba($lab-ink, 0.92)};
+  --lab-color-shadow-ink-04: #{rgba($lab-ink, 0.04)};
+  --lab-color-shadow-ink-08: #{rgba($lab-ink, 0.08)};
   --lab-color-shadow-ink-18: #{rgba($lab-ink, 0.18)};
-  --lab-color-focus-ring: #{rgba($lab-blue, 0.25)};
+  --lab-color-focus-ring: #{rgba($lab-blue, 0.22)};
 
   /* Dark mode */
   --lab-dark-surface: #{rgba(255, 255, 255, 0.03)};
@@ -139,6 +153,16 @@ $lab-card-ratio: unquote("#{$lab-phi} / 1") !default;
   --lab-content-width: #{$lab-content-width};
   --lab-page-gutter: #{$lab-page-gutter};
   --lab-card-gap: #{$lab-card-gap};
+  --lab-read-width: #{$lab-read-width};
   --lab-navbar-height: #{$lab-navbar-height};
   --lab-navbar-height-sm: #{$lab-navbar-height-sm};
+
+  /* Type (CSS-accessible) */
+  --lab-font-sans: #{$lab-font-sans};
+  --lab-text-display: #{$lab-text-display};
+  --lab-text-heading: #{$lab-text-heading};
+  --lab-weight-display: #{$lab-weight-display};
+  --lab-weight-heading: #{$lab-weight-heading};
+  --lab-tracking-display: #{$lab-tracking-display};
+  --lab-tracking-heading: #{$lab-tracking-heading};
 }

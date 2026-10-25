@@ -1,6 +1,7 @@
 {{- /* Collect year options from a page collection. Returns a slice of dicts with value/text. */ -}}
 {{- $pages := .pages -}}
 {{- $scratch := .scratch -}}
+{{- $scratch.Delete "years" -}}
 {{- range $pages -}}
   {{- $scratch.SetInMap "years" (print (.Date.Format "2006")) (print (.Date.Format "2006")) -}}
 {{- end -}}
