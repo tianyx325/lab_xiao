@@ -489,16 +489,14 @@
   opacity: 0.45;
 }
 
+/* Read-only meta text (not a chip) — inherits .lab-card-meta sizing,
+   guards long funding labels with ellipsis */
 .lab-card-meta-badge {
-  @extend %lab-label;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
-  font-size: inherit;
-  letter-spacing: inherit;
-  color: inherit;
 }
 
 .lab-card-author-name {
@@ -516,6 +514,7 @@
 
 .lab-card-author-link:hover {
   color: var(--lab-color-link) !important;
+  border-bottom: 1px solid var(--lab-color-link) !important;
   text-decoration: none !important;
 }
 

@@ -1,6 +1,12 @@
 /* Layer 4 · shared controls: buttons, page titles, card chrome
    Source: template.scss lines 592-772 (order-preserving split). */
-/* Buttons — bordered / filled controls; never look like labels or text-links */
+/* Buttons — exactly 4 sanctioned variants (solid / outline / quiet / icon).
+   New buttons MUST use a .lab-btn--* class; Bootstrap classes below are
+   legacy aliases that map onto the same skeleton. */
+.lab-btn--solid,
+.lab-btn--outline,
+.lab-btn--quiet,
+.lab-btn--icon,
 .btn,
 .btn-primary,
 .btn-light,
@@ -13,8 +19,8 @@
   min-height: 2.5rem;
   padding: var(--lab-space-2) var(--lab-space-5) !important;
   border-radius: var(--lab-card-radius) !important;
-  border-width: 1px !important;
-  border-style: solid !important;
+  border: 1px solid transparent !important;
+  font-family: $lab-font-sans;
   font-size: $lab-text-sm !important;
   font-weight: $lab-weight-medium !important;
   letter-spacing: 0.02em;
@@ -22,6 +28,75 @@
   text-decoration: none !important;
   box-shadow: none !important;
   cursor: pointer;
+  transition: color $lab-transition, border-color $lab-transition,
+    background-color $lab-transition, opacity $lab-transition;
+}
+
+/* Primary action — filled brand blue */
+.lab-btn--solid,
+.btn-primary {
+  background-color: var(--lab-color-link) !important;
+  border-color: var(--lab-color-link) !important;
+  color: var(--lab-color-white) !important;
+}
+
+.lab-btn--solid:hover,
+.btn-primary:hover {
+  opacity: 0.88;
+  color: var(--lab-color-white) !important;
+}
+
+/* Secondary action — outlined brand blue, fills on hover */
+.lab-btn--outline,
+.btn-outline-primary,
+.btn-page-header.btn-outline-primary {
+  border-color: var(--lab-color-link) !important;
+  color: var(--lab-color-link) !important;
+  background: transparent !important;
+}
+
+.lab-btn--outline:hover,
+.btn-outline-primary:hover {
+  background-color: var(--lab-color-link) !important;
+  color: var(--lab-color-white) !important;
+}
+
+/* Auxiliary action — neutral ghost, warms to brand on hover (hero CTAs) */
+.lab-btn--quiet {
+  color: var(--lab-color-text);
+  background: transparent;
+  border-color: var(--lab-color-border-ink-28);
+  white-space: nowrap;
+}
+
+.lab-btn--quiet:hover {
+  color: var(--lab-color-link);
+  border-color: var(--lab-color-border-blue-40);
+  background: var(--lab-color-accent-blue-04);
+}
+
+/* Compact square icon control (gallery nav etc.) */
+.lab-btn--icon {
+  min-height: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0 !important;
+  border-color: var(--lab-color-border-ink-14);
+  background: var(--lab-color-surface);
+  color: var(--lab-color-text);
+  font-size: $lab-text-lg;
+  line-height: 1;
+}
+
+.lab-btn--icon:hover:not(:disabled) {
+  border-color: var(--lab-article-accent, var(--lab-color-link));
+  color: var(--lab-article-accent, var(--lab-color-link));
+  background: var(--lab-article-wash, var(--lab-color-blue-wash));
+}
+
+.lab-btn--icon:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
 
 .btn-sm,

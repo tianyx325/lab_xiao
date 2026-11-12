@@ -607,34 +607,6 @@ $lab-home-sections: (
   margin: var(--lab-space-6) auto 0;
 }
 
-.lab-hero-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.5rem;
-  padding: var(--lab-space-2) var(--lab-space-5);
-  font-family: $lab-font-sans;
-  font-size: $lab-text-sm;
-  font-weight: $lab-weight-medium;
-  letter-spacing: 0.02em;
-  line-height: 1.3;
-  color: var(--lab-color-text);
-  background: transparent;
-  border: 1px solid var(--lab-color-border-ink-28);
-  border-radius: $lab-card-radius;
-  text-decoration: none !important;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color $lab-transition, border-color $lab-transition, background-color $lab-transition;
-}
-
-.lab-hero-btn:hover {
-  color: var(--lab-color-link);
-  border-color: var(--lab-color-border-blue-40);
-  background: var(--lab-color-accent-blue-04);
-  text-decoration: none !important;
-}
-
 /* Homepage two-column body */
 .home-section.lab-home-body {
   padding-top: $lab-space-5 !important;

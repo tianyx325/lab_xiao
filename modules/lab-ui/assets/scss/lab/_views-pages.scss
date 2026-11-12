@@ -288,11 +288,8 @@
 }
 
 .lab-article-title {
+  @include lab-section-title;
   margin: 0 !important;
-  font-size: clamp($lab-text-lg, 2.4vw, $lab-text-xl) !important;
-  font-weight: $lab-weight-semibold !important;
-  letter-spacing: 0.02em;
-  line-height: 1.35 !important;
   color: var(--lab-color-text);
   text-align: center;
 }
@@ -437,8 +434,14 @@
   color: var(--lab-color-text);
 }
 
-.lab-article-content a:not(.btn) {
+.lab-article-content a:not(.btn):not([data-fancybox]) {
   color: var(--lab-article-accent) !important;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--lab-article-accent) 35%, transparent);
+}
+
+.lab-article-content a:not(.btn):not([data-fancybox]):hover {
+  border-bottom-color: var(--lab-article-accent);
 }
 
 .lab-article-meta-line,
@@ -516,6 +519,16 @@
   padding: 0;
 }
 
+.lab-article-video-list a {
+  color: var(--lab-article-accent) !important;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--lab-article-accent) 35%, transparent);
+}
+
+.lab-article-video-list a:hover {
+  border-bottom-color: var(--lab-article-accent);
+}
+
 .lab-article-video-list li,
 .lab-video-link {
   display: flex;
@@ -566,35 +579,6 @@
   display: inline-flex;
   gap: $lab-space-1;
   flex: 0 0 auto;
-}
-
-.lab-gallery-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  margin: 0;
-  padding: 0;
-  border: 1px solid var(--lab-color-border-ink-14);
-  border-radius: var(--lab-card-radius);
-  background: var(--lab-color-surface);
-  color: var(--lab-color-text);
-  font-size: $lab-text-lg;
-  line-height: 1;
-  cursor: pointer;
-  transition: border-color $lab-transition, color $lab-transition, background-color $lab-transition;
-}
-
-.lab-gallery-btn:hover:not(:disabled) {
-  border-color: var(--lab-article-accent, $lab-blue);
-  color: var(--lab-article-accent, $lab-blue);
-  background: var(--lab-article-wash, #{$lab-blue-wash});
-}
-
-.lab-gallery-btn:disabled {
-  opacity: 0.35;
-  cursor: default;
 }
 
 .lab-gallery-viewport {

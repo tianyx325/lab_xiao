@@ -28,11 +28,8 @@
 }
 
 .lab-people-title {
+  @include lab-section-title;
   margin: 0 !important;
-  font-size: $lab-text-xl !important;
-  font-weight: $lab-weight-semibold !important;
-  letter-spacing: 0.08em;
-  line-height: $lab-leading-tight !important;
   color: var(--lab-color-text);
 }
 
@@ -175,16 +172,6 @@ a.lab-member-row:hover .lab-member-row-name {
   margin: var(--lab-space-3) 0 0;
   padding: 0;
   list-style: none;
-}
-
-.lab-member-row-tag {
-  font-size: $lab-text-xs;
-  line-height: 1.5;
-  color: var(--lab-color-link);
-  background: var(--lab-color-accent-blue-04);
-  border: 1px solid var(--lab-color-border-blue-40);
-  border-radius: 999px;
-  padding: 0.1rem var(--lab-space-3);
 }
 
 .lab-member-row-more {

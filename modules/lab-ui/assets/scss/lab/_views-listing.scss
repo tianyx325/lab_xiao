@@ -42,11 +42,8 @@
 }
 
 .lab-list-title {
+  @include lab-section-title;
   margin: 0 !important;
-  font-size: $lab-text-xl !important;
-  font-weight: $lab-weight-semibold !important;
-  letter-spacing: 0.08em;
-  line-height: $lab-leading-tight !important;
   color: var(--lab-color-text);
   text-align: center;
 }

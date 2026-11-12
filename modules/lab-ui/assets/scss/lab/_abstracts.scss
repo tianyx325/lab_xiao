@@ -69,3 +69,21 @@
   opacity: 0.82;
   font-weight: $lab-weight-medium;
 }
+
+/* Clickable-capable capsule chip — the ONE sanctioned pill form
+   (member direction tags, future tag filtering) */
+.lab-chip {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  font-size: $lab-text-xs;
+  line-height: 1.5;
+  font-weight: $lab-weight-medium;
+  color: var(--lab-color-link);
+  background: var(--lab-color-accent-blue-04);
+  border: 1px solid var(--lab-color-border-blue-40);
+  border-radius: 999px;
+  padding: 0.1rem var(--lab-space-3);
+  white-space: nowrap;
+  text-decoration: none;
+}

@@ -131,25 +131,7 @@ a.lab-member-dot {
   color: var(--lab-color-text);
 }
 
-.btn-outline-primary,
-.btn-outline-primary.btn-sm,
-.btn-page-header.btn-outline-primary {
-  border-color: var(--lab-color-link) !important;
-  color: var(--lab-color-link) !important;
-}
-
-.btn-primary {
-  background-color: var(--lab-color-link) !important;
-  border-color: var(--lab-color-link) !important;
-  color: var(--lab-color-white) !important;
-}
-
-.btn-primary:hover,
-.btn-outline-primary:hover {
-  background-color: var(--lab-color-link) !important;
-  border-color: var(--lab-color-link) !important;
-  color: var(--lab-color-white) !important;
-}
+/* Button variants live in _controls.scss (4 sanctioned .lab-btn--* forms) */
 
 /* Remaining theme blues (alerts / focus) → brand blue */
 .article-style aside,
