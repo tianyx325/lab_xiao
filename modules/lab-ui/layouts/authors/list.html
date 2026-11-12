@@ -212,51 +212,24 @@
 
     {{- $worksLimit := 7 -}}
 
-    {{- if $academic -}}
-    <section class="lab-member-section">
-      <h2 class="lab-member-section-title">学术成果</h2>
-      <ul class="lab-member-works">
-        {{- range $i, $item := $academic -}}
-        {{- $kind := "" -}}
-        {{- if eq $item.Section "publication" -}}{{- $kind = "论文" -}}
-        {{- else if eq $item.Section "patent" -}}{{- $kind = "专利" -}}
-        {{- else if eq $item.Section "award" -}}{{- $kind = "奖项" -}}
-        {{- end -}}
-        <li{{ if ge $i $worksLimit }} class="lab-member-works-extra" hidden{{ end }}>
-          {{- with $kind -}}
-          <span class="lab-member-works-kind lab-member-works-kind--{{ $item.Section }}">{{ . }}</span>
-          {{- end -}}
-          <a href="{{ $item.RelPermalink }}">{{ $item.Title }}</a>
-          {{- with $item.Date -}}
-          <span class="lab-member-works-year">{{ .Format "2006" }}</span>
-          {{- end -}}
-        </li>
-        {{- end -}}
-      </ul>
-      {{- if gt (len $academic) $worksLimit -}}
-      <button type="button" class="lab-member-works-more" data-lab-works-more>查看更多</button>
-      {{- end -}}
-    </section>
+    {{- with $academic -}}
+    {{ partial "components/member-works-section.html" (dict
+      "title" "学术成果"
+      "items" .
+      "limit" $worksLimit
+      "show_kind" true
+    ) }}
     {{- end -}}
 
-    {{- if $projects -}}
-    <section class="lab-member-section">
-      <h2 class="lab-member-section-title">研究项目</h2>
-      <ul class="lab-member-works">
-        {{- range $i, $item := $projects -}}
-        <li{{ if ge $i $worksLimit }} class="lab-member-works-extra" hidden{{ end }}>
-          <a href="{{ $item.RelPermalink }}">{{ $item.Title }}</a>
-          {{- with $item.Date -}}
-          <span class="lab-member-works-year">{{ .Format "2006" }}</span>
-          {{- end -}}
-        </li>
-        {{- end -}}
-      </ul>
-      {{- if gt (len $projects) $worksLimit -}}
-      <button type="button" class="lab-member-works-more" data-lab-works-more>查看更多</button>
-      {{- end -}}
-    </section>
+    {{- with $projects -}}
+    {{ partial "components/member-works-section.html" (dict
+      "title" "研究项目"
+      "items" .
+      "limit" $worksLimit
+      "show_kind" false
+    ) }}
     {{- end -}}
+
   </div>
 </div>
 {{ end }}

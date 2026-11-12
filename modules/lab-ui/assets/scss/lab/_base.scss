@@ -117,15 +117,13 @@ body {
 
 .article-style a,
 .portrait-title a,
-.universal-wrapper a:not(.btn):not(.lab-card):not(.lab-research-card):not(.lab-member-row):not(.lab-member-dot):not(.lab-meta-tag-link),
-.page-body a:not(.btn):not(.nav-link):not(.dropdown-item):not(.lab-card):not(.lab-research-card):not(.lab-member-row):not(.lab-member-dot):not(.lab-meta-tag-link) {
+.page-body a:not(.btn):not(.nav-link):not(.dropdown-item):not(.lab-card):not(.lab-member-row):not(.lab-member-dot):not(.lab-meta-tag-link) {
   color: var(--lab-color-link);
 }
 
 /* Card is an <a>; don't paint whole card blue — zones use category colors */
 a.lab-card.view-card,
 .lab-card.view-card,
-a.lab-research-card,
 a.lab-member-row,
 a.lab-member-dot {
   color: var(--lab-color-text);
@@ -158,7 +156,6 @@ div.alert > div:first-child::before {
 .navbar .dropdown-item:focus,
 .navbar .dropdown-item:focus-visible,
 a.lab-card:focus-visible,
-a.lab-research-card:focus-visible,
 a.lab-member-row:focus-visible,
 a.lab-member-dot:focus-visible {
   outline: none !important;

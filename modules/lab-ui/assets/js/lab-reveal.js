@@ -5,11 +5,9 @@
 
   var SELECTORS = [
     '.home-section .section-head',
-    '.research-cards > .lab-card',
+    '.lab-research-cards > .lab-card',
     '.lab-people-grid > *',
-    '.lab-outcomes-col',
-    '.lab-news-item',
-    '.lab-join > *'
+    '.lab-news-item'
   ];
 
   var els = [];

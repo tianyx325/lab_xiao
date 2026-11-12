@@ -1,0 +1,28 @@
+{{/* Member detail — works section (academic works / projects).
+    Expects dict: title (string), items (page slice), limit (int), show_kind (bool) */}}
+<section class="lab-member-section">
+  <h2 class="lab-member-section-title">{{ .title }}</h2>
+  <ul class="lab-member-works">
+    {{- range $i, $item := .items -}}
+    <li{{ if ge $i $.limit }} class="lab-member-works-extra" hidden{{ end }}>
+      {{- if $.show_kind -}}
+      {{- $kind := "" -}}
+      {{- if eq $item.Section "publication" -}}{{- $kind = "论文" -}}
+      {{- else if eq $item.Section "patent" -}}{{- $kind = "专利" -}}
+      {{- else if eq $item.Section "award" -}}{{- $kind = "奖项" -}}
+      {{- end -}}
+      {{- with $kind -}}
+      <span class="lab-member-works-kind lab-member-works-kind--{{ $item.Section }}">{{ . }}</span>
+      {{- end -}}
+      {{- end -}}
+      <a href="{{ $item.RelPermalink }}">{{ $item.Title }}</a>
+      {{- with $item.Date -}}
+      <span class="lab-member-works-year">{{ .Format "2006" }}</span>
+      {{- end -}}
+    </li>
+    {{- end -}}
+  </ul>
+  {{- if gt (len .items) .limit -}}
+  <button type="button" class="lab-member-works-more" data-lab-works-more>查看更多</button>
+  {{- end -}}
+</section>

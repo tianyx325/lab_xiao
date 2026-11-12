@@ -87,3 +87,21 @@
   white-space: nowrap;
   text-decoration: none;
 }
+
+/* Scroll-reveal entrance (pairs with js/lab-reveal.js — JS adds .lab-reveal
+   to targets, .lab-reveal-in when they enter the viewport).
+   JS skips when prefers-reduced-motion or no IntersectionObserver, so
+   elements stay visible by default; these rules only apply after JS opted in. */
+.lab-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+  will-change: opacity, transform;
+}
+
+.lab-reveal-in {
+  opacity: 1;
+  transform: none;
+}

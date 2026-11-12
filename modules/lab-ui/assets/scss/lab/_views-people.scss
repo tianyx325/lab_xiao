@@ -1,13 +1,5 @@
 /* Layer 5b · people views: member cards, profiles, roles
    Source: template.scss lines 1648-2402 (order-preserving split). */
-/* People as cards */
-.people-widget h2 {
-  text-align: center;
-  font-size: $lab-text-xl;
-  font-weight: $lab-weight-semibold;
-  letter-spacing: 0.06em;
-}
-
 /* Shared member cards (homepage + /people/) — whole card is square */
 .home-section.lab-people-section {
   background: var(--lab-color-page) !important;
@@ -471,14 +463,6 @@ $lab-member-avatar-lg: 168px;
 
 .lab-member-identity-email:hover {
   @extend %lab-text-link-hover;
-}
-
-.lab-member-identity-bio {
-  margin: $lab-space-1 0 0 !important;
-  max-width: 32rem;
-  font-size: $lab-text-md;
-  line-height: $lab-leading-body;
-  color: var(--lab-color-text-secondary);
 }
 
 .lab-member-focus-topics {

@@ -156,6 +156,28 @@
   display: none !important;
 }
 
+#container-publications {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--lab-card-gap);
+}
+
+#container-publications .isotope-item,
+#container-publications .grid-sizer {
+  position: static !important;
+  width: auto !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+}
+
+#container-publications .pub-list-item,
+#container-publications .lab-card.view-card {
+  max-width: none;
+  margin: 0 !important;
+  height: auto !important;
+}
+
 @media (max-width: 767px) {
   .lab-list-filters {
     max-width: none;
@@ -255,6 +277,11 @@
   color: var(--lab-color-text-ink-28);
 }
 
+.lab-row-year {
+  color: var(--lab-color-text-ink-42);
+  font-variant-numeric: tabular-nums;
+}
+
 .lab-list-grid > .lab-card,
 .lab-list-grid > .card-simple,
 .lab-list-grid > .lab-list-item {
@@ -324,7 +351,7 @@ button.lab-pagination-link {
 }
 
 /* Research list page: cards sit inside lab-list-body container — align to container edges */
-.lab-list-page--research .research-cards {
+.lab-list-page--research .lab-research-cards {
   margin: 0 auto;
   max-width: none;
   padding-left: 0;
@@ -428,6 +455,7 @@ button.lab-pagination-link {
   .lab-list-header {
     min-height: 0;
     padding: $lab-space-7 0 $lab-space-6;
+    margin-bottom: $lab-space-6;
   }
 
   .lab-list-grid,
@@ -468,19 +496,19 @@ button.lab-pagination-link {
   animation-delay: 0.14s;
 }
 
-.home-section.lab-major .research-cards .lab-card {
+.home-section.lab-major .lab-research-cards .lab-card {
   animation: lab-fade-up 0.5s ease both;
 }
 
-.home-section.lab-major .research-cards .lab-card:nth-child(1) {
+.home-section.lab-major .lab-research-cards .lab-card:nth-child(1) {
   animation-delay: 0.06s;
 }
 
-.home-section.lab-major .research-cards .lab-card:nth-child(2) {
+.home-section.lab-major .lab-research-cards .lab-card:nth-child(2) {
   animation-delay: 0.12s;
 }
 
-.home-section.lab-major .research-cards .lab-card:nth-child(3) {
+.home-section.lab-major .lab-research-cards .lab-card:nth-child(3) {
   animation-delay: 0.18s;
 }
 
@@ -501,7 +529,7 @@ a.lab-card:focus-visible {
   .lab-hero-brand,
   .lab-hero-title,
   .lab-hero-lead,
-  .home-section.lab-major .research-cards .lab-card {
+  .home-section.lab-major .lab-research-cards .lab-card {
     animation: none;
   }
 }

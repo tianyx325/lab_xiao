@@ -277,16 +277,6 @@
   padding-right: var(--lab-page-gutter);
 }
 
-.lab-article-kind {
-  display: inline-block;
-  margin: 0 0 $lab-space-3;
-  font-size: $lab-text-xs;
-  font-weight: $lab-weight-medium;
-  letter-spacing: 0.16em;
-  line-height: 1;
-  color: var(--lab-article-accent);
-}
-
 .lab-article-title {
   @include lab-section-title;
   margin: 0 !important;
@@ -319,36 +309,6 @@
   line-height: $lab-leading-body;
   color: var(--lab-color-text-secondary);
   text-align: center;
-}
-
-.lab-article-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: $lab-space-1 0;
-  list-style: none;
-  margin: $lab-space-4 0 0 !important;
-  padding: 0 !important;
-}
-
-.lab-article-meta li {
-  margin: 0;
-  padding: 0;
-  font-size: $lab-text-xs;
-  font-weight: $lab-weight-medium;
-  letter-spacing: 0.06em;
-  line-height: 1.4;
-  color: var(--lab-color-text-secondary);
-}
-
-.lab-article-meta li + li::before {
-  content: "·";
-  display: inline-block;
-  margin: 0 $lab-space-2 0 $lab-space-1;
-  font-weight: $lab-weight-body;
-  color: var(--lab-color-text-ink-28);
-  letter-spacing: 0;
 }
 
 .lab-article-body {
@@ -444,7 +404,6 @@
   border-bottom-color: var(--lab-article-accent);
 }
 
-.lab-article-meta-line,
 .lab-article-links {
   margin: $lab-space-7 0 0 !important;
   padding-top: $lab-space-5;
@@ -460,15 +419,13 @@
   gap: $lab-space-3 $lab-space-5;
 }
 
-.lab-article-links a,
-.lab-article-meta-line a {
+.lab-article-links a {
   color: var(--lab-article-accent) !important;
   text-decoration: none;
   border-bottom: 1px solid color-mix(in srgb, var(--lab-article-accent) 35%, transparent);
 }
 
-.lab-article-links a:hover,
-.lab-article-meta-line a:hover {
+.lab-article-links a:hover {
   border-bottom-color: var(--lab-article-accent);
 }
 
