@@ -17,4 +17,6 @@ tags:
 - "ghost removal"
 - "aliasing"
 featured: false
+research:
+  - depth
 ---

@@ -1,0 +1,16 @@
+    {{ if .Content }}
+    <div class="article-style lab-article-content">{{ .Content }}</div>
+    {{ end }}
+
+    {{ if and (eq .Section "project") .Params.url_external }}
+    <p class="lab-article-links">
+      <a href="{{ .Params.url_external }}" target="_blank" rel="noopener">项目主页</a>
+    </p>
+    {{ end }}
+
+    {{ partial "article/videos.html" . }}
+    {{ if eq .Section "post" }}
+    {{ partial "article/gallery.html" . }}
+    {{ end }}
+  </div>
+</article>

@@ -1,33 +1,36 @@
-# Navigation Links — leading / keeps active-state matching stable under subpaths
+# Navigation — destinations after logo (CTA lives in hero, not navbar)
 main:
-  - name: 成员
-    url: /people/
-    weight: 20
+  - name: 首页
+    url: /
+    weight: 5
   - name: 方向
     url: /research/
-    weight: 30
-  - name: 项目
-    url: /project/
-    weight: 40
+    weight: 10
   - name: 成果
     identifier: publications
     url: /publication/
-    weight: 50
+    weight: 20
   - name: 论文
     parent: publications
     url: /publication/
-    weight: 51
+    weight: 21
   - name: 专利
     parent: publications
     url: /patent/
-    weight: 52
+    weight: 22
   - name: 奖项
     parent: publications
     url: /award/
-    weight: 53
+    weight: 23
+  - name: 项目
+    url: /project/
+    weight: 30
+  - name: 成员
+    url: /people/
+    weight: 40
   - name: 动态
     url: /post/
-    weight: 60
+    weight: 50
   - name: 联系
     url: /contact/
-    weight: 70
+    weight: 60

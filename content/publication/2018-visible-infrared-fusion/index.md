@@ -17,4 +17,5 @@ abstract: |
   In this paper, we use contrast pyramid to decompose the image; and the directional Filter bank is applied to obtain multiple directional sub-band image. Then, we compute the decomposition coefficients of visible and infrared images by using a low-passing filtering process on the decomposition data. Finally, we introduce the whale optimization algorithm to search the optimal fusion coefficients, which will be used to computational reconstruct the final fusion image. The fusion experiments indicate that the proposed method outperforms the state of the art methods.
 featured: false
 url_html: "https://doi.org/10.1109/hpcc/smartcity/dss.2018.00169"
+ccf: "C"
 ---

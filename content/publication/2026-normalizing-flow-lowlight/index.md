@@ -22,4 +22,7 @@ tags:
 - "Color Guided Encoder Module"
 featured: false
 url_html: "https://doi.org/10.1007/s00530-026-02241-w"
+research:
+  - low-light
+ccf: "C"
 ---

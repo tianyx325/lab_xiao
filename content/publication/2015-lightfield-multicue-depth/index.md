@@ -24,4 +24,7 @@ tags:
 featured: false
 url_html: "http://cjc.ict.ac.cn/online/onlinepaper/ydg-2015112471336.pdf"
 url_pdf: "http://cjc.ict.ac.cn/online/onlinepaper/ydg-2015112471336.pdf"
+research:
+  - depth
+ccf: "A"
 ---

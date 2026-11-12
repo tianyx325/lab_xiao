@@ -30,7 +30,7 @@
 {{- $researchPages := slice -}}
 {{- $focusTopics := slice -}}
 {{- if $isAdvisor -}}
-  {{- partial "lab-member-focus-text.html" . -}}
+  {{- partial "components/member-focus-text.html" . -}}
   {{- $focusText := .Scratch.Get "lab_member_focus_text" | default "" -}}
   {{- if $focusText -}}
     {{- $norm := replaceRE `[;；、，,]` "|" $focusText -}}
@@ -40,7 +40,7 @@
     {{- end -}}
   {{- end -}}
 {{- else -}}
-  {{- partial "lab-member-research-pages.html" . -}}
+  {{- partial "components/member-research-pages.html" . -}}
   {{- $researchPages = .Scratch.Get "lab_member_research_pages" | default (slice) -}}
 {{- end -}}
 

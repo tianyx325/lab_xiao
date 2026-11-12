@@ -21,4 +21,7 @@ tags:
 featured: false
 url_pdf: "https://www.aas.net.cn/cn/article/doi/10.3724/SP.J.1004.2014.00247"
 url_html: "https://www.aas.net.cn/article/id/18287"
+research:
+  - depth
+ccf: "A"
 ---

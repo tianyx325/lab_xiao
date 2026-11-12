@@ -1,6 +1,6 @@
 ---
 title: 论文
-view: card
+view: list
 # lead ← lab.ui.section_leads.publication
 summary: ''
 banner:

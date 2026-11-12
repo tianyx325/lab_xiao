@@ -1,0 +1,15 @@
+/* lab-ui theme entry — overrides vendor template.scss (asset overlay).
+   Layer order = cascade order; do NOT reorder without visual diff check.
+   Tokens: lab/_tokens.scss · Fonts config: data/fonts/lab.toml
+   Theme primary sync: data/themes/minimal.toml == $lab-blue */
+@import "lab/tokens";
+@import "lab/type";
+@import "lab/base";
+@import "lab/controls";
+@import "lab/views-results";
+@import "lab/menus";
+@import "lab/views-people";
+@import "lab/views-pages";
+@import "lab/views-home";
+@import "lab/dark";
+@import "lab/views-listing";

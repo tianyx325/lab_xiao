@@ -2,7 +2,7 @@
 {{- $page := . -}}
 {{- with .Params.authors -}}
   {{- range $index, $a := . -}}
-    {{- partial "lab-resolve-author.html" (dict "id" $a "page" $page) -}}
+    {{- partial "components/resolve-author.html" (dict "id" $a "page" $page) -}}
     {{- $name := $page.Scratch.Get "lab_author_name" -}}
     {{- $href := $page.Scratch.Get "lab_author_href" -}}
     {{- if gt $index 0 }}, {{ end -}}

@@ -30,7 +30,7 @@
   {{- $metaTags = $metaTags | append (dict "label" "起始" "value" (.Params.date | time.Format "2006/01")) -}}
 {{- end -}}
 {{- if .Params.authors -}}
-  {{- $authors := partial "lab-detail-authors.html" . -}}
+  {{- $authors := partial "components/detail-authors.html" . -}}
   {{- $metaTags = $metaTags | append (dict "label" "负责人" "value" ($authors | safeHTML)) -}}
 {{- end -}}
 {{- $st := .Params.project_status | default "" -}}
@@ -50,6 +50,6 @@
 {{- end -}}
 
 {{- .Scratch.Set "lab_article_meta_tags" $metaTags -}}
-{{ partial "lab-build-meta-and-shell.html" . }}
+{{ partial "article/build-meta-and-shell.html" . }}
 
 {{- end -}}

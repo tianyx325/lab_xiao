@@ -5,15 +5,15 @@ date: 2024-01-01
 date_end: 2027-12-31
 authors:
   - admin
-tags:
-  - 国家自然科学基金
-  - 面上项目
-  - 弱光增强
-  - 光场成像
-external_link: ''
+url_external: ''
 image:
   focal_point: Center
 project_code: "62371389"
 project_status: "ongoing"
+project_type: "vertical"
+funding: "国家自然科学基金·面上项目"
+tags:
+  - 弱光增强
+  - 光场成像
 ---
 

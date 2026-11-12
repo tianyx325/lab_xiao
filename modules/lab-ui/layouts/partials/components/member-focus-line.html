@@ -1,0 +1,20 @@
+{{/* Card focus line: advisors = free-text (original); students = official research list. */}}
+{{- $isAdvisor := in (.Params.user_groups | default slice) "导师" -}}
+{{- if $isAdvisor -}}
+  {{- partial "components/member-focus-text.html" . -}}
+  {{- $focus := .Scratch.Get "lab_member_focus_text" | default "" -}}
+  {{- /* Original card logic: first clause only */ -}}
+  {{- $focus = replaceRE `[;；].*$` "" $focus -}}
+  {{- $focus = replaceRE `^\s+|\s+$` "" $focus -}}
+  {{- with $focus -}}{{ . | truncate 18 }}{{- end -}}
+{{- else -}}
+  {{- partial "components/member-research-pages.html" . -}}
+  {{- $pages := .Scratch.Get "lab_member_research_pages" | default slice -}}
+  {{- $titles := slice -}}
+  {{- range $pages -}}
+    {{- $titles = $titles | append .Title -}}
+  {{- end -}}
+  {{- if gt (len $titles) 0 -}}
+    {{- delimit $titles " · " -}}
+  {{- end -}}
+{{- end -}}

@@ -1,0 +1,436 @@
+/* Layer 4b · menus & page chrome: gutters, CTA, theme toggles
+   Source: template.scss lines 1352-1647 (order-preserving split). */
+/* Page gutters — tighter side margins so cards read larger */
+.page-body .container,
+.page-body .container-fluid,
+.lab-list-page > .container,
+.lab-list-body.container {
+  padding-left: var(--lab-page-gutter) !important;
+  padding-right: var(--lab-page-gutter) !important;
+}
+
+#navbar-main.navbar {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#navbar-main .lab-navbar-inner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: none;
+  padding-left: $lab-space-6;
+  padding-right: $lab-space-6;
+}
+
+/* Logo left; destinations + icons sit on the right */
+#navbar-main .lab-navbar-inner > .navbar-collapse.main-menu-item {
+  flex: 1 1 auto;
+  justify-content: flex-end !important;
+}
+
+/* Quiet action link — mirrors boguan’s right-side CTA, parchment-safe */
+#navbar-main .navbar-nav.ml-md-auto > .nav-item > .nav-link {
+  color: var(--lab-color-link) !important;
+  font-weight: $lab-weight-medium;
+}
+
+#navbar-main ul.nav-icons {
+  font-size: inherit; /* undo vendor 18px so text matches menu */
+  flex: 0 0 auto;
+  padding: 0;
+  margin-left: var(--lab-space-4);
+  padding-left: var(--lab-space-4);
+  border-left: 1px solid var(--lab-color-border);
+  align-items: center;
+  gap: var(--lab-space-1);
+}
+
+#navbar-main ul.nav-icons .js-search {
+  font-size: $lab-text-base; /* keep search icon readable */
+}
+
+#navbar-main ul.nav-icons > li {
+  padding-right: 0;
+}
+
+#navbar-main ul.nav-icons > li:last-of-type {
+  padding-right: 0;
+}
+
+/* Control buttons — search / theme / language: circular quiet icon buttons */
+#navbar-main ul.nav-icons .nav-link {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  color: var(--lab-color-text-secondary) !important;
+  transition: color $lab-transition, background-color $lab-transition;
+}
+
+#navbar-main ul.nav-icons .nav-link::after {
+  display: none !important; /* no underline bar on control buttons */
+}
+
+#navbar-main ul.nav-icons .nav-link:hover,
+#navbar-main ul.nav-icons .nav-link:focus,
+#navbar-main ul.nav-icons .nav-link[aria-expanded="true"] {
+  color: var(--lab-color-link) !important;
+  background: var(--lab-color-surface-alt) !important;
+}
+
+/* Custom inline-SVG control icons */
+#navbar-main .lab-ic {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+/* Menu-level size: slightly smaller than the 20px triggers, clearly readable */
+#navbar-main .lab-ic-sm {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Theme button shows the CURRENT mode: sun in light, moon in dark */
+#navbar-main .lab-theme-ic-moon {
+  display: none !important;
+}
+
+.dark #navbar-main .lab-theme-ic-moon {
+  display: block !important;
+}
+
+.dark #navbar-main .lab-theme-ic-sun {
+  display: none !important;
+}
+
+/* Language trigger — compact text pill, self-explanatory (no globe/map confusion) */
+#navbar-main ul.nav-icons .i18n-dropdown > .nav-link {
+  width: auto;
+  border-radius: 999px;
+}
+
+#navbar-main .lab-lang-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 1.625rem; /* 26px */
+  padding: 0 0.625rem;
+  border: 1px solid var(--lab-color-border);
+  border-radius: 999px;
+  font-family: $lab-font-sans;
+  font-size: $lab-text-xs;
+  font-weight: $lab-weight-medium;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: var(--lab-color-text-secondary);
+  transition: border-color $lab-transition, color $lab-transition;
+}
+
+#navbar-main ul.nav-icons .i18n-dropdown > .nav-link:hover .lab-lang-pill,
+#navbar-main ul.nav-icons .i18n-dropdown > .nav-link:focus .lab-lang-pill,
+#navbar-main ul.nav-icons .i18n-dropdown > .nav-link[aria-expanded="true"] .lab-lang-pill {
+  border-color: var(--lab-color-link);
+  color: var(--lab-color-link) !important;
+}
+
+#navbar-main .lab-nav-text-toggle {
+  font-size: $lab-text-base; /* match search icon weight */
+}
+
+#navbar-main .lab-nav-parent:hover::after,
+#navbar-main .lab-nav-parent[aria-expanded="true"]::after {
+  transform: scaleX(1);
+}
+
+/* Shared liquid-glass menus: 成果 / 主题 / 语言 */
+#navbar-main .lab-nav-menu {
+  min-width: 8rem;
+  padding: var(--lab-space-1) 0;
+  margin-top: var(--lab-space-1); /* hugs the trigger — reads as its extension */
+  background: rgba(255, 255, 255, 0.66) !important;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(30, 35, 44, 0.08) !important;
+  border-radius: 12px;
+  /* top inner sheen = the glass edge catching light */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 2px 6px var(--lab-color-shadow-ink-04),
+    0 8px 28px var(--lab-color-shadow-ink-08) !important;
+}
+
+/* Dropdown entrance — grows out of the trigger's corner (scale + fade) */
+@media (prefers-reduced-motion: no-preference) {
+  #navbar-main .dropdown-menu.show,
+  #navbar-main .dropdown.show .lab-nav-menu {
+    transform-origin: top right;
+    animation: lab-menu-in 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes lab-menu-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+#navbar-main .lab-nav-menu .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--lab-space-2);
+  font-family: $lab-font-sans;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-body;
+  letter-spacing: 0.02em;
+  color: var(--lab-color-text);
+  padding: var(--lab-space-2) var(--lab-space-4);
+  background: transparent;
+}
+
+#navbar-main .lab-nav-menu .dropdown-item::before {
+  display: none; /* no purple rail */
+}
+
+/* Current-option check marks */
+#navbar-main .lab-opt-check {
+  margin-left: auto;
+  color: var(--lab-color-link);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+#navbar-main .js-set-theme-light .lab-opt-check {
+  opacity: 1;
+}
+
+.dark #navbar-main .js-set-theme-light .lab-opt-check {
+  opacity: 0;
+}
+
+.dark #navbar-main .js-set-theme-dark .lab-opt-check {
+  opacity: 1;
+}
+
+#navbar-main .lab-opt-check-on {
+  opacity: 1 !important;
+}
+
+#navbar-main .lab-nav-menu .dropdown-item:hover,
+#navbar-main .lab-nav-menu .dropdown-item:focus {
+  color: var(--lab-color-link) !important;
+  /* translucent ink wash — the glass stays see-through on hover */
+  background: rgba(30, 35, 44, 0.06) !important;
+}
+
+#navbar-main .lab-nav-menu .dropdown-item-active {
+  color: var(--lab-color-text-secondary);
+  font-weight: $lab-weight-medium;
+  pointer-events: none;
+}
+
+/* Hamburger trigger — same quiet circular button language as the icon controls */
+#navbar-main .navbar-toggler {
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  color: var(--lab-color-text-secondary);
+  background: transparent;
+  transition: color $lab-transition, background-color $lab-transition;
+}
+
+#navbar-main .navbar-toggler:hover,
+#navbar-main .navbar-toggler:focus {
+  color: var(--lab-color-link);
+  background: var(--lab-color-surface-alt);
+}
+
+/* Mobile: brand centered; solid menu panel + dim backdrop (no content bleed) */
+@media (max-width: 991px) {
+  /* Floating pill tightens to the screen edges */
+  .page-header {
+    top: $lab-space-2;
+    left: $lab-space-2;
+    right: $lab-space-2;
+  }
+
+  #navbar-main .lab-navbar-inner {
+    position: relative;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding-left: $lab-space-1;
+    padding-right: $lab-space-1;
+  }
+
+  /* Tablet: brand returns to normal flow — drop the desktop indent */
+  #navbar-main .lab-navbar-brand {
+    padding-left: 0 !important;
+  }
+
+  #navbar-main .navbar-toggler {
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 2;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: $lab-space-1;
+    padding-right: $lab-space-1;
+  }
+
+  #navbar-main ul.nav-icons {
+    flex: 0 0 auto;
+    margin-left: auto !important;
+    padding-left: 0;
+    border-left: none;
+    position: relative;
+    z-index: 2;
+  }
+
+  #navbar-main ul.nav-icons .nav-link {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding-left: $lab-space-2 !important;
+    padding-right: $lab-space-2 !important;
+  }
+
+  /* Hide page chrome while menu open — absolute drawer can leave a 1–N px
+     gap at the fold (dvh vs layout viewport), which looked like footer/nav bleed. */
+  body:has(#navbar-content.show) {
+    overflow: hidden;
+  }
+
+  body:has(#navbar-content.show) .page-body,
+  body:has(#navbar-content.show) .page-footer {
+    visibility: hidden;
+  }
+
+  /* Full-viewport solid drawer (positioning parent is .lab-navbar-inner) */
+  #navbar-main .navbar-collapse.main-menu-item.show,
+  #navbar-main .navbar-collapse.main-menu-item.collapsing {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    width: 100%;
+    min-height: calc(100dvh - var(--lab-navbar-height-sm) + 4rem);
+    height: calc(100dvh - var(--lab-navbar-height-sm) + 4rem);
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1031 !important;
+    margin: 0;
+    padding: $lab-space-1 0 $lab-space-3;
+    background: var(--lab-color-page) !important;
+    border-bottom: none;
+    box-shadow: none;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .navbar-nav {
+    width: 100%;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .nav-item {
+    width: 100%;
+    margin: 0;
+    padding: $lab-space-1 $lab-space-4 !important;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .nav-link {
+    display: block !important;
+    width: 100%;
+    padding: $lab-space-3 $lab-space-1 !important;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .dropdown-menu {
+    position: static !important;
+    float: none;
+    width: 100%;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
+}
+
+/* Three-column content cards — incomplete rows stay centered */
+.home-section.lab-row-body .col-12:not(.section-heading),
+.home-section.wg-collection .col-12:not(.section-heading) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--lab-card-gap);
+  max-width: var(--lab-content-width);
+  margin: 0 auto;
+  float: none;
+  justify-items: stretch;
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
+  box-sizing: border-box;
+}
+
+.home-section.lab-row-body.lab-last .col-12:not(.section-heading) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--lab-card-gap);
+}
+
+.home-section.lab-row-body.lab-last .col-12:not(.section-heading) > .lab-card {
+  flex: 0 1 calc((100% - #{var(--lab-card-gap)} * 2) / 3);
+  max-width: calc((100% - #{var(--lab-card-gap)} * 2) / 3);
+  min-width: 220px;
+  margin: 0 !important;
+}
+
+.home-section.lab-row-body .lab-card.view-card,
+.home-section.wg-collection .lab-card.view-card {
+  max-width: none;
+  margin: 0 !important;
+  height: auto !important; /* keep 4:5 aspect-ratio */
+}
+
+#container-publications {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--lab-card-gap);
+}
+
+#container-publications .isotope-item,
+#container-publications .grid-sizer {
+  position: static !important;
+  width: auto !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+}
+
+#container-publications .pub-list-item,
+#container-publications .lab-card.view-card {
+  max-width: none;
+  margin: 0 !important;
+  height: auto !important;
+}
+
+/* Legacy wrappers kept minimal; list pages use .lab-list-* */
+.universal-wrapper .lab-card.view-card,
+.universal-wrapper .media.stream-item {
+  max-width: none;
+  margin: 0 !important;
+  height: auto !important;
+}

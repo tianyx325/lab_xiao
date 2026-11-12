@@ -1,20 +1,21 @@
-# Brand primary — keep in sync with assets/scss/lab/_tokens.scss $lab-blue
-# Ink / page — keep in sync with $lab-ink / $lab-page-bg / $lab-white
+# Brand primary — keep in sync with assets/scss/lab/_tokens.scss $lab-blue (DeepSeek brand blue)
+# Reference: deepseek.com --ds-color-* tokens (sampled from production CSS)
+# Ink is blue-tinted (#1E232C body / #121C31 headings feel); borders are ink alpha, no gray values
 name = "Minimal"
 
 [light]
-  primary = "#4F46E5"
+  primary = "#4D6BFE"
 
   menu_primary = "#fff"
-  menu_text = "#0f1a2a"
-  menu_text_active = "#4F46E5"
-  menu_title = "#0f1a2a"
+  menu_text = "#1E232C"
+  menu_text_active = "#4D6BFE"
+  menu_title = "#1E232C"
 
-  home_section_odd = "#ffffff"
-  home_section_even = "#F8FAFC"
+  home_section_odd = "#FFFFFF"
+  home_section_even = "#F9FAFB"
 
 [dark]
-  primary = "#4F46E5"
+  primary = "#6799FE"
 
-  link = "#818CF8"
-  link_hover = "#A5B4FC"
+  link = "#6799FE"
+  link_hover = "#8FB5FF"

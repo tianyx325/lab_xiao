@@ -1,24 +1,30 @@
 {{ $lab := site.Params.lab | default dict }}
 {{ $ui := $lab.ui | default dict }}
-{{ $emailLabel := $ui.email_label | default "邮箱" }}
-{{ $addressLabel := $ui.address_label | default "地址" }}
+{{ $is_en := eq site.Language.Lang "en" }}
+{{ $emailLabel := cond $is_en "Email" ($ui.email_label | default "邮箱") }}
+{{ $addressLabel := cond $is_en "Address" ($ui.address_label | default "地址") }}
+{{ $contactHeading := cond $is_en "Contact" "联系方式" }}
+{{ $linksHeading := cond $is_en "Links" "友情链接" }}
+{{ $brandName := site.Title | default ($lab.name | default "") }}
+{{ $brandLead := site.Params.lead | default ($lab.lead | default "") }}
 <footer class="lab-footer">
   <div class="lab-footer-inner">
 
     <div class="lab-footer-brand">
-      <div class="lab-footer-brand-top">
-        <a href="{{ site.Home.RelPermalink }}" class="navbar-brand lab-footer-logo">
-          <span class="lab-logo"></span>
-          {{- $lab.name -}}
-        </a>
-      </div>
-      {{ with $lab.lead }}
+      <a href="{{ site.Home.RelPermalink }}" class="lab-footer-logo">
+        <span class="lab-logo" aria-hidden="true"></span>
+        <span class="lab-footer-logo-text">{{- $brandName -}}</span>
+      </a>
+      {{ with $lab.org_name }}
+        <p class="lab-footer-org">{{ . }}</p>
+      {{ end }}
+      {{ with $brandLead }}
         <p class="lab-footer-desc">{{ . }}</p>
       {{ end }}
     </div>
 
     <div class="lab-footer-contact">
-      <h4 class="lab-footer-heading">联系方式</h4>
+      <h2 class="lab-footer-heading">{{ $contactHeading }}</h2>
       <div class="lab-footer-contact-items">
         {{ with $lab.email }}
           <div class="lab-footer-contact-item">
@@ -37,8 +43,8 @@
 
     {{ with $lab.friend_links }}
     <div class="lab-footer-links">
-      <h4 class="lab-footer-heading">友情链接</h4>
-      <ul class="lab-footer-list lab-footer-links-grid">
+      <h2 class="lab-footer-heading">{{ $linksHeading }}</h2>
+      <ul class="lab-footer-list">
         {{ range . }}
         <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></li>
         {{ end }}
@@ -49,7 +55,10 @@
   </div>
 
   <div class="lab-footer-bottom">
-    {{- $notice := site.Params.footer.copyright.notice | default $lab.name -}}
-    <span>&copy; {{ now.Year }} {{ $notice }}</span>
+    <div class="lab-footer-bottom-inner">
+      {{- $notice := site.Params.footer.copyright.notice | default ($lab.name | default site.Title) -}}
+      <span>&copy; {{ now.Year }} {{ $notice }}</span>
+      <a href="#top" class="lab-footer-top">{{ cond $is_en "Back to top" "回到顶部" }}</a>
+    </div>
   </div>
 </footer>

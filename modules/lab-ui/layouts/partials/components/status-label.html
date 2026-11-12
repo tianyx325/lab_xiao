@@ -1,0 +1,35 @@
+{{/* Shared status / badge label for project & patent cards and meta bars.
+    Usage: {{ partial "components/status-label.html" (dict "kind" "project" "page" .) }}
+    Returns plain text (may be empty). */}}
+{{- $kind := .kind | default "" -}}
+{{- $p := .page -}}
+{{- $out := "" -}}
+{{- if eq $kind "project" -}}
+  {{- /* 资助类别角标：优先 funding 字段，兼容旧 tags */ -}}
+  {{- $funding := $p.Params.funding | default "" -}}
+  {{- $tags := $p.Params.tags | default slice -}}
+  {{- $hay := printf "%s %s" $funding (delimit $tags " ") -}}
+  {{- if in $hay "重点项目" -}}{{- $out = "重点" -}}
+  {{- else if in $hay "面上项目" -}}{{- $out = "面上" -}}
+  {{- else if in $hay "省级基金" -}}{{- $out = "省级" -}}
+  {{- else if in $hay "青年" -}}{{- $out = "青年" -}}
+  {{- else if in $hay "国家自然科学基金" -}}{{- $out = "国自然" -}}
+  {{- end -}}
+  {{- $st := $p.Params.project_status | default "" -}}
+  {{- if eq $st "ongoing" -}}
+    {{- if $out -}}{{- $out = printf "%s · 在研" $out -}}{{- else -}}{{- $out = "在研" -}}{{- end -}}
+  {{- else if eq $st "completed" -}}
+    {{- if $out -}}{{- $out = printf "%s · 结题" $out -}}{{- else -}}{{- $out = "已结题" -}}{{- end -}}
+  {{- end -}}
+{{- else if eq $kind "patent" -}}
+  {{- if eq ($p.Params.patent_status | default "") "granted" -}}
+    {{- $out = "已授权" -}}
+  {{- else -}}
+    {{- $pt := $p.Params.patent_type | default "invention" -}}
+    {{- if eq $pt "utility" -}}{{- $out = "实用新型" -}}
+    {{- else if eq $pt "design" -}}{{- $out = "外观设计" -}}
+    {{- else -}}{{- $out = "发明专利" -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

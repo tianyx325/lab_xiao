@@ -19,7 +19,7 @@
 <div class="lab-people{{ if $is_list_page }} lab-list-page{{ end }}">
   {{ with $block.content.title }}
     {{ if $is_list_page }}
-      {{ partial "lab-list-header.html" (dict "title" . "lead" $peopleLead) }}
+      {{ partial "listing/header.html" (dict "title" . "lead" $peopleLead) }}
     {{ else }}
   <header class="lab-people-header">
     <h1 class="lab-people-title">{{ . | markdownify | emojify }}</h1>
@@ -39,17 +39,17 @@
     {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice .) }}
     {{ $sort_ascending := $block.content.sort_ascending | default true }}
     {{ $sort_order := cond $sort_ascending "asc" "desc" }}
-    {{/* Sort by Params.sort if exists, otherwise by Title */}}
+    {{/* Sort by Params.weight if exists, otherwise by Title */}}
     {{ $with_sort := slice }}
     {{ $without_sort := slice }}
     {{ range $query }}
-      {{ if .Params.sort }}
+      {{ if .Params.weight }}
         {{ $with_sort = $with_sort | append . }}
       {{ else }}
         {{ $without_sort = $without_sort | append . }}
       {{ end }}
     {{ end }}
-    {{ $with_sort = sort $with_sort "Params.sort" $sort_order }}
+    {{ $with_sort = sort $with_sort "Params.weight" $sort_order }}
     {{ $without_sort = sort $without_sort "Title" $sort_order }}
     {{ $query = $with_sort | append $without_sort }}
     {{/* Lab director always first within the group */}}
@@ -81,7 +81,7 @@
           {{ if site.Params.features.avatar.gravatar }}
             {{ $src = printf "https://s.gravatar.com/avatar/%s?s=480" (md5 .Params.email) }}
           {{ else if $avatar }}
-            {{ $avatar_image := $avatar.Fill "480x480 Center" }}
+            {{ $avatar_image := $avatar.Fill "480x480 Smart" }}
             {{ $src = $avatar_image.RelPermalink }}
           {{ end }}
 
@@ -103,7 +103,7 @@
               {{ with .Params.role }}
               <p class="lab-member-role">{{ . | plainify }}</p>
               {{ end }}
-              {{ $focus := partial "lab-member-focus-line.html" . }}
+              {{ $focus := partial "components/member-focus-line.html" . }}
               {{ with $focus }}
               <p class="lab-member-focus-line">{{ . }}</p>
               {{ end }}
@@ -117,11 +117,6 @@
       </div>
     </section>
     {{ end }}
-  {{ end }}
-  {{ if not $is_list_page }}
-  <div class="lab-section-more">
-    <a class="lab-outcomes-more" href="{{ "people/" | relURL }}">查看更多</a>
-  </div>
   {{ end }}
   </div>
 </div>

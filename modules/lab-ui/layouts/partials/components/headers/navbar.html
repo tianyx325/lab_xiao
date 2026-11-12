@@ -27,7 +27,7 @@
       {{ if site.Menus.main }}
       <button type="button" class="navbar-toggler" data-toggle="collapse"
               data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="{{ i18n "toggle_navigation" }}">
-      <span><i class="fas fa-bars"></i></span>
+      <span><svg class="lab-ic" viewBox="3 5 18 14" fill="none" aria-hidden="true"><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></g></svg></span>
       </button>
       {{ end }}
 
@@ -41,11 +41,10 @@
 
           {{ if .HasChildren }}
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="nav-link dropdown-toggle lab-nav-parent" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{- .Pre -}}<span>{{ .Name | safeHTML }}</span>{{- .Post -}}
-              <span class="caret"></span>
             </a>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu dropdown-menu-right lab-nav-menu">
               {{ range .Children }}
                 <a class="dropdown-item" href="{{ .URL | relLangURL }}"{{ if $.IsHome }} data-target="{{ .URL }}"{{ end }}>
                   {{- .Pre -}}<span>{{ .Name | safeHTML }}</span>{{- .Post -}}
@@ -89,7 +88,7 @@
           {{end}}
 
           <li class="nav-item">
-            <a class="nav-link {{if and $highlight_active_link $is_link_in_current_path }} active{{end}}" href="{{.URL | relLangURL}}"{{ if and $is_widget_page $is_same_page }} data-target="{{$hash}}"{{ end }}{{ ($.Scratch.Get "target") | safeHTMLAttr }}>
+            <a class="nav-link {{if and $highlight_active_link $is_link_in_current_path }} active{{end}}" {{ if and $highlight_active_link $is_link_in_current_path }}aria-current="page"{{ end }} href="{{.URL | relLangURL}}"{{ if and $is_widget_page $is_same_page }} data-target="{{$hash}}"{{ end }}{{ ($.Scratch.Get "target") | safeHTMLAttr }}>
               {{- .Pre -}}<span>{{ .Name | safeHTML }}</span>{{- .Post -}}
             </a>
           </li>
@@ -147,19 +146,47 @@
         {{ $show_day_night := site.Params.header.navbar.show_day_night | default true }}
         {{ $has_day_night_themes := (and site.Params.appearance.theme_day site.Params.appearance.theme_night) }}
         {{ if and $has_day_night_themes $show_day_night }}
+        {{ $is_en := eq .Lang "en" }}
         <li class="nav-item dropdown theme-dropdown">
-          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="{{ i18n "theme_selector" | default "Display preferences" }}">
-            <i class="fas fa-moon" aria-hidden="true"></i>
+          <a href="#" class="nav-link lab-nav-text-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="{{ i18n "theme_selector" | default "Display preferences" }}">
+            {{/* Icon shows the CURRENT mode: sun in light, moon in dark */}}
+            <svg class="lab-ic lab-theme-ic-sun" viewBox="2.5 2.5 19 19" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.4" fill="currentColor"/>
+              <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <path d="M12 3.4v2M12 18.6v2M3.4 12h2M18.6 12h2M5.9 5.9l1.4 1.4M16.7 16.7l1.4 1.4M18.1 5.9l-1.4 1.4M7.3 16.7l-1.4 1.4"/>
+              </g>
+            </svg>
+            <svg class="lab-ic lab-theme-ic-moon" viewBox="2.6 2.5 19.2 19.6" fill="none" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" fill="currentColor"/>
+              <path d="M17.6 3.2l.62 1.68 1.68.62-1.68.62-.62 1.68-.62-1.68-1.68-.62 1.68-.62Z" fill="currentColor" opacity="0.85"/>
+            </svg>
           </a>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu dropdown-menu-right lab-nav-menu">
+            {{/* Menu icons: same hand-drawn SVG set as the triggers, 16px */}}
             <a href="#" class="dropdown-item js-set-theme-light">
-              <span>{{ i18n "theme_light" | default "Light" }}</span>
+              <svg class="lab-ic lab-ic-sm" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="4.4" fill="currentColor"/>
+                <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                  <path d="M12 3.4v2M12 18.6v2M3.4 12h2M18.6 12h2M5.9 5.9l1.4 1.4M16.7 16.7l1.4 1.4M18.1 5.9l-1.4 1.4M7.3 16.7l-1.4 1.4"/>
+                </g>
+              </svg>
+              <span>{{ cond $is_en "Light" "浅色" }}</span>
+              <svg class="lab-ic lab-ic-sm lab-opt-check" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <a href="#" class="dropdown-item js-set-theme-dark">
-              <span>{{ i18n "theme_dark" | default "Dark" }}</span>
+              <svg class="lab-ic lab-ic-sm" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" fill="currentColor"/>
+                <path d="M17.6 3.2l.62 1.68 1.68.62-1.68.62-.62 1.68-.62-1.68-1.68-.62 1.68-.62Z" fill="currentColor" opacity="0.85"/>
+              </svg>
+              <span>{{ cond $is_en "Dark" "深色" }}</span>
+              <svg class="lab-ic lab-ic-sm lab-opt-check" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <a href="#" class="dropdown-item js-set-theme-auto">
-              <span>{{ i18n "theme_auto" | default "Automatic" }}</span>
+              <svg class="lab-ic lab-ic-sm" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="8.4" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M12 3.6a8.4 8.4 0 0 1 0 16.8Z" fill="currentColor"/>
+              </svg>
+              <span>{{ cond $is_en "Auto" "自动" }}</span>
             </a>
           </div>
         </li>
@@ -167,21 +194,21 @@
 
         {{ $show_translations := site.Params.header.navbar.show_translations | default true }}
         {{ if .IsTranslated | and $show_translations }}
+        {{ $is_en := eq .Lang "en" }}
         <li class="nav-item dropdown i18n-dropdown">
-          <a href="#" class="nav-link {{ if $show_current_language }}dropdown-toggle{{end}}" data-toggle="dropdown"
+          <a href="#" class="nav-link lab-nav-text-toggle" data-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false" aria-label="{{ i18n "languages" | default "Languages" }}">
-            <i class="fas fa-globe mr-1" aria-hidden="true"></i>
-            {{- if $show_current_language -}}
-              <span class="d-none d-lg-inline">{{ index site.Data.i18n.languages .Lang }}</span>
-            {{- end -}}
+            <span class="lab-lang-pill">{{ cond $is_en "EN" "中" }}</span>
           </a>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu dropdown-menu-right lab-nav-menu">
             <div class="dropdown-item dropdown-item-active">
-              <span>{{ index site.Data.i18n.languages .Lang }}</span>
+              <span>{{ cond $is_en "EN" "中" }}</span>
+              <svg class="lab-ic lab-ic-sm lab-opt-check lab-opt-check-on" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             {{ range .Translations }}
-            <a class="dropdown-item" href="{{ .Permalink }}"{{ if $.IsHome }} data-target="{{ .RelPermalink }}"{{ end }}>
-              <span>{{ index site.Data.i18n.languages .Lang }}</span>
+            {{ $t_short := cond (eq .Lang "zh") "中" "EN" }}
+            <a class="dropdown-item" href="{{ .RelPermalink }}">
+              <span>{{ $t_short }}</span>
             </a>
             {{ end }}
           </div>

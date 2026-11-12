@@ -14,4 +14,6 @@ issue: "1"
 summary: "利用时间维度的局部特征识别人体行为。"
 abstract: "利用时间维度的局部特征识别人体行为。"
 featured: false
+research:
+  - action
 ---

@@ -22,4 +22,7 @@ tags:
 featured: false
 url_pdf: "https://projet.liris.cnrs.fr/imagine/pub/proceedings/ICIP-2014/Papers/1569910923.pdf"
 url_html: "https://doi.org/10.1109/ICIP.2014.7025007"
+research:
+  - depth
+ccf: "C"
 ---

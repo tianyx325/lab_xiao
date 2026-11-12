@@ -1,0 +1,649 @@
+/* Layer 3 · global base: alignment, gutters, navbar, footer
+   Source: template.scss lines 8-591 (order-preserving split). */
+@mixin lab-placeholder-bg {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 35%, rgba(255, 255, 255, 0.5), transparent 70%),
+    linear-gradient(165deg, rgba($lab-ink, 0.04) 0%, $lab-blue-wash 50%, rgba($lab-ink, 0.06) 100%);
+}
+
+// Make page header alignment consistent with widget page header alignment
+.universal-wrapper h1,
+.universal-wrapper h2,
+.article-header,
+.article-header h1,
+.page-header,
+.section-heading {
+  text-align: center;
+}
+
+.universal-wrapper > h1 {
+  @include lab-page-title;
+}
+
+.cta-group {
+  justify-content: center;
+}
+
+/* Page-type gutters — cascade into var(--lab-page-gutter) consumers */
+.lab-page--home {
+  --lab-page-gutter: var(--lab-gutter-home);
+}
+
+.lab-page--list {
+  --lab-page-gutter: var(--lab-gutter-list);
+}
+
+.lab-page--detail {
+  --lab-page-gutter: var(--lab-gutter-detail);
+}
+
+.lab-page--detail .lab-article-header > .container,
+.lab-page--detail .lab-article-body {
+  max-width: var(--lab-read-width-detail) !important;
+}
+
+/* ---------- Global: quiet parchment academic ---------- */
+/* Fixed navbar: keep in-page anchor targets & keyboard focus clear of the pill
+   (WCAG 2.4.11 Focus Not Obscured / W3C C43 scroll-padding practice) */
+html {
+  scroll-padding-top: calc(var(--lab-navbar-height) + #{$lab-space-6});
+}
+
+@media (max-width: 991px) {
+  html {
+    scroll-padding-top: calc(var(--lab-navbar-height-sm) + #{$lab-space-6});
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth; /* #top / section anchors glide, no hard jump */
+  }
+}
+
+body {
+  @include lab-font-sans;
+  font-size: $lab-text-base;
+  font-weight: $lab-weight-body;
+  line-height: $lab-leading-body;
+  letter-spacing: $lab-tracking-body;
+  color: var(--lab-color-text);
+  /* Paper fill + faint grain (no stacking-context tricks) */
+  background-color: var(--lab-color-page) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E") !important;
+  background-repeat: repeat !important;
+}
+
+.article-title,
+.page-header h1,
+.section-head h2,
+.home-section .section-heading h1,
+.lab-people-title,
+.lab-list-title {
+  font-family: $lab-font-serif;
+}
+
+.article-style,
+.lab-list-intro {
+  font-size: $lab-text-base;
+  line-height: $lab-leading-loose;
+}
+
+/* Unify theme link / active blues to brand blue */
+.nav-link.active,
+.navbar .nav-item.active > .nav-link,
+.navbar-nav .nav-link.active {
+  color: var(--lab-color-link) !important;
+}
+
+.article-style a,
+.portrait-title a,
+.universal-wrapper a:not(.btn):not(.lab-card):not(.lab-research-card):not(.lab-member-card):not(.lab-meta-tag-link),
+.page-body a:not(.btn):not(.nav-link):not(.dropdown-item):not(.lab-card):not(.lab-research-card):not(.lab-member-card):not(.lab-meta-tag-link) {
+  color: var(--lab-color-link);
+}
+
+/* Card is an <a>; don't paint whole card blue — zones use category colors */
+a.lab-card.view-card,
+.lab-card.view-card,
+a.lab-research-card,
+a.lab-member-card {
+  color: var(--lab-color-text);
+}
+
+.btn-outline-primary,
+.btn-outline-primary.btn-sm,
+.btn-page-header.btn-outline-primary {
+  border-color: var(--lab-color-link) !important;
+  color: var(--lab-color-link) !important;
+}
+
+.btn-primary {
+  background-color: var(--lab-color-link) !important;
+  border-color: var(--lab-color-link) !important;
+  color: var(--lab-color-white) !important;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+  background-color: var(--lab-color-link) !important;
+  border-color: var(--lab-color-link) !important;
+  color: var(--lab-color-white) !important;
+}
+
+/* Remaining theme blues (alerts / focus) → brand blue */
+.article-style aside,
+.alert-note {
+  color: var(--lab-color-link) !important;
+  border-color: var(--lab-color-link) !important;
+  background-color: var(--lab-color-blue-wash) !important;
+}
+
+.article-style aside p::before,
+div.alert > div:first-child::before {
+  color: var(--lab-color-link) !important;
+}
+
+.form-control:focus,
+.btn:focus,
+.page-link:focus {
+  box-shadow: 0 0 0 0.2rem var(--lab-color-focus-ring) !important;
+}
+
+.navbar .nav-link:focus,
+.navbar .nav-link:focus-visible,
+.navbar .dropdown-toggle:focus,
+.navbar .dropdown-item:focus,
+.navbar .dropdown-item:focus-visible,
+a.lab-card:focus-visible,
+a.lab-research-card:focus-visible,
+a.lab-member-card:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--lab-color-focus-ring) !important;
+}
+
+/* Floating pill navbar — detached glass capsule, centered, soft elevation */
+.page-header {
+  position: fixed !important;
+  top: $lab-space-3;
+  right: $lab-space-4;
+  left: $lab-space-4;
+  z-index: 1030;
+  width: auto;
+  max-width: calc(#{$lab-content-width} + #{$lab-space-9});
+  margin-inline: auto;
+  background: var(--lab-color-navbar-bg) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--lab-color-border-light);
+  border-radius: 999px;
+  box-shadow: 0 1px 2px var(--lab-color-shadow-ink-04), 0 4px 24px var(--lab-color-shadow-ink-08);
+  transition: box-shadow $lab-transition;
+  transform: none !important;
+}
+
+.page-header.headroom--pinned,
+.page-header.headroom--unpinned,
+.page-header.headroom--top {
+  transform: none !important;
+}
+
+.page-header .navbar {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Slim capsule — height driven by tokens, content vertically centered */
+#navbar-main {
+  height: var(--lab-navbar-height);
+  padding-top: $lab-space-1;
+  padding-bottom: $lab-space-1;
+}
+
+#navbar-main .lab-navbar-inner {
+  height: 100%;
+}
+
+@media (max-width: 991px) {
+  #navbar-main {
+    height: var(--lab-navbar-height-sm);
+  }
+}
+
+.page-header.scrolled {
+  box-shadow: 0 2px 8px var(--lab-color-shadow-ink-04), 0 8px 32px var(--lab-color-shadow-ink-08);
+}
+
+body {
+  padding-top: calc(var(--lab-navbar-height) + #{$lab-space-3} + #{$lab-space-2});
+}
+
+@media (max-width: 991px) {
+  body {
+    padding-top: calc(var(--lab-navbar-height-sm) + #{$lab-space-3} + #{$lab-space-2});
+  }
+}
+
+.navbar {
+  font-size: $lab-text-sm;
+  letter-spacing: 0.02em;
+}
+
+.navbar .container,
+.navbar .container-fluid,
+.navbar > .container,
+.navbar-nav,
+.navbar .navbar-brand {
+  display: flex;
+  align-items: center; /* 导航文字垂直居中 */
+}
+
+.navbar-brand {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: $lab-space-6;
+  margin-right: $lab-space-4;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: $lab-space-2;
+}
+
+.lab-navbar-brand {
+  display: none;
+}
+
+/* Brand visible from tablet up — drawer mode below md centers it absolutely */
+@include media-breakpoint-up(md) {
+  .lab-navbar-brand {
+    display: inline-flex;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .lab-navbar-brand {
+    position: absolute !important;
+    left: 50% !important;
+    right: auto !important;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    max-width: calc(100% - 9.5rem);
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+/* 隐藏原有 logo 图片 */
+.navbar-brand img {
+  display: none;
+}
+
+/* CSS 图标 - 智能体 + 视觉感知 */
+.lab-logo {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+/* 暗室显影 — 暗场方框中的一点光（assets/media/icon.svg 的主题感知孪生版） */
+.lab-logo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  /* Beam along the BL→TR diagonal; light mode: white on ink, dark mode: near-black on raised light */
+  background:
+    linear-gradient(135deg, transparent 38%, var(--lab-card-bg) 46%, var(--lab-card-bg) 58%, transparent 66%),
+    var(--lab-color-ink);
+  border-radius: 6px;
+}
+
+/* 增强的光点 — 品牌蓝 */
+.lab-logo::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 7px;
+  height: 7px;
+  background: var(--lab-color-blue);
+  border-radius: 50%;
+}
+
+.navbar .nav-link {
+  display: inline-flex !important;
+  align-items: center;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: var(--lab-space-3) !important;
+  padding-right: var(--lab-space-3) !important;
+  line-height: 1.2;
+  height: 100%;
+  color: var(--lab-color-text);
+  font-family: $lab-font-sans;
+  font-weight: $lab-weight-medium;
+  font-size: $lab-text-sm;
+  letter-spacing: 0.02em;
+  position: relative;
+  transition: color $lab-transition;
+}
+
+.navbar .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: var(--lab-space-3);
+  right: var(--lab-space-3);
+  height: 1px;
+  background: var(--lab-color-link);
+  transform: scaleX(0);
+  transition: transform $lab-transition;
+}
+
+.navbar .nav-link:hover {
+  color: var(--lab-color-link) !important;
+}
+
+.navbar .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Active section — persistent brand underline bar (2px, rounded) */
+.navbar .nav-link.active::after {
+  height: 2px;
+  border-radius: 1px;
+  transform: scaleX(1);
+}
+
+/* Hide Bootstrap caret on parent items (成果) */
+#navbar-main .lab-nav-parent.dropdown-toggle::after,
+#navbar-main .navbar-nav .caret {
+  display: none !important;
+}
+
+.dropdown-menu {
+  border-radius: var(--lab-card-radius);
+  border: 1px solid var(--lab-color-border-light);
+  box-shadow: 0 8px 28px var(--lab-color-shadow-ink-08), 0 1px 4px var(--lab-color-shadow-ink-04);
+  padding: $lab-space-2 0;
+  background: var(--lab-color-navbar-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  min-width: 160px;
+}
+
+.dropdown-item {
+  font-size: $lab-text-sm;
+  letter-spacing: 0.03em;
+  padding: $lab-space-2 $lab-space-5;
+  color: var(--lab-color-text);
+  transition: all $lab-transition;
+  position: relative;
+  font-weight: 400;
+}
+
+.dropdown-item::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--lab-color-blue);
+  border-radius: 2px;
+  transition: height $lab-transition;
+}
+
+.dropdown-item:hover {
+  color: var(--lab-color-blue) !important;
+  background: var(--lab-color-accent-blue-06);
+}
+
+.dropdown-item:hover::before {
+  height: 60%;
+}
+
+/* Keep copyright footer pinned to the bottom of the viewport on short pages */
+body.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-body {
+  flex: 1 0 auto;
+}
+
+.page-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  width: 100%;
+}
+
+/* ---------- Footer — quiet parchment, aligned with navbar type ---------- */
+.lab-footer {
+  background: var(--lab-card-bg);
+  border-top: 1px solid var(--lab-color-border-light);
+  padding: var(--lab-space-7) 0 0;
+  font-family: $lab-font-sans;
+  font-size: $lab-text-sm;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-footer-inner {
+  max-width: var(--lab-content-width);
+  margin: 0 auto;
+  padding: 0 var(--lab-gutter-home);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: var(--lab-space-8);
+  row-gap: var(--lab-space-7);
+  align-items: start;
+}
+
+.lab-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--lab-space-3);
+  max-width: 22rem;
+  min-width: 0;
+}
+
+.lab-footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lab-space-3);
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  border-bottom: none;
+  color: var(--lab-color-text);
+  transition: color $lab-transition;
+}
+
+.lab-footer-logo:hover {
+  color: var(--lab-color-link);
+  text-decoration: none;
+}
+
+.lab-footer-logo-text {
+  font-family: $lab-font-serif;
+  font-size: $lab-text-md;
+  font-weight: $lab-weight-heading;
+  letter-spacing: $lab-tracking-heading;
+  line-height: $lab-leading-tight;
+}
+
+.lab-footer-org {
+  margin: 0;
+  font-size: $lab-text-xs;
+  font-weight: $lab-weight-medium;
+  letter-spacing: 0.04em;
+  line-height: $lab-leading-snug;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-footer-desc {
+  margin: 0;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-body;
+  text-align: left;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-footer-heading {
+  margin: 0 0 var(--lab-space-3);
+  font-family: $lab-font-sans;
+  font-size: $lab-text-xs;
+  font-weight: $lab-weight-medium;
+  line-height: $lab-leading-tight;
+  letter-spacing: 0.08em;
+  color: var(--lab-color-muted);
+}
+
+.lab-footer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lab-space-2);
+}
+
+.lab-footer-list a {
+  display: inline-block;
+  color: var(--lab-color-text-secondary);
+  text-decoration: none;
+  border-bottom: none;
+  line-height: $lab-leading-body;
+  transition: color $lab-transition;
+}
+
+.lab-footer-list a:hover {
+  color: var(--lab-color-link);
+}
+
+.lab-footer-contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lab-space-3);
+}
+
+.lab-footer-contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lab-space-1);
+  min-width: 0;
+}
+
+.lab-footer-contact-label {
+  font-size: $lab-text-xs;
+  font-weight: $lab-weight-medium;
+  letter-spacing: 0.06em;
+  line-height: $lab-leading-tight;
+  color: var(--lab-color-muted); /* ≥4.5:1 on white (WCAG AA); ink-42 was ~2.6:1 */
+}
+
+.lab-footer-contact-item a,
+.lab-footer-contact-item p {
+  margin: 0;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-body;
+  text-align: left;
+  color: var(--lab-color-text);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.lab-footer-contact-item a:hover {
+  color: var(--lab-color-link);
+}
+
+.lab-footer-bottom {
+  margin-top: var(--lab-space-6);
+  border-top: 1px solid var(--lab-color-border-light);
+  font-size: $lab-text-xs;
+  color: var(--lab-color-muted); /* ≥4.5:1 on white (WCAG AA); ink-35 was ~2.1:1 */
+  letter-spacing: 0.04em;
+}
+
+.lab-footer-bottom-inner {
+  max-width: var(--lab-content-width);
+  margin: 0 auto;
+  padding: var(--lab-space-5) var(--lab-gutter-home);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--lab-space-4);
+}
+
+.lab-footer-top {
+  color: var(--lab-color-muted);
+  text-decoration: none;
+  transition: color $lab-transition;
+}
+
+.lab-footer-top:hover {
+  color: var(--lab-color-link);
+  text-decoration: none;
+}
+
+@media (max-width: 991px) {
+  .lab-footer-inner {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--lab-space-6);
+    row-gap: var(--lab-space-6);
+  }
+
+  .lab-footer-brand {
+    grid-column: 1 / -1;
+    max-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .lab-footer {
+    padding-top: var(--lab-space-5);
+  }
+
+  .lab-footer-inner {
+    grid-template-columns: 1fr;
+    row-gap: var(--lab-space-5);
+  }
+
+  .lab-footer-heading {
+    margin-bottom: var(--lab-space-2);
+  }
+
+  .lab-footer-list a,
+  .lab-footer-contact-item a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: var(--lab-space-1) 0;
+  }
+
+  .lab-footer-bottom {
+    margin-top: var(--lab-space-4);
+  }
+}

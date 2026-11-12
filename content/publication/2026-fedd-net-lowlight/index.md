@@ -17,4 +17,7 @@ abstract: |
 featured: false
 url_html: "https://doi.org/10.1109/icassp55912.2026.11462537"
 url_code: "https://github.com/CodeSet1/FEDD-Net"
+research:
+  - low-light
+ccf: "C"
 ---

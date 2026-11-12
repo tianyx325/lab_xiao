@@ -19,4 +19,5 @@ abstract: |
 featured: false
 url_html: "https://doi.org/10.1016/j.patcog.2025.111903"
 url_code: "https://github.com/Livsdjo/FCRNet-Network-code"
+ccf: "B"
 ---

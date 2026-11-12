@@ -13,9 +13,9 @@ sections:
     design:
       columns: '1'
       spacing:
-        padding: ['5rem', '1.5rem', '5rem', '1.5rem']
-      css_class: fullscreen lab-hero-section
-  
+        padding: ['3rem', '1.5rem', '2.5rem', '1.5rem']
+      css_class: lab-hero-section
+
   - block: markdown
     content:
       title:
@@ -40,23 +40,6 @@ sections:
   - block: markdown
     content:
       title:
-      text: '{{< lab-section-head title="研究方向" >}}'
-    design:
-      columns: '1'
-      css_class: lab-block-head
-
-  - block: markdown
-    content:
-      title:
-      subtitle: ''
-      text: '{{< lab-research-cards >}}'
-    design:
-      columns: '1'
-      css_class: lab-major
-
-  - block: markdown
-    content:
-      title:
       text: '{{< lab-section-head title="学术成果" >}}'
     design:
       columns: '1'
@@ -65,7 +48,7 @@ sections:
   - block: markdown
     content:
       title:
-      text: '{{< lab-outcomes-grid count="2" >}}'
+      text: '{{< lab-outcomes-grid count="3" >}}'
     design:
       columns: '1'
       css_class: lab-outcomes-section

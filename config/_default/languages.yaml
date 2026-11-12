@@ -6,3 +6,12 @@ zh:
   title: 智能感知与决策实验室
   params:
     description: 本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。
+    lead: 聚焦大模型与智能体、弱光视觉、深度估计，做能落地的感知与决策研究
+
+en:
+  locale: en-US
+  title: Intelligent Perception & Decision Lab
+  languageName: English
+  params:
+    description: Research on large models and agents, low-light vision, depth estimation, and human action recognition.
+    lead: Large models and agents, low-light vision, and depth estimation — perception and decision research that ships.

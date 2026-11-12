@@ -24,4 +24,6 @@ tags:
 - "Light field imaging"
 featured: false
 url_html: "https://doi.org/10.1007/s11063-022-10955-x"
+research:
+  - depth
 ---

@@ -18,4 +18,5 @@ abstract: |
 featured: false
 url_html: "https://doi.org/10.1109/icassp49660.2025.10887571"
 url_code: "https://github.com/Livsdjo/NCNet-Code"
+ccf: "C"
 ---

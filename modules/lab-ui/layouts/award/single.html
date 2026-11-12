@@ -5,7 +5,7 @@
   {{ $metaTags = $metaTags | append (dict "label" "获奖年份" "value" (.Format "2006")) }}
 {{ end }}
 {{ if .Params.authors }}
-  {{ $authors := partial "lab-detail-authors.html" . }}
+  {{ $authors := partial "components/detail-authors.html" . }}
   {{ $metaTags = $metaTags | append (dict "label" "获奖人" "value" ($authors | safeHTML)) }}
 {{ end }}
 {{ $levelKeys := slice "国家级" "省级" "市级" "校级" }}
@@ -18,6 +18,6 @@
 {{ end }}
 {{ .Scratch.Set "lab_article_meta_tags" $metaTags }}
 
-{{ partial "lab-build-meta-and-shell.html" . }}
+{{ partial "article/build-meta-and-shell.html" . }}
 
 {{- end -}}

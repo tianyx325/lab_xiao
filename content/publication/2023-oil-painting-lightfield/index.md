@@ -31,4 +31,6 @@ tags:
 featured: false
 url_html: "http://cjig.ijournals.cn/jig/ch/reader/view_abstract.aspx?file_no=220774"
 url_pdf: "http://cjig.ijournals.cn/jig/ch/reader/create_pdf.aspx?file_no=220774&flag=1&year_id=2023&quarter_id=10"
+research:
+  - depth
 ---

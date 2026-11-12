@@ -1,0 +1,261 @@
+# Sveltia CMS 配置（数据模型见 docs/DATA-MODEL.md，字段契约见 docs/SCHEMA.md）
+# 本文件覆盖 blox-plugin-decap-cms 的默认 data/decap_cms_config.yaml（项目数据优先）。
+# 渲染产物：/admin/config.yml（由 content/admin/index.md 的 decap_cms_config 输出格式生成）。
+#
+# 双语约定：structure: multiple_files → 中文写 <slug>/index.md，英文写 <slug>/index.en.md。
+# 字段 i18n 规则：true = 各语言单独填写（标题/摘要等）；duplicate = 建英文条目时自动带出中文值
+# （日期/编号/枚举/链接等共用字段），改不改随意；未标注的字段继承 collection 级 true。
+
+backend:
+  # Sveltia 原生支持 GitHub 后端（需配一次 OAuth，见 docs/CMS.md）
+  name: github
+  repo: tianyx325/lab_xiao
+  branch: main
+
+media_folder: static/uploads
+public_folder: /uploads
+
+site_url: https://tianyx325.github.io/lab_xiao/
+locale: zh_Hans
+
+i18n:
+  structure: multiple_files
+  locales: [zh, en]
+  default_locale: zh
+
+collections:
+  # ── 成员 Member：content/authors/<slug>/_index.md ──
+  - name: members
+    label: 团队成员
+    label_singular: 成员
+    folder: content/authors
+    path: '{{slug}}/_index'
+    create: true
+    sortable_fields: [title, role, user_groups]
+    summary: '{{title}} · {{role}}'
+    fields:
+      - { label: 姓名, name: title, widget: string }
+      - { label: 名（拼音/英文，first name）, name: first_name, widget: string, required: false }
+      - { label: 姓（拼音/英文，last name）, name: last_name, widget: string, required: false }
+      - { label: 身份（如 教授 / 研一）, name: role, widget: string }
+      - { label: 入学年份, name: enroll_year, widget: number, required: false, i18n: duplicate, hint: 如 2025；用于学籍自动提醒 }
+      - { label: 个人主页链接, name: personal_url, widget: string, required: false, i18n: duplicate, hint: GitHub / 个人学术页 }
+      - { label: 毕业去向, name: destination, widget: string, required: false, hint: 仅毕业生填，如「华为 · 算法工程师」或「读博 @ 西安交通大学」 }
+      - label: 分组
+        name: user_groups
+        widget: select
+        multiple: true
+        max: 1
+        default: [研一]
+        options: [导师, 博士生, 研三, 研二, 研一, 本科生, 毕业生]
+        hint: 必选一个；分组名与成员页渲染一一对应，勿自创
+      - { label: 所属研究方向, name: research, widget: relation, collection: research, display_fields: [title], search_fields: [title], value_field: '{{slug}}', multiple: true, required: false, i18n: duplicate }
+      - { label: 实验室负责人, name: superuser, widget: boolean, default: false, required: false, i18n: duplicate, hint: 仅一人 }
+      - { label: 组内排序, name: weight, widget: number, default: 1, required: false, i18n: duplicate }
+      - { label: 邮箱, name: email, widget: string, required: false, i18n: duplicate }
+      - { label: 短简介, name: bio, widget: string, required: false }
+      - { label: 兴趣标签, name: interests, widget: list, required: false }
+      - { label: 个人主页正文, name: body, widget: markdown, required: false }
+
+  # ── 论文 Publication：content/publication/<slug>/index.md ──
+  - name: publication
+    label: 论文
+    label_singular: 论文
+    folder: content/publication
+    path: '{{slug}}/index'
+    create: true
+    sortable_fields: [date, title]
+    summary: '{{title}} · {{publication_short}}'
+    media_folder: ''   # 图片进入该条目的页面捆绑目录（与现有 jpg 同级）
+    public_folder: ''
+    fields:
+      - { label: 标题, name: title, widget: string }
+      - { label: 作者, name: authors, widget: list, i18n: duplicate, hint: 成员填 slug（如 admin、su-haonan），外协填姓名全名 }
+      - { label: 发表日期, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, i18n: duplicate }
+      - label: 类型
+        name: publication_types
+        widget: select
+        multiple: true
+        max: 1
+        default: [paper-conference]
+        i18n: duplicate
+        options:
+          - { label: 期刊论文, value: article-journal }
+          - { label: 会议论文, value: paper-conference }
+          - { label: 预印本, value: preprint }
+          - { label: 技术报告, value: report }
+          - { label: 学位论文, value: thesis }
+      - { label: 期刊/会议全称, name: publication, widget: string, i18n: duplicate, hint: 专名两语言一致（中文论文保留中文刊名） }
+      - { label: 期刊/会议简称, name: publication_short, widget: string, required: false, i18n: duplicate }
+      - { label: 卷, name: volume, widget: string, required: false, i18n: duplicate }
+      - { label: 页码, name: pages, widget: string, required: false, i18n: duplicate }
+      - { label: DOI, name: doi, widget: string, required: false, i18n: duplicate }
+      - { label: CCF 等级, name: ccf, widget: select, required: false, default: '', i18n: duplicate, options: [{ label: 无, value: '' }, { label: A, value: A }, { label: B, value: B }, { label: C, value: C }] }
+      - { label: 论文获奖, name: paper_award, widget: string, required: false, i18n: duplicate, hint: 如 Best Paper Honorable Mention }
+      - { label: PDF 链接, name: url_pdf, widget: string, required: false, i18n: duplicate }
+      - { label: 文章链接, name: url_html, widget: string, required: false, i18n: duplicate }
+      - { label: 代码仓库, name: url_code, widget: string, required: false, i18n: duplicate }
+      - { label: 摘要（列表卡片用）, name: summary, widget: string, required: false }
+      - { label: 学术摘要, name: abstract, widget: text, required: false }
+      - { label: 精选（首页优先展示）, name: featured, widget: boolean, default: false, required: false, i18n: duplicate }
+      - { label: 成果配图, name: image, widget: file, required: false, i18n: duplicate }
+
+  # ── 专利 Patent：content/patent/<slug>/index.md ──
+  - name: patent
+    label: 专利
+    label_singular: 专利
+    folder: content/patent
+    path: '{{slug}}/index'
+    create: true
+    sortable_fields: [date, title]
+    summary: '{{title}} · {{patent_number}}'
+    media_folder: ''
+    public_folder: ''
+    fields:
+      - { label: 名称, name: title, widget: string }
+      - { label: 发明人, name: authors, widget: list, i18n: duplicate, hint: 成员填 slug，外协填姓名全名 }
+      - { label: 授权日期, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, i18n: duplicate }
+      - { label: 申请日期, name: application_date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false, i18n: duplicate }
+      - { label: 专利号, name: patent_number, widget: string, i18n: duplicate, hint: 如 ZL202310972064.7 }
+      - label: 专利类型
+        name: patent_type
+        widget: select
+        default: invention
+        i18n: duplicate
+        options:
+          - { label: 发明专利, value: invention }
+          - { label: 实用新型, value: utility }
+          - { label: 外观设计, value: design }
+      - label: 状态
+        name: patent_status
+        widget: select
+        default: granted
+        i18n: duplicate
+        options:
+          - { label: 已授权, value: granted }
+      - { label: 标签（仅主题词）, name: tags, widget: list, required: false, hint: 类型与状态已由上方字段表达，此处勿再填 }
+      - { label: 专利链接, name: url_patent, widget: string, required: false, i18n: duplicate }
+      - { label: PDF 链接, name: url_pdf, widget: string, required: false, i18n: duplicate }
+      - { label: 摘要, name: summary, widget: string, required: false }
+      - { label: 说明书摘要正文, name: body, widget: markdown, required: false }
+
+  # ── 项目 Project：content/project/<slug>/index.md ──
+  - name: project
+    label: 项目
+    label_singular: 项目
+    folder: content/project
+    path: '{{slug}}/index'
+    create: true
+    sortable_fields: [date, title]
+    summary: '{{title}} · {{project_code}}'
+    media_folder: ''
+    public_folder: ''
+    fields:
+      - { label: 名称, name: title, widget: string }
+      - { label: 负责人/参与人, name: authors, widget: list, i18n: duplicate, hint: 成员填 slug }
+      - { label: 起始日期, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, i18n: duplicate }
+      - { label: 结束日期, name: date_end, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false, i18n: duplicate }
+      - { label: 课题号, name: project_code, widget: string, required: false, i18n: duplicate, hint: 如 62371389；纵向项目必填 }
+      - label: 项目类别
+        name: project_type
+        widget: select
+        default: vertical
+        i18n: duplicate
+        options:
+          - { label: 纵向（有立项依据）, value: vertical }
+          - { label: 横向（合作/定制）, value: horizontal }
+      - { label: 资助类别, name: funding, widget: string, required: false, i18n: duplicate, hint: 纵向项目填，如「国家自然科学基金面上项目」 }
+      - label: 状态
+        name: project_status
+        widget: select
+        default: ongoing
+        i18n: duplicate
+        options:
+          - { label: 在研, value: ongoing }
+          - { label: 已结题, value: completed }
+      - { label: 标签（含资助类型，如 国家自然科学基金/面上项目）, name: tags, widget: list, required: false }
+      - { label: 外部链接, name: url_external, widget: string, required: false, i18n: duplicate }
+      - { label: 配图, name: image, widget: file, required: false, i18n: duplicate }
+      - { label: 摘要, name: summary, widget: string, required: false }
+      - { label: 详细介绍, name: body, widget: markdown, required: false }
+
+  # ── 奖项 Award：content/award/<slug>/index.md ──
+  - name: award
+    label: 奖项
+    label_singular: 奖项
+    folder: content/award
+    path: '{{slug}}/index'
+    create: true
+    sortable_fields: [date, title]
+    summary: '{{title}} · {{authors}}'
+    media_folder: ''
+    public_folder: ''
+    fields:
+      - { label: 名称, name: title, widget: string }
+      - { label: 获奖人, name: authors, widget: list, i18n: duplicate, hint: 成员填 slug，外协填姓名全名 }
+      - { label: 获奖日期, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, i18n: duplicate }
+      - label: 奖项级别
+        name: level
+        widget: select
+        default: provincial
+        i18n: duplicate
+        options:
+          - { label: 国家级, value: national }
+          - { label: 省部级, value: provincial }
+          - { label: 校级, value: university }
+          - { label: 学会/行业, value: society }
+      - label: 获奖等级
+        name: rank
+        widget: select
+        required: false
+        default: ''
+        i18n: duplicate
+        options:
+          - { label: 无, value: '' }
+          - { label: 特等奖, value: special }
+          - { label: 一等奖, value: first }
+          - { label: 二等奖, value: second }
+          - { label: 三等奖, value: third }
+          - { label: 优秀, value: excellent }
+      - { label: 级别标签（仅主题词）, name: tags, widget: list, required: false, hint: 级别与等级已由上方字段表达，此处勿再填 }
+      - { label: 简介, name: summary, widget: string, required: false }
+      - { label: 详情正文, name: body, widget: markdown, required: false }
+
+  # ── 研究方向 Research：content/research/<slug>/index.md ──
+  - name: research
+    label: 研究方向
+    label_singular: 研究方向
+    folder: content/research
+    path: '{{slug}}/index'
+    create: true
+    sortable_fields: [weight, title]
+    summary: '{{title}}'
+    media_folder: ''
+    public_folder: ''
+    fields:
+      - { label: 名称, name: title, widget: string }
+      - { label: 日期, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false, i18n: duplicate }
+      - { label: 排序权重（小在前）, name: weight, widget: number, default: 100, i18n: duplicate }
+      - { label: 卡片摘要, name: summary, widget: string }
+      - { label: 标签, name: tags, widget: list, required: false }
+      - { label: 方向页正文（方向简介/研究内容/关键问题/技术路线）, name: body, widget: markdown }
+
+  # ── 动态 Post：content/post/<slug>/index.md ──
+  - name: post
+    label: 新闻动态
+    label_singular: 动态
+    folder: content/post
+    path: '{{slug}}/index'
+    create: true
+    sortable_fields: [date, title]
+    summary: '{{title}} · {{date}}'
+    media_folder: ''
+    public_folder: ''
+    fields:
+      - { label: 标题, name: title, widget: string }
+      - { label: 摘要, name: summary, widget: string, required: false }
+      - { label: 日期, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, i18n: duplicate }
+      - { label: 草稿, name: draft, widget: boolean, default: false, required: false, i18n: duplicate }
+      - { label: 作者, name: authors, widget: list, i18n: duplicate, hint: 成员填 slug }
+      - { label: 分类（如 通知公告/学术活动）, name: categories, widget: list, required: false }
+      - { label: 正文, name: body, widget: markdown }

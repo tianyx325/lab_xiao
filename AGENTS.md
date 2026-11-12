@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Academic research lab site (智能感知与决策实验室) built with Hugo + HugoBlox (blox-bootstrap v5). Content is Markdown in `content/`, theme uses SCSS in `assets/scss/`. Deployed to GitHub Pages via `gh-pages` branch.
+Academic research lab site (智能感知与决策实验室) built with Hugo + HugoBlox (blox-bootstrap v5). Content is Markdown in `content/`; the custom theme is the self-contained module `modules/lab-ui/` (layouts + SCSS + JS). Deployed to GitHub Pages via `gh-pages` branch.
 
 ## Build Commands
 
@@ -13,12 +13,15 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 ## Directory Structure
 
 - `content/` — Markdown content by section: `publication/`, `patent/`, `award/`, `project/`, `research/`, `post/`, `authors/`
-- `modules/lab-ui/layouts/` — Custom Hugo templates. Override the vendor theme.
-- `assets/scss/template.scss` — Main stylesheet. All style changes go here.
-- `assets/scss/lab/_tokens.scss` — Sole design-token source (`$lab-*` / `--lab-*`).
-- `assets/scss/lab/_type.scss` — Typography mixins (display/section titles).
-- `data/fonts/lab.toml` — Inter + Noto Sans SC (`appearance.font: lab`).
-- `config/_default/` — Hugo config split into `hugo.yaml`, `params.yaml`, `languages.yaml`, `menus.yaml`, `module.yaml`.
+- `modules/lab-ui/` — Self-contained theme module (see its README.md)
+  - `modules/lab-ui/layouts/partials/{components,listing,article}/` — Grouped partials; top-level unprefixed files are vendor overrides (keep names)
+  - `modules/lab-ui/assets/scss/template.scss` — Entry; layered via `@import` (order = cascade order, do not reorder)
+  - `modules/lab-ui/assets/scss/lab/_tokens.scss` — Sole design-token source (`$lab-*` / `--lab-*`)
+  - `modules/lab-ui/assets/scss/lab/_type.scss` — Typography mixins (text roles + display/section titles)
+  - `modules/lab-ui/assets/js/` — Single-purpose vanilla JS components
+- `assets/media/` — Site media only (logo/icon); no site-level scss/js
+- `data/fonts/lab.toml` — Inter + Noto Sans SC (`appearance.font: lab`)
+- `config/_default/` — Hugo config split into `hugo.yaml`, `params.yaml`, `languages.yaml`, `menus.yaml`, `module.yaml`
 
 ## Constraints
 
@@ -31,7 +34,7 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 
 - Hugo Modules manage the base theme (`blox-bootstrap/v5`). Custom overrides live in `modules/lab-ui/`.
 - Template lookup: `modules/lab-ui/layouts/<section>/single.html` for detail pages, `section/<name>.html` for list pages, `_default/list.html` as fallback.
-- Shared partials in `modules/lab-ui/layouts/partials/` prefixed with `lab-` (e.g., `lab-article-shell-start.html`).
+- Shared partials in `modules/lab-ui/layouts/partials/`, grouped by domain: `components/`, `listing/`, `article/`; vendor-override files keep their original top-level names.
 - Shortcodes in `modules/lab-ui/layouts/shortcodes/` for content-embeddable components.
 
 ## Content Types
@@ -40,15 +43,17 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 |---------|---------|-----------------|
 | publication | Academic papers | `publication_types`, `authors`, `abstract`, `doi` |
 | patent | Patents | `authors` (inventors), `patent_number` |
-| award | Awards/honors | `authors` (display), `award_date` (keep in sync with `date`) |
-| project | Research projects | `external_link`, `image` |
+| award | Awards/honors | `authors` (display), `level`, `rank` |
+| project | Research projects | `project_type`, `funding`, `url_external`, `image` |
 | research | Research directions | Used for overview cards |
 | post | News/blog posts | `authors`, `tags`, `categories` |
 
 ## SCSS Conventions
 
-- Design tokens: define in `assets/scss/lab/_tokens.scss` only. Prefer `var(--lab-*)` in rules; use `$lab-*` for Sass math / maps.
-- Do not hardcode brand hex/rgba in `template.scss` — add a token, then reference it.
-- Brand purple (`$lab-blue`) is accent-only (links, active, focus); page atmosphere stays neutral.
+- Design tokens: define in `modules/lab-ui/assets/scss/lab/_tokens.scss` only. Prefer `var(--lab-*)` in rules; use `$lab-*` for Sass math / maps.
+- Do not hardcode brand hex/rgba in view stylesheets — add a token, then reference it.
+- Brand accent is DeepSeek brand blue `#4D6BFE` (SCSS name `$lab-blue`, kept for legacy reasons) — interaction only: buttons, active, focus, hover borders. Body links inherit the same accent; page is pure white `#FFFFFF` with `#F9FAFB` alternating sections. Ink is blue-tinted `#1E232C`; borders are ink-alpha (`rgba(30,35,44,.14)`), never standalone grays. Dark mode is near-black `#0A0A0A` with lifted blue `#6799FE` links. No gradients, no glow — premium comes from ink quality and whitespace (reference: deepseek.com `--ds-color-*` tokens).
 - Display/section titles: medium weight (`$lab-weight-display` / `$lab-weight-heading`) + tight tracking; use mixins from `_type.scss`.
+- Spacing: 8px base scale (`$lab-space-1..9` = 4/8/12/16/24/32/40/48/64) is the ONLY allowed set. Every margin/padding/gap must resolve to a `$lab-space-*` token or a semantic alias (`$lab-space-inline/stack/block/section/section-sm`); never write raw rem/px. 4px is a half-step for tight component internals only; sub-4px px tweaks are permitted. Exceptions require a comment and should be rare (current: two >4rem section offsets).
+- Typography: the `$lab-text-*` steps are the complete scale — never introduce new font sizes. Text roles are mixins in `_type.scss` (`lab-type-caption` / `lab-type-ui` / `lab-type-body` / `lab-type-lead` + title mixins); components consume roles, not raw steps. Body = 16px / 1.75 leading (CJK-optimal). Reading columns: `$lab-read-width-detail` = 42rem ≈ 42 CJK chars/line (WCAG CJK advisory ≤40); `$lab-read-width` = 52rem for list rows.
 - Prefer quiet academic motion (color/opacity); avoid glow shadows and layout-shifting font-weight toggles.

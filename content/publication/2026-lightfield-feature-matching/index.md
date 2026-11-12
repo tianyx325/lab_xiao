@@ -24,4 +24,7 @@ tags:
 featured: false
 url_html: "https://doi.org/10.1109/TIP.2026.3662579"
 url_pdf: "https://hal.science/hal-05645938v1/document"
+research:
+  - depth
+ccf: "A"
 ---

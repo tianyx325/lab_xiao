@@ -35,7 +35,7 @@ permalinks:
   tags: '/tag/:slug/'
   categories: '/category/:slug/'
   publication_types: '/publication-type/:slug/'
-disableAliases: true
+disableAliases: false  # GitHub Pages 不支持 _redirects，用 Hugo 原生 alias 页做旧 URL 重定向
 outputs:
   home: [HTML, RSS, JSON, WebAppManifest, headers, redirects]
   section: [HTML, RSS]

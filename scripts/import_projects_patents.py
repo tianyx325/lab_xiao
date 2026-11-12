@@ -122,37 +122,14 @@ def status_zh_patent(status: str) -> str:
     }.get(s, status or "—")
 
 
-def funding_tags(source: str, area: str) -> list[str]:
+def project_topic_tags(area: str) -> list[str]:
+    """主题标签（v2 模型）：资助类型走 funding 字段，tags 只放研究主题。"""
     tags: list[str] = []
-    src = as_str(source)
-    if "国家自然科学基金" in src:
-        tags.append("国家自然科学基金")
-        if "重点" in src:
-            tags.append("重点项目")
-        elif "面上" in src:
-            tags.append("面上项目")
-    elif "省" in src and "自然" in src:
-        tags.append("省级基金")
-    elif src:
-        # short label from source
-        short = re.split(r"[（(]", src, 1)[0].strip()
-        if short:
-            tags.append(short[:20])
-
     for part in re.split(r"[；;、，,]", as_str(area)):
         part = part.strip()
         if part and part not in tags:
             tags.append(part)
-    # de-dupe preserve order, max ~6
-    seen = set()
-    out = []
-    for t in tags:
-        if t not in seen:
-            seen.add(t)
-            out.append(t)
-        if len(out) >= 6:
-            break
-    return out or ["科研项目"]
+    return tags or ["科研项目"]
 
 
 def project_slug(row: dict) -> str:
@@ -191,7 +168,8 @@ def render_project(row: dict) -> str:
     pi = as_str(row.get("principal_investigator")) or "肖照林"
     status = status_zh_project(as_str(row.get("status")))
     desc = as_str(row.get("description"))
-    tags = funding_tags(source, as_str(row.get("research_area")))
+    tags = project_topic_tags(as_str(row.get("research_area")))
+    kind = "vertical" if code else "horizontal"
     authors = ["admin"] if "肖照林" in pi else []
     period = f"{ym(start)} – {ym(end)}" if start or end else "—"
 
@@ -220,11 +198,14 @@ def render_project(row: dict) -> str:
         fm.append(yaml_list(authors))
     fm.append("tags:")
     fm.extend(yaml_list(tags).splitlines())
-    fm.append("external_link: ''")
+    fm.append("url_external: ''")
     fm.append("image:")
     fm.append("  focal_point: Center")
     if code:
         fm.append(f"project_code: {yaml_quote(code)}")
+    fm.append(f'project_type: "{kind}"')
+    if source:
+        fm.append(f"funding: {yaml_quote(source)}")
     fm.append(f"project_status: {yaml_quote(as_str(row.get('status')))}")
     fm.append("---")
     fm.append("")
@@ -242,9 +223,8 @@ def render_patent(row: dict) -> str:
     inventors = as_str(row.get("inventors"))
     status = status_zh_patent(as_str(row.get("status")))
     authors = ["admin"] if "肖照林" in inventors else []
-    tags = ["发明专利"]
-    if as_str(row.get("status")).lower() == "granted":
-        tags.append("已授权")
+    # v2 模型：类型走 patent_type，状态走 patent_status，tags 只放主题词
+    tags: list[str] = []
 
     body = [
         "**专利类型**：发明专利  ",
@@ -273,6 +253,7 @@ def render_patent(row: dict) -> str:
     fm.extend(yaml_list(tags).splitlines())
     if number:
         fm.append(f"patent_number: {yaml_quote(number)}")
+    fm.append('patent_type: "invention"')
     fm.append(f"patent_status: {yaml_quote(as_str(row.get('status')))}")
     fm.append("---")
     fm.append("")

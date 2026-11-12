@@ -1,0 +1,36 @@
+# English navigation labels (URLs shared with main menus.yaml structure)
+main:
+  - name: Home
+    url: /
+    weight: 5
+  - name: Research
+    url: /research/
+    weight: 10
+  - name: Outcomes
+    identifier: publications
+    url: /publication/
+    weight: 20
+  - name: Papers
+    parent: publications
+    url: /publication/
+    weight: 21
+  - name: Patents
+    parent: publications
+    url: /patent/
+    weight: 22
+  - name: Awards
+    parent: publications
+    url: /award/
+    weight: 23
+  - name: Projects
+    url: /project/
+    weight: 30
+  - name: People
+    url: /people/
+    weight: 40
+  - name: News
+    url: /post/
+    weight: 50
+  - name: Contact
+    url: /contact/
+    weight: 60

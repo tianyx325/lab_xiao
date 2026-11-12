@@ -23,4 +23,7 @@ tags:
 - "Sparse representation"
 featured: false
 url_html: "https://doi.org/10.1109/icip.2017.8296840"
+research:
+  - depth
+ccf: "C"
 ---

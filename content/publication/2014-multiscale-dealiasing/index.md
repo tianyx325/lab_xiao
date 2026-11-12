@@ -23,4 +23,7 @@ tags:
 featured: false
 url_pdf: "https://www.jcad.cn/cn/article/pdf/preview/34b08dff-b5ef-4bde-ad4f-abdacc24132c.pdf"
 url_html: "https://www.jcad.cn/cn/article/id/34b08dff-b5ef-4bde-ad4f-abdacc24132c"
+research:
+  - depth
+ccf: "B"
 ---

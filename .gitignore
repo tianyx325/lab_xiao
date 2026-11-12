@@ -11,3 +11,4 @@ _debug_*.py
 _v.py
 _v.txt
 _excel_preview.json
+__pycache__/

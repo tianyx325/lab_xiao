@@ -18,7 +18,7 @@
 {{- $factRow := slice -}}
 {{- $linkRow := slice -}}
 {{- if .Params.authors -}}
-  {{- $authors := partial "lab-detail-authors.html" . -}}
+  {{- $authors := partial "components/detail-authors.html" . -}}
   {{- $authorRow = $authorRow | append (dict "label" "作者" "value" ($authors | safeHTML)) -}}
 {{- end -}}
 {{- with .Date -}}
@@ -83,7 +83,7 @@
 {{- end -}}
 {{- .Scratch.Set "lab_article_meta_tags" (slice $authorRow $factRow $linkRow) -}}
 
-{{ partial "lab-article-shell-start.html" . }}
+{{ partial "article/shell-start.html" . }}
 
     {{ if or .Params.abstract .Params.tags }}
     <div class="lab-article-abstract">
@@ -100,6 +100,6 @@
     </div>
     {{ end }}
 
-{{ partial "lab-article-shell-end.html" . }}
+{{ partial "article/shell-end.html" . }}
 
 {{- end -}}

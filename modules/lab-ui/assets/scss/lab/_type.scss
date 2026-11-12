@@ -1,0 +1,63 @@
+/* Typography utilities — depend on assets/scss/lab/_tokens.scss only.
+   Import once from template.scss after tokens. */
+
+@mixin lab-font-sans {
+  font-family: $lab-font-sans;
+}
+
+@mixin lab-font-serif {
+  font-family: $lab-font-serif;
+}
+
+@mixin lab-display-title {
+  @include lab-font-serif;
+  font-size: $lab-text-display;
+  font-weight: $lab-weight-display;
+  letter-spacing: $lab-tracking-display;
+  line-height: $lab-leading-display;
+}
+
+@mixin lab-section-title {
+  @include lab-font-serif;
+  font-size: $lab-text-heading;
+  font-weight: $lab-weight-heading;
+  letter-spacing: $lab-tracking-heading;
+  line-height: $lab-leading-tight;
+}
+
+/* Alias — same scale as section titles (list/page H1) */
+@mixin lab-page-title {
+  @include lab-section-title;
+}
+
+/* ── Text roles — components consume THESE, not raw $lab-text-* steps ──
+   Role = size + leading + weight bundled, so re-tuning a role retunes
+   every consumer. Map: caption→xs, ui→sm, body→base, lead→md. */
+
+/* Captions, meta info, footnotes, venue tags */
+@mixin lab-type-caption {
+  font-size: $lab-text-xs;
+  font-weight: $lab-weight-medium;
+  line-height: $lab-leading-snug;
+}
+
+/* UI labels, buttons, nav items, form controls */
+@mixin lab-type-ui {
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-medium;
+  line-height: $lab-leading-snug;
+}
+
+/* Long-form body reading (default paragraph text) */
+@mixin lab-type-body {
+  font-size: $lab-text-base;
+  font-weight: $lab-weight-body;
+  line-height: $lab-leading-body;
+}
+
+/* Lead paragraphs, subtitle, emphasized intro text */
+@mixin lab-type-lead {
+  font-size: $lab-text-md;
+  font-weight: $lab-weight-body;
+  line-height: $lab-leading-snug;
+}

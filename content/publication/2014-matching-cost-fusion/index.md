@@ -15,4 +15,6 @@ abstract: |
   This paper proposes a novel method of fusing different matching cost for dense depth map recovery in a global optimization framework. Two simple classical cost functions, NCC and SAD, are combined to make a complementary costs fusion, which is robust against noises and weak radiometric difference. We address complicated difficulties as texture-less region and occlusion in a multi-view energy based global optimization, which is efficiently solved via graph cuts algorithm. We evaluate our cost fusion and optimization algorithm on camera-array captured scenes. The experimental results demonstrate that, our cost fusion get better result than single cost function, and our multi-view optimization gains greatly than stereo method, that means our algorithm is appropriate for camera-array against complex difficulties.
 featured: false
 url_html: "https://doi.org/10.1109/icvrv.2014.67"
+research:
+  - depth
 ---

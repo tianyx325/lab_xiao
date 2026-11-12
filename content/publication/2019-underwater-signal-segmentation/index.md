@@ -23,4 +23,5 @@ tags:
 - "Signal detection"
 featured: false
 url_html: "https://doi.org/10.1016/j.jvcir.2019.02.036"
+ccf: "C"
 ---

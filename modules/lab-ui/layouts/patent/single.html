@@ -11,10 +11,10 @@
   {{ $metaTags = $metaTags | append (dict "label" "授权日" "value" (.Format "2006-01-02")) }}
 {{ end }}
 {{ if .Params.authors }}
-  {{ $authors := partial "lab-detail-authors.html" . }}
+  {{ $authors := partial "components/detail-authors.html" . }}
   {{ $metaTags = $metaTags | append (dict "label" "发明人" "value" ($authors | safeHTML)) }}
 {{ end }}
-{{ with partial "lab-status-label.html" (dict "kind" "patent" "page" .) }}
+{{ with partial "components/status-label.html" (dict "kind" "patent" "page" .) }}
   {{ $metaTags = $metaTags | append (dict "label" "状态" "value" .) }}
 {{ end }}
 {{ with .Params.url_patent }}
@@ -25,6 +25,6 @@
 {{ end }}
 {{ .Scratch.Set "lab_article_meta_tags" $metaTags }}
 
-{{ partial "lab-build-meta-and-shell.html" . }}
+{{ partial "article/build-meta-and-shell.html" . }}
 
 {{- end -}}

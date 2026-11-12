@@ -1,0 +1,96 @@
+{{- /*
+  Homepage body: main (outcomes) | sidebar (news + mentors).
+  Stacks to one column on small screens.
+*/ -}}
+{{- $newsCount := int (.Get "news" | default 3) -}}
+{{- $outcomeCount := int (.Get "outcomes" | default 2) -}}
+{{- $posts := first $newsCount (sort (where site.RegularPages "Section" "post") "Date" "desc") -}}
+{{- $mentors := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice "导师") -}}
+{{- $directors := slice -}}
+{{- $others := slice -}}
+{{- range $mentors -}}
+  {{- if in (.Params.role | default "" | string) "实验室负责人" -}}
+    {{- $directors = $directors | append . -}}
+  {{- else -}}
+    {{- $others = $others | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $mentors = $directors | append (sort $others "Title" "asc") -}}
+
+{{- $pubs := first $outcomeCount (sort (where site.RegularPages "Section" "publication") "Date" "desc") -}}
+{{- $patents := first $outcomeCount (sort (where site.RegularPages "Section" "patent") "Date" "desc") -}}
+{{- $awards := first $outcomeCount (sort (where site.RegularPages "Section" "award") "Date" "desc") -}}
+{{- $cols := slice
+  (dict "title" "论文" "more" "查看更多" "href" "publication/" "pages" $pubs)
+  (dict "title" "专利" "more" "查看更多" "href" "patent/" "pages" $patents)
+  (dict "title" "奖项" "more" "查看更多" "href" "award/" "pages" $awards)
+-}}
+
+<div class="lab-home-grid">
+  <div class="lab-home-main">
+    <div class="lab-home-block">
+      <div class="section-head">
+        <h2>学术成果</h2>
+      </div>
+      <div class="lab-outcomes">
+        {{- range $cols -}}
+        <div class="lab-outcomes-col">
+          <h3 class="lab-outcomes-col-title">{{ .title }}</h3>
+          <div class="lab-outcomes-cards">
+            {{- range $i, $p := .pages -}}
+              {{ partial "functions/render_view" (dict "page" $.Page "item" $p "view" "card" "index" $i) }}
+            {{- else -}}
+              <p class="lab-outcomes-empty">暂无</p>
+            {{- end -}}
+          </div>
+          <a class="lab-outcomes-more" href="{{ .href | relURL }}">{{ .more }}</a>
+        </div>
+        {{- end -}}
+      </div>
+    </div>
+  </div>
+
+  <aside class="lab-home-aside">
+    <div class="lab-home-aside-block">
+      <h2 class="lab-home-aside-title">动态</h2>
+      {{- if $posts -}}
+      <ol class="lab-news-timeline">
+        {{- range $posts -}}
+        <li class="lab-news-item">
+          <time class="lab-news-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01" }}</time>
+          <a class="lab-news-headline" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </li>
+        {{- end -}}
+      </ol>
+      <a class="lab-outcomes-more" href="{{ "post/" | relURL }}">查看更多</a>
+      {{- else -}}
+      <p class="lab-outcomes-empty">暂无动态</p>
+      {{- end -}}
+    </div>
+
+    {{- if $mentors -}}
+    <div class="lab-home-aside-block">
+      <h2 class="lab-home-aside-title">导师</h2>
+      <ul class="lab-mentor-list">
+        {{- range $mentors -}}
+        {{- $link := "" -}}
+        {{- with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) -}}
+          {{- $link = .RelPermalink -}}
+        {{- end -}}
+        <li class="lab-mentor-item">
+          {{- if $link -}}
+          <a href="{{ $link }}">{{ .Title }}</a>
+          {{- else -}}
+          <span>{{ .Title }}</span>
+          {{- end -}}
+          {{- with .Params.role -}}
+          <span class="lab-mentor-role">{{ . }}</span>
+          {{- end -}}
+        </li>
+        {{- end -}}
+      </ul>
+      <a class="lab-outcomes-more" href="{{ "people/" | relURL }}">查看成员</a>
+    </div>
+    {{- end -}}
+  </aside>
+</div>

@@ -23,4 +23,7 @@ tags:
 featured: false
 url_html: "https://doi.org/10.1109/ICIP42928.2021.9506361"
 url_pdf: "https://hal.science/hal-03233522/document"
+research:
+  - depth
+ccf: "C"
 ---

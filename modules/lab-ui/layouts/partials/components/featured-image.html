@@ -1,0 +1,18 @@
+{{- /* Returns featured image data (src, srcset, width, height) for a page.
+       Near-square 4:5 crops for poster cards. */ -}}
+{{- $page := . -}}
+{{- $result := dict -}}
+{{- $resource := partial "blox-core/functions/get_featured_image.html" $page -}}
+{{- $anchor := "Smart" -}}
+{{- if reflect.IsMap $page.Params.image -}}
+  {{- with $page.Params.image.focal_point -}}
+    {{- $anchor = . -}}
+  {{- end -}}
+{{- end -}}
+{{- with $resource -}}
+  {{- $lg := .Fill (printf "420x525 %s webp q72" $anchor) -}}
+  {{- $md := .Fill (printf "320x400 %s webp q70" $anchor) -}}
+  {{- $sm := .Fill (printf "240x300 %s webp q68" $anchor) -}}
+  {{- $result = dict "src" $md.RelPermalink "srcset" (printf "%s 240w, %s 320w, %s 420w" $sm.RelPermalink $md.RelPermalink $lg.RelPermalink) "width" $md.Width "height" $md.Height -}}
+{{- end -}}
+{{- return $result -}}

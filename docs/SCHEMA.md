@@ -1,5 +1,7 @@
 # 内容字段契约（可复用）
 
+实体结构、主键/外键与关联关系见 [`DATA-MODEL.md`](DATA-MODEL.md)；本文件管逐字段怎么填。
+
 换实验室或批量新增内容时，按此表填写。展示层依赖这些字段；`---` 之后的正文为自定义，脚本默认不覆盖。
 
 ## 单一配置源 `params.lab`
@@ -34,7 +36,7 @@ py -3 scripts/sync_lab_identity.py --dry-run
 - `languages.yaml` → `zh.title` / `zh.params.description`
 - `params.yaml` → `marketing.seo.org_name` / `description`、`footer.copyright.notice`
 
-主题色：`assets/scss/lab/_tokens.scss` 的 `$lab-blue` 与 `data/themes/minimal.toml` 的 `primary` 保持一致。
+主题色：`modules/lab-ui/assets/scss/lab/_tokens.scss` 的 `$lab-blue` 与 `data/themes/minimal.toml` 的 `primary` 保持一致。
 
 ## 成员 `content/authors/<slug>/_index.md`
 
@@ -43,10 +45,14 @@ py -3 scripts/sync_lab_identity.py --dry-run
 | title | 是 | 显示名 |
 | role | 是 | 身份，如 研一 / 教授 |
 | user_groups | 是 | 与 `/people/` 分组名一致：导师、博士生、研三、研二、研一、本科生、毕业生 |
-| research_focus | 建议 | 研究方向短句；卡片与详情优先用此字段 |
-| bio | 可选 | 短简介；无 `research_focus` 时尝试从「研究方向为…」解析 |
-| organizations | 可选 | 单位 |
-| email / social | 可选 | 联系方式 |
+| research | 建议 | 外键数组，取 `content/research/` 目录名；**非必填**；卡片"研究方向"文字由方向页标题自动派生，缺省时解析 bio |
+| enroll_year | 建议 | 入学年份（研究生填，如 2025）；lint 每年自动核对学籍与分组 |
+| personal_url | 可选 | 个人主页 / GitHub |
+| destination | 可选 | 毕业去向，仅毕业生填（如「华为 · 算法工程师」） |
+| bio | 可选 | 短简介；无 `research` 时从「研究方向为…」解析展示 |
+| email / social | 可选 | 邮箱；social 只放 GitHub/Scholar 等真实社交链接（mailto 由 email 派生，勿重复） |
+
+已废弃（lint 会提醒删除）：`research_focus`（由 research[] 派生）、`organizations`（默认取 `params.lab.org_name`，仅 admin 保留）、`highlight_name`。
 
 新建：`hugo new authors/zhang-san/_index.md`（需 archetype 可用）。
 
@@ -56,23 +62,51 @@ py -3 scripts/sync_lab_identity.py --dry-run
 - 显示名 / 英文名映射见 `data/lab_author_aliases.yaml`（解析链接用）
 - 外协可写中文或英文全名；站点**不启用** authors taxonomy，避免孤儿 `/author/` 页
 
+## 论文 `content/publication/<slug>/index.md`
+
+| 字段 | 必填 | 说明 |
+|------|------|------|
+| title | 是 | 英文原题 |
+| authors | 是 | 成员填 slug，外协填姓名全名（双轨制见 DATA-MODEL） |
+| date | 是 | 发表日期；列表年份筛选依赖 |
+| publication_types | 是 | 枚举：article-journal / paper-conference / preprint / report / thesis |
+| publication / publication_short | 是 / 建议 | 期刊会议全称 / 简称（卡片角标用简称） |
+| doi / url_pdf / url_html | 可选 | 链接三件套 |
+| volume / pages | 可选 | 卷期页码（BibTeX 导出依赖） |
+| summary | 建议 | 中文摘要，列表卡片展示 |
+| abstract | 可选 | 英文摘要 |
+| ccf | 可选 | CCF 等级 A/B/C，卡片角标 |
+| paper_award | 可选 | 论文获奖名（如 Best Paper Honorable Mention） |
+| url_code | 可选 | 开源代码仓库 |
+| featured | 是（默认 false） | 首页精选开关 |
+| research | 建议 | 外键数组，取 `content/research/` 目录名（agent / low-light / depth / action）；方向筛选依赖 |
+
+已废弃：`publishDate`（与 date 冗余）。
+
+方向外键已批量补齐（一次性迁移，脚本用毕即删）；新内容走 archetype 与 CMS 表单兜底。
+
 ## 奖项 `content/award/<slug>/index.md`
 
 | 字段 | 说明 |
 |------|------|
 | authors | 获奖人（成员用 slug） |
-| date / award_date | 保持一致；列表年份用 `date` |
-| tags | 如「国家级」「省级」 |
+| date | 获奖日期；**唯一日期字段**，列表年份取此 |
+| level | 枚举：national（国家级）/ provincial（省部级）/ university（校级）/ society（学会/行业） |
+| rank | 可选枚举：special / first / second / third / excellent |
+| tags | 仅主题词；级别与等级由 level/rank 表达，勿再填 |
 | summary | 列表摘要 |
+
+已废弃：`award_date`（与 date 强制同步的冗余字段）。
 
 ## 项目 `content/project/<slug>/index.md`
 
 | 字段 | 说明 |
 |------|------|
-| project_code | 课题号，导入 slug 依据 |
+| project_code | 课题号；**纵向项目必填**，横向/定制项目可缺省（slug 即自然键） |
+| project_type | 枚举：vertical（纵向）/ horizontal（横向） |
+| funding | 资助类别全称（纵向填，如「国家自然科学基金面上项目」）；卡片角标读取 |
 | project_status | `ongoing` / `completed` |
-| funding / grant_type | 可选；缺省时从 tags 启发式推断 |
-| tags | 含「面上项目」「重点项目」等时卡片显示类型角标 |
+| tags | 仅主题词；资助类型已由 funding 表达，勿再填 |
 | summary | 列表摘要 |
 
 ## 专利 `content/patent/<slug>/index.md`
@@ -81,7 +115,9 @@ py -3 scripts/sync_lab_identity.py --dry-run
 |------|------|
 | authors | 发明人（成员用 slug；外协可用中文名） |
 | patent_number | 如 ZL…，导入 slug 依据 |
+| patent_type | 枚举：invention / utility / design（默认 invention） |
 | patent_status | `granted` → 卡片「已授权」 |
+| tags | 仅主题词；类型与状态由 patent_type/patent_status 表达，勿再填 |
 | summary | 列表摘要 |
 
 ## 研究方向 `content/research/<slug>/index.md`
@@ -97,6 +133,9 @@ py -3 scripts/sync_lab_identity.py --dry-run
 
 ```text
 py -3 scripts/import_projects_patents.py --xlsx-dir <dir> --content <contentDir> [--dry-run]
-py -3 scripts/sync_research_focus.py [--authors <authorsDir>]
+
 py -3 scripts/sync_lab_identity.py [--dry-run]
+py -3 scripts/lint_content.py [--quiet]
 ```
+
+`lint_content.py` 校验数据模型（主键/外键/枚举/一致性），退出码非 0 表示存在错误，建议提交前或 CI 运行。

@@ -1,0 +1,19 @@
+{{- /* Homepage news as a quiet timeline list (not cards). */ -}}
+{{- $count := int (.Get "count" | default 3) -}}
+{{- $is_en := eq site.Language.Lang "en" -}}
+{{- $posts := first $count (sort (where site.RegularPages "Section" "post") "Date" "desc") -}}
+<div class="lab-news-list">
+  {{- if $posts -}}
+  <ol class="lab-news-timeline lab-news-timeline--home">
+    {{- range $posts -}}
+    <li class="lab-news-item">
+      <time class="lab-news-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      <a class="lab-news-headline" href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
+    {{- end -}}
+  </ol>
+  <a class="lab-outcomes-more" href="{{ "post/" | relLangURL }}">{{ cond $is_en "More" "查看更多" }}</a>
+  {{- else -}}
+  <p class="lab-outcomes-empty">{{ cond $is_en "No news yet" "暂无动态" }}</p>
+  {{- end -}}
+</div>

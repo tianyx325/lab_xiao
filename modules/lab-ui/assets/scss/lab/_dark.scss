@@ -1,0 +1,67 @@
+/* Layer 6 · dark mode overrides (must stay near the end)
+   Source: template.scss lines 3953-3993 (order-preserving split). */
+/* Dark mode */
+.dark .media.stream-item,
+.dark .pub-list-item,
+.dark .lab-member-card {
+  background: var(--lab-card-bg) !important;
+  border-color: var(--lab-card-border) !important;
+  box-shadow: var(--lab-card-shadow) !important;
+}
+
+.dark .lab-card.view-card {
+  background: var(--lab-card-bg) !important;
+  border-color: var(--lab-card-border) !important;
+  box-shadow: var(--lab-card-shadow) !important;
+}
+
+.dark .lab-card-media:not(.lab-card-media--placeholder) {
+  background: var(--lab-dark-surface);
+}
+
+.dark .lab-card-media--placeholder {
+  --lab-ph-ink: rgba(255, 255, 255, 0.14);
+  --lab-ph-ink-soft: rgba(255, 255, 255, 0.08);
+  --lab-ph-accent: rgba(115, 163, 210, 0.3);
+  --lab-ph-accent-soft: rgba(115, 163, 210, 0.15);
+}
+
+.dark .media.stream-item:hover,
+.dark .pub-list-item:hover,
+.dark .lab-member-card:hover {
+  border-color: var(--lab-card-border-hover) !important;
+  box-shadow: var(--lab-card-shadow-hover) !important;
+}
+
+.dark .home-section .section-heading p {
+  color: var(--lab-dark-text-muted);
+}
+
+.dark .dropdown-menu {
+  border-color: var(--lab-dark-border);
+}
+
+/* Liquid-glass dropdowns on night ground — dark translucent pane + faint cool edge */
+.dark #navbar-main .lab-nav-menu {
+  background: rgba(22, 25, 31, 0.62) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.35),
+    0 10px 32px rgba(0, 0, 0, 0.45) !important;
+}
+
+.dark #navbar-main .lab-nav-menu .dropdown-item:hover,
+.dark #navbar-main .lab-nav-menu .dropdown-item:focus {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Floating pill navbar — darker glass edge + deeper elevation on night ground */
+.dark .page-header {
+  border-color: var(--lab-color-border);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 28px rgba(0, 0, 0, 0.4);
+}
+
+.dark .page-header.scrolled {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 10px 36px rgba(0, 0, 0, 0.5);
+}

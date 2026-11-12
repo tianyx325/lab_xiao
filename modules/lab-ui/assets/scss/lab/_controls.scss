@@ -1,0 +1,183 @@
+/* Layer 4 · shared controls: buttons, page titles, card chrome
+   Source: template.scss lines 592-772 (order-preserving split). */
+/* Buttons — bordered / filled controls; never look like labels or text-links */
+.btn,
+.btn-primary,
+.btn-light,
+.btn-outline-primary,
+.btn-outline-primary.btn-sm,
+.btn-page-header {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: var(--lab-space-2) var(--lab-space-5) !important;
+  border-radius: var(--lab-card-radius) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  font-size: $lab-text-sm !important;
+  font-weight: $lab-weight-medium !important;
+  letter-spacing: 0.02em;
+  line-height: 1.3 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+.btn-sm,
+.btn-outline-primary.btn-sm {
+  min-height: 2.125rem;
+  padding: var(--lab-space-1) var(--lab-space-4) !important;
+}
+
+.form-control,
+.form-control-sm {
+  border-radius: var(--lab-card-radius) !important;
+}
+
+/* Inner page titles */
+.universal-wrapper {
+  padding-top: var(--lab-space-8);
+  padding-bottom: var(--lab-space-8);
+}
+
+.universal-wrapper > h1,
+.article-header h1,
+.article-title {
+  font-weight: 600 !important;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  color: var(--lab-color-text) !important;
+}
+
+.article-header {
+  margin-bottom: var(--lab-space-6);
+}
+
+.article-style,
+.article-body,
+.universal-wrapper p,
+.docs-article-container p {
+  line-height: 1.85;
+}
+
+.article-style h2,
+.article-style h3,
+.universal-wrapper h2,
+.universal-wrapper h3 {
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-top: $lab-space-6;
+}
+
+.article-metadata,
+.article-date {
+  font-size: $lab-text-sm;
+  opacity: 0.6;
+  letter-spacing: 0.03em;
+}
+
+/* ---------- List/stream soft panels (not poster cards) ---------- */
+.media.stream-item,
+.pub-list-item {
+  display: block;
+  padding: $lab-card-pad !important;
+  margin: 0 0 $lab-space-4 !important;
+  background: var(--lab-card-bg) !important;
+  border: 1px solid var(--lab-color-border-light) !important;
+  border-radius: var(--lab-card-radius) !important;
+  box-shadow: var(--lab-card-shadow);
+  transition: border-color $lab-transition, box-shadow $lab-transition;
+}
+
+.media.stream-item:hover,
+.pub-list-item:hover {
+  border-color: var(--lab-card-border-hover) !important;
+  box-shadow: var(--lab-card-shadow-hover);
+  transform: none !important;
+}
+
+/* Poster cards — whole card is 4:5; media fills remainder above text */
+$lab-summary-lh: 1.45;
+
+.lab-card.view-card,
+a.lab-card.view-card {
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--lab-color-text) !important;
+  text-decoration: none !important;
+  background: var(--lab-card-bg) !important;
+  border: 1px solid var(--lab-card-border) !important;
+  border-radius: var(--lab-card-radius) !important;
+  box-shadow: var(--lab-card-shadow) !important;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: border-color $lab-transition, background-color $lab-transition,
+    box-shadow $lab-transition;
+}
+
+.lab-card.view-card:hover,
+a.lab-card.view-card:hover {
+  background: var(--lab-card-bg) !important;
+  border-color: var(--lab-card-border-hover) !important;
+  box-shadow: var(--lab-card-shadow-hover) !important;
+  transform: none !important;
+}
+
+.lab-card-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.lab-card-media {
+  position: relative;
+  z-index: 0;
+  flex: 0 0 48%;
+  max-height: 48%;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0;
+  pointer-events: none;
+  background: #{$lab-surface-alt};
+}
+
+.lab-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity $lab-transition;
+}
+
+.lab-card.view-card:hover .lab-card-media img {
+  opacity: 0.88;
+}
+
+/* Placeholder covers — type families + per-card variants (CSS only) */
+.lab-card-media--placeholder {
+  --lab-ph-ink: #{rgba($lab-ink, 0.1)};
+  --lab-ph-ink-soft: #{rgba($lab-ink, 0.06)};
+  --lab-ph-accent: #{rgba($lab-blue, 0.14)};
+  --lab-ph-accent-soft: #{rgba($lab-blue, 0.07)};
+  background:
+    radial-gradient(120% 80% at 12% 18%, var(--lab-ph-accent-soft), transparent 55%),
+    linear-gradient(165deg, #{$lab-card-bg} 0%, #{$lab-surface-alt} 48%, #{$lab-placeholder-bg} 100%);
+}
+
+.lab-card-ph {
+  position: absolute;
+  pointer-events: none;
+  box-sizing: border-box;
+}

@@ -20,4 +20,5 @@ abstract: |
 featured: false
 url_html: "https://doi.org/10.1109/icassp48485.2024.10448503"
 url_code: "https://github.com/tianzhiya/SPGFusion"
+ccf: "C"
 ---

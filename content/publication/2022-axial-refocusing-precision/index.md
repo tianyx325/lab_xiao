@@ -18,4 +18,6 @@ abstract: |
 featured: false
 url_html: "https://doi.org/10.1016/j.image.2022.116721"
 url_pdf: "https://hal.science/hal-03651953/file/The_model_SPIC_HAL.pdf"
+research:
+  - depth
 ---

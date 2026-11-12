@@ -74,7 +74,8 @@ lab:
 
 appearance:
   theme_day: minimal
-  theme_night:
+  # Same theme file’s [dark] block — required for the navbar day/night control
+  theme_night: minimal
   # data/fonts/lab.toml — Inter + Noto Sans SC
   font: lab
   font_size: M
@@ -104,11 +105,13 @@ marketing:
 header:
   navbar:
     enable: true
+    # r: logo left, destination links + theme/lang on the right
     align: r
     show_logo: true
-    show_language: false
-    show_day_night: false
-    show_search: true
+    show_language: true
+    show_day_night: true
+    show_translations: true
+    show_search: false
     highlight_active_link: true
 
 # Hide "Published with Hugo Blox Builder" footer text

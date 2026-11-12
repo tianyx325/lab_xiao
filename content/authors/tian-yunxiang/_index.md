@@ -4,26 +4,15 @@ first_name: 云祥
 last_name: 田
 superuser: false
 role: 研一
-sort: 7
-organizations:
-  - name: 西安理工大学计算机科学与技术学院
-    url: 'https://jsj.xaut.edu.cn/'
+weight: 7
 bio: "研究方向为智能体应用。"
-research_focus: "智能体应用"
 interests:
   - 乒乓球
-social:
-  - icon: envelope
-    icon_pack: fas
-    link: 'mailto:3253154873@qq.com'
 email: '3253154873@qq.com'
-highlight_name: false
 research:
   - agent
 user_groups:
   - 研一
+enroll_year: 2026
 ---
 
-**田云祥**，西安理工大学计算机科学与技术学院**硕士研究生**（研一），导师：肖照林教授。
-
-**研究方向：** 智能体应用

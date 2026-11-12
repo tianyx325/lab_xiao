@@ -7,7 +7,8 @@ authors:
 date: "2022-01-01T00:00:00Z"
 doi: "10.1049/ipr2.12460"
 publication_types: ["article-journal"]
-publication: "IET Image Processing"
+publication: "IET Image Processing"
+
 pages: "1949-1958"
 issue: "7"
 volume: "16"
@@ -24,4 +25,6 @@ tags:
 featured: false
 url_pdf: "https://ietresearch.onlinelibrary.wiley.com/doi/pdfdirect/10.1049/ipr2.12460"
 url_html: "https://ietresearch.onlinelibrary.wiley.com/doi/full/10.1049/ipr2.12460"
+research:
+  - depth
 ---

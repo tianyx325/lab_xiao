@@ -17,4 +17,7 @@ abstract: |
 featured: false
 url_html: "https://doi.org/10.1016/j.jvcir.2026.104819"
 url_code: "https://github.com/yangpipi-01/LLIE"
+research:
+  - low-light
+ccf: "C"
 ---

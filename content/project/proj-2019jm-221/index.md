@@ -9,10 +9,12 @@ tags:
   - 陕西省自然科学基础研究计划
   - 光场特征
   - 特征表示
-external_link: ''
+url_external: ''
 image:
   focal_point: Center
 project_code: "2019JM-221"
 project_status: "completed"
+project_type: "vertical"
+funding: "陕西省自然科学基础研究计划"
 ---
 

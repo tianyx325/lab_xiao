@@ -24,4 +24,7 @@ tags:
 featured: false
 url_pdf: "https://arxiv.org/pdf/2103.06510"
 url_html: "https://doi.org/10.1016/j.neucom.2021.05.056"
+research:
+  - depth
+ccf: "C"
 ---

@@ -15,4 +15,5 @@ summary: "用惩罚线性回归剔除多视几何中的离群点。"
 abstract: "用惩罚线性回归剔除多视几何中的离群点。"
 featured: false
 url_html: "https://doi.org/10.1016/j.neucom.2017.06.043"
+ccf: "C"
 ---

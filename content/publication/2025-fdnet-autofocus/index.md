@@ -19,4 +19,6 @@ abstract: |
 featured: false
 url_html: "https://doi.org/10.1007/s11063-025-11788-0"
 url_pdf: "https://link.springer.com/content/pdf/10.1007/s11063-025-11788-0.pdf"
+research:
+  - depth
 ---

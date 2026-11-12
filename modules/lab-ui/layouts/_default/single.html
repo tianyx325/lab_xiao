@@ -9,7 +9,7 @@
   {{ end }}
 {{ end }}
 {{ if .Params.authors }}
-  {{ $byline = $byline | append (partial "lab-detail-authors.html" .) }}
+  {{ $byline = $byline | append (partial "components/detail-authors.html" .) }}
 {{ end }}
 {{ with .Params.tags }}
   {{ $byline = $byline | append (delimit . " · ") }}
@@ -19,8 +19,8 @@
 {{ end }}
 {{ .Scratch.Set "lab_article_byline" (delimit $byline " · ") }}
 
-{{ partial "lab-article-shell-start.html" . }}
+{{ partial "article/shell-start.html" . }}
 
-{{ partial "lab-article-shell-end.html" . }}
+{{ partial "article/shell-end.html" . }}
 
 {{- end -}}

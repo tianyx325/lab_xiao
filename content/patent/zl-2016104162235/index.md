@@ -8,13 +8,10 @@ authors:
   - 王庆
   - 周果清
   - 李秀秀
-tags:
-  - 发明专利
-  - 已授权
 patent_number: "ZL201610416223.5"
 patent_status: "granted"
 url_patent: "https://patents.google.com/patent/CN106097343B/zh"
 url_pdf: "https://patentimages.storage.googleapis.com/b1/e3/8e/e8821b7a22f016/CN106097343B.pdf"
+patent_type: "invention"
 ---
 
-该方法用于光场采集装置的性能评价和参数标定，测定对象包括双平面模型光场成像设备。测定结果用来量化设备的轴向分辨率，也就是数字重聚焦能够区分的深度间隔。

@@ -7,15 +7,10 @@ authors:
   - admin
   - 周果清
   - 王庆
-tags:
-  - 发明专利
-  - 已授权
 patent_number: "ZL201610570392.4"
 patent_status: "granted"
 url_patent: "https://patents.google.com/patent/CN106295497B/zh"
 url_pdf: "https://patentimages.storage.googleapis.com/7a/88/a7/c1289a415777c8/CN106295497B.pdf"
+patent_type: "invention"
 ---
 
-密码和射频识别可以被复制或计算破解。公开说明书改用一块物理光场编码板：底板上有三维表面，表面贴有至少三个凸透镜组成的微透镜阵列。
-
-多个图像传感器从不同视角拍摄这块编码板。首次采集的多视图像存为基准，再次采集的图像作为待比对数据，按像素差、特征差或统计差计算相似度，超过预设阈值则判定为同一块板。凸透镜焦距被限制在底板表面距离与板厚所决定的范围内。由于编码来自三维表面和多视角光场，而不是一串数字，难以用常规密码手段复制。

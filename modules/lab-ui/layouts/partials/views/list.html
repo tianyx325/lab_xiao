@@ -1,0 +1,52 @@
+{{- /* Quiet list row: title · venue/badge · year (+ optional authors for pubs). */ -}}
+{{- $item := .item -}}
+{{- $link := $item.RelPermalink -}}
+{{- $target := "" -}}
+{{- if $item.Params.url_external -}}
+  {{- $link = $item.Params.url_external -}}
+  {{- $target = "target=\"_blank\" rel=\"noopener\"" -}}
+{{- end -}}
+{{- $year := $item.Date.Format "2006" -}}
+{{- $meta := "" -}}
+{{- if eq $item.Type "publication" -}}
+  {{- $meta = $item.Params.publication_short | default ($item.Params.publication | default "") -}}
+{{- else if eq $item.Type "patent" -}}
+  {{- $meta = $item.Params.patent_number | default "" -}}
+{{- else if eq $item.Type "award" -}}
+  {{- with $item.Params.tags -}}{{- $meta = index . 0 -}}{{- end -}}
+{{- else if eq $item.Type "project" -}}
+  {{- $meta = partial "components/status-label.html" (dict "kind" "project" "page" $item) -}}
+{{- else if eq $item.Type "post" -}}
+  {{- $meta = $item.Date.Format "2006-01-02" -}}
+  {{- $year = "" -}}
+{{- end -}}
+
+{{- $authorItems := slice -}}
+{{- if or (eq $item.Type "publication") (eq $item.Type "patent") -}}
+  {{- range $item.Params.authors -}}
+    {{- partial "components/resolve-author.html" (dict "id" . "page" $item) -}}
+    {{- $an := $item.Scratch.Get "lab_author_name" -}}
+    {{- $ah := $item.Scratch.Get "lab_author_href" -}}
+    {{- if $ah -}}
+      {{- $authorItems = $authorItems | append (dict "name" $an "href" $ah) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<article class="lab-row">
+  <a class="lab-row-link" href="{{ $link }}" {{ $target | safeHTMLAttr }}>
+    <h3 class="lab-row-title">{{ $item.Title }}</h3>
+    {{- if $authorItems -}}
+    <p class="lab-row-authors">
+      {{- range $i, $m := $authorItems -}}
+        {{- if $i -}}<span class="lab-row-sep"> · </span>{{- end -}}
+        <span>{{ $m.name }}</span>
+      {{- end -}}
+    </p>
+    {{- end -}}
+    <p class="lab-row-meta">
+      {{- with $meta -}}<span class="lab-row-venue">{{ . | plainify }}</span>{{- end -}}
+      {{- with $year -}}<span class="lab-row-year">{{ . }}</span>{{- end -}}
+    </p>
+  </a>
+</article>
