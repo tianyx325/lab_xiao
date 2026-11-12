@@ -593,31 +593,25 @@ div.lab-meta-tag:hover {
 }
 
 .lab-meta-tag-value a {
-  @extend %lab-text-link;
+  @extend %lab-accent-link;
   font-size: inherit;
-  color: var(--lab-article-accent, #{$lab-blue}) !important;
-  border-bottom-color: color-mix(in srgb, var(--lab-article-accent, #{$lab-blue}) 35%, transparent) !important;
 }
 
 .lab-meta-tag-value a:hover {
-  @extend %lab-text-link-hover;
-  border-bottom-color: var(--lab-article-accent, #{$lab-blue}) !important;
+  @extend %lab-accent-link-hover;
 }
 
 /* DOI / PDF / code — text links, not chips */
 a.lab-meta-tag,
 a.lab-meta-tag.lab-meta-tag-link,
 .lab-article a.lab-meta-tag-link {
-  @extend %lab-text-link;
-  color: var(--lab-article-accent, #{$lab-blue}) !important;
-  border-bottom-color: color-mix(in srgb, var(--lab-article-accent, #{$lab-blue}) 35%, transparent) !important;
+  @extend %lab-accent-link;
 }
 
 a.lab-meta-tag:hover,
 a.lab-meta-tag.lab-meta-tag-link:hover,
 .lab-article a.lab-meta-tag-link:hover {
-  @extend %lab-text-link-hover;
-  border-bottom-color: var(--lab-article-accent, #{$lab-blue}) !important;
+  @extend %lab-accent-link-hover;
   background: none !important;
 }
 

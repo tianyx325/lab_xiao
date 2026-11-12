@@ -48,6 +48,23 @@
   background: none !important;
 }
 
+/* In-context accent link (article body / byline / meta values / DOI rows).
+   Unlike %lab-text-link this does NOT lock font-size/weight — a link inside
+   running text inherits its surrounding typography. Accent resolves to the
+   per-page --lab-article-accent, falling back to the global link color. */
+%lab-accent-link {
+  color: var(--lab-article-accent, var(--lab-color-link)) !important;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--lab-article-accent, var(--lab-color-link)) 35%, transparent);
+  transition: border-color $lab-transition, opacity $lab-transition;
+  word-break: break-word;
+}
+
+%lab-accent-link-hover {
+  border-bottom-color: var(--lab-article-accent, var(--lab-color-link));
+  opacity: 0.85;
+}
+
 /* "查看更多 / More" link — brand color with underline offset */
 %lab-more-link {
   display: inline-flex;

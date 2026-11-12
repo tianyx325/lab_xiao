@@ -293,13 +293,11 @@
 }
 
 .lab-article-byline a {
-  color: var(--lab-article-accent) !important;
-  text-decoration: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--lab-article-accent) 35%, transparent);
+  @extend %lab-accent-link;
 }
 
 .lab-article-byline a:hover {
-  border-bottom-color: var(--lab-article-accent);
+  @extend %lab-accent-link-hover;
 }
 
 .lab-article-dek {
@@ -395,16 +393,17 @@
 }
 
 .lab-article-content a:not(.btn):not([data-fancybox]) {
-  color: var(--lab-article-accent) !important;
-  text-decoration: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--lab-article-accent) 35%, transparent);
+  @extend %lab-accent-link;
 }
 
 .lab-article-content a:not(.btn):not([data-fancybox]):hover {
-  border-bottom-color: var(--lab-article-accent);
+  @extend %lab-accent-link-hover;
 }
 
 .lab-article-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $lab-space-3 $lab-space-5;
   margin: $lab-space-7 0 0 !important;
   padding-top: $lab-space-5;
   border-top: 1px solid var(--lab-color-border-light);
@@ -413,20 +412,12 @@
   color: var(--lab-color-text-secondary);
 }
 
-.lab-article-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $lab-space-3 $lab-space-5;
-}
-
 .lab-article-links a {
-  color: var(--lab-article-accent) !important;
-  text-decoration: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--lab-article-accent) 35%, transparent);
+  @extend %lab-accent-link;
 }
 
 .lab-article-links a:hover {
-  border-bottom-color: var(--lab-article-accent);
+  @extend %lab-accent-link-hover;
 }
 
 /* Body figures / Markdown images */
@@ -476,14 +467,14 @@
   padding: 0;
 }
 
-.lab-article-video-list a {
-  color: var(--lab-article-accent) !important;
-  text-decoration: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--lab-article-accent) 35%, transparent);
+.lab-article-video-list a,
+.lab-video-link a {
+  @extend %lab-accent-link;
 }
 
-.lab-article-video-list a:hover {
-  border-bottom-color: var(--lab-article-accent);
+.lab-article-video-list a:hover,
+.lab-video-link a:hover {
+  @extend %lab-accent-link-hover;
 }
 
 .lab-article-video-list li,
@@ -495,18 +486,6 @@
   margin: 0 0 $lab-space-3;
   font-size: $lab-text-sm;
   line-height: 1.55;
-}
-
-.lab-article-video-list a,
-.lab-video-link a {
-  color: var(--lab-article-accent) !important;
-  text-decoration: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--lab-article-accent) 35%, transparent);
-}
-
-.lab-article-video-list a:hover,
-.lab-video-link a:hover {
-  border-bottom-color: var(--lab-article-accent);
 }
 
 .lab-article-video-url {
