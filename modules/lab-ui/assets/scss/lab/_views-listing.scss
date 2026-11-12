@@ -30,7 +30,7 @@
 .lab-list-header--filters {
   align-items: flex-start;
   min-height: 0;
-  padding: $lab-space-8 0 $lab-space-6;
+  padding: var(--lab-page-top) 0 $lab-space-6;
 }
 
 .lab-list-header .container {
