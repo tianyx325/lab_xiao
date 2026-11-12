@@ -44,7 +44,7 @@
 .lab-list-title {
   margin: 0 !important;
   font-size: $lab-text-xl !important;
-  font-weight: 600 !important;
+  font-weight: $lab-weight-semibold !important;
   letter-spacing: 0.08em;
   line-height: $lab-leading-tight !important;
   color: var(--lab-color-text);
@@ -94,7 +94,7 @@
   background-color: var(--lab-color-white) !important;
   color: var(--lab-color-text) !important;
   font-size: $lab-text-sm;
-  font-weight: 400;
+  font-weight: $lab-weight-body;
   letter-spacing: 0.04em;
   line-height: 2.25rem;
   box-shadow: none !important;
@@ -130,7 +130,7 @@
 
 .lab-list-filters select.lab-filter-control option {
   letter-spacing: 0;
-  font-weight: 400;
+  font-weight: $lab-weight-body;
   font-size: $lab-text-sm;
   color: var(--lab-color-text);
   background: var(--lab-color-page);
@@ -401,7 +401,7 @@ button.lab-pagination-link {
   color: var(--lab-color-white) !important;
   border-color: var(--lab-list-accent, $lab-blue);
   background: var(--lab-list-accent, $lab-blue);
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
   pointer-events: none;
 }
 
@@ -607,7 +607,7 @@ a.lab-meta-tag.lab-meta-tag-link:hover,
   z-index: 9999;
   padding: $lab-space-3 $lab-space-5;
   font-size: $lab-text-sm;
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
   letter-spacing: 0.04em;
   color: var(--lab-color-white);
   background: var(--lab-color-link);
@@ -717,6 +717,6 @@ a.lab-meta-tag-link:focus-visible {
 
   .navbar .nav-link.active:hover,
   .navbar .nav-item.active .nav-link:hover {
-    color: var(--lab-color-blue) !important;
+    color: var(--lab-color-link) !important;
   }
 }

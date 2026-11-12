@@ -4,7 +4,7 @@
 .people-widget h2 {
   text-align: center;
   font-size: $lab-text-xl;
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
   letter-spacing: 0.06em;
 }
 
@@ -30,7 +30,7 @@
 .lab-people-title {
   margin: 0 !important;
   font-size: $lab-text-xl !important;
-  font-weight: 600 !important;
+  font-weight: $lab-weight-semibold !important;
   letter-spacing: 0.08em;
   line-height: $lab-leading-tight !important;
   color: var(--lab-color-text);
@@ -51,7 +51,7 @@
   margin: 0 0 $lab-space-4 !important;
   text-align: center;
   font-size: $lab-text-md !important;
-  font-weight: 500;
+  font-weight: $lab-weight-medium;
   letter-spacing: 0.14em;
   color: var(--lab-color-text-secondary);
 }
@@ -61,7 +61,7 @@
   margin: $lab-space-6 0 $lab-space-4 !important;
   text-align: center;
   font-size: $lab-text-md !important;
-  font-weight: 500;
+  font-weight: $lab-weight-medium;
   letter-spacing: 0.14em;
   color: var(--lab-color-text-secondary);
 }
@@ -75,7 +75,7 @@
   margin: $lab-space-6 0 $lab-space-3 !important;
   text-align: center;
   font-size: $lab-text-sm !important;
-  font-weight: 500;
+  font-weight: $lab-weight-medium;
   letter-spacing: 0.12em;
   color: var(--lab-color-text-ink-42);
 }
@@ -403,7 +403,7 @@ $lab-member-avatar-lg: 168px;
 
 .lab-member-avatar-initial {
   font-size: $lab-text-display;
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
   letter-spacing: 0.06em;
   line-height: 1;
   color: var(--lab-color-link);
@@ -436,7 +436,7 @@ $lab-member-avatar-lg: 168px;
   flex: 0 0 auto;
   margin: 0 !important;
   font-size: $lab-text-lg !important;
-  font-weight: 600 !important;
+  font-weight: $lab-weight-semibold !important;
   letter-spacing: 0.06em;
   line-height: $lab-leading-tight !important;
   color: var(--lab-color-text);
@@ -463,49 +463,7 @@ $lab-member-avatar-lg: 168px;
   overflow: hidden;
 }
 
-/* Interaction roles — label (read-only) ≠ text-link ≠ button */
-%lab-label {
-  display: inline;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  font-size: $lab-text-xs;
-  font-weight: $lab-weight-medium;
-  letter-spacing: 0.04em;
-  line-height: 1.45;
-  color: var(--lab-color-text-secondary);
-  background: none;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-%lab-text-link {
-  display: inline;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  font-size: $lab-text-sm;
-  font-weight: $lab-weight-medium;
-  letter-spacing: 0.02em;
-  line-height: 1.45;
-  color: var(--lab-color-link) !important;
-  background: none !important;
-  border: none !important;
-  border-radius: 0;
-  box-shadow: none !important;
-  text-decoration: none !important;
-  border-bottom: 1px solid color-mix(in srgb, var(--lab-color-link) 35%, transparent) !important;
-  transition: border-color $lab-transition, opacity $lab-transition;
-  word-break: break-word;
-}
-
-%lab-text-link-hover {
-  color: var(--lab-color-link) !important;
-  border-bottom-color: var(--lab-color-link) !important;
-  opacity: 0.85;
-  background: none !important;
-}
+/* Interaction roles — label (read-only) ≠ text-link ≠ button: @extend the shared placeholders in _abstracts.scss */
 
 .lab-member-identity-role {
   @extend %lab-label;
@@ -640,7 +598,7 @@ a.lab-member-focus-tag:hover {
 }
 
 .lab-member-bio strong {
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
   color: var(--lab-color-text);
 }
 
@@ -685,7 +643,7 @@ a.lab-member-focus-tag:hover {
 .lab-member-section-title {
   margin: 0 0 $lab-space-3 !important;
   font-size: $lab-text-sm !important;
-  font-weight: 600 !important;
+  font-weight: $lab-weight-semibold !important;
   letter-spacing: 0.14em;
   color: var(--lab-color-link) !important;
   line-height: 1.3 !important;
@@ -719,7 +677,7 @@ a.lab-member-focus-tag:hover {
   align-items: center;
   padding: $lab-space-1 $lab-space-2;
   font-size: $lab-text-xs;
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
   letter-spacing: 0.1em;
   line-height: 1.3;
   border-radius: var(--lab-card-radius);
@@ -729,7 +687,7 @@ a.lab-member-focus-tag:hover {
 .lab-member-works-kind--publication,
 .lab-member-works-kind--patent,
 .lab-member-works-kind--award {
-  color: var(--lab-color-blue);
+  color: var(--lab-color-link);
   background: var(--lab-color-blue-wash);
   border-color: var(--lab-color-border-blue-22);
 }
@@ -761,7 +719,7 @@ a.lab-member-focus-tag:hover {
   margin: $lab-space-3 0 0;
   padding: $lab-space-1 $lab-space-3;
   font-size: $lab-text-sm;
-  font-weight: 500;
+  font-weight: $lab-weight-medium;
   letter-spacing: 0.1em;
   line-height: 1.3;
   color: var(--lab-color-link);

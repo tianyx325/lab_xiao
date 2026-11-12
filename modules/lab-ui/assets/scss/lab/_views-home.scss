@@ -221,7 +221,7 @@ $lab-home-sections: (
   transform: translateX(-50%);
   width: 1.75rem;
   height: 2px;
-  background: var(--lab-color-blue);
+  background: var(--lab-color-link);
   border-radius: 1px;
   opacity: 0.85;
 }
@@ -247,27 +247,6 @@ $lab-home-sections: (
   font-size: $lab-text-sm;
   color: var(--lab-color-text-secondary);
   text-align: center;
-}
-
-%lab-more-link {
-  display: inline-flex;
-  align-items: center;
-  font-size: $lab-text-sm;
-  letter-spacing: 0.08em;
-  line-height: 1 !important;
-  color: var(--lab-color-link) !important;
-  text-decoration: none;
-  white-space: nowrap;
-  padding-bottom: $lab-space-1 !important;
-  position: relative;
-  font-weight: 500;
-  transition: color $lab-transition, opacity $lab-transition;
-}
-
-%lab-more-link-hover {
-  color: var(--lab-color-link) !important;
-  opacity: 0.82;
-  font-weight: 500;
 }
 
 /* 查看更多 — 品牌色可点，悬停略收 */
@@ -299,7 +278,7 @@ $lab-home-sections: (
 .home-section.lab-row-body .see-all a:hover {
   color: var(--lab-color-link) !important;
   opacity: 0.82;
-  font-weight: 500;
+  font-weight: $lab-weight-medium;
 }
 
 .lab-outcomes-more:hover::after,

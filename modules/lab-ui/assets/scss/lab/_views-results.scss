@@ -515,7 +515,7 @@
 }
 
 .lab-card-author-link:hover {
-  color: var(--lab-color-blue) !important;
+  color: var(--lab-color-link) !important;
   text-decoration: none !important;
 }
 
@@ -543,7 +543,7 @@
 }
 
 .lab-card.view-card:hover .lab-card-title {
-  color: var(--lab-color-blue) !important;
+  color: var(--lab-color-link) !important;
 }
 
 .lab-card-summary {
@@ -564,7 +564,7 @@
 .portrait-title h2,
 .portrait-title h2 a {
   font-size: $lab-text-lg !important;
-  font-weight: 600 !important;
+  font-weight: $lab-weight-semibold !important;
   letter-spacing: 0.03em;
   line-height: 1.45;
   margin: $lab-space-1 0 $lab-space-2 !important;

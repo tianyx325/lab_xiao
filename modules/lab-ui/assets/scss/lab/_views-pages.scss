@@ -39,7 +39,7 @@
   display: inline-block;
   margin-bottom: $lab-space-4;
   font-size: $lab-text-xs;
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
   letter-spacing: 0.18em;
   color: var(--lab-color-link);
   line-height: 1;
@@ -80,7 +80,7 @@
 .lab-contact-admit-col h2 {
   margin: 0 0 $lab-space-3 !important;
   font-size: $lab-text-lg !important;
-  font-weight: 600 !important;
+  font-weight: $lab-weight-semibold !important;
   letter-spacing: 0.04em;
   color: var(--lab-color-text);
   line-height: 1.35 !important;
@@ -150,7 +150,7 @@
   display: inline;
   margin: 0;
   font-size: inherit;
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
   letter-spacing: 0.01em;
   color: var(--lab-color-link) !important;
   text-decoration: none;
@@ -188,7 +188,7 @@
   display: block;
   margin-bottom: $lab-space-2;
   font-size: $lab-text-xs;
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
   letter-spacing: 0.18em;
   color: var(--lab-color-link);
 }
@@ -281,7 +281,7 @@
   display: inline-block;
   margin: 0 0 $lab-space-3;
   font-size: $lab-text-xs;
-  font-weight: 500;
+  font-weight: $lab-weight-medium;
   letter-spacing: 0.16em;
   line-height: 1;
   color: var(--lab-article-accent);
@@ -290,7 +290,7 @@
 .lab-article-title {
   margin: 0 !important;
   font-size: clamp($lab-text-lg, 2.4vw, $lab-text-xl) !important;
-  font-weight: 600 !important;
+  font-weight: $lab-weight-semibold !important;
   letter-spacing: 0.02em;
   line-height: 1.35 !important;
   color: var(--lab-color-text);
@@ -339,7 +339,7 @@
   margin: 0;
   padding: 0;
   font-size: $lab-text-xs;
-  font-weight: 500;
+  font-weight: $lab-weight-medium;
   letter-spacing: 0.06em;
   line-height: 1.4;
   color: var(--lab-color-text-secondary);
@@ -349,7 +349,7 @@
   content: "·";
   display: inline-block;
   margin: 0 $lab-space-2 0 $lab-space-1;
-  font-weight: 400;
+  font-weight: $lab-weight-body;
   color: var(--lab-color-text-ink-28);
   letter-spacing: 0;
 }
@@ -374,7 +374,7 @@
   display: block;
   margin: 0 0 $lab-space-4;
   font-size: $lab-text-xs;
-  font-weight: 500;
+  font-weight: $lab-weight-medium;
   letter-spacing: 0.14em;
   line-height: 1;
   color: var(--lab-color-text-secondary);
@@ -390,7 +390,7 @@
 
 .lab-article-abstract-body strong {
   color: var(--lab-color-text);
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
 }
 
 .lab-article-abstract-body > *:first-child {
@@ -424,7 +424,7 @@
 .lab-article-content h3 {
   margin: $lab-space-7 0 $lab-space-3 !important;
   font-size: $lab-text-lg !important;
-  font-weight: 500 !important;
+  font-weight: $lab-weight-medium !important;
   letter-spacing: 0.06em;
   color: var(--lab-color-text);
   line-height: $lab-leading-tight !important;
@@ -442,7 +442,6 @@
 }
 
 .lab-article-meta-line,
-.lab-article-tags,
 .lab-article-links {
   margin: $lab-space-7 0 0 !important;
   padding-top: $lab-space-5;
@@ -450,10 +449,6 @@
   font-size: $lab-text-sm;
   line-height: 1.7;
   color: var(--lab-color-text-secondary);
-}
-
-.lab-article-tags {
-  letter-spacing: 0.04em;
 }
 
 .lab-article-links {
@@ -509,7 +504,7 @@
 .lab-article-media-title {
   margin: 0 0 $lab-space-4 !important;
   font-size: $lab-text-md !important;
-  font-weight: 500 !important;
+  font-weight: $lab-weight-medium !important;
   letter-spacing: 0.1em;
   line-height: 1.35 !important;
   color: var(--lab-color-text);

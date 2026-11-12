@@ -44,7 +44,7 @@
 .universal-wrapper > h1,
 .article-header h1,
 .article-title {
-  font-weight: 600 !important;
+  font-weight: $lab-weight-semibold !important;
   letter-spacing: 0.04em;
   line-height: 1.35;
   color: var(--lab-color-text) !important;
@@ -65,7 +65,7 @@
 .article-style h3,
 .universal-wrapper h2,
 .universal-wrapper h3 {
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
   letter-spacing: 0.03em;
   margin-top: $lab-space-6;
 }

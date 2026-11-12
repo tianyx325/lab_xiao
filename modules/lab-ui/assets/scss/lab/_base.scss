@@ -260,7 +260,7 @@ body {
 }
 
 .navbar-brand {
-  font-weight: 600;
+  font-weight: $lab-weight-semibold;
   letter-spacing: 0.04em;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
@@ -342,7 +342,7 @@ body {
   right: 4px;
   width: 7px;
   height: 7px;
-  background: var(--lab-color-blue);
+  background: var(--lab-color-link);
   border-radius: 50%;
 }
 
@@ -415,7 +415,7 @@ body {
   color: var(--lab-color-text);
   transition: all $lab-transition;
   position: relative;
-  font-weight: 400;
+  font-weight: $lab-weight-body;
 }
 
 .dropdown-item::before {
@@ -426,13 +426,13 @@ body {
   transform: translateY(-50%);
   width: 3px;
   height: 0;
-  background: var(--lab-color-blue);
+  background: var(--lab-color-link);
   border-radius: 2px;
   transition: height $lab-transition;
 }
 
 .dropdown-item:hover {
-  color: var(--lab-color-blue) !important;
+  color: var(--lab-color-link) !important;
   background: var(--lab-color-accent-blue-06);
 }
 
