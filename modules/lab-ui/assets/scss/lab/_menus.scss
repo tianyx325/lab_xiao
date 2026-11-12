@@ -75,7 +75,7 @@
 }
 
 #navbar-main ul.nav-icons .nav-link:hover,
-#navbar-main ul.nav-icons .nav-link:focus,
+#navbar-main ul.nav-icons .nav-link:focus-visible,
 #navbar-main ul.nav-icons .nav-link[aria-expanded="true"] {
   color: var(--lab-color-link) !important;
   background: var(--lab-color-surface-alt) !important;
@@ -131,7 +131,7 @@
 }
 
 #navbar-main ul.nav-icons .i18n-dropdown > .nav-link:hover .lab-lang-pill,
-#navbar-main ul.nav-icons .i18n-dropdown > .nav-link:focus .lab-lang-pill,
+#navbar-main ul.nav-icons .i18n-dropdown > .nav-link:focus-visible .lab-lang-pill,
 #navbar-main ul.nav-icons .i18n-dropdown > .nav-link[aria-expanded="true"] .lab-lang-pill {
   border-color: var(--lab-color-link);
   color: var(--lab-color-link) !important;
@@ -225,7 +225,7 @@
 }
 
 #navbar-main .lab-nav-menu .dropdown-item:hover,
-#navbar-main .lab-nav-menu .dropdown-item:focus {
+#navbar-main .lab-nav-menu .dropdown-item:focus-visible {
   color: var(--lab-color-link) !important;
   /* translucent ink wash — the glass stays see-through on hover */
   background: rgba(30, 35, 44, 0.06) !important;
@@ -248,7 +248,7 @@
 }
 
 #navbar-main .navbar-toggler:hover,
-#navbar-main .navbar-toggler:focus {
+#navbar-main .navbar-toggler:focus-visible {
   color: var(--lab-color-link);
   background: var(--lab-color-surface-alt);
 }

@@ -145,15 +145,14 @@ div.alert > div:first-child::before {
 }
 
 .form-control:focus,
-.btn:focus,
-.page-link:focus {
+.btn:focus-visible,
+.page-link:focus-visible {
   box-shadow: 0 0 0 0.2rem var(--lab-color-focus-ring) !important;
 }
 
-.navbar .nav-link:focus,
+/* Keyboard-only focus ring: :focus-visible never fires on mouse click,
+   so clicking nav items / dropdowns no longer flashes a box (WCAG 2.4.7 kept) */
 .navbar .nav-link:focus-visible,
-.navbar .dropdown-toggle:focus,
-.navbar .dropdown-item:focus,
 .navbar .dropdown-item:focus-visible,
 a.lab-card:focus-visible,
 a.lab-member-row:focus-visible,
