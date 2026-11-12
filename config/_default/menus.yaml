@@ -7,21 +7,8 @@ main:
     url: /research/
     weight: 10
   - name: 成果
-    identifier: publications
-    url: /publication/
+    url: /publications/
     weight: 20
-  - name: 论文
-    parent: publications
-    url: /publication/
-    weight: 21
-  - name: 专利
-    parent: publications
-    url: /patent/
-    weight: 22
-  - name: 奖项
-    parent: publications
-    url: /award/
-    weight: 23
   - name: 项目
     url: /project/
     weight: 30

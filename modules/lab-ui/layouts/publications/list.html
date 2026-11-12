@@ -1,0 +1,52 @@
+{{- define "main" -}}
+
+{{/* Publications hub — overview landing that links the output sections.
+     Counts are computed live so the cards never drift from the content. */}}
+{{ $isEn := eq site.Language.Lang "en" }}
+{{ $pubs := where site.RegularPages "Type" "publication" }}
+{{ $pats := where site.RegularPages "Type" "patent" }}
+{{ $awards := where site.RegularPages "Type" "award" }}
+
+<div class="lab-list-page lab-list-page--overview">
+  {{ partial "listing/header.html" (dict
+    "title" .Title
+    "lead" (partial "components/section-lead.html" (dict "page" . "key" "publications"))
+  ) }}
+
+  <div class="lab-list-body container">
+    {{ with .Content }}
+    <div class="article-style lab-list-intro">{{ . }}</div>
+    {{ end }}
+
+    <div class="lab-hub-cards">
+      <a class="lab-hub-card" href="{{ "publication/" | relLangURL }}">
+        <span class="lab-hub-card-count">{{ len $pubs }}</span>
+        <span class="lab-hub-card-name">{{ cond $isEn "Papers" "论文" }}</span>
+        <span class="lab-hub-card-desc">{{ cond $isEn "Journal and conference papers" "发表的期刊与会议论文" }}</span>
+        <span class="lab-hub-card-go" aria-hidden="true">
+          <svg class="lab-ic" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+
+      <a class="lab-hub-card" href="{{ "patent/" | relLangURL }}">
+        <span class="lab-hub-card-count">{{ len $pats }}</span>
+        <span class="lab-hub-card-name">{{ cond $isEn "Patents" "专利" }}</span>
+        <span class="lab-hub-card-desc">{{ cond $isEn "Granted invention patents" "授权发明专利" }}</span>
+        <span class="lab-hub-card-go" aria-hidden="true">
+          <svg class="lab-ic" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+
+      <a class="lab-hub-card" href="{{ "award/" | relLangURL }}">
+        <span class="lab-hub-card-count">{{ len $awards }}</span>
+        <span class="lab-hub-card-name">{{ cond $isEn "Awards" "奖项" }}</span>
+        <span class="lab-hub-card-desc">{{ cond $isEn "Awards and honors" "相关奖项与荣誉" }}</span>
+        <span class="lab-hub-card-go" aria-hidden="true">
+          <svg class="lab-ic" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+
+{{- end -}}

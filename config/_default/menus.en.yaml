@@ -7,21 +7,8 @@ main:
     url: /research/
     weight: 10
   - name: Outcomes
-    identifier: publications
-    url: /publication/
+    url: /publications/
     weight: 20
-  - name: Papers
-    parent: publications
-    url: /publication/
-    weight: 21
-  - name: Patents
-    parent: publications
-    url: /patent/
-    weight: 22
-  - name: Awards
-    parent: publications
-    url: /award/
-    weight: 23
   - name: Projects
     url: /project/
     weight: 30

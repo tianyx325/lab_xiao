@@ -17,3 +17,14 @@ en:
     description: Research on large models and agents, low-light vision, depth estimation, and human action recognition.
     lead: Large models and agents, low-light vision, and depth estimation — perception and decision research that ships.
     intro: Affiliated with the School of Computer Science and Technology, Xi'an University of Technology, the lab works along a perception-to-decision research line, with results deployed in surveillance, industrial inspection, and underwater exploration.
+    lab:
+      email: zhaolin.xiao@xaut.edu.cn
+      address: Room 417, Teaching Building 3, Jinhua Campus, Xi'an University of Technology
+      admit_lead: 'We welcome motivated students interested in computer vision, image processing, and AI research to join the lab.'
+      ui:
+        contact_title: Contact & Admissions
+        admit_kind: Admissions
+        contact_kind: Contact
+        email_label: Email
+        address_label: Address
+        map_aria: Lab location map
