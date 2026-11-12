@@ -69,12 +69,24 @@ $lab-page-gutter: $lab-space-5 !default;
 $lab-gutter-home: clamp(1.5rem, 5vw, 3rem) !default;
 $lab-gutter-list: clamp(1.25rem, 3vw, 2rem) !default;
 $lab-gutter-detail: clamp(1.25rem, 4vw, 2.5rem) !default;
+/* Page-type top breathing (below navbar) and end breathing (above footer) —
+   each page kind owns its own set; consumed via --lab-page-top / --lab-page-end */
+$lab-page-top-home: 0 !default; /* hero sits flush under the navbar */
+$lab-page-top-list: $lab-space-9 !default;
+$lab-page-top-detail: $lab-space-8 !default;
+$lab-page-end-home: $lab-space-page-end !default;
+$lab-page-end-list: $lab-space-page-end !default;
+$lab-page-end-detail: $lab-space-page-end !default;
+/* Content column width per page kind — components inside are sized for this */
+$lab-page-width-home: $lab-content-width !default; /* 1100px hero + card stage */
+$lab-page-width-list: $lab-content-width !default; /* 1100px, same 3-col card rhythm */
 $lab-card-gap: $lab-space-5 !default;
 $lab-card-pad: $lab-space-4 $lab-space-5 !default;
 /* List rows + article measure — wider than a blog column */
 $lab-read-width: 52rem !default;
 /* Detail/article reading column — 42rem ≈ 42 CJK chars/line (WCAG CJK advisory ≤40) */
 $lab-read-width-detail: 42rem !default;
+$lab-page-width-detail: $lab-read-width-detail !default; /* 42rem reading column */
 $lab-navbar-height: 56px !default; /* floating capsule height (desktop) */
 $lab-navbar-height-sm: 48px !default; /* floating capsule height (mobile) */
 
@@ -225,6 +237,16 @@ $lab-leading-loose: 1.75 !default;
   --lab-gutter-home: #{$lab-gutter-home};
   --lab-gutter-list: #{$lab-gutter-list};
   --lab-gutter-detail: #{$lab-gutter-detail};
+  --lab-page-top-home: #{$lab-page-top-home};
+  --lab-page-top-list: #{$lab-page-top-list};
+  --lab-page-top-detail: #{$lab-page-top-detail};
+  --lab-page-end-home: #{$lab-page-end-home};
+  --lab-page-end-list: #{$lab-page-end-list};
+  --lab-page-end-detail: #{$lab-page-end-detail};
+  --lab-page-width-home: #{$lab-page-width-home};
+  --lab-page-width-list: #{$lab-page-width-list};
+  --lab-page-width-detail: #{$lab-page-width-detail};
+  --lab-page-width: var(--lab-page-width-list); /* page kinds override below */
   --lab-card-gap: #{$lab-card-gap};
   --lab-read-width: #{$lab-read-width};
   --lab-read-width-detail: #{$lab-read-width-detail};

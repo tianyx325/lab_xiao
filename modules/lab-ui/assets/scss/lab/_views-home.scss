@@ -35,7 +35,7 @@ $lab-home-sections: (
   ".home-section.lab-pubs-title",
   ".home-section.lab-major",
   ".home-section.lab-outcomes-section",
-  ".home-section.lab-people-section:not(.lab-list-shell)",
+  ".home-section.lab-people-section",
   ".home-section.lab-row-body",
   ".home-section.lab-news-section",
 );
@@ -43,7 +43,7 @@ $lab-home-sections: (
 @each $sec in $lab-home-sections {
   #{$sec} > .container {
     width: 100%;
-    max-width: var(--lab-content-width) !important;
+    max-width: var(--lab-page-width) !important;
     margin-left: auto !important;
     margin-right: auto !important;
     margin-top: 0 !important;
@@ -87,7 +87,7 @@ $lab-home-sections: (
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--lab-card-gap);
-  max-width: var(--lab-content-width);
+  max-width: var(--lab-page-width);
   margin: 0 auto;
   padding-left: var(--lab-page-gutter);
   padding-right: var(--lab-page-gutter);
@@ -96,7 +96,7 @@ $lab-home-sections: (
 
 .lab-outcomes--paper-cards {
   display: block;
-  max-width: var(--lab-content-width);
+  max-width: var(--lab-page-width);
 }
 
 .lab-outcomes--paper-cards .lab-outcomes-cards {
@@ -181,7 +181,7 @@ $lab-home-sections: (
 }
 
 .lab-news-timeline--home {
-  max-width: var(--lab-content-width);
+  max-width: var(--lab-page-width);
   margin: 0 auto;
   padding: 0 var(--lab-page-gutter);
   box-sizing: border-box;
@@ -389,7 +389,7 @@ $lab-home-sections: (
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   width: 100%;
-  max-width: var(--lab-content-width);
+  max-width: var(--lab-page-width);
 }
 
 .home-section.lab-major .section-heading {
@@ -487,7 +487,7 @@ $lab-home-sections: (
   padding-right: 0;
 }
 
-.home-section.lab-people-section:not(.lab-list-shell) .lab-people {
+.home-section.lab-people-section .lab-people {
   width: 100%;
   max-width: none;
   margin-left: 0;
@@ -552,6 +552,72 @@ $lab-home-sections: (
   color: var(--lab-color-text-secondary);
 }
 
+.lab-hero-intro {
+  margin: var(--lab-space-4) auto 0;
+  max-width: 36rem;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-loose;
+  color: var(--lab-color-muted);
+}
+
+/* Hero stats — proof bar, numbers aggregated at build time */
+.lab-hero-stats {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin: var(--lab-space-6) auto 0;
+  padding: 0;
+}
+
+.lab-hero-stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 6rem;
+  padding: 0 var(--lab-space-5);
+}
+
+.lab-hero-stat + .lab-hero-stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12%;
+  bottom: 12%;
+  width: 1px;
+  background: var(--lab-color-border-light);
+}
+
+.lab-hero-stat-num {
+  @include lab-font-serif;
+  margin: 0;
+  font-size: $lab-text-xl;
+  font-weight: $lab-weight-semibold;
+  line-height: 1.2;
+  color: var(--lab-color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.lab-hero-stat-label {
+  margin: var(--lab-space-1) 0 0;
+  font-size: $lab-text-xs;
+  letter-spacing: 0.06em;
+  color: var(--lab-color-muted);
+}
+
+@media (max-width: 575px) {
+  .lab-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--lab-space-4) 0;
+    max-width: 20rem;
+  }
+
+  .lab-hero-stat + .lab-hero-stat::before {
+    display: none;
+  }
+}
+
 /* Hero CTAs — one row: 研究方向 + 加入我们 */
 .lab-hero-actions {
   display: flex;
@@ -599,7 +665,7 @@ $lab-home-sections: (
 
 .home-section.lab-home-body > .container {
   width: 100%;
-  max-width: var(--lab-content-width) !important;
+  max-width: var(--lab-page-width) !important;
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: var(--lab-page-gutter) !important;
@@ -767,18 +833,33 @@ $lab-home-sections: (
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--lab-card-gap);
   margin: var(--lab-space-block) auto 0;
-  max-width: var(--lab-content-width);
+  max-width: var(--lab-page-width);
   align-items: stretch;
   padding-left: var(--lab-page-gutter);
   padding-right: var(--lab-page-gutter);
   box-sizing: border-box;
   container-type: inline-size;
   container-name: lab-cards;
+  counter-reset: lab-research;
 }
 
 .research-cards > .lab-card {
   margin: 0 !important;
   height: auto !important;
+  counter-increment: lab-research;
+}
+
+/* LangChain-style ordinal: 01 / 02 / 03 above each direction card */
+.research-cards > .lab-card::before {
+  content: counter(lab-research, decimal-leading-zero);
+  display: block;
+  @include lab-font-serif;
+  margin: 0 0 var(--lab-space-2);
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-semibold;
+  line-height: 1;
+  color: var(--lab-color-link);
+  font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 991px) {
@@ -823,19 +904,21 @@ $lab-home-sections: (
     gap: var(--lab-space-inline);
   }
 
-  a.lab-member-card,
-  .lab-member-card {
-    width: 12rem;
-    max-width: 12rem;
+  .lab-member-row {
+    flex-wrap: wrap;
   }
 
-  .lab-people.lab-list-page .lab-people-grid {
-    justify-content: center;
+  .lab-member-row-photo {
+    width: 5.5rem;
+    height: 5.5rem;
   }
 
-  .lab-people.lab-list-page a.lab-member-card,
-  .lab-people.lab-list-page .lab-member-card {
-    width: calc((100% - var(--lab-card-gap)) / 2);
+  .lab-member-row-more {
+    margin-left: auto;
+  }
+
+  .lab-people-grid--dots {
+    gap: var(--lab-space-5) var(--lab-space-4);
   }
 
   .home-section.wg-collection .col-12:not(.section-heading),

@@ -19,8 +19,8 @@
   align-items: center;
   width: 100%;
   max-width: none;
-  padding-left: $lab-space-6;
-  padding-right: $lab-space-6;
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
 }
 
 /* Logo left; destinations + icons sit on the right */

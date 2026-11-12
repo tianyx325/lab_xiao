@@ -24,22 +24,41 @@
   justify-content: center;
 }
 
-/* Page-type gutters — cascade into var(--lab-page-gutter) consumers */
+/* Page-type margins — each page kind owns ONE set of content-area insets
+   (sides, below-navbar top, above-footer end). Everything on the page —
+   navbar, content column, footer — resolves the same vars, so the page is
+   internally consistent while page kinds differ from each other. */
 .lab-page--home {
   --lab-page-gutter: var(--lab-gutter-home);
+  --lab-page-top: var(--lab-page-top-home);
+  --lab-page-end: var(--lab-page-end-home);
+  --lab-page-width: var(--lab-page-width-home);
 }
 
 .lab-page--list {
   --lab-page-gutter: var(--lab-gutter-list);
+  --lab-page-top: var(--lab-page-top-list);
+  --lab-page-end: var(--lab-page-end-list);
+  --lab-page-width: var(--lab-page-width-list);
 }
 
 .lab-page--detail {
   --lab-page-gutter: var(--lab-gutter-detail);
+  --lab-page-top: var(--lab-page-top-detail);
+  --lab-page-end: var(--lab-page-end-detail);
+  --lab-page-width: var(--lab-page-width-detail);
+}
+
+/* Content column width per page kind — replaces Bootstrap container jumps
+   (1140/1320px per breakpoint) so every page owns one stable column. */
+.lab-page--list .page-body .container,
+.lab-page--home .page-body .container {
+  max-width: var(--lab-page-width) !important;
 }
 
 .lab-page--detail .lab-article-header > .container,
 .lab-page--detail .lab-article-body {
-  max-width: var(--lab-read-width-detail) !important;
+  max-width: var(--lab-page-width) !important;
 }
 
 /* ---------- Global: quiet parchment academic ---------- */
@@ -98,8 +117,8 @@ body {
 
 .article-style a,
 .portrait-title a,
-.universal-wrapper a:not(.btn):not(.lab-card):not(.lab-research-card):not(.lab-member-card):not(.lab-meta-tag-link),
-.page-body a:not(.btn):not(.nav-link):not(.dropdown-item):not(.lab-card):not(.lab-research-card):not(.lab-member-card):not(.lab-meta-tag-link) {
+.universal-wrapper a:not(.btn):not(.lab-card):not(.lab-research-card):not(.lab-member-row):not(.lab-member-dot):not(.lab-meta-tag-link),
+.page-body a:not(.btn):not(.nav-link):not(.dropdown-item):not(.lab-card):not(.lab-research-card):not(.lab-member-row):not(.lab-member-dot):not(.lab-meta-tag-link) {
   color: var(--lab-color-link);
 }
 
@@ -107,7 +126,8 @@ body {
 a.lab-card.view-card,
 .lab-card.view-card,
 a.lab-research-card,
-a.lab-member-card {
+a.lab-member-row,
+a.lab-member-dot {
   color: var(--lab-color-text);
 }
 
@@ -157,7 +177,8 @@ div.alert > div:first-child::before {
 .navbar .dropdown-item:focus-visible,
 a.lab-card:focus-visible,
 a.lab-research-card:focus-visible,
-a.lab-member-card:focus-visible {
+a.lab-member-row:focus-visible,
+a.lab-member-dot:focus-visible {
   outline: none !important;
   box-shadow: 0 0 0 2px var(--lab-color-focus-ring) !important;
 }
@@ -449,7 +470,7 @@ body.page-wrapper {
 .lab-footer-inner {
   max-width: var(--lab-content-width);
   margin: 0 auto;
-  padding: 0 var(--lab-gutter-home);
+  padding: 0 var(--lab-page-gutter);
   box-sizing: border-box;
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
@@ -588,7 +609,7 @@ body.page-wrapper {
 .lab-footer-bottom-inner {
   max-width: var(--lab-content-width);
   margin: 0 auto;
-  padding: var(--lab-space-5) var(--lab-gutter-home);
+  padding: var(--lab-space-5) var(--lab-page-gutter);
   box-sizing: border-box;
   display: flex;
   align-items: center;

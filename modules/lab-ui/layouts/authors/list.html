@@ -15,12 +15,30 @@
   {{- $avatarImage := $avatar.Fill "320x320 Center" -}}
   {{- $src = $avatarImage.RelPermalink -}}
 {{- end -}}
-{{- $works := where .Pages ".IsPage" true -}}
+{{- /* Authors taxonomy is disabled (hugo.yaml) → .Pages is always empty.
+       Collect works from site.RegularPages by Params.authors membership:
+       match this member's slug, display name, or any alias mapping to the slug. */ -}}
+{{- $slug := .File.ContentBaseName -}}
+{{- $ids := slice $slug .Title -}}
+{{- with site.Data.lab_author_aliases -}}
+  {{- range $k, $v := . -}}
+    {{- if eq $v $slug -}}{{- $ids = $ids | append $k -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $works := slice -}}
+{{- range where site.RegularPages "Section" "in" (slice "publication" "patent" "award" "project") -}}
+  {{- $mine := false -}}
+  {{- range .Params.authors | default slice -}}
+    {{- if in $ids (printf "%v" .) -}}{{- $mine = true -}}{{- end -}}
+  {{- end -}}
+  {{- if $mine -}}{{- $works = $works | append . -}}{{- end -}}
+{{- end -}}
+{{- /* Academic + projects: newest first by page Date */ -}}
 {{- /* Academic + projects: newest first by page Date */ -}}
 {{- $academic := where $works "Section" "in" (slice "publication" "patent" "award") -}}
-{{- $academic = $academic.ByDate.Reverse -}}
+{{- $academic = sort $academic "Date" "desc" -}}
 {{- $projects := where $works "Section" "project" -}}
-{{- $projects = $projects.ByDate.Reverse -}}
+{{- $projects = sort $projects "Date" "desc" -}}
 
 {{- $labOrg := "" -}}
 {{- with site.Params.lab -}}{{- $labOrg = .org_name | default "" -}}{{- end -}}
@@ -119,8 +137,6 @@
                 {{- end -}}
               </ul>
             </div>
-            {{- else if and (not $email) (not $person.role) $person.bio -}}
-            <p class="lab-member-identity-bio">{{ $person.bio | markdownify | emojify }}</p>
             {{- end -}}
           </div>
 
@@ -179,11 +195,20 @@
   </div>
 
   <div class="lab-list-body container">
-    {{ with .Content }}
-    <div class="article-style lab-member-bio">
-      {{ . }}
-    </div>
-    {{ end }}
+    {{- /* Intro: custom body first, else front-matter bio (every member has one) */ -}}
+    {{- $isEn := eq site.Language.Lang "en" -}}
+    {{- $intro := .Content -}}
+    {{- if not $intro -}}
+      {{- with $person.bio -}}{{- $intro = . | markdownify | emojify -}}{{- end -}}
+    {{- end -}}
+    {{- with $intro -}}
+    <section class="lab-member-section">
+      <h2 class="lab-member-section-title">{{ cond $isEn "Introduction" "个人简介" }}</h2>
+      <div class="article-style lab-member-bio">
+        {{ . }}
+      </div>
+    </section>
+    {{- end -}}
 
     {{- $worksLimit := 7 -}}
 

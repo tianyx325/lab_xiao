@@ -3,7 +3,7 @@
 /* Dark mode */
 .dark .media.stream-item,
 .dark .pub-list-item,
-.dark .lab-member-card {
+.dark .lab-member-row {
   background: var(--lab-card-bg) !important;
   border-color: var(--lab-card-border) !important;
   box-shadow: var(--lab-card-shadow) !important;
@@ -28,7 +28,7 @@
 
 .dark .media.stream-item:hover,
 .dark .pub-list-item:hover,
-.dark .lab-member-card:hover {
+.dark .lab-member-row:hover {
   border-color: var(--lab-card-border-hover) !important;
   box-shadow: var(--lab-card-shadow-hover) !important;
 }

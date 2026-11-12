@@ -19,6 +19,22 @@ sections:
   - block: markdown
     content:
       title:
+      text: '{{< lab-section-head title="研究方向" >}}'
+    design:
+      columns: '1'
+      css_class: lab-block-head
+
+  - block: markdown
+    content:
+      title:
+      text: '{{< lab-research-cards count="3" >}}'
+    design:
+      columns: '1'
+      css_class: lab-major
+
+  - block: markdown
+    content:
+      title:
       text: '{{< lab-section-head title="导师团队" >}}'
     design:
       columns: '1'
@@ -61,19 +77,11 @@ sections:
       columns: '1'
       css_class: lab-row-head
 
-  - block: collection
+  - block: markdown
     content:
       title:
-      count: 3
-      filters:
-        folders:
-          - post
-      archive:
-        enable: true
-        text: 查看更多
-        link: post/
+      text: '{{< lab-news-list count="6" >}}'
     design:
-      view: card
       columns: '1'
-      css_class: lab-row-body lab-last
+      css_class: lab-news-section lab-last
 ---

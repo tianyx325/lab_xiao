@@ -19,7 +19,7 @@ lab:
   latitude: '34.2560'
   longitude: '108.9880'
   tagline: ''
-  lead: 聚焦大模型与智能体应用、弱光视觉增强及深度估计，做能落地的视觉与智能体研究
+  lead: 聚焦大模型与智能体、弱光视觉、深度估计，做能落地的感知与决策研究
   seo_description: 本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。
   admit_lead: 欢迎有志于智能感知与决策研究的同学加入实验室
   research_home_count: 3
@@ -40,6 +40,7 @@ lab:
     address_label: 地址
     map_aria: 实验室位置地图
     section_leads:
+      people: 导师与学生团队
       publication: 发表的期刊与会议论文
       project: 承担的科研项目
       patent: 授权发明专利

@@ -1,0 +1,84 @@
+{{- /*
+  Single member card — the one source of markup for both homepage and /people/.
+  Input: the member page object.
+  Auto-tracks: advisor (user_groups 导师/Supervisor) → editorial row card,
+  everyone else → avatar dot card.
+*/ -}}
+{{- $page := . -}}
+{{- $avatar := ($page.Resources.ByType "image").GetMatch "*avatar*" -}}
+{{- $link := "" -}}
+{{- with site.GetPage (printf "/authors/%s" (path.Base $page.File.Dir)) -}}
+  {{- $link = .RelPermalink -}}
+{{- end -}}
+{{- $src := "" -}}
+{{- if site.Params.features.avatar.gravatar -}}
+  {{- $src = printf "https://s.gravatar.com/avatar/%s?s=480" (md5 $page.Params.email) -}}
+{{- else if $avatar -}}
+  {{- $avatar_image := $avatar.Fill "480x480 Smart" -}}
+  {{- $src = $avatar_image.RelPermalink -}}
+{{- end -}}
+{{- $initial := substr $page.Title 0 1 -}}
+{{- $isAdvisor := or (in ($page.Params.user_groups | default slice) "导师") (in ($page.Params.user_groups | default slice) "Supervisor") -}}
+{{- if $isAdvisor -}}
+{{/* Focus chips: split derived focus text (、) into max 4 pills */}}
+{{ partial "components/member-focus-text.html" $page }}
+{{ $chips := slice }}
+{{ range split (replace (.Scratch.Get "lab_member_focus_text" | default "") "，" "、") "、" }}
+  {{ $t := trim . " " }}
+  {{ if $t }}{{ $chips = $chips | append $t }}{{ end }}
+{{ end }}
+{{ $chips = first 4 $chips }}
+{{ if $link }}
+<a class="lab-member-row" href="{{ $link }}">
+{{ else }}
+<article class="lab-member-row">
+{{ end }}
+  <div class="lab-member-row-photo{{ if not $src }} is-placeholder{{ end }}">
+    {{ if $src }}
+    <img src="{{ $src }}" alt="{{ $page.Title }}" loading="lazy" width="240" height="240">
+    {{ else }}
+    <span class="lab-member-photo-initial" aria-hidden="true">{{ $initial }}</span>
+    {{ end }}
+  </div>
+  <div class="lab-member-row-info">
+    <h3 class="lab-member-row-name">{{ $page.Title }}</h3>
+    {{ with $page.Params.role }}
+    <p class="lab-member-row-role">{{ . | plainify }}</p>
+    {{ end }}
+    {{ with $chips }}
+    <ul class="lab-member-row-tags">
+      {{- range . -}}<li class="lab-member-row-tag">{{ . }}</li>{{- end -}}
+    </ul>
+    {{ end }}
+  </div>
+  {{ with $link }}
+  <span class="lab-member-row-more">{{ cond (eq site.Language.Lang "en") "Profile" "个人主页" }}<span aria-hidden="true"> →</span></span>
+  {{ end }}
+{{ if $link }}
+</a>
+{{ else }}
+</article>
+{{ end }}
+{{- else -}}
+{{ if $link }}
+<a class="lab-member-dot" href="{{ $link }}">
+{{ else }}
+<article class="lab-member-dot">
+{{ end }}
+  <div class="lab-member-dot-photo{{ if not $src }} is-placeholder{{ end }}">
+    {{ if $src }}
+    <img src="{{ $src }}" alt="{{ $page.Title }}" loading="lazy" width="240" height="240">
+    {{ else }}
+    <span class="lab-member-photo-initial" aria-hidden="true">{{ $initial }}</span>
+    {{ end }}
+  </div>
+  <div class="lab-member-dot-name">{{ $page.Title }}</div>
+  {{ with $page.Params.role }}
+  <div class="lab-member-dot-role">{{ . | plainify }}</div>
+  {{ end }}
+{{ if $link }}
+</a>
+{{ else }}
+</article>
+{{ end }}
+{{- end -}}

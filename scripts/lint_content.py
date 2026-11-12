@@ -21,7 +21,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content"
 
-ALLOWED_USER_GROUPS = {"导师", "博士生", "研三", "研二", "研一", "本科生", "毕业生"}
+ALLOWED_USER_GROUPS = {"导师", "博士生", "硕士生", "研三", "研二", "研一", "博一", "博二", "博三", "本科生", "在读学生", "毕业生"}
 ALLOWED_PUB_TYPES = {"article-journal", "paper-conference", "preprint",
                      "report", "thesis", "book", "book-section", "chapter"}
 ALLOWED_PATENT_STATUS = {"granted", "pending"}
@@ -37,7 +37,7 @@ RESEARCH_BODY_SECTIONS = ("方向简介", "研究内容", "关键问题", "技�
 # 受控词表 / 正文四段式按语言区分；其余枚举两语言共用
 ALLOWED_USER_GROUPS_EN = {"Supervisor", "Ph.D. Students", "M.S. Year 1",
                           "M.S. Year 2", "M.S. Year 3", "Undergraduates",
-                          "Alumni"}
+                          "Current Students", "Alumni"}
 RESEARCH_BODY_SECTIONS_EN = ("Direction Overview", "Research Topics",
                              "Key Challenges", "Technical Approach")
 _ZH_RE = _re.compile(r"[\u4e00-\u9fff]")

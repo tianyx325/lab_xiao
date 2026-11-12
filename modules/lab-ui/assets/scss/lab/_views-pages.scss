@@ -19,7 +19,7 @@
 }
 
 .lab-contact .lab-list-body {
-  max-width: var(--lab-content-width);
+  max-width: var(--lab-page-width);
 }
 
 .lab-contact-panel {
@@ -258,12 +258,12 @@
   --lab-article-wash: #{$lab-blue-wash};
   max-width: none;
   margin: 0;
-  padding: 0 0 var(--lab-space-page-end);
+  padding: 0 0 var(--lab-page-end);
 }
 
 .lab-article-header {
   margin: 0 0 $lab-space-7;
-  padding: $lab-space-8 0 $lab-space-7;
+  padding: var(--lab-page-top) 0 $lab-space-7;
   text-align: center;
   border-bottom: 1px solid var(--lab-color-border-light);
   background: var(--lab-color-page);

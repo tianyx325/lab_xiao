@@ -14,3 +14,15 @@ user_groups:
 email: "liwengai@foxmail.com"
 ---
 
+**李文改**，西安理工大学计算机科学与技术学院**博士研究生**（博三），导师：肖照林教授。
+
+**研究方向：** 弱光图像增强与弱光深度估计
+
+**学习与研究**
+
+- 李文改，桂柯，肖照林，等. 频域特征优化与截断采样的条件扩散模型弱光图像增强方法[J]. *中国图象图形学报*，2026, 31(9): 3352-3367.
+- Li W, Xiao Z, Su H, et al. FEDD-Net: A Frequency Diagonal Feature Enhanced Dual-Branch Diffusion Network for Low-Light Image Enhancement[C]//*ICASSP 2026*. IEEE, 2026: 8757-8761.
+
+**个人**
+
+- 待补充

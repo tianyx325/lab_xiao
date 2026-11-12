@@ -1,0 +1,187 @@
+{{- /*
+  Render people groups (shared by homepage people block + /people/ list page).
+  Input: dict "groups" (slice of group names) "sort_ascending" (bool, optional)
+  Card markup lives in components/member-card.html — single source of truth.
+
+  Group semantics:
+  - "导师"/"Supervisor": advisors, weight/title sort, lab director first.
+  - "在读学生"/"Current Students" and "毕业生"/"Alumni": aggregated groups.
+    Inside, three centered sub-sections:
+      博士生 (Ph.D.)          — all doctoral members, senior grade first
+      研究生 (Master's)       — grouped by enrollment cohort "2024级",
+                                senior cohort first, weight within cohort
+      本科生 (Undergraduates) — the rest
+    Cohort year is derived from role (研一 → current academic year start,
+    博二 → one year earlier; a 4-digit number in role counts as the cohort).
+*/ -}}
+{{- $groups := .groups | default slice -}}
+{{- $sort_ascending := .sort_ascending | default true -}}
+{{- $is_en := eq site.Language.Lang "en" -}}
+
+{{- /* Student / alumni membership pools (member profiles keep fine-grained
+       groups like 研一 / Ph.D. Students; the page aggregates them) */ -}}
+{{- $studentPool := slice "博士生" "硕士生" "研一" "研二" "研三" "研四" "博一" "博二" "博三" "博四" "博五" "本科生" "在读学生" -}}
+{{- $studentPoolEn := slice "Ph.D. Students" "M.S. Year 1" "M.S. Year 2" "M.S. Year 3" "M.S. Year 4" "M.S. Year 5" "Undergraduates" "Current Students" -}}
+{{- $alumniPool := slice "毕业生" -}}
+{{- $alumniPoolEn := slice "Alumni" -}}
+
+{{ range $groups }}
+  {{ $groupName := . }}
+  {{ $isStudents := in (slice "在读学生" "Current Students") $groupName }}
+  {{ $isAlumni := in (slice "毕业生" "Alumni") $groupName }}
+  {{ $query := slice }}
+
+  {{ if or $isStudents $isAlumni }}
+    {{- /* ---- Aggregated group: 博士生 / 研究生（按级） / 本科生 ---- */ -}}
+    {{ $pool := $studentPool }}
+    {{ if $isAlumni }}
+      {{ $pool = $alumniPool }}
+      {{ if $is_en }}{{ $pool = $alumniPoolEn }}{{ end }}
+    {{ else if $is_en }}
+      {{ $pool = $studentPoolEn }}
+    {{ end }}
+    {{ $matched := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" $pool }}
+
+    {{/* Academic-year baseline: Year-1 students enrolled in September of the
+        current academic year (Sept 2026 → 2026级). */}}
+    {{ $acadStart := int (now.Format "2006") }}
+    {{ if lt (int (now.Format "1")) 9 }}
+      {{ $acadStart = sub $acadStart 1 }}
+    {{ end }}
+
+    {{ $phds := slice }}
+    {{ $masters := slice }}
+    {{ $ugs := slice }}
+    {{ range $matched }}
+      {{ $role := .Params.role | default "" | string }}
+      {{ $deg := 0 }}
+      {{ if findRE "(?i)ph\\.?\\s?d" $role }}
+        {{ $deg = 2 }}
+      {{ else if in $role "博" }}
+        {{ $deg = 2 }}
+      {{ else if or (in $role "研") (in $role "硕") (findRE "(?i)m\\.?s" $role) (findRE "(?i)master" $role) }}
+        {{ $deg = 1 }}
+      {{ end }}
+      {{ $sub := 0 }}
+      {{ $coh := 0 }}
+      {{ $nums := findRE "[0-9]+" $role }}
+      {{ with $nums }}
+        {{ $n := index . 0 }}
+        {{ if eq (len $n) 4 }}
+          {{/* e.g. "2024级博士生" — the year IS the cohort */}}
+          {{ $coh = int $n }}
+        {{ else }}
+          {{ $sub = int $n }}
+        {{ end }}
+      {{ end }}
+      {{/* Chinese numeral grades: 博一 / 研二… (no ASCII digits in role) */}}
+      {{ $cnNums := dict "一" 1 "二" 2 "三" 3 "四" 4 "五" 5 "六" 6 }}
+      {{ range $cn, $v := $cnNums }}
+        {{ if and (in $role $cn) (gt $v $sub) }}
+          {{ $sub = $v }}
+        {{ end }}
+      {{ end }}
+      {{ if and (eq $coh 0) (gt $sub 0) }}
+        {{ $coh = add (sub (add $acadStart 1) $sub) 0 }}
+      {{ end }}
+      {{ $w := int (.Params.weight | default 999) }}
+      {{ if eq $deg 2 }}
+        {{/* Ph.D.: senior grade first, weight within grade */}}
+        {{ $key := add (mul $sub 1000) (sub 1000 $w) }}
+        {{ $phds = $phds | append (dict "key" $key "page" .) }}
+      {{ else if eq $deg 1 }}
+        {{/* Master's: cohort asc (senior first), weight within cohort */}}
+        {{ if eq $coh 0 }}{{ $coh = 9999 }}{{ end }}
+        {{ $key := add (mul $coh 1000) $w }}
+        {{ $masters = $masters | append (dict "key" $key "coh" $coh "page" .) }}
+      {{ else }}
+        {{ $ugs = $ugs | append (dict "key" $w "page" .) }}
+      {{ end }}
+    {{ end }}
+    {{ $phds = sort $phds "key" "desc" }}
+    {{ $masters = sort $masters "key" "asc" }}
+    {{ $ugs = sort $ugs "key" "asc" }}
+
+    {{ if or $phds $masters $ugs }}
+    <section class="lab-people-group">
+      {{ if gt (len $groups) 1 }}
+      <h2 class="lab-people-group-title">{{ $groupName | markdownify }}</h2>
+      {{ end }}
+
+      {{ with $phds }}
+      <h3 class="lab-people-subgroup-title">{{ cond $is_en "Ph.D. Students" "博士生" }}</h3>
+      <div class="lab-people-grid lab-people-grid--dots">
+        {{ range . }}{{ partial "components/member-card.html" .page }}{{ end }}
+      </div>
+      {{ end }}
+
+      {{ with $masters }}
+      <h3 class="lab-people-subgroup-title">{{ cond $is_en "Master's Students" "研究生" }}</h3>
+      {{ $prevCoh := 0 }}
+      {{ $gridOpen := false }}
+      {{ range . }}
+        {{ if ne .coh $prevCoh }}
+          {{ if $gridOpen }}</div>{{ end }}
+          {{ if lt .coh 2100 }}
+          <div class="lab-people-cohort-title">{{ cond $is_en (printf "Cohort %d" .coh) (printf "%d级" .coh) }}</div>
+          {{ end }}
+          <div class="lab-people-grid lab-people-grid--dots">
+          {{ $prevCoh = .coh }}
+          {{ $gridOpen = true }}
+        {{ end }}
+        {{ partial "components/member-card.html" .page }}
+      {{ end }}
+      {{ if $gridOpen }}</div>{{ end }}
+      {{ end }}
+
+      {{ with $ugs }}
+      <h3 class="lab-people-subgroup-title">{{ if $isAlumni }}{{ cond $is_en "Others" "其他成员" }}{{ else }}{{ cond $is_en "Undergraduates" "本科生" }}{{ end }}</h3>
+      <div class="lab-people-grid lab-people-grid--dots">
+        {{ range . }}{{ partial "components/member-card.html" .page }}{{ end }}
+      </div>
+      {{ end }}
+    </section>
+    {{ end }}
+  {{ else }}
+    {{- /* ---- Advisor (or any legacy explicit) group: weight/title sort ---- */ -}}
+    {{ $query = where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice $groupName) }}
+    {{ $sort_order := cond $sort_ascending "asc" "desc" }}
+    {{/* Sort by Params.weight if exists, otherwise by Title */}}
+    {{ $with_sort := slice }}
+    {{ $without_sort := slice }}
+    {{ range $query }}
+      {{ if .Params.weight }}
+        {{ $with_sort = $with_sort | append . }}
+      {{ else }}
+        {{ $without_sort = $without_sort | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $with_sort = sort $with_sort "Params.weight" $sort_order }}
+    {{ $without_sort = sort $without_sort "Title" $sort_order }}
+    {{ $query = $with_sort | append $without_sort }}
+    {{/* Lab director always first within the group */}}
+    {{ $directors := slice }}
+    {{ $others := slice }}
+    {{ range $query }}
+      {{ if in (.Params.role | default "" | string) "实验室负责人" }}
+        {{ $directors = $directors | append . }}
+      {{ else }}
+        {{ $others = $others | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $query = $directors | append $others }}
+
+    {{ if $query }}
+    <section class="lab-people-group">
+      {{ if gt (len $groups) 1 }}
+      <h2 class="lab-people-group-title">{{ $groupName | markdownify }}</h2>
+      {{ end }}
+      <div class="lab-people-grid lab-people-grid--rows" data-count="{{ len $query }}">
+        {{ range $query }}
+          {{ partial "components/member-card.html" . }}
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+  {{ end }}
+{{ end }}
