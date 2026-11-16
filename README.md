@@ -24,7 +24,7 @@ py -3 scripts\sync_lab_identity.py
 需 **Hugo Extended ≥ 0.135** 与 **Go ≥ 1.22**。
 
 ```powershell
-.\start-server.ps1
+.\scripts\dev.ps1
 ```
 
 http://127.0.0.1:1313/

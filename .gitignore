@@ -7,6 +7,7 @@
 public/
 assets/jsconfig.json
 .hugo_build.lock
+.hugo-build.log
 _debug_*.py
 _v.py
 _v.txt
