@@ -1,0 +1,90 @@
+{{- /*
+  Per-section filter configuration shared by every list surface.
+  Usage: {{ $cfg := partial "listing/filter-config.html" (dict "section" "publication" "pages" $pages) }}
+  Returns: filterable, placeholder, selects, years, yearCounts, yearGrouped, measure
+*/ -}}
+
+{{- $section := .section -}}
+{{- $pages := .pages -}}
+{{- $selects := slice -}}
+{{- $placeholder := i18n "lab_search_title_abstract" -}}
+{{- $filterable := false -}}
+{{- $lblType := i18n "lab_filter_type" -}}
+{{- $lblYear := i18n "lab_filter_year" -}}
+{{- $lblCat := i18n "lab_filter_category" -}}
+{{- $lblStatus := i18n "lab_filter_status" -}}
+
+{{- if eq $section "publication" -}}
+  {{- $filterable = true -}}
+  {{- $placeholder = i18n "lab_search_papers" -}}
+  {{- $typeOpts := slice -}}
+  {{- range $index, $taxonomy := site.Taxonomies.publication_types -}}
+    {{- $label := i18n (printf "pub_%s" (strings.Replace $index "-" "_")) | default (strings.Title $index) -}}
+    {{- $typeOpts = $typeOpts | append (dict "value" (printf ".pubtype-%s" $index) "text" $label) -}}
+  {{- end -}}
+  {{- $selects = $selects | append
+    (dict "label" $lblType "group" "pubtype" "all" $lblType "options" $typeOpts)
+    (dict "label" $lblYear "group" "year" "all" $lblYear "options" (partial "listing/collect-years.html" (dict "pages" $pages "scratch" (newScratch))))
+  -}}
+{{- else if eq $section "post" -}}
+  {{- $filterable = true -}}
+  {{- $placeholder = i18n "lab_search_news" -}}
+  {{- $cats := dict -}}
+  {{- range $pages -}}
+    {{- range (.Params.categories | default slice) -}}
+      {{- $cats = merge $cats (dict (. | urlize) .) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $catOpts := slice -}}
+  {{- range $slug, $label := $cats -}}
+    {{- $catOpts = $catOpts | append (dict "value" (printf ".cat-%s" $slug) "text" $label) -}}
+  {{- end -}}
+  {{- if $catOpts -}}
+    {{- $selects = $selects | append (dict "label" $lblCat "group" "cat" "all" $lblCat "options" $catOpts) -}}
+  {{- end -}}
+  {{- $selects = $selects | append (dict "label" $lblYear "group" "year" "all" $lblYear "options" (partial "listing/collect-years.html" (dict "pages" $pages "scratch" (newScratch)))) -}}
+{{- else if eq $section "project" -}}
+  {{- $filterable = true -}}
+  {{- $placeholder = i18n "lab_search_projects" -}}
+  {{- $selects = $selects | append (dict "label" $lblStatus "group" "status" "all" $lblStatus "options" (slice
+    (dict "value" ".status-ongoing" "text" (i18n "lab_status_ongoing"))
+    (dict "value" ".status-completed" "text" (i18n "lab_status_completed"))
+  )) -}}
+  {{- $selects = $selects | append (dict "label" $lblYear "group" "year" "all" $lblYear "options" (partial "listing/collect-years.html" (dict "pages" $pages "scratch" (newScratch)))) -}}
+{{- else if eq $section "patent" -}}
+  {{- $filterable = true -}}
+  {{- $placeholder = i18n "lab_search_patents" -}}
+  {{- $selects = $selects | append (dict "label" $lblStatus "group" "status" "all" $lblStatus "options" (slice
+    (dict "value" ".status-granted" "text" (i18n "lab_status_granted"))
+  )) -}}
+  {{- $selects = $selects | append (dict "label" $lblYear "group" "year" "all" $lblYear "options" (partial "listing/collect-years.html" (dict "pages" $pages "scratch" (newScratch)))) -}}
+{{- else if eq $section "award" -}}
+  {{- $filterable = true -}}
+  {{- $placeholder = i18n "lab_search_awards" -}}
+  {{- $selects = $selects | append (dict "label" $lblYear "group" "year" "all" $lblYear "options" (partial "listing/collect-years.html" (dict "pages" $pages "scratch" (newScratch)))) -}}
+{{- end -}}
+
+{{- /* Per-year counts for the year group heads (papers / patents). */ -}}
+{{- $yearCounts := dict -}}
+{{- range $pages -}}
+  {{- $y := .Date.Format "2006" -}}
+  {{- $yearCounts = merge $yearCounts (dict $y (add (index $yearCounts $y | default 0) 1)) -}}
+{{- end -}}
+
+{{- /* Year grouping is a property of retrieval-style sections (papers,
+       patents), not of a particular view — works for list rows and
+       media-row cards alike. */ -}}
+{{- $yearGrouped := and $filterable (or (eq $section "publication") (eq $section "patent")) -}}
+{{- $measure := i18n "lab_measure_item" -}}
+{{- if eq $section "publication" -}}{{- $measure = i18n "lab_measure_paper" -}}
+{{- else if eq $section "patent" -}}{{- $measure = i18n "lab_measure_patent" -}}
+{{- else if eq $section "award" -}}{{- $measure = i18n "lab_measure_award" -}}{{- end -}}
+
+{{- return (dict
+  "filterable" $filterable
+  "placeholder" $placeholder
+  "selects" $selects
+  "yearCounts" $yearCounts
+  "yearGrouped" $yearGrouped
+  "measure" $measure
+) -}}

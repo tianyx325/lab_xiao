@@ -10,7 +10,11 @@
           <h2>{{ i18n "search" }}</h2>
         </div>
         <div class="col-6 col-search-close">
-          <a class="js-search" href="#" aria-label="{{i18n "close" | default "Close"}}"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+          {{/* Close is an ACTION → <button>, not an <a>; glyph from the
+             site-wide inline-SVG system (FA font removed) */}}
+          <button type="button" class="js-search lab-search-close" aria-label="{{i18n "close" | default "Close"}}">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
         </div>
       </div>
 
@@ -25,19 +29,23 @@
       </div>
 
       {{ $search_queries := false }}
-      {{ if isset site.Data (printf "search_queries.%s" .Site.Language.Lang) }}
-        {{ $search_queries = index site.Data (printf "search_queries.%s" .Site.Language.Lang) }}
-      {{ else if isset site.Data "search_queries" }}
-        {{ $search_queries = site.Data.search_queries }}
+      {{ if isset hugo.Data (printf "search_queries.%s" .Site.Language.Lang) }}
+        {{ $search_queries = index hugo.Data (printf "search_queries.%s" .Site.Language.Lang) }}
+      {{ else if isset hugo.Data "search_queries" }}
+        {{ $search_queries = hugo.Data.search_queries }}
       {{end}}
 
       {{ if $search_queries }}
       <div id="search-common-queries" class="pt-3">
-        <div class="font-weight-bold pb-3">{{ i18n "search_common_queries" | default "Common searches" }}</div>
-        <ul class="fa-ul">
+        <div class="lab-search-queries-title">{{ i18n "search_common_queries" | default "Common searches" }}</div>
+        {{/* Suggestions navigate → <a>; magnifier glyph is inline SVG (no FA) */}}
+        <ul class="lab-search-queries">
           {{ range $search_queries }}
-            <li class="pb-3">
-              <a href="{{.link | relURL}}"><i class="fa-li fas fa-search" aria-hidden="true"></i><span class="pl-1">{{.query | markdownify | emojify}}</span></a>
+            <li>
+              <a href="{{.link | relURL}}">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.3 16.3L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <span>{{.query | markdownify | emojify}}</span>
+              </a>
             </li>
           {{ end }}
         </ul>

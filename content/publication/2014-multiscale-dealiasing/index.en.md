@@ -8,7 +8,7 @@ authors:
 date: "2014-01-01T00:00:00Z"
 publication_types: ["article-journal"]
 publication: "计算机辅助设计与图形学学报"
-publication_short: "计算机辅助设计与图形学学报"
+publication_short: "Journal of Computer-Aided Design & Computer Graphics"
 volume: "26"
 issue: "7"
 pages: "1126-1134"

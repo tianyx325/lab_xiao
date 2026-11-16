@@ -1,64 +1,44 @@
 {{ $lab := site.Params.lab | default dict }}
-{{ $ui := $lab.ui | default dict }}
 {{ $is_en := eq site.Language.Lang "en" }}
-{{ $emailLabel := cond $is_en "Email" ($ui.email_label | default "邮箱") }}
-{{ $addressLabel := cond $is_en "Address" ($ui.address_label | default "地址") }}
 {{ $contactHeading := cond $is_en "Contact" "联系方式" }}
 {{ $linksHeading := cond $is_en "Links" "友情链接" }}
-{{ $brandName := site.Title | default ($lab.name | default "") }}
-{{ $brandLead := site.Params.lead | default ($lab.lead | default "") }}
+{{ $emailLabel := $lab.ui.email_label | default (cond $is_en "Email" "邮箱") }}
+{{ $addressLabel := $lab.ui.address_label | default (cond $is_en "Address" "地址") }}
 <footer class="lab-footer">
   <div class="lab-footer-inner">
 
-    <div class="lab-footer-brand">
-      <a href="{{ site.Home.RelPermalink }}" class="lab-footer-logo">
-        <span class="lab-logo" aria-hidden="true"></span>
-        <span class="lab-footer-logo-text">{{- $brandName -}}</span>
-      </a>
-      {{ with $lab.org_name }}
-        <p class="lab-footer-org">{{ . }}</p>
+    {{/* Contact row — group label ("联系方式") + per-item labels
+       (邮箱/地址), all sharing one mono label spec so the three labels
+       read as the same family and the left edges align with 友情链接 */}}
+    {{ if or $lab.email $lab.address }}
+    <div class="lab-footer-links">
+      <div class="lab-footer-heading">{{ $contactHeading }}</div>
+      {{ with $lab.email }}
+      <span class="lab-footer-meta-item">
+        <span class="lab-footer-meta-label">{{ $emailLabel }}</span>
+        <a href="mailto:{{ . }}">{{ . }}</a>
+      </span>
       {{ end }}
-      {{ with $brandLead }}
-        <p class="lab-footer-desc">{{ . }}</p>
+      {{ with $lab.address }}
+      <span class="lab-footer-meta-item">
+        <span class="lab-footer-meta-label">{{ $addressLabel }}</span>
+        <span>{{ . }}</span>
+      </span>
       {{ end }}
     </div>
-
-    <div class="lab-footer-contact">
-      <h2 class="lab-footer-heading">{{ $contactHeading }}</h2>
-      <div class="lab-footer-contact-items">
-        {{ with $lab.email }}
-          <div class="lab-footer-contact-item">
-            <span class="lab-footer-contact-label">{{ $emailLabel }}</span>
-            <a href="mailto:{{ . }}">{{ . }}</a>
-          </div>
-        {{ end }}
-        {{ with $lab.address }}
-          <div class="lab-footer-contact-item">
-            <span class="lab-footer-contact-label">{{- $addressLabel -}}</span>
-            <p>{{- . -}}</p>
-          </div>
-        {{ end }}
-      </div>
-    </div>
+    {{ end }}
 
     {{ with $lab.friend_links }}
     <div class="lab-footer-links">
-      <h2 class="lab-footer-heading">{{ $linksHeading }}</h2>
+      {{/* div (not h2) — a footer label must not pollute the page outline */}}
+      <div class="lab-footer-heading">{{ $linksHeading }}</div>
       <ul class="lab-footer-list">
         {{ range . }}
-        <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></li>
+        <li><a class="lab-ext" href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></li>
         {{ end }}
       </ul>
     </div>
     {{ end }}
 
-  </div>
-
-  <div class="lab-footer-bottom">
-    <div class="lab-footer-bottom-inner">
-      {{- $notice := site.Params.footer.copyright.notice | default ($lab.name | default site.Title) -}}
-      <span>&copy; {{ now.Year }} {{ $notice }}</span>
-      <a href="#top" class="lab-footer-top">{{ cond $is_en "Back to top" "回到顶部" }}</a>
-    </div>
   </div>
 </footer>

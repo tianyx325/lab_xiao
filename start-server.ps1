@@ -4,13 +4,14 @@ $ErrorActionPreference = "Stop"
 $tools = "D:\Claude code\tools"
 $hugo = Join-Path $tools "hugo\hugo.exe"
 $goBin = Join-Path $tools "go\bin"
+$dartSass = Join-Path $tools "dart-sass"
 
 if (-not (Test-Path $hugo)) {
     Write-Host "Hugo not found: $hugo" -ForegroundColor Red
     exit 1
 }
 
-$env:PATH = "$goBin;$($tools)\hugo;$env:PATH"
+$env:PATH = "$dartSass;$goBin;$($tools)\hugo;$env:PATH"
 $env:GOROOT = Join-Path $tools "go"
 $env:GOPROXY = "https://goproxy.cn,direct"
 

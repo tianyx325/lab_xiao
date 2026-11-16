@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>站点颜色系统 · Color System</title>
+<style>
+  :root {
+    --brand: #4176E6;
+    --page: #F2FAFF;
+    --card: #FDFEFF;
+    --ink: #1E232C;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "DM Sans", "Noto Sans SC", system-ui, sans-serif;
+    background: var(--page);
+    color: var(--ink);
+    line-height: 1.75;
+    padding: 48px 24px 96px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.01em; }
+  .sub { color: #6E737B; font-size: 0.9rem; margin-top: 4px; }
+  .sub b { color: var(--brand); font-weight: 500; }
+  header { margin-bottom: 40px; }
+
+  h2 {
+    font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em;
+    margin: 40px 0 4px; display: flex; align-items: center; gap: 10px;
+  }
+  h2 .tag {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em;
+    background: rgba(65,118,230,0.06); color: var(--brand);
+    border: 1px solid rgba(65,118,230,0.16);
+    padding: 1px 8px; border-radius: 999px; font-family: ui-monospace, monospace;
+  }
+  .desc { color: rgba(30,35,44,0.42); font-size: 0.82rem; margin-bottom: 14px; }
+
+  .group {
+    background: var(--card);
+    border: 1px solid rgba(65,118,230,0.14);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(65,118,230,0.04), 0 2px 8px rgba(65,118,230,0.05);
+    overflow: hidden;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 64px 220px 1fr 300px;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(30,35,44,0.06);
+  }
+  .row:last-child { border-bottom: none; }
+  .row:hover { background: rgba(65,118,230,0.03); }
+  .sw {
+    width: 64px; height: 40px; border-radius: 6px;
+    border: 1px solid rgba(30,35,44,0.08);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.35);
+  }
+  .name { font-weight: 500; font-size: 0.88rem; }
+  .name small { display: block; font-weight: 400; color: rgba(30,35,44,0.42); font-size: 0.72rem; font-family: ui-monospace, monospace; }
+  .val { font-family: ui-monospace, "SF Mono", Consolas, monospace; font-size: 0.78rem; color: #6E737B; }
+  .use { font-size: 0.8rem; color: rgba(30,35,44,0.42); }
+
+  .ladder { display: flex; border-radius: 6px; overflow: hidden; }
+  .ladder div {
+    flex: 1; height: 56px; position: relative;
+    display: flex; align-items: flex-end; justify-content: center;
+    font-family: ui-monospace, monospace; font-size: 0.62rem; color: rgba(30,35,44,0.42);
+    padding-bottom: 3px;
+  }
+  .ladder.light-text div { color: rgba(255,255,255,0.85); }
+  .ladder-wrap { margin-top: 12px; }
+  .ladder-cap { font-size: 0.75rem; color: rgba(30,35,44,0.42); margin-top: 6px; }
+
+  .legacy .sw { opacity: 0.75; }
+  .note {
+    margin-top: 40px; padding: 16px 20px;
+    background: rgba(65,118,230,0.06);
+    border: 1px solid rgba(65,118,230,0.16);
+    border-radius: 8px; font-size: 0.82rem; color: #6E737B;
+  }
+  .note b { color: var(--ink); font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>站点颜色系统</h1>
+    <p class="sub">主色 <b>#4176E6</b>（本次指定） · 页面背景 <b>#F2FAFF</b>（此前指定） · 全部色值提取自当前编译产物与令牌源 <code>_tokens.scss</code></p>
+  </header>
+
+  <h2>① 品牌蓝 <span class="tag">BRAND</span></h2>
+  <p class="desc">唯一色相，交互专用：按钮 / 激活态 / 焦点 / 链接。装饰一律走透明度阶梯，不再引入第二个蓝。</p>
+  <div class="group">
+    <div class="row"><div class="sw" style="background:#4176E6"></div><div class="name">品牌纯色<small>$lab-blue / --lab-color-brand</small></div><div class="val">#4176E6</div><div class="use">logo、选中态、边框、装饰（不承载文字）</div></div>
+    <div class="row"><div class="sw" style="background:#4176E6"></div><div class="name">交互蓝<small>--lab-color-link</small></div><div class="val">#4176E6（= 主色）</div><div class="use">正文链接、主按钮底（4.19:1，用户批准例外）</div></div>
+    <div class="row"><div class="sw" style="background:#5C89EA"></div><div class="name">链接 hover<small>--lab-color-link-hover</small></div><div class="val">主色86%+白 ≈ #5C89EA</div><div class="use">hover 提亮，永不深于主色</div></div>
+    <div class="row"><div class="sw" style="background:#6791EB"></div><div class="name">弱调蓝<small>--lab-color-link-soft</small></div><div class="val">主色80%+白 ≈ #6791EB</div><div class="use">页脚链接、查看更多、meta（3.05:1）</div></div>
+    <div class="row"><div class="sw" style="background:#EFF6FF"></div><div class="name">蓝浅底<small>$lab-blue-wash</small></div><div class="val">#EFF6FF</div><div class="use">面板底色、点缀区块</div></div>
+    <div class="row"><div class="sw" style="background:#6C9CF2"></div><div class="name">暗色链接<small>.dark link</small></div><div class="val">#6C9CF2</div><div class="use">暗色模式链接/主色（6.24:1 ✓AA）</div></div>
+    <div class="row"><div class="sw" style="background:rgba(108,156,242,0.10)"></div><div class="name">暗色蓝雾<small>.dark wash</small></div><div class="val">rgba(108,156,242,.10)</div><div class="use">暗色模式浅蓝底</div></div>
+  </div>
+
+  <div class="ladder-wrap">
+    <div class="ladder light-text">
+      <div style="background:rgba(65,118,230,0.04)">.04</div>
+      <div style="background:rgba(65,118,230,0.05)">.05</div>
+      <div style="background:rgba(65,118,230,0.06)">.06</div>
+      <div style="background:rgba(65,118,230,0.09)">.09</div>
+      <div style="background:rgba(65,118,230,0.14)">.14</div>
+      <div style="background:rgba(65,118,230,0.16)">.16</div>
+      <div style="background:rgba(65,118,230,0.28)">.28</div>
+      <div style="background:rgba(65,118,230,0.32)">.32</div>
+      <div style="background:rgba(65,118,230,0.40)">.40</div>
+    </div>
+    <p class="ladder-cap">主色透明度阶梯（#4176E6 · 由浅到深）：卡片阴影 → 蓝雾底 → 卡片边框 → 软边框 → 焦点环/常规蓝边框 → hover 边框 → 强边框</p>
+  </div>
+
+  <h2>② 墨色与文字 <span class="tag">INK</span></h2>
+  <p class="desc">单一蓝调墨色，靠透明度分层，不引入灰色系。</p>
+  <div class="group">
+    <div class="row"><div class="sw" style="background:#1E232C"></div><div class="name">正文墨<small>$lab-ink</small></div><div class="val">#1E232C</div><div class="use">标题、正文、图标</div></div>
+    <div class="row"><div class="sw" style="background:#6E737B"></div><div class="name">次要文字<small>$lab-muted</small></div><div class="val">#6E737B</div><div class="use">副标题、说明、meta</div></div>
+    <div class="row"><div class="sw" style="background:rgba(30,35,44,0.55)"></div><div class="name">三级文字<small>text-tertiary</small></div><div class="val">rgba(30,35,44,.55)</div><div class="use">弱化说明（3.63:1 ≥3:1 ✓）</div></div>
+    <div class="row"><div class="sw" style="background:rgba(30,35,44,0.28)"></div><div class="name">最淡文字<small>text-faint</small></div><div class="val">rgba(30,35,44,.28)</div><div class="use">仅限装饰（水印/大序号），不承载信息</div></div>
+    <div class="row"><div class="sw" style="background:rgba(30,35,44,0.92)"></div><div class="name">浮层遮罩<small>overlay</small></div><div class="val">rgba(30,35,44,.92)</div><div class="use">图片浮层、lightbox</div></div>
+  </div>
+
+  <h2>③ 表面与背景 <span class="tag">SURFACE</span></h2>
+  <p class="desc">页面最浅、卡片更亮并由边框+阴影托起，共享同一蓝调温度。</p>
+  <div class="group">
+    <div class="row"><div class="sw" style="background:#F2FAFF"></div><div class="name">页面背景<small>$lab-page-bg</small></div><div class="val">#F2FAFF（用户指定）</div><div class="use">全站页面底色</div></div>
+    <div class="row"><div class="sw" style="background:#FDFEFF"></div><div class="name">卡片底<small>$lab-card-bg</small></div><div class="val">#FDFEFF</div><div class="use">卡片、面板</div></div>
+    <div class="row"><div class="sw" style="background:#FFFFFF"></div><div class="name">纯白<small>$lab-white</small></div><div class="val">#FFFFFF</div><div class="use">导航栏底(90%)、反白元素</div></div>
+    <div class="row"><div class="sw" style="background:#F9FAFB"></div><div class="name">交替表面<small>$lab-surface-alt</small></div><div class="val">#F9FAFB</div><div class="use">斑马纹、disabled 底</div></div>
+    <div class="row"><div class="sw" style="background:#F1F3F5"></div><div class="name">占位底<small>$lab-placeholder-bg</small></div><div class="val">#F1F3F5</div><div class="use">图片加载占位</div></div>
+  </div>
+
+  <h2>④ 边框与阴影 <span class="tag">LINE · SHADOW</span></h2>
+  <p class="desc">两条阶梯：墨色（中性分隔）+ 品牌蓝（交互边界），语义命名、无数字散值。</p>
+  <div class="group">
+    <div class="row"><div class="sw" style="background:rgba(30,35,44,0.08)"></div><div class="name">墨边框·轻<small>border-light</small></div><div class="val">rgba(30,35,44,.08)</div><div class="use">次级分隔线</div></div>
+    <div class="row"><div class="sw" style="background:rgba(30,35,44,0.14)"></div><div class="name">墨边框·中<small>border-ink-14</small></div><div class="val">rgba(30,35,44,.14)</div><div class="use">常规分隔线</div></div>
+    <div class="row"><div class="sw" style="background:rgba(30,35,44,0.28)"></div><div class="name">墨边框·重<small>border-ink-28</small></div><div class="val">rgba(30,35,44,.28)</div><div class="use">输入框、强调分隔</div></div>
+    <div class="row"><div class="sw" style="background:rgba(65,118,230,0.16)"></div><div class="name">蓝边框·软<small>border-blue-soft</small></div><div class="val">rgba(65,118,230,.16)</div><div class="use">卡片默认边框、胶囊</div></div>
+    <div class="row"><div class="sw" style="background:rgba(65,118,230,0.28)"></div><div class="name">蓝边框·常<small>border-blue</small></div><div class="val">rgba(65,118,230,.28)</div><div class="use">hover 边框、焦点环</div></div>
+    <div class="row"><div class="sw" style="background:rgba(65,118,230,0.40)"></div><div class="name">蓝边框·强<small>border-blue-strong</small></div><div class="val">rgba(65,118,230,.40)</div><div class="use">选中态、强边界</div></div>
+    <div class="row"><div class="sw" style="background:linear-gradient(135deg,#FDFEFF 55%, rgba(65,118,230,0.09) 100%)"></div><div class="name">卡片阴影<small>card-shadow</small></div><div class="val">blue .04–.09 两层</div><div class="use">静置轻投影 / hover 提升</div></div>
+  </div>
+
+  <h2>⑤ 暗色模式 <span class="tag">DARK</span></h2>
+  <p class="desc">近黑底 + 轻蓝调，链接用提亮蓝保证对比度。</p>
+  <div class="group" style="background:#141518; border-color:#2A2D33;">
+    <div class="row" style="border-color:rgba(255,255,255,0.06)"><div class="sw" style="background:#0A0A0A"></div><div class="name" style="color:#F2F4F8">页面底<small style="color:#8A919E">dark page</small></div><div class="val" style="color:#8A919E">#0A0A0A</div><div class="use" style="color:#8A919E">暗色页面背景</div></div>
+    <div class="row" style="border-color:rgba(255,255,255,0.06)"><div class="sw" style="background:#141518"></div><div class="name" style="color:#F2F4F8">交替表面<small style="color:#8A919E">surface-alt</small></div><div class="val" style="color:#8A919E">#141518</div><div class="use" style="color:#8A919E">斑马纹</div></div>
+    <div class="row" style="border-color:rgba(255,255,255,0.06)"><div class="sw" style="background:#1A1C20"></div><div class="name" style="color:#F2F4F8">卡片底<small style="color:#8A919E">card / raised</small></div><div class="val" style="color:#8A919E">#1A1C20</div><div class="use" style="color:#8A919E">卡片、面板</div></div>
+    <div class="row" style="border-color:rgba(255,255,255,0.06)"><div class="sw" style="background:#26282E"></div><div class="name" style="color:#F2F4F8">边框<small style="color:#8A919E">border</small></div><div class="val" style="color:#8A919E">#26282E / #2A2D33</div><div class="use" style="color:#8A919E">分隔线、卡片边框</div></div>
+    <div class="row" style="border-color:rgba(255,255,255,0.06)"><div class="sw" style="background:#F2F4F8"></div><div class="name" style="color:#F2F4F8">正文<small style="color:#8A919E">text</small></div><div class="val" style="color:#8A919E">#F2F4F8</div><div class="use" style="color:#8A919E">标题、正文</div></div>
+    <div class="row" style="border-color:rgba(255,255,255,0.06)"><div class="sw" style="background:#A9B0BC"></div><div class="name" style="color:#F2F4F8">次要文字<small style="color:#8A919E">text-secondary</small></div><div class="val" style="color:#8A919E">#A9B0BC</div><div class="use" style="color:#8A919E">副标题、说明</div></div>
+    <div class="row" style="border-color:rgba(255,255,255,0.06)"><div class="sw" style="background:#8A919E"></div><div class="name" style="color:#F2F4F8">弱文字<small style="color:#8A919E">muted</small></div><div class="val" style="color:#8A919E">#8A919E</div><div class="use" style="color:#8A919E">meta、最弱层级</div></div>
+    <div class="row" style="border-color:rgba(255,255,255,0.06)"><div class="sw" style="background:#141B2E"></div><div class="name" style="color:#F2F4F8">蓝暗底<small style="color:#8A919E">blue-wash</small></div><div class="val" style="color:#8A919E">#141B2E</div><div class="use" style="color:#8A919E">暗色浅蓝面板</div></div>
+    <div class="row" style="border-color:rgba(255,255,255,0.06)"><div class="sw" style="background:#6C9CF2"></div><div class="name" style="color:#F2F4F8">链接<small style="color:#8A919E">link</small></div><div class="val" style="color:#8A919E">#6C9CF2</div><div class="use" style="color:#8A919E">链接、主色（提亮）</div></div>
+  </div>
+
+  <h2>⑥ 遗留状态色（体系外） <span class="tag legacy">VENDOR</span></h2>
+  <p class="desc">来自 HugoBlox/Bootstrap 组件库，仅出现在 alert 提示、代码高亮等组件内部，不属于本站设计体系，未纳入精简范围。</p>
+  <div class="group legacy">
+    <div class="row"><div class="sw" style="background:#28a745"></div><div class="name">成功<small>bootstrap success</small></div><div class="val">#28A745</div><div class="use">alert 成功提示</div></div>
+    <div class="row"><div class="sw" style="background:#17a2b8"></div><div class="name">信息<small>bootstrap info</small></div><div class="val">#17A2B8</div><div class="use">alert 信息提示</div></div>
+    <div class="row"><div class="sw" style="background:#ffc107"></div><div class="name">警告<small>bootstrap warning</small></div><div class="val">#FFC107</div><div class="use">alert 警告提示</div></div>
+    <div class="row"><div class="sw" style="background:#dc3545"></div><div class="name">危险<small>bootstrap danger</small></div><div class="val">#DC3545</div><div class="use">alert 错误提示</div></div>
+    <div class="row"><div class="sw" style="background:#282a36"></div><div class="name">代码块·暗<small>chroma dracula</small></div><div class="val">#282A36</div><div class="use">暗色代码高亮底</div></div>
+  </div>
+
+  <div class="note">
+    <b>统计口径：</b>①–⑤ 共 <b>30</b> 个色值为本站设计体系（lab 令牌）实际使用；⑥ 为组件库遗留，共 5 组基准色（含派生透明变体）。全站 CSS 中品牌蓝 <code>#4176E6</code> 出现 70 处，旧主色 <code>#4D6BFE</code> 已清零。
+  </div>
+
+</div>
+</body>
+</html>

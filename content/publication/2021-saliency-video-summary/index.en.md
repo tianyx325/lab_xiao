@@ -9,7 +9,7 @@ date: "2021-03-20T00:00:00Z"
 doi: "10.13700/j.bh.1001-5965.2020.0479"
 publication_types: ["article-journal"]
 publication: "北京航空航天大学学报"
-publication_short: "北京航空航天大学学报"
+publication_short: "Journal of Beijing University of Aeronautics and Astronautics"
 volume: "47"
 issue: "3"
 pages: "441-450"

@@ -27,19 +27,41 @@ mounts:
 
 | 层 | 文件 | 职责 |
 |----|------|------|
-| tokens | `lab/_tokens.scss` | 设计 token 唯一来源（`$lab-*` / `--lab-*`） |
+| tokens | `lab/_tokens.scss` | 设计 token 唯一来源（`$lab-*` / `--lab-*`，含断点 `$lab-bp-*`） |
 | type | `lab/_type.scss` | 中文排印 mixin（display/section 标题） |
+| grid | `lab/_grid.scss` | 栅格系统：断点 mixin、`lab-card-grid`、12 列基元、光学对齐 |
+| abstracts | `lab/_abstracts.scss` | 共享 placeholder（标签/链接/箭头 vocabulary） |
 | base | `lab/_base.scss` | 全局基础：对齐、gutters、导航、页脚 |
 | controls | `lab/_controls.scss` / `lab/_menus.scss` | 复用控件：按钮、卡片基类、菜单 |
 | views | `lab/_views-{results,people,pages,home,listing}.scss` | 各视图域样式 |
 | dark | `lab/_dark.scss` | 暗色覆盖（保持在末段） |
+
+## 栅格系统（lab/_grid.scss）
+
+响应式网格的**唯一合法声明方式**——视图文件禁止手写 `repeat(n, minmax(...))` 和裸 px 媒体查询：
+
+```scss
+// 等宽卡片墙（3 → 2 → 1，gap = --lab-card-gap）：站点通用节奏
+.lab-xxx-cards { @include lab-card-grid; }
+
+// 指定列数（不做响应式降级时）
+.lab-xxx { @include lab-grid-cols(2); }
+
+// 断点（token：$lab-bp-sm/md/lg = 576/768/992）
+@include lab-bp-down(lg) { … }  // ≤991（桌面优先，站内主流风格）
+@include lab-bp-up(sm)   { … }  // ≥576（移动优先）
+```
+
+- `.lab-grid` 12 列基元 + `.lab-col-{1..12}` / `.lab-col-md-*` / `.lab-col-sm-*` / `.lab-col-full`：仅供未来**混合跨度**版面（杂志式 hero 等），等宽卡片墙禁止使用。
+- 光学对齐：`$lab-align-glyph-nudge` / `$lab-align-arrow-nudge`（亚 4px 视觉补偿），工具类 `.lab-align-glyph` / `.lab-align-arrow`；"更多"链接箭头与卡片类型 glyph 已内置。
+- 已知例外：`_base.scss` 页脚断点（768 含边界）与 `_views-pages.scss` 相册断点（639，内容驱动）保留裸值。
 
 ## Partials（layouts/partials/）
 
 按领域分组，文件名不带前缀（目录即命名空间）：
 
 - `components/` — 可复用组件：`status-label` / `resolve-author` / `detail-authors` / `featured-image` / `member-focus-*` / `member-research-pages` / `research-cards` / `section-lead`
-- `listing/` — 列表页族：`list-page` / `filters` / `filter-script` / `header` / `collect-years`
+- `listing/` — 列表页族：`list-page` / `filter-config` / `filter-body` / `filters` / `filter-script` / `header` / `collect-years`
 - `article/` — 详情页族：`shell-start` / `shell-end` / `gallery` / `videos` / `build-meta-and-shell` / `meta-tags`
 - 顶层无前缀文件（`page_author.html`、`views/`、`blocks/` 等）为 **vendor 覆盖文件，保留原名，勿改名勿分组**
 

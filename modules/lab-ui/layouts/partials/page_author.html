@@ -10,7 +10,7 @@
   {{ range $a := .Params.authors }}
     {{ $raw := printf "%v" $a }}
     {{ $slug := $raw }}
-    {{ with site.Data.lab_author_aliases }}
+    {{ with hugo.Data.lab_author_aliases }}
       {{ with index . $raw }}{{ $slug = . }}{{ end }}
     {{ end }}
     {{ with site.GetPage (printf "/authors/%s" $slug) }}

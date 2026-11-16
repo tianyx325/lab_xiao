@@ -61,3 +61,13 @@
   font-weight: $lab-weight-body;
   line-height: $lab-leading-snug;
 }
+
+/* Mono micro-labels: section ordinals (01), meta badges, dates, venue tags.
+   Latin glyphs go mono; CJK falls back to the sans stack naturally. */
+@mixin lab-type-mono {
+  font-family: $lab-font-mono;
+  font-size: $lab-text-xs;
+  font-weight: $lab-weight-medium;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}

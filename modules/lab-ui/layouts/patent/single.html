@@ -2,23 +2,23 @@
 
 {{ $metaTags := slice }}
 {{ with .Params.patent_number }}
-  {{ $metaTags = $metaTags | append (dict "label" "专利号" "value" .) }}
+  {{ $metaTags = $metaTags | append (dict "label" (i18n "lab_label_patent_no") "value" .) }}
 {{ end }}
 {{ with .Params.application_date }}
-  {{ $metaTags = $metaTags | append (dict "label" "申请日" "value" (. | time.Format "2006-01-02")) }}
+  {{ $metaTags = $metaTags | append (dict "label" (i18n "lab_label_filed") "value" (. | time.Format "2006-01-02")) }}
 {{ end }}
 {{ with .Date }}
-  {{ $metaTags = $metaTags | append (dict "label" "授权日" "value" (.Format "2006-01-02")) }}
+  {{ $metaTags = $metaTags | append (dict "label" (i18n "lab_label_granted_date") "value" (.Format "2006-01-02")) }}
 {{ end }}
 {{ if .Params.authors }}
   {{ $authors := partial "components/detail-authors.html" . }}
-  {{ $metaTags = $metaTags | append (dict "label" "发明人" "value" ($authors | safeHTML)) }}
+  {{ $metaTags = $metaTags | append (dict "label" (i18n "lab_label_inventors") "value" ($authors | safeHTML)) }}
 {{ end }}
 {{ with partial "components/status-label.html" (dict "kind" "patent" "page" .) }}
-  {{ $metaTags = $metaTags | append (dict "label" "状态" "value" .) }}
+  {{ $metaTags = $metaTags | append (dict "label" (i18n "lab_label_status") "value" .) }}
 {{ end }}
 {{ with .Params.url_patent }}
-  {{ $metaTags = $metaTags | append (dict "label" "全文" "href" .) }}
+  {{ $metaTags = $metaTags | append (dict "label" (i18n "lab_label_fulltext") "href" .) }}
 {{ end }}
 {{ with .Params.url_pdf }}
   {{ $metaTags = $metaTags | append (dict "label" "PDF" "href" .) }}

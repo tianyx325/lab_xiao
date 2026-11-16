@@ -1,0 +1,217 @@
+# Lab UI — Chinese (site overlays; HugoBlox keys remain in the theme module)
+
+- id: lab_skip_to_content
+  translation: 跳到正文
+
+- id: lab_pagination
+  translation: 列表分页
+
+- id: lab_page_n
+  translation: '第 {{ . }} 页'
+
+- id: lab_page_n_of
+  translation: '第 {{ .n }} 页，共 {{ .total }} 页'
+
+- id: lab_filter_empty
+  translation: 没有匹配的内容
+
+- id: lab_search_title_abstract
+  translation: 搜索标题、摘要…
+
+- id: lab_search_papers
+  translation: 搜索论文…
+
+- id: lab_search_news
+  translation: 搜索新闻…
+
+- id: lab_search_projects
+  translation: 搜索项目…
+
+- id: lab_search_patents
+  translation: 搜索专利…
+
+- id: lab_search_awards
+  translation: 搜索奖项…
+
+- id: lab_filter_type
+  translation: 类型
+
+- id: lab_filter_year
+  translation: 年份
+
+- id: lab_filter_category
+  translation: 分类
+
+- id: lab_filter_status
+  translation: 状态
+
+- id: lab_measure_item
+  translation: 条
+
+- id: lab_measure_paper
+  translation: 篇
+
+- id: lab_measure_patent
+  translation: 件
+
+- id: lab_measure_award
+  translation: 项
+
+- id: lab_status_ongoing
+  translation: 在研
+
+- id: lab_status_completed
+  translation: 已结题
+
+- id: lab_status_granted
+  translation: 已授权
+
+- id: lab_funding_key
+  translation: 重点
+
+- id: lab_funding_general
+  translation: 面上
+
+- id: lab_funding_provincial
+  translation: 省级
+
+- id: lab_funding_youth
+  translation: 青年
+
+- id: lab_funding_nsfc
+  translation: 国自然
+
+- id: lab_patent_utility
+  translation: 实用新型
+
+- id: lab_patent_design
+  translation: 外观设计
+
+- id: lab_patent_invention
+  translation: 发明专利
+
+- id: lab_label_authors
+  translation: 作者
+
+- id: lab_label_year
+  translation: 年份
+
+- id: lab_label_venue
+  translation: 刊物
+
+- id: lab_label_volume
+  translation: 卷期
+
+- id: lab_label_type
+  translation: 类型
+
+- id: lab_label_paper
+  translation: 论文
+
+- id: lab_label_code
+  translation: 代码
+
+- id: lab_label_dataset
+  translation: 数据
+
+- id: lab_label_poster
+  translation: 海报
+
+- id: lab_label_keywords
+  translation: 关键词
+
+- id: lab_label_project_code
+  translation: 编号
+
+- id: lab_label_period
+  translation: 起止时间
+
+- id: lab_label_start
+  translation: 起始
+
+- id: lab_label_pi
+  translation: 负责人
+
+- id: lab_label_status
+  translation: 状态
+
+- id: lab_label_source
+  translation: 来源
+
+- id: lab_label_level
+  translation: 级别
+
+- id: lab_label_patent_no
+  translation: 专利号
+
+- id: lab_label_filed
+  translation: 申请日
+
+- id: lab_label_granted_date
+  translation: 授权日
+
+- id: lab_label_inventors
+  translation: 发明人
+
+- id: lab_label_fulltext
+  translation: 全文
+
+- id: lab_label_award_year
+  translation: 获奖年份
+
+- id: lab_label_awardees
+  translation: 获奖人
+
+- id: lab_label_category
+  translation: 类别
+
+- id: lab_project_homepage
+  translation: 项目主页
+
+- id: lab_gallery
+  translation: 图集
+
+- id: lab_gallery_nav
+  translation: 图集翻页
+
+- id: lab_gallery_prev
+  translation: 上一组
+
+- id: lab_gallery_next
+  translation: 下一组
+
+- id: lab_videos
+  translation: 视频链接
+
+- id: lab_video
+  translation: 视频
+
+- id: lab_open_external
+  translation: 在新窗口打开外部链接
+
+- id: lab_back_to_people
+  translation: 返回成员列表
+
+- id: lab_social_links
+  translation: 社交链接
+
+- id: lab_member_outputs
+  translation: 学术成果
+
+- id: lab_member_projects
+  translation: 研究项目
+
+- id: lab_more
+  translation: 查看更多
+
+- id: lab_kind_paper
+  translation: 论文
+
+- id: lab_kind_patent
+  translation: 专利
+
+- id: lab_kind_award
+  translation: 奖项
+
+- id: lab_people_lead
+  translation: '{{ . }}团队成员'

@@ -1,4 +1,6 @@
-{{- /* Shared research cards grid. Expects optional: count, page (for render_view). */ -}}
+{{- /* Shared research cards grid. Expects optional: count, page (for render_view).
+     "查看更多" only when the list is truncated (home teaser); the /research/
+     list page passes a high count and must not link to itself. */ -}}
 {{- $page := .page | default . -}}
 {{- $count := 0 -}}
 {{- with .count -}}
@@ -12,6 +14,8 @@
   {{- $pages = where (where site.Pages "Section" "research") "Kind" "page" -}}
   {{- $pages = sort $pages "Weight" "asc" -}}
 {{- end -}}
+{{- $total := len $pages -}}
+{{- $truncated := and (gt $count 0) (gt $total $count) -}}
 {{- if gt $count 0 -}}
   {{- $pages = first $count $pages -}}
 {{- end -}}
@@ -20,6 +24,8 @@
     {{ partial "functions/render_view" (dict "page" $page "item" $p "view" "card" "index" $i) }}
   {{- end -}}
 </div>
+{{- if $truncated -}}
 <div class="lab-section-more">
-  <a class="lab-outcomes-more" href="{{ "research/" | relURL }}">查看更多</a>
+  <a class="lab-outcomes-more" href="{{ "research/" | relLangURL }}">{{ if eq site.Language.Lang "en" }}More{{ else }}查看更多{{ end }}</a>
 </div>
+{{- end -}}

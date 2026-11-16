@@ -1,114 +1,193 @@
 <script>
 (function () {
-  var root = document.querySelector('[data-lab-filter-root]');
-  if (!root) return;
-  var pageSize = parseInt(root.getAttribute('data-page-size') || '12', 10);
-  if (!pageSize || pageSize < 1) pageSize = 12;
-  var items = Array.prototype.slice.call(root.querySelectorAll('.lab-list-item'));
-  var search = document.querySelector('.lab-list-filters .filter-search');
-  var selects = Array.prototype.slice.call(document.querySelectorAll('.lab-list-filters .lab-filter-select'));
-  var page = 1;
+  /* One independent filter engine per [data-lab-filter-root]; controls are
+     scoped to the nearest [data-lab-list-scope] so several lists (outputs
+     hub tab panels) can coexist on one page without cross-talk. */
+  var roots = Array.prototype.slice.call(document.querySelectorAll('[data-lab-filter-root]'));
+  var i18n = {{ dict
+    "empty" (i18n "lab_filter_empty")
+    "pagination" (i18n "lab_pagination")
+    "prev" (i18n "previous")
+    "next" (i18n "next")
+  | jsonify | safeJS }};
 
-  var empty = document.createElement('p');
-  empty.className = 'lab-filter-empty';
-  empty.setAttribute('hidden', '');
-  empty.textContent = '没有匹配的内容';
+  function init(root) {
+    var pageSize = parseInt(root.getAttribute('data-page-size') || '12', 10);
+    if (!pageSize || pageSize < 1) pageSize = 12;
+    var items = Array.prototype.slice.call(root.querySelectorAll('.lab-list-item'));
+    /* Controls live in a sticky bar: the hub renders one filter row per tab
+       panel in its sticky header ([data-filter-for]); standalone list pages
+       keep them in the page header. */
+    var scope = root.closest('[data-lab-list-scope]');
+    var panel = root.closest('[role="tabpanel"]');
+    var host = panel ? document.querySelector('[data-filter-for="' + panel.id + '"]') : null;
+    var controlScope = host ||
+      (scope && scope.querySelector('.lab-list-filters') ? scope : null) ||
+      root.closest('.lab-list-page') || document;
+    var search = controlScope.querySelector('.lab-list-filters .filter-search');
+    var selects = Array.prototype.slice.call(controlScope.querySelectorAll('.lab-list-filters .lab-filter-select'));
+    var page = 1;
 
-  var nav = document.createElement('nav');
-  nav.className = 'lab-pagination';
-  nav.setAttribute('aria-label', '列表分页');
-  nav.setAttribute('hidden', '');
-  var list = document.createElement('ul');
-  list.className = 'lab-pagination-list';
-  nav.appendChild(list);
-  root.insertAdjacentElement('afterend', nav);
-  root.insertAdjacentElement('afterend', empty);
+    var empty = document.createElement('p');
+    empty.className = 'lab-filter-empty';
+    empty.setAttribute('hidden', '');
+    empty.textContent = i18n.empty;
 
-  function matched() {
-    return items.filter(function (item) {
-      return !item.classList.contains('is-filtered-out');
-    });
-  }
+    var nav = document.createElement('nav');
+    nav.className = 'lab-pagination';
+    nav.setAttribute('aria-label', i18n.pagination);
+    nav.setAttribute('hidden', '');
+    var list = document.createElement('ul');
+    list.className = 'lab-pagination-list';
+    nav.appendChild(list);
+    root.insertAdjacentElement('afterend', nav);
+    root.insertAdjacentElement('afterend', empty);
 
-  function button(label, opts) {
-    var li = document.createElement('li');
-    li.className = 'lab-pagination-item';
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'lab-pagination-link' + (opts.text ? ' lab-pagination-link--text' : '');
-    btn.textContent = label;
-    if (opts.disabled) {
-      btn.classList.add('is-disabled');
-      btn.disabled = true;
-    }
-    if (opts.current) {
-      btn.classList.add('is-current');
-      btn.setAttribute('aria-current', 'page');
-    }
-    if (opts.goto) {
-      btn.addEventListener('click', function () {
-        page = opts.goto;
-        render();
-        var header = document.querySelector('.lab-list-header');
-        if (header && header.scrollIntoView) header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    function matched() {
+      return items.filter(function (item) {
+        return !item.classList.contains('is-filtered-out');
       });
     }
-    li.appendChild(btn);
-    return li;
-  }
 
-  function render() {
-    var hits = matched();
-    var pages = Math.max(1, Math.ceil(hits.length / pageSize));
-    if (page > pages) page = pages;
-    if (page < 1) page = 1;
-    var start = (page - 1) * pageSize;
-    hits.forEach(function (item, i) {
-      item.classList.toggle('is-paged-out', i < start || i >= start + pageSize);
-    });
-
-    if (hits.length === 0) empty.removeAttribute('hidden');
-    else empty.setAttribute('hidden', '');
-
-    list.textContent = '';
-    if (pages <= 1) {
-      nav.setAttribute('hidden', '');
-      return;
-    }
-    nav.removeAttribute('hidden');
-    list.appendChild(button('上一页', { text: true, disabled: page === 1, goto: page === 1 ? 0 : page - 1 }));
-    for (var n = 1; n <= pages; n++) {
-      list.appendChild(button(String(n), { current: n === page, goto: n === page ? 0 : n }));
-    }
-    list.appendChild(button('下一页', { text: true, disabled: page === pages, goto: page === pages ? 0 : page + 1 }));
-  }
-
-  function applyFilter(resetPage) {
-    var q = (search && search.value ? search.value : '').trim().toLowerCase();
-    var groups = {};
-    selects.forEach(function (sel) {
-      groups[sel.getAttribute('data-filter-group')] = sel.value || '*';
-    });
-    items.forEach(function (item) {
-      var ok = true;
-      Object.keys(groups).forEach(function (g) {
-        var v = groups[g];
-        if (v && v !== '*' && !item.classList.contains(v.replace(/^\./, ''))) ok = false;
-      });
-      if (ok && q) {
-        var text = (item.textContent || '').toLowerCase();
-        if (text.indexOf(q) === -1) ok = false;
+    function scrollToTop() {
+      var scroller = document.querySelector('.page-body');
+      if (scroller && scroller.scrollHeight > scroller.clientHeight + 1) {
+        scroller.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
       }
-      item.classList.toggle('is-filtered-out', !ok);
+      var target = controlScope.querySelector('.lab-list-filters') ||
+        document.querySelector('.lab-list-header');
+      if (target && target.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function button(label, opts) {
+      var li = document.createElement('li');
+      li.className = 'lab-pagination-item';
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'lab-pagination-link' + (opts.text ? ' lab-pagination-link--text' : '');
+      btn.textContent = label;
+      if (opts.disabled) {
+        btn.classList.add('is-disabled');
+        btn.disabled = true;
+      }
+      if (opts.current) {
+        btn.classList.add('is-current');
+        btn.setAttribute('aria-current', 'page');
+      }
+      if (opts.goto) {
+        btn.addEventListener('click', function () {
+          page = opts.goto;
+          render();
+          scrollToTop();
+        });
+      }
+      li.appendChild(btn);
+      return li;
+    }
+
+    function render() {
+      var hits = matched();
+      var pages = Math.max(1, Math.ceil(hits.length / pageSize));
+      if (page > pages) page = pages;
+      if (page < 1) page = 1;
+      var start = (page - 1) * pageSize;
+      hits.forEach(function (item, i) {
+        item.classList.toggle('is-paged-out', i < start || i >= start + pageSize);
+      });
+
+      if (hits.length === 0) empty.removeAttribute('hidden');
+      else empty.setAttribute('hidden', '');
+
+      list.textContent = '';
+      if (pages <= 1) {
+        nav.setAttribute('hidden', '');
+        return;
+      }
+      nav.removeAttribute('hidden');
+      list.appendChild(button(i18n.prev, { text: true, disabled: page === 1, goto: page === 1 ? 0 : page - 1 }));
+      for (var n = 1; n <= pages; n++) {
+        list.appendChild(button(String(n), { current: n === page, goto: n === page ? 0 : n }));
+      }
+      list.appendChild(button(i18n.next, { text: true, disabled: page === pages, goto: page === pages ? 0 : page + 1 }));
+    }
+
+    /* Year group heads: hide when a year has no visible rows (filtered out
+       or paged out). */
+    var yearHeads = Array.prototype.slice.call(root.querySelectorAll('.lab-year-head'));
+
+    function yearVisible(y) {
+      return items.some(function (item) {
+        return item.classList.contains('year-' + y) &&
+          !item.classList.contains('is-filtered-out') &&
+          !item.classList.contains('is-paged-out');
+      });
+    }
+
+    function syncYearGroups() {
+      if (!yearHeads.length) return;
+      yearHeads.forEach(function (head) {
+        head.hidden = !yearVisible(head.getAttribute('data-year'));
+      });
+    }
+
+    function applyFilter(resetPage) {
+      var q = (search && search.value ? search.value : '').trim().toLowerCase();
+      var groups = {};
+      selects.forEach(function (sel) {
+        groups[sel.getAttribute('data-filter-group')] = sel.value || '*';
+      });
+      items.forEach(function (item) {
+        var ok = true;
+        Object.keys(groups).forEach(function (g) {
+          var v = groups[g];
+          if (v && v !== '*' && !item.classList.contains(v.replace(/^\./, ''))) ok = false;
+        });
+        if (ok && q) {
+          var text = (item.textContent || '').toLowerCase();
+          if (text.indexOf(q) === -1) ok = false;
+        }
+        item.classList.toggle('is-filtered-out', !ok);
+      });
+      if (resetPage) page = 1;
+      render();
+      syncYearGroups();
+    }
+
+    if (search) search.addEventListener('input', function () { applyFilter(true); });
+    selects.forEach(function (sel) {
+      sel.addEventListener('change', function () { applyFilter(true); });
     });
-    if (resetPage) page = 1;
-    render();
+    applyFilter(false);
   }
 
-  if (search) search.addEventListener('input', function () { applyFilter(true); });
-  selects.forEach(function (sel) {
-    sel.addEventListener('change', function () { applyFilter(true); });
-  });
-  applyFilter(false);
+  roots.forEach(init);
+
+  /* Back-to-top — appears after one viewport of scrolling; smooth unless
+     the user prefers reduced motion. */
+  var topBtn = document.querySelector('.lab-top-btn');
+  if (topBtn) {
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    /* App-shell list pages scroll .page-body (main + shared footer). */
+    var pane = document.querySelector('.page-body');
+    var paneScrolls = function () {
+      if (!pane) return false;
+      var oy = window.getComputedStyle(pane).overflowY;
+      return (oy === 'auto' || oy === 'scroll') &&
+        pane.scrollHeight > pane.clientHeight + 1;
+    };
+    var onScroll = function () {
+      var y = paneScrolls() ? pane.scrollTop : (window.scrollY || 0);
+      topBtn.hidden = y < 480;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    if (pane) pane.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    topBtn.addEventListener('click', function () {
+      var behavior = prefersReduced.matches ? 'auto' : 'smooth';
+      if (paneScrolls()) pane.scrollTo({ top: 0, behavior: behavior });
+      else window.scrollTo({ top: 0, behavior: behavior });
+    });
+  }
 })();
 </script>

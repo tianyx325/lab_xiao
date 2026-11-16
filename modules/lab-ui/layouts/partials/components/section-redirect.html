@@ -1,0 +1,25 @@
+{{- /*
+  Standalone redirect document for retired list URLs (论文/专利/奖项 section
+  pages now live as tabs inside 学术成果). Rendered without baseof — the
+  section layout files call this partial directly.
+  Usage: {{ partial "components/section-redirect.html" (dict "hash" "pub" "title" .Title) }}
+*/ -}}
+{{- $hash := .hash | default "pub" -}}
+{{- $title := .title | default "学术成果" -}}
+{{- $target := printf "%s#%s" ("publications/" | relLangURL) $hash -}}
+{{- $isEn := eq site.Language.Lang "en" -}}
+<!DOCTYPE html>
+<html lang="{{ site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, follow">
+  <title>{{ $title }}</title>
+  <link rel="canonical" href="{{ $target }}">
+  <meta http-equiv="refresh" content="0; url={{ $target }}">
+  <script>location.replace('{{ $target }}');</script>
+</head>
+<body>
+  <p>{{ cond $isEn "Redirecting to Research Outputs" "正在前往学术成果" }} — <a href="{{ $target }}">{{ $target }}</a></p>
+</body>
+</html>

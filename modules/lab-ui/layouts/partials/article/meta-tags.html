@@ -16,7 +16,7 @@
   <div class="lab-meta-tags-row">
     {{- range $row }}
     {{- if .href }}
-    <a class="lab-meta-tag lab-meta-tag-link" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }}</a>
+    <a class="lab-meta-tag lab-meta-tag-link lab-ext" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }}</a>
     {{- else }}
     <div class="lab-meta-tag">
       <span class="lab-meta-tag-label">{{ .label }}</span>

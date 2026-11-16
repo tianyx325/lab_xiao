@@ -20,12 +20,6 @@
   padding-bottom: 0 !important;
   margin-top: 0 !important;
   background: transparent !important;
-  border-top: 1px solid var(--lab-color-border-light);
-}
-
-/* Hero 后首个分区不加顶线，避免切断主视觉 */
-.home-section.lab-hero-section + .home-section.lab-block-head {
-  border-top: none;
 }
 
 $lab-home-sections: (
@@ -76,80 +70,28 @@ $lab-home-sections: (
   display: none !important;
 }
 
-.lab-outcomes {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--lab-card-gap);
-  max-width: var(--lab-page-width);
-  margin: 0 auto;
-  padding-left: var(--lab-page-gutter);
-  padding-right: var(--lab-page-gutter);
-  box-sizing: border-box;
-}
-
-.lab-outcomes--paper-cards {
+/* Homepage outcomes/news reuse the list-page card grids (lab-list-grid /
+   lab-list-grid--media-rows) — wrapper is a plain block; the "more" link
+   stays centered. */
+.lab-outcomes,
+.lab-news-list {
   display: block;
-  max-width: var(--lab-page-width);
 }
 
-.lab-outcomes--paper-cards .lab-outcomes-cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--lab-card-gap);
-}
-
-.lab-outcomes--paper-cards .lab-outcomes-more {
+.lab-outcomes-more {
   display: block;
   width: fit-content;
-  margin: var(--lab-space-4) auto 0 !important;
+  margin: var(--lab-space-block) auto 0 !important;
 }
 
-@media (max-width: 991px) {
-  .lab-outcomes--paper-cards .lab-outcomes-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 767px) {
-  .lab-outcomes--paper-cards .lab-outcomes-cards {
-    grid-template-columns: 1fr;
-  }
-}
+/* Homepage reuse of the list-page card grids: the section container already
+   carries the page gutter — no second pad, or the cards come out narrower
+   than the same wall on a list page. */
 
 .home-section.lab-news-section {
   padding-top: var(--lab-space-section-sm) !important;
   padding-bottom: 0 !important;
   background: transparent !important;
-}
-
-.lab-news-timeline--home {
-  max-width: var(--lab-page-width);
-  margin: 0 auto;
-  padding: 0 var(--lab-page-gutter);
-  box-sizing: border-box;
-}
-
-.lab-news-section .lab-outcomes-more {
-  display: block;
-  width: fit-content;
-  margin: var(--lab-space-3) auto 0 !important;
-}
-
-/* Homepage mentors use the same raised card chrome as /people/ */
-
-.lab-outcomes-cards {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lab-card-gap);
-  flex: 1 1 auto;
-  min-height: 0;
-}
-
-.lab-outcomes-cards > .lab-card,
-.lab-outcomes-cards > .card-simple {
-  width: 100%;
-  margin: 0 !important;
-  max-width: none;
 }
 
 .lab-outcomes-empty {
@@ -160,46 +102,28 @@ $lab-home-sections: (
   text-align: center;
 }
 
-/* 查看更多 — 品牌色可点，悬停略收 */
+/* 查看更多 / 全部 — unified jump-link affordance (arrow comes from
+   %lab-more-link); no underline animation, no borders. */
 .lab-outcomes-more,
 .section-head a {
-  position: relative;
   border-bottom: none !important;
   text-decoration: none !important;
   box-shadow: none !important;
 }
 
-.lab-outcomes-more::after,
-.section-head a::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--lab-color-link);
-  transform: scaleX(0);
-  transition: transform $lab-transition;
-}
-
 .lab-outcomes-more:hover,
 .section-head a:hover {
-  color: var(--lab-color-link) !important;
-  opacity: 0.82;
-  font-weight: $lab-weight-medium;
+  @extend %lab-more-link-hover;
 }
 
-.lab-outcomes-more:hover::after,
-.section-head a:hover::after {
-  transform: scaleX(1);
-}
-
-/* Match .section-head a (“全部”) — always centered */
+/* Match .section-head a (“全部”) — always centered.
+   One top-gap for EVERY “more” link on the page (was 12/16/32 mix):
+   var(--lab-space-block), mirroring the head→content gap above it. */
 .lab-outcomes-more {
   @extend %lab-more-link;
   display: block;
   width: fit-content;
-  margin: var(--lab-space-4) auto 0 !important;
+  margin: var(--lab-space-block) auto 0 !important;
   padding: 0 !important;
   height: 1.2em;
   text-align: center;
@@ -209,10 +133,10 @@ $lab-home-sections: (
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: $lab-space-6;
+  margin-top: var(--lab-space-block);
 }
 
-@media (max-width: 991px) {
+@include lab-bp-down(lg) {
   .lab-outcomes {
     grid-template-columns: 1fr;
   }
@@ -232,7 +156,7 @@ $lab-home-sections: (
 }
 
 .home-section.lab-last {
-  padding-bottom: var(--lab-space-section) !important;
+  padding-bottom: var(--lab-page-end) !important;
 }
 
 .home-section .section-heading {
@@ -359,8 +283,32 @@ $lab-home-sections: (
   isolation: isolate;
   padding-bottom: 0 !important;
   margin-bottom: 0 !important;
-  /* Flat page ground — no wash, no glow (DeepSeek-clean) */
   background: var(--lab-color-page) !important;
+}
+
+/* CSS-drawn ground, no patterns: three soft radial washes on the page color —
+   a main glow top-center (the logo's "light in darkness" motif), a faint
+   companion upper-right for depth, a whisper lower-left for balance.
+   Pure gradients, no images, no grid. Mask fades out before content. */
+.home-section.lab-hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(56rem 26rem at 50% 0%, rgba($lab-blue, 0.12), transparent 72%),
+    radial-gradient(30rem 18rem at 84% 2%, rgba($lab-blue, 0.06), transparent 70%),
+    radial-gradient(26rem 16rem at 8% 78%, rgba($lab-blue, 0.045), transparent 70%);
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 96%);
+  mask-image: linear-gradient(180deg, #000 55%, transparent 96%);
+}
+
+.dark .home-section.lab-hero-section::before {
+  background-image:
+    radial-gradient(56rem 26rem at 50% 0%, rgba(108, 156, 242, 0.14), transparent 72%),
+    radial-gradient(30rem 18rem at 84% 2%, rgba(108, 156, 242, 0.07), transparent 70%),
+    radial-gradient(26rem 16rem at 8% 78%, rgba(108, 156, 242, 0.05), transparent 70%);
 }
 
 .home-section.lab-hero-section::after {
@@ -444,7 +392,7 @@ $lab-home-sections: (
   margin: 0;
   font-size: $lab-text-xl;
   font-weight: $lab-weight-semibold;
-  line-height: 1.2;
+  line-height: $lab-leading-display;
   color: var(--lab-color-text);
   font-variant-numeric: tabular-nums;
 }
@@ -456,7 +404,7 @@ $lab-home-sections: (
   color: var(--lab-color-muted);
 }
 
-@media (max-width: 575px) {
+@include lab-bp-down(sm) {
   .lab-hero-stats {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -479,50 +427,11 @@ $lab-home-sections: (
   margin: var(--lab-space-6) auto 0;
 }
 
-.lab-news-timeline {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.lab-news-item {
-  padding: $lab-space-3 0;
-  border-bottom: 1px solid var(--lab-color-border-light);
-}
-
-.lab-news-item:last-child {
-  border-bottom: none;
-}
-
-.lab-news-date {
-  display: block;
-  font-family: $lab-font-sans;
-  font-size: $lab-text-xs;
-  font-weight: $lab-weight-semibold;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--lab-color-text-secondary);
-}
-
-.lab-news-headline {
-  display: block;
-  margin-top: $lab-space-1;
-  font-size: $lab-text-sm;
-  line-height: $lab-leading-snug;
-  color: var(--lab-color-text);
-  text-decoration: none;
-  transition: color $lab-transition;
-}
-
-.lab-news-headline:hover {
-  color: var(--lab-color-link);
-}
-
-/* Research direction cards share the content-card template. */
+/* Research direction cards share the content-card template — four per row
+   (smaller tiles), no ordinal counter, content limited to title + summary. */
 .lab-research-cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--lab-card-gap);
+  @include lab-card-grid(4);
+  gap: var(--lab-space-3);
   margin: var(--lab-space-block) auto 0;
   max-width: var(--lab-page-width);
   align-items: stretch;
@@ -531,37 +440,17 @@ $lab-home-sections: (
   box-sizing: border-box;
   container-type: inline-size;
   container-name: lab-cards;
-  counter-reset: lab-research;
 }
 
 .lab-research-cards > .lab-card {
   margin: 0 !important;
   height: auto !important;
-  counter-increment: lab-research;
 }
 
-/* LangChain-style ordinal: 01 / 02 / 03 above each direction card */
-.lab-research-cards > .lab-card::before {
-  content: counter(lab-research, decimal-leading-zero);
-  display: block;
-  @include lab-font-serif;
-  margin: 0 0 var(--lab-space-2);
-  font-size: $lab-text-sm;
-  font-weight: $lab-weight-semibold;
-  line-height: 1;
-  color: var(--lab-color-link);
-  font-variant-numeric: tabular-nums;
-}
+/* Card-grid down-steps (2-col / 1-col) now live in the lab-card-grid mixin
+   (lab/_grid.scss) — only non-grid breakpoints are declared here. */
 
-@media (max-width: 991px) {
-  .lab-research-cards,
-  #container-publications {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-}
-
-@media (max-width: 767px) {
+@include lab-bp-down(md) {
   .home-section.lab-hero-section {
     min-height: 0;
     padding-top: var(--lab-space-7) !important;
@@ -580,33 +469,8 @@ $lab-home-sections: (
     max-width: 100%;
   }
 
-  .lab-research-cards {
-    grid-template-columns: 1fr;
-  }
-
   .lab-people-grid {
     gap: var(--lab-space-inline);
-  }
-
-  .lab-member-row {
-    flex-wrap: wrap;
-  }
-
-  .lab-member-row-photo {
-    width: 5.5rem;
-    height: 5.5rem;
-  }
-
-  .lab-member-row-more {
-    margin-left: auto;
-  }
-
-  .lab-people-grid--dots {
-    gap: var(--lab-space-5) var(--lab-space-4);
-  }
-
-  #container-publications {
-    grid-template-columns: 1fr;
   }
 
 
@@ -636,10 +500,183 @@ $lab-home-sections: (
   }
 
   .home-section.lab-last {
-    padding-bottom: $lab-space-7 !important;
+    padding-bottom: var(--lab-page-end) !important;
   }
 
   .lab-contact-ways-map #map {
     height: 14rem;
+  }
+}
+
+/* ── Research scroll-story — sticky index + stacked panels ──
+   Quiet version of langchain.com's AADL wheel: scroll tracks the active
+   direction, nav marker moves (color/opacity only), panels stay calm. */
+.lab-story {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  gap: var(--lab-space-8);
+  align-items: start;
+  max-width: var(--lab-page-width);
+  margin: var(--lab-space-block) auto 0;
+  padding: 0 var(--lab-page-gutter);
+  box-sizing: border-box;
+}
+
+.lab-story-nav {
+  position: sticky;
+  top: calc(var(--lab-navbar-height) + var(--lab-space-5));
+  display: flex;
+  flex-direction: column;
+  gap: var(--lab-space-1);
+}
+
+.lab-story-nav-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--lab-space-inline);
+  padding: var(--lab-space-2) var(--lab-space-3);
+  border-left: 2px solid var(--lab-color-border-light);
+  color: var(--lab-color-text-secondary);
+  text-decoration: none !important;
+  border-bottom: none;
+  box-shadow: none;
+  transition:
+    color $lab-transition,
+    border-color $lab-transition,
+    background-color $lab-transition;
+}
+
+.lab-story-nav-item:hover {
+  color: var(--lab-color-link-hover);
+  opacity: 1;
+}
+
+.lab-story-nav-num {
+  @include lab-type-mono;
+  color: var(--lab-color-text-tertiary);
+  transition: color $lab-transition;
+}
+
+.lab-story-nav-name {
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-medium;
+  line-height: $lab-leading-snug;
+}
+
+.lab-story-nav-item.is-active {
+  color: var(--lab-color-text);
+  border-left-color: var(--lab-color-link);
+  background: var(--lab-color-accent-wash);
+}
+
+.lab-story-nav-item.is-active .lab-story-nav-num {
+  color: var(--lab-color-link);
+}
+
+.lab-story-panels {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lab-space-6);
+}
+
+.lab-story-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lab-space-stack);
+  padding: var(--lab-space-5) var(--lab-space-6);
+  border: 1px solid var(--lab-color-border);
+  border-radius: var(--lab-card-radius);
+  background: var(--lab-color-surface);
+  transition: border-color $lab-transition;
+}
+
+.lab-story-panel.is-active {
+  border-color: var(--lab-color-border-blue);
+}
+
+.lab-story-panel-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--lab-space-inline);
+}
+
+.lab-story-panel-num {
+  @include lab-type-mono;
+  color: var(--lab-color-link-soft);
+}
+
+.lab-story-panel-title {
+  @include lab-section-title;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--lab-color-text);
+}
+
+.lab-story-panel-lead {
+  margin: 0;
+  font-size: $lab-text-base;
+  line-height: $lab-leading-body;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-story-panel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lab-space-inline);
+}
+
+/* Keyword tags are LABELS, not controls: mono secondary ink, no border,
+   no pill chrome — chips (.lab-chip) stay reserved for interactive tags. */
+.lab-story-panel-tag {
+  @include lab-type-mono;
+  color: var(--lab-color-text-secondary);
+  white-space: nowrap;
+}
+
+.lab-story-panel-more {
+  @extend %lab-more-link;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lab-space-1);
+  width: fit-content;
+}
+
+@include lab-bp-down(lg) {
+  .lab-story {
+    grid-template-columns: 1fr;
+    gap: var(--lab-space-5);
+  }
+
+  .lab-story-nav {
+    position: sticky;
+    top: var(--lab-navbar-height-sm);
+    z-index: 3;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: var(--lab-space-2);
+    padding: var(--lab-space-2) 0;
+    background: var(--lab-color-page);
+    scrollbar-width: none;
+  }
+
+  .lab-story-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lab-story-nav-item {
+    flex: 0 0 auto;
+    border-left: none;
+    border: 1px solid var(--lab-color-border-light);
+    border-radius: 999px;
+    background: var(--lab-color-page);
+  }
+
+  .lab-story-nav-item.is-active {
+    border-color: var(--lab-color-border-blue);
+    background: var(--lab-color-accent-wash);
+  }
+
+  .lab-story-panel {
+    padding: var(--lab-space-4) var(--lab-space-5);
   }
 }

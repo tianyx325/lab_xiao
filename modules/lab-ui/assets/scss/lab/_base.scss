@@ -2,7 +2,7 @@
    Source: template.scss lines 8-591 (order-preserving split). */
 @mixin lab-placeholder-bg {
   background:
-    radial-gradient(ellipse 70% 55% at 50% 35%, rgba(255, 255, 255, 0.5), transparent 70%),
+    radial-gradient(ellipse 70% 55% at 50% 35%, rgba($lab-white, 0.5), transparent 70%),
     linear-gradient(165deg, rgba($lab-ink, 0.04) 0%, $lab-blue-wash 50%, rgba($lab-ink, 0.06) 100%);
 }
 
@@ -68,7 +68,7 @@ html {
   scroll-padding-top: calc(var(--lab-navbar-height) + #{$lab-space-6});
 }
 
-@media (max-width: 991px) {
+@include lab-bp-down(lg) {
   html {
     scroll-padding-top: calc(var(--lab-navbar-height-sm) + #{$lab-space-6});
   }
@@ -117,31 +117,30 @@ body {
 
 .article-style a,
 .portrait-title a,
-.page-body a:not(.btn):not(.nav-link):not(.dropdown-item):not(.lab-card):not(.lab-member-row):not(.lab-member-dot):not(.lab-meta-tag-link) {
+.page-body a:not(.btn):not(.nav-link):not(.dropdown-item):not(.lab-card):not(.lab-member-card):not(.lab-meta-tag-link) {
   color: var(--lab-color-link);
 }
 
 /* Card is an <a>; don't paint whole card blue — zones use category colors */
 a.lab-card.view-card,
 .lab-card.view-card,
-a.lab-member-row,
-a.lab-member-dot {
+a.lab-member-card {
   color: var(--lab-color-text);
 }
 
 /* Button variants live in _controls.scss (4 sanctioned .lab-btn--* forms) */
 
-/* Remaining theme blues (alerts / focus) → brand blue */
+/* Remaining theme blues (alerts / focus) → soft accent (info block, not interaction) */
 .article-style aside,
 .alert-note {
-  color: var(--lab-color-link) !important;
-  border-color: var(--lab-color-link) !important;
+  color: var(--lab-color-link-soft) !important;
+  border-color: var(--lab-color-link-soft) !important;
   background-color: var(--lab-color-blue-wash) !important;
 }
 
 .article-style aside p::before,
 div.alert > div:first-child::before {
-  color: var(--lab-color-link) !important;
+  color: var(--lab-color-link-soft) !important;
 }
 
 .form-control:focus,
@@ -155,13 +154,13 @@ div.alert > div:first-child::before {
 .navbar .nav-link:focus-visible,
 .navbar .dropdown-item:focus-visible,
 a.lab-card:focus-visible,
-a.lab-member-row:focus-visible,
-a.lab-member-dot:focus-visible {
+a.lab-member-card:focus-visible {
   outline: none !important;
   box-shadow: 0 0 0 2px var(--lab-color-focus-ring) !important;
 }
 
-/* Floating pill navbar — detached glass capsule, centered, soft elevation */
+/* Floating pill navbar — liquid glass capsule: translucent tint, backdrop
+   blur+saturate, inner top sheen (glass edge catching light), soft elevation */
 .page-header {
   position: fixed !important;
   top: $lab-space-3;
@@ -171,21 +170,31 @@ a.lab-member-dot:focus-visible {
   width: auto;
   max-width: calc(#{$lab-content-width} + #{$lab-space-9});
   margin-inline: auto;
-  background: var(--lab-color-navbar-bg) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba($lab-white, 0.55) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--lab-color-border-light);
   border-radius: 999px;
-  box-shadow: 0 1px 2px var(--lab-color-shadow-ink-04), 0 4px 24px var(--lab-color-shadow-ink-08);
+  box-shadow:
+    inset 0 1px 0 rgba($lab-white, 0.65),
+    0 1px 2px var(--lab-color-shadow-ink-04),
+    0 4px 24px var(--lab-color-shadow-ink-08);
   transition: box-shadow $lab-transition;
   transform: none !important;
 }
 
-.page-header.headroom--pinned,
-.page-header.headroom--unpinned,
-.page-header.headroom--top {
-  transform: none !important;
+.dark .page-header {
+  /* Dark glass derives from --lab-dark-surface (was a hardcode #101114 — one of three inconsistent blacks) */
+  background: color-mix(in srgb, var(--lab-dark-surface) 55%, transparent) !important;
+  border-color: var(--lab-color-border-light);
+  box-shadow:
+    inset 0 1px 0 var(--lab-color-border-light),
+    0 1px 2px var(--lab-color-shadow-ink-04),
+    0 4px 24px var(--lab-color-shadow-ink-08);
 }
+
+/* Headroom disabled via config (header.on_scroll: stay) — the navbar is
+   always visible; scroll emphasis is handled by .scrolled shadow below */
 
 .page-header .navbar {
   background: transparent !important;
@@ -203,7 +212,7 @@ a.lab-member-dot:focus-visible {
   height: 100%;
 }
 
-@media (max-width: 991px) {
+@include lab-bp-down(lg) {
   #navbar-main {
     height: var(--lab-navbar-height-sm);
   }
@@ -217,7 +226,7 @@ body {
   padding-top: calc(var(--lab-navbar-height) + #{$lab-space-3} + #{$lab-space-2});
 }
 
-@media (max-width: 991px) {
+@include lab-bp-down(lg) {
   body {
     padding-top: calc(var(--lab-navbar-height-sm) + #{$lab-space-3} + #{$lab-space-2});
   }
@@ -244,7 +253,7 @@ body {
   padding-bottom: 0 !important;
   padding-left: $lab-space-6;
   margin-right: $lab-space-4;
-  line-height: 1.2;
+  line-height: $lab-leading-display;
   display: flex;
   align-items: center;
   gap: $lab-space-2;
@@ -252,6 +261,12 @@ body {
 
 .lab-navbar-brand {
   display: none;
+  min-width: 0;
+  flex: 0 1 auto;
+  max-width: 22rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* Brand visible from tablet up — drawer mode below md centers it absolutely */
@@ -331,7 +346,7 @@ body {
   padding-bottom: 0 !important;
   padding-left: var(--lab-space-3) !important;
   padding-right: var(--lab-space-3) !important;
-  line-height: 1.2;
+  line-height: $lab-leading-display;
   height: 100%;
   color: var(--lab-color-text);
   font-family: $lab-font-sans;
@@ -355,19 +370,14 @@ body {
 }
 
 .navbar .nav-link:hover {
-  color: var(--lab-color-link) !important;
+  color: var(--lab-color-link-hover) !important;
 }
 
 .navbar .nav-link:hover::after {
   transform: scaleX(1);
 }
 
-/* Active section — persistent brand underline bar (2px, rounded) */
-.navbar .nav-link.active::after {
-  height: 2px;
-  border-radius: 1px;
-  transform: scaleX(1);
-}
+/* Active section — color-only (no underline bar; selection is the blue ink) */
 
 /* Hide Bootstrap caret on parent items (成果) */
 #navbar-main .lab-nav-parent.dropdown-toggle::after,
@@ -376,14 +386,27 @@ body {
 }
 
 .dropdown-menu {
-  border-radius: var(--lab-card-radius);
+  border-radius: 12px;
   border: 1px solid var(--lab-color-border-light);
-  box-shadow: 0 8px 28px var(--lab-color-shadow-ink-08), 0 1px 4px var(--lab-color-shadow-ink-04);
   padding: $lab-space-2 0;
-  background: var(--lab-color-navbar-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   min-width: 160px;
+  /* Liquid glass: translucent tint + backdrop blur/saturate + inner sheen */
+  background: rgba($lab-white, 0.65) !important;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba($lab-white, 0.65),
+    0 2px 6px var(--lab-color-shadow-ink-04),
+    0 8px 28px var(--lab-color-shadow-ink-08) !important;
+}
+
+.dark .dropdown-menu {
+  background: color-mix(in srgb, var(--lab-dark-surface) 66%, transparent) !important;
+  border-color: var(--lab-color-border-light);
+  box-shadow:
+    inset 0 1px 0 var(--lab-color-border-light),
+    0 2px 6px var(--lab-color-shadow-ink-04),
+    0 8px 28px var(--lab-color-shadow-ink-08) !important;
 }
 
 .dropdown-item {
@@ -391,31 +414,13 @@ body {
   letter-spacing: 0.03em;
   padding: $lab-space-2 $lab-space-5;
   color: var(--lab-color-text);
-  transition: all $lab-transition;
-  position: relative;
+  transition: color $lab-transition, background-color $lab-transition;
   font-weight: $lab-weight-body;
 }
 
-.dropdown-item::before {
-  content: '';
-  position: absolute;
-  left: 0.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 0;
-  background: var(--lab-color-link);
-  border-radius: 2px;
-  transition: height $lab-transition;
-}
-
 .dropdown-item:hover {
-  color: var(--lab-color-link) !important;
-  background: var(--lab-color-accent-blue-06);
-}
-
-.dropdown-item:hover::before {
-  height: 60%;
+  color: var(--lab-color-link-hover) !important;
+  background: var(--lab-color-accent-wash);
 }
 
 /* Keep copyright footer pinned to the bottom of the viewport on short pages */
@@ -435,87 +440,78 @@ body.page-wrapper {
   width: 100%;
 }
 
-/* ---------- Footer — quiet parchment, aligned with navbar type ---------- */
+/* ---------- Footer — quiet close with a brand hairline ---------- */
 .lab-footer {
-  background: var(--lab-card-bg);
-  border-top: 1px solid var(--lab-color-border-light);
-  padding: var(--lab-space-7) 0 0;
+  position: relative;
+  /* Same base as the page body (dark mode keeps the quiet close), with a
+     whisper of brand blue at the bottom for depth — never a raised slab */
+  background: linear-gradient(
+    180deg,
+    var(--lab-color-page) 0%,
+    color-mix(in srgb, var(--lab-color-page) 96%, $lab-blue) 100%
+  );
+  padding: var(--lab-space-6) 0;
   font-family: $lab-font-sans;
   font-size: $lab-text-sm;
   color: var(--lab-color-text-secondary);
 }
 
+/* Top rule — same quiet ink-alpha hairline as every other section boundary */
+.lab-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--lab-color-border-light);
+}
+
+/* Footer column is locked to the home stage on every page kind so the
+   close always lands on the same left/right edges as the homepage. */
 .lab-footer-inner {
-  max-width: var(--lab-content-width);
+  max-width: var(--lab-page-width-home);
   margin: 0 auto;
-  padding: 0 var(--lab-page-gutter);
+  padding: 0 var(--lab-gutter-home);
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
-  column-gap: var(--lab-space-8);
-  row-gap: var(--lab-space-7);
-  align-items: start;
 }
 
-.lab-footer-brand {
+/* Footer rows — shared structure: mono group label (联系方式/友情链接) +
+   items on one baseline. No divider between rows; spacing only */
+.lab-footer-links {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--lab-space-3);
-  max-width: 22rem;
-  min-width: 0;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--lab-space-2) var(--lab-space-5);
 }
 
-.lab-footer-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--lab-space-3);
+.lab-footer-links + .lab-footer-links {
+  margin-top: var(--lab-space-4);
+}
+
+/* Shared footer label type — one mono spec for 友情链接 AND the contact
+   labels (邮箱/地址), so all three read as the same label family */
+.lab-footer-heading,
+.lab-footer-meta-label {
   margin: 0;
-  padding: 0;
-  text-decoration: none;
-  border-bottom: none;
-  color: var(--lab-color-text);
-  transition: color $lab-transition;
-}
-
-.lab-footer-logo:hover {
-  color: var(--lab-color-link);
-  text-decoration: none;
-}
-
-.lab-footer-logo-text {
-  font-family: $lab-font-serif;
-  font-size: $lab-text-md;
-  font-weight: $lab-weight-heading;
-  letter-spacing: $lab-tracking-heading;
-  line-height: $lab-leading-tight;
-}
-
-.lab-footer-org {
-  margin: 0;
-  font-size: $lab-text-xs;
-  font-weight: $lab-weight-medium;
-  letter-spacing: 0.04em;
-  line-height: $lab-leading-snug;
-  color: var(--lab-color-text-secondary);
-}
-
-.lab-footer-desc {
-  margin: 0;
-  font-size: $lab-text-sm;
-  line-height: $lab-leading-body;
-  text-align: left;
-  color: var(--lab-color-text-secondary);
-}
-
-.lab-footer-heading {
-  margin: 0 0 var(--lab-space-3);
-  font-family: $lab-font-sans;
-  font-size: $lab-text-xs;
-  font-weight: $lab-weight-medium;
+  @include lab-type-mono;
   line-height: $lab-leading-tight;
   letter-spacing: 0.08em;
   color: var(--lab-color-muted);
+}
+
+/* Group labels (联系方式/友情链接) carry a brand tick — marks each row's
+   anchor; per-item labels stay plain so hierarchy stays two-level */
+.lab-footer-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lab-space-2);
+}
+
+.lab-footer-heading::before {
+  content: "";
+  width: 3px;
+  height: 0.9em;
+  border-radius: 1px;
+  background: var(--lab-color-link-soft);
 }
 
 .lab-footer-list {
@@ -523,126 +519,73 @@ body.page-wrapper {
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
-  gap: var(--lab-space-2);
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--lab-space-2) var(--lab-space-5);
 }
 
 .lab-footer-list a {
-  display: inline-block;
-  color: var(--lab-color-text-secondary);
+  display: inline;
+  color: var(--lab-color-link-soft);
   text-decoration: none;
-  border-bottom: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--lab-color-link) 35%, transparent);
   line-height: $lab-leading-body;
-  transition: color $lab-transition;
+  transition: color $lab-transition, border-color $lab-transition;
 }
 
 .lab-footer-list a:hover {
-  color: var(--lab-color-link);
+  color: var(--lab-color-link-hover);
+  border-bottom-color: var(--lab-color-link-hover);
 }
 
-.lab-footer-contact-items {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lab-space-3);
+/* Contact items — group label + per-item label + value, all on one baseline */
+.lab-footer-meta-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--lab-space-2);
+  color: var(--lab-color-text-secondary);
 }
 
-.lab-footer-contact-item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lab-space-1);
-  min-width: 0;
-}
-
-.lab-footer-contact-label {
-  font-size: $lab-text-xs;
-  font-weight: $lab-weight-medium;
-  letter-spacing: 0.06em;
-  line-height: $lab-leading-tight;
-  color: var(--lab-color-muted); /* ≥4.5:1 on white (WCAG AA); ink-42 was ~2.6:1 */
-}
-
-.lab-footer-contact-item a,
-.lab-footer-contact-item p {
-  margin: 0;
-  font-size: $lab-text-sm;
-  line-height: $lab-leading-body;
-  text-align: left;
-  color: var(--lab-color-text);
-  text-decoration: none;
-  overflow-wrap: anywhere;
-}
-
-.lab-footer-contact-item a:hover {
-  color: var(--lab-color-link);
-}
-
-.lab-footer-bottom {
-  margin-top: var(--lab-space-6);
-  border-top: 1px solid var(--lab-color-border-light);
-  font-size: $lab-text-xs;
-  color: var(--lab-color-muted); /* ≥4.5:1 on white (WCAG AA); ink-35 was ~2.1:1 */
-  letter-spacing: 0.04em;
-}
-
-.lab-footer-bottom-inner {
-  max-width: var(--lab-content-width);
-  margin: 0 auto;
-  padding: var(--lab-space-5) var(--lab-page-gutter);
-  box-sizing: border-box;
-  display: flex;
+/* Email pill — same capsule family as the member-card email tag:
+   mono address in a soft blue capsule; click = mailto.
+   xs text + tight line-height + 2px vertical pad (sub-4px micro-adjust
+   exception, so the capsule sits slimmer than one text line) */
+.lab-footer-meta-item a {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: var(--lab-space-4);
+  padding: 2px $lab-space-3;
+  font-family: $lab-font-mono;
+  font-variant-numeric: tabular-nums;
+  font-size: $lab-text-xs;
+  line-height: $lab-leading-tight;
+  color: var(--lab-color-link-soft);
+  background: var(--lab-color-accent-wash);
+  border: 1px solid var(--lab-color-border-blue-soft);
+  border-radius: 999px;
+  transition: color $lab-transition, background-color $lab-transition, border-color $lab-transition;
 }
 
-.lab-footer-top {
-  color: var(--lab-color-muted);
+.lab-footer-meta-item a:hover {
+  color: var(--lab-color-link-hover);
+  background: var(--lab-color-accent-wash);
+  border-color: var(--lab-color-border-blue);
   text-decoration: none;
-  transition: color $lab-transition;
-}
-
-.lab-footer-top:hover {
-  color: var(--lab-color-link);
-  text-decoration: none;
-}
-
-@media (max-width: 991px) {
-  .lab-footer-inner {
-    grid-template-columns: 1fr 1fr;
-    column-gap: var(--lab-space-6);
-    row-gap: var(--lab-space-6);
-  }
-
-  .lab-footer-brand {
-    grid-column: 1 / -1;
-    max-width: none;
-  }
 }
 
 @media (max-width: 768px) {
   .lab-footer {
-    padding-top: var(--lab-space-5);
+    padding-top: var(--lab-space-4);
   }
 
-  .lab-footer-inner {
-    grid-template-columns: 1fr;
-    row-gap: var(--lab-space-5);
+  .lab-footer-links {
+    flex-direction: column;
+    gap: var(--lab-space-2);
   }
 
-  .lab-footer-heading {
-    margin-bottom: var(--lab-space-2);
-  }
-
-  .lab-footer-list a,
-  .lab-footer-contact-item a {
+  .lab-footer-list a {
     display: inline-flex;
     align-items: center;
     min-height: 2.5rem;
     padding: var(--lab-space-1) 0;
-  }
-
-  .lab-footer-bottom {
-    margin-top: var(--lab-space-4);
   }
 }

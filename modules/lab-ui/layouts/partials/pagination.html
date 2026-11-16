@@ -6,31 +6,31 @@
 */ -}}
 {{- $pag := .Paginator -}}
 {{- if gt $pag.TotalPages 1 -}}
-<nav class="lab-pagination" aria-label="列表分页">
+<nav class="lab-pagination" aria-label="{{ i18n "lab_pagination" }}">
   <ul class="lab-pagination-list">
     <li class="lab-pagination-item">
       {{- if $pag.HasPrev -}}
-      <a class="lab-pagination-link lab-pagination-link--text" href="{{ $pag.Prev.URL }}" rel="prev">上一页</a>
+      <a class="lab-pagination-link lab-pagination-link--text" href="{{ $pag.Prev.URL }}" rel="prev">{{ i18n "previous" }}</a>
       {{- else -}}
-      <span class="lab-pagination-link lab-pagination-link--text is-disabled" aria-disabled="true">上一页</span>
+      <span class="lab-pagination-link lab-pagination-link--text is-disabled" aria-disabled="true">{{ i18n "previous" }}</span>
       {{- end -}}
     </li>
 
     {{- range $pag.Pagers -}}
     <li class="lab-pagination-item">
       {{- if eq . $pag -}}
-      <a class="lab-pagination-link is-current" href="{{ .URL }}" aria-current="page" aria-label="第 {{ .PageNumber }} 页，共 {{ $pag.TotalPages }} 页">{{ .PageNumber }}</a>
+      <a class="lab-pagination-link is-current" href="{{ .URL }}" aria-current="page" aria-label="{{ i18n "lab_page_n_of" (dict "n" .PageNumber "total" $pag.TotalPages) }}">{{ .PageNumber }}</a>
       {{- else -}}
-      <a class="lab-pagination-link" href="{{ .URL }}" aria-label="第 {{ .PageNumber }} 页">{{ .PageNumber }}</a>
+      <a class="lab-pagination-link" href="{{ .URL }}" aria-label="{{ i18n "lab_page_n" .PageNumber }}">{{ .PageNumber }}</a>
       {{- end -}}
     </li>
     {{- end -}}
 
     <li class="lab-pagination-item">
       {{- if $pag.HasNext -}}
-      <a class="lab-pagination-link lab-pagination-link--text" href="{{ $pag.Next.URL }}" rel="next">下一页</a>
+      <a class="lab-pagination-link lab-pagination-link--text" href="{{ $pag.Next.URL }}" rel="next">{{ i18n "next" }}</a>
       {{- else -}}
-      <span class="lab-pagination-link lab-pagination-link--text is-disabled" aria-disabled="true">下一页</span>
+      <span class="lab-pagination-link lab-pagination-link--text is-disabled" aria-disabled="true">{{ i18n "next" }}</span>
       {{- end -}}
     </li>
   </ul>

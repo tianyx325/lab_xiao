@@ -7,7 +7,7 @@ authors:
 date: "2014-03-01T00:00:00Z"
 publication_types: ["article-journal"]
 publication: "计算机应用研究"
-publication_short: "计算机应用研究"
+publication_short: "Application Research of Computers"
 volume: "31"
 issue: "3"
 pages: "942-945"

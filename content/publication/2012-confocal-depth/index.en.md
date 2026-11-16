@@ -8,7 +8,7 @@ authors:
 date: "2012-12-01T00:00:00Z"
 publication_types: ["article-journal"]
 publication: "计算机应用与软件"
-publication_short: "计算机应用与软件"
+publication_short: "Computer Applications and Software"
 volume: "29"
 issue: "12"
 pages: "43-46"

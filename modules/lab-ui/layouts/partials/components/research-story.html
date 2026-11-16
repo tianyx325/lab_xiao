@@ -1,0 +1,41 @@
+{{- /* Research scroll-story: sticky direction index (left) + stacked
+       direction panels (right). Nav highlights track scroll position via
+       lab-research-story.js. Replaces the flat card grid on the homepage;
+       the /research/ list page keeps components/research-cards.html.
+       Input: optional count (default: all research pages, Weight order). */ -}}
+{{- $count := int (.count | default 99) -}}
+{{- $pages := where site.RegularPages "Section" "research" -}}
+{{- $pages = sort $pages "Weight" "asc" -}}
+{{- if gt $count 0 -}}
+  {{- $pages = first $count $pages -}}
+{{- end -}}
+{{- $isEn := eq site.Language.Lang "en" -}}
+<div class="lab-story" data-lab-story>
+  <nav class="lab-story-nav" aria-label="{{ cond $isEn "Research directions" "研究方向导航" }}">
+    {{- range $i, $p := $pages -}}
+    <a class="lab-story-nav-item" href="#story-{{ $p.File.ContentBaseName }}" data-story-link="{{ $i }}">
+      <span class="lab-story-nav-num">{{ printf "%02d" (add $i 1) }}</span>
+      <span class="lab-story-nav-name">{{ $p.Title }}</span>
+    </a>
+    {{- end -}}
+  </nav>
+  <div class="lab-story-panels">
+    {{- range $i, $p := $pages -}}
+    <section class="lab-story-panel" id="story-{{ $p.File.ContentBaseName }}" data-story-panel="{{ $i }}">
+      <div class="lab-story-panel-head">
+        <span class="lab-story-panel-num">{{ printf "%02d" (add $i 1) }}</span>
+        <h3 class="lab-story-panel-title">{{ $p.Title }}</h3>
+      </div>
+      {{- with $p.Params.summary -}}
+      <p class="lab-story-panel-lead">{{ . }}</p>
+      {{- end -}}
+      {{- with $p.Params.tags -}}
+      <div class="lab-story-panel-tags">
+        {{- range . -}}<span class="lab-story-panel-tag">{{ . }}</span>{{- end -}}
+      </div>
+      {{- end -}}
+      <a class="lab-story-panel-more" href="{{ $p.RelPermalink }}">{{ cond $isEn "View direction" "进入方向" }}</a>
+    </section>
+    {{- end -}}
+  </div>
+</div>

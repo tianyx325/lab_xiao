@@ -12,3 +12,6 @@ _v.py
 _v.txt
 _excel_preview.json
 __pycache__/
+
+# Local scratch builds
+.workbuddy/tmp/

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 {{ "<!-- This site was created with Hugo Blox. https://hugoblox.com -->" | safeHTML }}
 {{ printf "<!-- Last Published: %s -->" (now | time.Format ":date_long") | safeHTML }}
-{{- $language_code := site.LanguageCode | default "en-us" -}}
-<html lang="{{$language_code}}" {{ if in site.Data.i18n.rtl.rtl $language_code }}dir="rtl"{{end}}>
+{{- $language_code := site.Language.Locale | default "en-us" -}}
+<html lang="{{$language_code}}" {{ if in hugo.Data.i18n.rtl.rtl $language_code }}dir="rtl"{{end}}>
 
 {{ partial "site_head" . }}
 
@@ -11,15 +11,34 @@
 {{- $lab_page_kind := "detail" -}}
 {{- if .IsHome -}}
   {{- $lab_page_kind = "home" -}}
-{{- else if or .IsSection (eq .Type "people") (eq .Section "people") (eq .Section "contact") (eq .Type "landing") -}}
+{{- else if or .IsSection (eq .Type "people") (eq .Section "people") (eq .Type "contact") (eq .Section "contact") (eq .Type "landing") -}}
   {{- $lab_page_kind = "list" -}}
 {{- end -}}
-<body id="top" data-spy="scroll" {{ if $show_navbar }}data-offset="70"{{end}} data-target="{{ if or .IsHome (eq .Type "widget_page") | and $highlight_active_link }}#navbar-main{{else}}#TableOfContents{{end}}" class="page-wrapper lab-page--{{ $lab_page_kind }} {{with .Params.design.css_class}}{{.}}{{end}} {{ if not (.Scratch.Get "light") }}dark{{end}} {{ if not $show_navbar }}no-navbar{{end}}" {{with .File}}data-wc-page-id="{{.UniqueID}}"{{end}} {{with .Params.design.css_style}}style="{{. | safeCSS}}"{{end}}>
+{{- $spy_toc := not (or .IsHome (eq .Type "widget_page")) -}}{{/* ScrollSpy only for article ToC; on landing pages it would strip the build-time .active from page-link nav items */}}
+<body id="top" {{ if $spy_toc }}data-spy="scroll" {{ if $show_navbar }}data-offset="70"{{ end }}{{ end }} data-target="{{ if or .IsHome (eq .Type "widget_page") | and $highlight_active_link }}#navbar-main{{else}}#TableOfContents{{end}}" class="page-wrapper lab-page--{{ $lab_page_kind }} {{with .Params.design.css_class}}{{.}}{{end}} {{ if not (.Scratch.Get "light") }}dark{{end}} {{ if not $show_navbar }}no-navbar{{end}}" {{with .File}}data-wc-page-id="{{.UniqueID}}"{{end}} {{with .Params.design.css_style}}style="{{. | safeCSS}}"{{end}}>
 
-<a class="lab-skip-link" href="#main-content">跳到正文</a>
+<a class="lab-skip-link" href="#main-content">{{ i18n "lab_skip_to_content" }}</a>
+
+{{/* Resolve theme before first paint (aligned with new-api's head IIFE):
+     apply the stored mode inline so the page never flashes the wrong theme —
+     no network fetch, runs before any visible content is parsed. The vendor
+     bundle re-runs initThemeVariation later; both agree (idempotent). */}}
+{{ $lab_site_theme_dark := not (.Scratch.Get "light") }}
+<script>
+  ;(function () {
+    var siteDark = {{ $lab_site_theme_dark }};
+    var mode = '2';
+    try { mode = localStorage.getItem('wcTheme') || '2'; } catch (e) {}
+    var dark = mode === '0' ? false
+      : mode === '1' ? true
+      : window.matchMedia('(prefers-color-scheme: dark)').matches ? true : siteDark;
+    if (dark) document.body.classList.add('dark');
+    else document.body.classList.remove('dark');
+  })();
+</script>
 
 {{/* Initialise Hugo Blox. */}}
-{{ $js_license := printf "/*! Hugo Blox Builder v%s | https://hugoblox.com/ */\n" site.Data.hugoblox.version }}
+{{ $js_license := printf "/*! Hugo Blox Builder v%s | https://hugoblox.com/ */\n" hugo.Data.hugoblox.version }}
 {{ $js_license := $js_license | printf "%s/*! Copyright 2016-present George Cushen (https://georgecushen.com/) */\n" }}
 {{ $js_license := $js_license | printf "%s/*! License: https://github.com/HugoBlox/hugo-blox-builder/blob/main/LICENSE.md */\n" }}
 {{ $js_bundle_head := $js_license | resources.FromString "js/bundle-head.js" }}
@@ -66,12 +85,15 @@
     {{ end }}
 
     {{ block "main" . }}{{ end }}
-  </div>
 
-  <div class="page-footer">
-    {{ if not (in (slice "book" "docs" "updates") .Type) }}
-      {{ partial "site_footer" . }}
-    {{ end }}
+    {{/* One footer template for every page — lives inside page-body so list
+         app-shell scrollers and the homepage document scroll share the same
+         markup and styles (no JS relocate / per-page overrides). */}}
+    <div class="page-footer">
+      {{ if not (in (slice "book" "docs" "updates") .Type) }}
+        {{ partial "site_footer" . }}
+      {{ end }}
+    </div>
   </div>
 
   {{ partial "site_js" . }}

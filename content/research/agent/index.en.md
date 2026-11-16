@@ -2,6 +2,7 @@
 title: Large Models and Agent Applications
 date: 2026-10-13
 weight: 10
+placeholder_art: agent
 summary: "Focusing on large language models and agents, this direction studies task planning, tool use, and multi-agent collaboration, promoting application deployment, evaluation, and decision-making capabilities in vertical scenarios."
 tags:
   - agent
@@ -16,21 +17,21 @@ The lab treats large models as composable cognitive and decision-making componen
 
 ### Research Topics
 
-- Application modeling, prompt engineering, and effectiveness evaluation of large models in vertical scenarios
-- Task planning, tool use, and external knowledge retrieval augmentation for single agents
-- Multi-agent collaboration: role division, task allocation, and negotiation mechanisms
-- Multi-step reasoning, decision trajectories, and controllable generation for complex tasks
-- System integration for deployment: interface specifications, safety boundaries, and human-agent collaboration workflows
+- **Model vertical applications**: application modeling, prompt engineering, and effectiveness evaluation of large models
+- **Enhance single agents**: task planning, tool use, and external knowledge retrieval augmentation
+- **Organize multi-agent collaboration**: role division, task allocation, and negotiation mechanisms
+- **Control reasoning processes**: multi-step reasoning, decision trajectories, and controllable generation for complex tasks
+- **Integrate deployable systems**: interface specifications, safety boundaries, and human-agent collaboration workflows
 
 ### Key Challenges
 
-- In open environments, task goals are ambiguous and tool interfaces are heterogeneous, making planning prone to failure
-- Consistency, conflict resolution, and cost control in multi-agent collaboration
-- Effective integration of domain knowledge with general model capabilities and hallucination suppression
-- Lack of unified, reproducible evaluation protocols for application effectiveness
+- **Planning failures**: ambiguous task goals and heterogeneous tool interfaces in open environments
+- **Collaboration consistency**: conflict resolution and cost control across multi-agent systems
+- **Knowledge fusion**: integrating domain knowledge with general capabilities and suppressing hallucinations
+- **Missing evaluation**: lack of unified, reproducible protocols for application effectiveness
 
 ### Technical Approach
 
-- Characterize the planning process with task graphs / workflows, combining retrieval and tool use to reduce hallucinations
-- Design observable agent execution logs and evaluation metrics to support iterative optimization
-- Build demonstration systems in vertical scenarios, connecting data, models, and user interfaces
+- **Characterize task graphs**: express planning with task graphs / workflows, reduce hallucinations via retrieval and tool use
+- **Build evaluation loops**: design observable execution logs and evaluation metrics to support iterative optimization
+- **Construct demonstration systems**: connect data, models, and user interfaces in vertical scenarios

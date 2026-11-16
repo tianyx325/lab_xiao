@@ -1,0 +1,185 @@
+{{- /* Placeholder cover illustration — three semantic variants per content
+       type, drawn inline so every stroke resolves to the theme's placeholder
+       vars (hue / ink wash) and dark mode repaints itself. Card picks a
+       variant by URL hash, so assignment looks random but never churns
+       between builds. Call: dict "type" <item.Type> "variant" <0|1|2> */ -}}
+{{- $t := .type | default "default" -}}
+{{- $v := .variant | default 0 -}}
+{{- $art := .art | default "" -}}
+<svg class="lab-card-ph-art" viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+{{- /* one shared enlargement: drawings are composed on a 320×180 stage but
+       live inside ~50–270 x 20–150, so 1.2 about the centre fills the cover
+       without the motifs touching the edges */ -}}
+<g transform="translate(160 90) scale(1.2) translate(-160 -90)">
+{{- if eq $art "agent" -}}
+  {{- /* Large-model + agent: a model console wired to tool nodes */ -}}
+  <rect class="lab-ph-stroke" x="92" y="54" width="78" height="60" rx="12"/>
+  <path class="lab-ph-stroke-soft" d="M108 74h40M108 90h26"/>
+  <circle class="lab-ph-dot" cx="150" cy="90" r="3.5"/>
+  <circle class="lab-ph-wash-strong" cx="228" cy="54" r="12"/>
+  <circle class="lab-ph-wash" cx="240" cy="112" r="9"/>
+  <circle class="lab-ph-wash" cx="196" cy="142" r="8"/>
+  <path class="lab-ph-stroke-soft" d="M170 64l46-6M170 80l60 26M166 112l20 24"/>
+{{- else if eq $art "lowlight" -}}
+  {{- /* Low-light enhancement: night frame with crescent moon and stars,
+         landscape detail being brought back */ -}}
+  <rect class="lab-ph-stroke-soft" x="74" y="46" width="172" height="92" rx="12"/>
+  <path class="lab-ph-stroke-soft" d="M90 122l26-30 20 16 24-28 26 22 22-14"/>
+  <path class="lab-ph-wash-strong" d="M212 56a17 17 0 1 0 0 30a23 23 0 1 1 0-30z"/>
+  <circle class="lab-ph-dot" cx="104" cy="64" r="2.5"/>
+  <circle class="lab-ph-dot" cx="126" cy="56" r="2"/>
+  <circle class="lab-ph-dot" cx="146" cy="68" r="1.6"/>
+{{- else if eq $art "depth" -}}
+  {{- /* Depth estimation: camera frustum aimed at a target, depth contours
+         resolving inside the view */ -}}
+  <rect class="lab-ph-stroke" x="62" y="78" width="30" height="22" rx="5"/>
+  <circle class="lab-ph-dot" cx="77" cy="89" r="5"/>
+  <path class="lab-ph-stroke-soft" d="M92 83l82-31M92 95l82 31"/>
+  <rect class="lab-ph-stroke-soft" x="174" y="40" width="74" height="96" rx="8"/>
+  <rect class="lab-ph-stroke" x="190" y="64" width="42" height="48" rx="6"/>
+  <path class="lab-ph-stroke-soft" d="M174 88h74M211 40v96"/>
+  <circle class="lab-ph-dot" cx="211" cy="88" r="4"/>
+{{- else if eq $art "action" -}}
+  {{- /* Action recognition: pose skeleton mid-stride, joint dots, viewfinder
+         brackets framing the subject */ -}}
+  <path class="lab-ph-stroke-soft" d="M74 52H60v15M246 52h14v15M74 130H60v-15M246 130h14v-15"/>
+  <circle class="lab-ph-stroke" cx="158" cy="52" r="9"/>
+  <path class="lab-ph-stroke" d="M158 61v30M158 70l-26-13M158 74l28 10M158 91l-22 31M158 91l25 27"/>
+  <circle class="lab-ph-dot" cx="132" cy="57" r="3.5"/>
+  <circle class="lab-ph-dot" cx="186" cy="84" r="3.5"/>
+  <circle class="lab-ph-dot" cx="136" cy="122" r="3.5"/>
+  <circle class="lab-ph-dot" cx="183" cy="118" r="3.5"/>
+{{- else if eq $t "publication" -}}
+  {{- if eq $v 0 -}}
+  <rect class="lab-ph-wash" x="98" y="28" width="116" height="118" rx="10" transform="rotate(-8 156 87)"/>
+  <rect class="lab-ph-stroke-soft" x="112" y="36" width="116" height="118" rx="10"/>
+  <path class="lab-ph-stroke" d="M132 60h74M132 78h56M132 96h68M132 114h46"/>
+  <path class="lab-ph-stroke-soft" d="M132 132h58"/>
+  <path class="lab-ph-stroke" d="M238 130c16-8 22-22 19-40"/>
+  <path class="lab-ph-stroke" d="M249 100l8-10 9 9"/>
+  <circle class="lab-ph-dot" cx="238" cy="130" r="4"/>
+  {{- else if eq $v 1 -}}
+  <rect class="lab-ph-stroke-soft" x="72" y="34" width="176" height="112" rx="12"/>
+  <path class="lab-ph-stroke-soft" d="M92 122h136M92 122V54"/>
+  <path class="lab-ph-wash-strong" d="M102 118h18v-26h-18zM132 118h18V84h-18zM162 118h18V68h-18z"/>
+  <path class="lab-ph-stroke" d="M196 104l18-16 16 10 22-28"/>
+  <circle class="lab-ph-dot" cx="252" cy="70" r="4"/>
+  {{- else -}}
+  <rect class="lab-ph-wash" x="74" y="44" width="92" height="92" rx="10" transform="rotate(-10 120 90)"/>
+  <rect class="lab-ph-stroke-soft" x="96" y="38" width="92" height="104" rx="10" transform="rotate(-4 142 90)"/>
+  <rect class="lab-ph-stroke" x="120" y="46" width="96" height="96" rx="10"/>
+  <path class="lab-ph-stroke" d="M138 70h60M138 88h44M138 106h56"/>
+  <path class="lab-ph-stroke-soft" d="M232 128c18-10 26-28 22-48"/>
+  <circle class="lab-ph-dot" cx="232" cy="128" r="3.5"/>
+  <circle class="lab-ph-dot" cx="254" cy="80" r="3.5"/>
+  {{- end -}}
+{{- else if eq $t "patent" -}}
+  {{- if eq $v 0 -}}
+  <path class="lab-ph-stroke-soft" d="M56 58h208M56 92h208M56 126h208M104 40v100M160 40v100M216 40v100"/>
+  <circle class="lab-ph-stroke" cx="140" cy="92" r="30"/>
+  <path class="lab-ph-stroke" d="M140 56v72M104 92h72"/>
+  <path class="lab-ph-stroke-soft" d="M126 106l28-28"/>
+  {{- else if eq $v 1 -}}
+  <path class="lab-ph-wash-strong" d="M132 108l-16 40 40-20 40 20-16-40z"/>
+  <circle class="lab-ph-stroke" cx="156" cy="80" r="34"/>
+  <circle class="lab-ph-stroke-soft" cx="156" cy="80" r="24"/>
+  <path class="lab-ph-stroke" d="M156 62l6 12 14 2-10 10 2 14-12-6-12 6 2-14-10-10 14-2z"/>
+  {{- else -}}
+  <rect class="lab-ph-stroke-soft" x="78" y="34" width="164" height="112" rx="10"/>
+  <rect class="lab-ph-stroke" x="98" y="54" width="58" height="58" rx="8"/>
+  <circle class="lab-ph-dot" cx="127" cy="83" r="5"/>
+  <path class="lab-ph-stroke-soft" d="M172 64h50M172 80h38M172 96h46M98 128h124"/>
+  {{- end -}}
+{{- else if eq $t "project" -}}
+  {{- if eq $v 0 -}}
+  <path class="lab-ph-stroke-soft" d="M50 106h220"/>
+  <path class="lab-ph-stroke" d="M50 106h64" stroke-dasharray="4 9"/>
+  <path class="lab-ph-stroke" d="M114 106h70" stroke-dasharray="4 9"/>
+  <path class="lab-ph-stroke" d="M184 106h86" stroke-dasharray="4 9"/>
+  <circle class="lab-ph-dot" cx="88" cy="106" r="5.5"/>
+  <circle class="lab-ph-dot" cx="158" cy="106" r="5.5"/>
+  <circle class="lab-ph-dot" cx="228" cy="106" r="5.5"/>
+  <rect class="lab-ph-wash" x="62" y="66" width="52" height="18" rx="9"/>
+  <rect class="lab-ph-wash-strong" x="132" y="52" width="52" height="18" rx="9"/>
+  <rect class="lab-ph-wash" x="202" y="74" width="52" height="18" rx="9"/>
+  {{- else if eq $v 1 -}}
+  <path class="lab-ph-stroke-soft" d="M96 124l64-56 64 56M96 124l64 20 64-20M160 68v76"/>
+  <circle class="lab-ph-wash-strong" cx="160" cy="68" r="17"/>
+  <circle class="lab-ph-dot" cx="96" cy="124" r="7"/>
+  <circle class="lab-ph-dot" cx="224" cy="124" r="7"/>
+  <circle class="lab-ph-dot" cx="160" cy="144" r="7"/>
+  <path class="lab-ph-stroke" d="M160 51V36"/>
+  {{- else -}}
+  <path class="lab-ph-wash" d="M160 42l54 31v62l-54 31-54-31V73z"/>
+  <path class="lab-ph-stroke" d="M160 42l54 31v62l-54 31-54-31V73z"/>
+  <path class="lab-ph-stroke" d="M106 73l54 31 54-31M160 104v62"/>
+  <path class="lab-ph-stroke-soft" d="M160 104l54-31v62l-54 31"/>
+  {{- end -}}
+{{- else if eq $t "post" -}}
+  {{- if eq $v 0 -}}
+  <rect class="lab-ph-stroke-soft" x="74" y="40" width="172" height="104" rx="10"/>
+  <path class="lab-ph-stroke" d="M94 62h132"/>
+  <path class="lab-ph-stroke-soft" d="M94 82h62M94 98h62M94 114h62"/>
+  <rect class="lab-ph-wash" x="172" y="78" width="54" height="52" rx="6"/>
+  {{- else if eq $v 1 -}}
+  <path class="lab-ph-stroke" d="M92 46h128a12 12 0 0 1 12 12v56a12 12 0 0 1-12 12h-52l-30 22v-22H92a12 12 0 0 1-12-12V58a12 12 0 0 1 12-12z"/>
+  <path class="lab-ph-stroke-soft" d="M104 76h84M104 94h58"/>
+  <path class="lab-ph-stroke-soft" d="M248 66c11 9 11 32 0 41M262 58c15 13 15 44 0 57"/>
+  {{- else -}}
+  <rect class="lab-ph-stroke-soft" x="84" y="48" width="152" height="96" rx="12"/>
+  <path class="lab-ph-stroke" d="M84 76h152"/>
+  <path class="lab-ph-stroke-soft" d="M124 48V34M196 48V34"/>
+  <rect class="lab-ph-wash-strong" x="102" y="88" width="22" height="22" rx="5"/>
+  <rect class="lab-ph-wash" x="134" y="88" width="22" height="22" rx="5"/>
+  <rect class="lab-ph-wash" x="166" y="88" width="22" height="22" rx="5"/>
+  <rect class="lab-ph-wash" x="198" y="88" width="22" height="22" rx="5"/>
+  {{- end -}}
+{{- else if eq $t "award" -}}
+  {{- if eq $v 0 -}}
+  <path class="lab-ph-wash" d="M126 46h26l-10 42h-26z"/>
+  <path class="lab-ph-wash-strong" d="M168 46h26l-16 42h-26z"/>
+  <circle class="lab-ph-stroke" cx="160" cy="116" r="28"/>
+  <path class="lab-ph-stroke" d="M160 102l5 9 10 1-7 7 2 10-10-5-10 5 2-10-7-7 10-1z"/>
+  {{- else if eq $v 1 -}}
+  <path class="lab-ph-stroke" d="M118 44h84v24a42 42 0 0 1-84 0z"/>
+  <path class="lab-ph-stroke-soft" d="M118 54H98v10a24 24 0 0 0 24 24M202 54h20v10a24 24 0 0 1-24 24"/>
+  <path class="lab-ph-stroke" d="M160 110v20M134 138h52"/>
+  <path class="lab-ph-wash" d="M142 44h36v18h-36z"/>
+  {{- else -}}
+  <path class="lab-ph-wash-strong" d="M160 58l12 26 28 4-20 20 5 28-25-13-25 13 5-28-20-20 28-4z"/>
+  <path class="lab-ph-stroke" d="M160 40V22M214 62l12-12M106 62L94 50M258 96h18M62 96H44"/>
+  {{- end -}}
+{{- else if eq $t "research" -}}
+  {{- if eq $v 0 -}}
+  <path class="lab-ph-stroke-soft" d="M78 128L150 62l40 34 52-48"/>
+  <circle class="lab-ph-wash-strong" cx="150" cy="62" r="14"/>
+  <circle class="lab-ph-dot" cx="78" cy="128" r="6"/>
+  <circle class="lab-ph-dot" cx="190" cy="96" r="6"/>
+  <circle class="lab-ph-dot" cx="242" cy="48" r="6"/>
+  <path class="lab-ph-stroke" d="M78 128l112-32"/>
+  {{- else if eq $v 1 -}}
+  <path class="lab-ph-stroke" d="M64 92c16-36 30-36 46 0s30 36 46 0 30-36 46 0 30 36 46 0"/>
+  <path class="lab-ph-stroke-soft" d="M64 122c16-20 30-20 46 0s30 20 46 0 30-20 46 0 30 20 46 0"/>
+  <circle class="lab-ph-dot" cx="156" cy="92" r="4"/>
+  {{- else -}}
+  <rect class="lab-ph-wash" x="98" y="58" width="94" height="78" rx="8" transform="rotate(-8 145 97)"/>
+  <rect class="lab-ph-stroke-soft" x="120" y="48" width="94" height="84" rx="8" transform="rotate(-2 167 90)"/>
+  <rect class="lab-ph-stroke" x="146" y="40" width="94" height="88" rx="8"/>
+  <path class="lab-ph-stroke" d="M164 66h58M164 86h40M164 106h52"/>
+  {{- end -}}
+{{- else -}}
+  {{- if eq $v 0 -}}
+  <circle class="lab-ph-stroke" cx="160" cy="90" r="34"/>
+  <circle class="lab-ph-stroke-soft" cx="160" cy="90" r="52"/>
+  <circle class="lab-ph-dot" cx="160" cy="90" r="5"/>
+  {{- else if eq $v 1 -}}
+  <rect class="lab-ph-stroke-soft" x="82" y="52" width="156" height="76" rx="10"/>
+  <path class="lab-ph-stroke" d="M104 106l24-26 20 16 22-30 26 22 20-26"/>
+  {{- else -}}
+  <path class="lab-ph-wash" d="M96 60h128v70H96z"/>
+  <path class="lab-ph-stroke" d="M96 60h128v70H96zM96 84h128"/>
+  <path class="lab-ph-stroke-soft" d="M118 100h60"/>
+  {{- end -}}
+{{- end -}}
+</g>
+</svg>

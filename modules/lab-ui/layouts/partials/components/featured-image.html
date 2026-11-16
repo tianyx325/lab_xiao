@@ -1,5 +1,6 @@
 {{- /* Returns featured image data (src, srcset, width, height) for a page.
-       Near-square 4:5 crops for poster cards. */ -}}
+       16:9 landscape crops — matches the card media slots (poster top band,
+       media-row left zone) and row thumbnails. */ -}}
 {{- $page := . -}}
 {{- $result := dict -}}
 {{- $resource := partial "blox-core/functions/get_featured_image.html" $page -}}
@@ -10,9 +11,9 @@
   {{- end -}}
 {{- end -}}
 {{- with $resource -}}
-  {{- $lg := .Fill (printf "420x525 %s webp q72" $anchor) -}}
-  {{- $md := .Fill (printf "320x400 %s webp q70" $anchor) -}}
-  {{- $sm := .Fill (printf "240x300 %s webp q68" $anchor) -}}
-  {{- $result = dict "src" $md.RelPermalink "srcset" (printf "%s 240w, %s 320w, %s 420w" $sm.RelPermalink $md.RelPermalink $lg.RelPermalink) "width" $md.Width "height" $md.Height -}}
+  {{- $lg := .Fill (printf "640x360 %s webp q72" $anchor) -}}
+  {{- $md := .Fill (printf "480x270 %s webp q70" $anchor) -}}
+  {{- $sm := .Fill (printf "320x180 %s webp q68" $anchor) -}}
+  {{- $result = dict "src" $md.RelPermalink "srcset" (printf "%s 320w, %s 480w, %s 640w" $sm.RelPermalink $md.RelPermalink $lg.RelPermalink) "width" $md.Width "height" $md.Height -}}
 {{- end -}}
 {{- return $result -}}

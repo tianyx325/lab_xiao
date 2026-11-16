@@ -9,7 +9,7 @@
 /* ── Brand ── */
 /* Accent channel = DeepSeek brand blue (interaction only: buttons, active, focus).
    Legacy name "$lab-blue" kept for the 60+ existing call sites — value swap only. */
-$lab-blue: #4D6BFE !default;
+$lab-blue: #4176E6 !default;
 /* Soft blue wash — panels / accents */
 $lab-blue-wash: #EFF6FF !default;
 
@@ -18,22 +18,24 @@ $lab-ink: #1E232C !default;
 $lab-muted: #6E737B !default;
 $lab-white: #fff !default;
 /*
-  Surface ladder (must stay visibly stepped):
-  page (pure white) < surface-alt (recessed gray) < card (raised white + border)
+  Surface ladder (must stay visibly stepped, one temperature):
+  page (#F2FAFF, user-specified) < card (#FDFEFF cool white + border) — card
+  is raised by being lighter AND by border/shadow; both share the blue cast.
 */
-$lab-page-bg: #FFFFFF !default;
+$lab-page-bg: #F2FAFF !default;
 $lab-surface-alt: #F9FAFB !default;
-$lab-card-bg: #ffffff !default;
+$lab-card-bg: #FDFEFF !default;
 
 /* ── Surfaces ── */
 $lab-navbar-bg: rgba(255, 255, 255, 0.9) !default;
-/* Borders use ink alpha (DeepSeek practice) — no standalone gray values */
-$lab-card-border: rgba($lab-ink, 0.14) !default;
+/* Borders/shadows carry the same blue temperature as the surfaces — neutral
+   gray borders read cold on the #F2FAFF page */
+$lab-card-border: rgba($lab-blue, 0.14) !default;
 $lab-card-border-hover: rgba($lab-blue, 0.32) !default;
 $lab-card-radius: 8px !default;
 /* Whisper shadows — card gains air at rest, quiet lift on hover */
-$lab-card-shadow: 0 1px 2px rgba($lab-ink, 0.04), 0 2px 8px rgba($lab-ink, 0.04) !default;
-$lab-card-shadow-hover: 0 2px 4px rgba($lab-ink, 0.05), 0 8px 20px rgba($lab-ink, 0.08) !default;
+$lab-card-shadow: 0 1px 2px rgba($lab-blue, 0.04), 0 2px 8px rgba($lab-blue, 0.05) !default;
+$lab-card-shadow-hover: 0 2px 4px rgba($lab-blue, 0.05), 0 8px 20px rgba($lab-blue, 0.09) !default;
 
 /* ── Motion (calm; color/opacity only) ── */
 $lab-transition: 0.32s cubic-bezier(0.22, 1, 0.36, 1) !default;
@@ -72,7 +74,7 @@ $lab-gutter-detail: clamp(1.25rem, 4vw, 2.5rem) !default;
 /* Page-type top breathing (below navbar) and end breathing (above footer) —
    each page kind owns its own set; consumed via --lab-page-top / --lab-page-end */
 $lab-page-top-home: 0 !default; /* hero sits flush under the navbar */
-$lab-page-top-list: $lab-space-9 !default;
+$lab-page-top-list: $lab-space-7 !default;
 $lab-page-top-detail: $lab-space-8 !default;
 $lab-page-end-home: $lab-space-page-end !default;
 $lab-page-end-list: $lab-space-page-end !default;
@@ -82,6 +84,10 @@ $lab-page-width-home: $lab-content-width !default; /* 1100px hero + card stage *
 $lab-page-width-list: $lab-content-width !default; /* 1100px, same 3-col card rhythm */
 $lab-card-gap: $lab-space-5 !default;
 $lab-card-pad: $lab-space-4 $lab-space-5 !default;
+/* Three-zone list row (media / text / meta): fixed outer rails so every
+   row's text column starts and ends at the same x */
+$lab-row-media-width: 10rem !default;
+$lab-row-meta-width: 12rem !default;
 /* List rows + article measure — wider than a blog column */
 $lab-read-width: 52rem !default;
 /* Detail/article reading column — 42rem ≈ 42 CJK chars/line (WCAG CJK advisory ≤40) */
@@ -89,10 +95,39 @@ $lab-read-width-detail: 42rem !default;
 $lab-page-width-detail: $lab-read-width-detail !default; /* 42rem reading column */
 $lab-navbar-height: 56px !default; /* floating capsule height (desktop) */
 $lab-navbar-height-sm: 48px !default; /* floating capsule height (mobile) */
+/* Navbar gutter — constant across page kinds. The fixed navbar must NOT
+   consume --lab-page-gutter (which page kinds override), or the logo/menu/icon
+   positions shift between home, list, and detail pages. */
+$lab-navbar-gutter: clamp(1.5rem, 5vw, 3rem) !default;
+
+/* ── Breakpoints (SCSS-only) ──
+   Media queries cannot read CSS custom properties, so breakpoints exist only
+   as SCSS tokens. Consume via the lab-bp-down / lab-bp-up mixins in _grid.scss
+   — never write a raw px value in a media query.
+   sm=576 (large phone) · md=768 (tablet portrait) · lg=992 (small desktop).
+   Values match the historical site breakpoints (575/767/991 max-width). */
+$lab-bp-sm: 576px !default;
+$lab-bp-md: 768px !default;
+$lab-bp-lg: 992px !default;
+
+/* ── Optical alignment ──
+   Perceived alignment ≠ geometric alignment: shapes whose mass sits unevenly
+   (uppercase mono glyphs, arrows) need a sub-4px compensation nudge to LOOK
+   aligned. Consumed by .lab-align-* utilities in _grid.scss. */
+$lab-align-glyph-nudge: 0.03em !default; /* uppercase mono glyph sits high → nudge down */
+$lab-align-arrow-nudge: -0.03em !default; /* "→" glyph sits low → nudge up */
 
 /* ── State colors ── */
 $lab-placeholder-bg: #F1F3F5 !default;
 $lab-disabled-bg: #F9FAFB !default;
+
+/* ── Placeholder illustration hues — type-agnostic, per-card pseudo-random ──
+   Blue/violet/green/gold; grounds & accents derive via color-mix in CSS.
+   Muted, equal-lightness tones — variety without breaking the quiet system.
+   (User-sanctioned multi-hue exception, placeholder covers only.) */
+$lab-ph-hue-violet: #7C62DC !default;
+$lab-ph-hue-green: #1E966E !default;
+$lab-ph-hue-gold: #C79A54 !default;
 
 /* ── Typography: stack + scale + weight + tracking ──
    Scale rule: the steps below are the complete set — NO new sizes.
@@ -100,7 +135,11 @@ $lab-disabled-bg: #F9FAFB !default;
    section-title/display) or an existing $lab-text-* step.
    Small steps are hand-tuned (0.8→0.875→1→1.125→1.25→1.5); display steps
    ride clamp() fluid ranges. Body is 16px/1.75 (CJK-optimal leading). */
-/* Body: DM Sans + Noto Sans SC. Headings: Source Serif 4 + Noto Serif SC. */
+/* Body: DM Sans + Noto Sans SC. Headings: Source Serif 4 + Noto Serif SC.
+   Mono: UI micro-labels only (ordinals, meta badges, dates) — never body copy.
+   Stack mirrors data/fonts/lab.toml mono_font (system mono, no webfont cost). */
+$lab-font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas,
+  "Liberation Mono", monospace !default;
 $lab-font-sans: "DM Sans", "Noto Sans SC", system-ui, -apple-system, "Segoe UI",
   sans-serif !default;
 $lab-font-serif: "Source Serif 4", "Noto Serif SC", "Source Han Serif SC", Georgia,
@@ -126,8 +165,14 @@ $lab-text-heading: clamp(1.5rem, 2.4vw, 1.875rem) !default;
 $lab-text-display: clamp(2rem, 4vw, 2.75rem) !default;
 $lab-text-hero-lead: clamp(1.15rem, 2vw, 1.35rem) !default;
 
+/* Leading scale — the complete set (audited 2026-11-15, raw ratios banned):
+   none=1 glyphs/icons · display=1.2 big headings · tight=1.25 compact heads
+   ui=1.35 controls/labels/secondary lines · snug=1.45 body-adjacent, card text
+   body=1.75 running prose (CJK-optimal) */
+$lab-leading-none: 1 !default;
 $lab-leading-tight: 1.25 !default;
 $lab-leading-display: 1.2 !default;
+$lab-leading-ui: 1.35 !default;
 $lab-leading-snug: 1.45 !default;
 $lab-leading-body: 1.75 !default;
 $lab-leading-loose: 1.75 !default;
@@ -151,52 +196,48 @@ $lab-leading-loose: 1.75 !default;
   /* Semantic */
   --lab-color-text: #{$lab-ink};
   --lab-color-text-secondary: #{$lab-muted};
+  /* User rule: NO blue text may be deeper than the primary. Body links and
+     primary-button fills sit ON the primary (#4176E6, 4.19:1 on card —
+     user-approved AA exception; strict AA would require deepening). */
   --lab-color-link: #{$lab-blue};
+  --lab-color-brand: #{$lab-blue};
+  /* Derived accents — hover and static decorations LIGHTEN toward white
+     (deepening toward ink is banned by user preference):
+     hover ≈#5C89EA · soft ≈#6791EB, both visibly lighter than the primary.
+     Referencing the semantic vars means .dark overrides cascade through. */
+  --lab-color-link-hover: color-mix(in srgb, var(--lab-color-link) 86%, white);
+  --lab-color-link-soft: color-mix(in srgb, var(--lab-color-link) 80%, white);
   --lab-color-line: #{$lab-card-border};
   --lab-color-placeholder-bg: #{$lab-placeholder-bg};
   --lab-color-disabled-bg: #{$lab-disabled-bg};
 
-  /* Borders */
+  /* Borders — ink family (neutral) + blue family (interactive), 3 steps each.
+     Semantic names, no numeric ladders: sprawl killed at the root. */
   --lab-color-border: #{$lab-card-border};
   --lab-color-border-light: #{rgba($lab-ink, 0.08)};
   --lab-color-border-ink-14: #{rgba($lab-ink, 0.14)};
   --lab-color-border-ink-28: #{rgba($lab-ink, 0.28)};
-  --lab-color-border-blue-12: #{rgba($lab-blue, 0.12)};
-  --lab-color-border-blue-14: #{rgba($lab-blue, 0.14)};
-  --lab-color-border-blue-16: #{rgba($lab-blue, 0.16)};
-  --lab-color-border-blue-20: #{rgba($lab-blue, 0.2)};
-  --lab-color-border-blue-22: #{rgba($lab-blue, 0.22)};
-  --lab-color-border-blue-28: #{rgba($lab-blue, 0.28)};
-  --lab-color-border-blue-35: #{rgba($lab-blue, 0.35)};
-  --lab-color-border-blue-40: #{rgba($lab-blue, 0.4)};
-  --lab-color-border-blue-45: #{rgba($lab-blue, 0.45)};
-  --lab-color-border-blue-55: #{rgba($lab-blue, 0.55)};
+  --lab-color-border-blue-soft: #{rgba($lab-blue, 0.16)};
+  --lab-color-border-blue: #{rgba($lab-blue, 0.28)};
+  --lab-color-border-blue-strong: #{rgba($lab-blue, 0.4)};
 
-  /* Accent opacity scale */
-  --lab-color-accent-blue-04: #{rgba($lab-blue, 0.04)};
-  --lab-color-accent-blue-06: #{rgba($lab-blue, 0.06)};
-  --lab-color-accent-blue-10: #{rgba($lab-blue, 0.1)};
-  --lab-color-accent-blue-12: #{rgba($lab-blue, 0.12)};
-  --lab-color-accent-blue-14: #{rgba($lab-blue, 0.14)};
-  --lab-color-accent-blue-25: #{color-mix(in srgb, #{$lab-blue} 25%, transparent)};
-  --lab-color-accent-blue-35: #{color-mix(in srgb, #{$lab-blue} 35%, transparent)};
+  /* Blue wash — the single quiet blue fill (chips, active pills, washes) */
+  --lab-color-accent-wash: #{rgba($lab-blue, 0.06)};
 
-  /* Text opacity */
-  --lab-color-text-on-dark: #{$lab-white};
-  --lab-color-text-on-dark-86: #{rgba(255, 255, 255, 0.86)};
-  --lab-color-text-on-dark-82: #{rgba(255, 255, 255, 0.82)};
-  --lab-color-text-ink-52: #{rgba($lab-ink, 0.52)};
-  --lab-color-text-ink-42: #{rgba($lab-ink, 0.42)};
-  --lab-color-text-ink-35: #{rgba($lab-ink, 0.35)};
-  --lab-color-text-ink-28: #{rgba($lab-ink, 0.28)};
-  --lab-color-text-muted-90: #{rgba($lab-muted, 0.9)};
+  /* Text opacity — de-emphasized steps. tertiary carries incidental text at
+     ≥3:1 (0.55 measured 3.63:1 on card); faint is DECORATIVE ONLY (0.28 ≈
+     1.8:1) — never for information-bearing text. */
+  --lab-color-text-tertiary: #{rgba($lab-ink, 0.55)};
+  --lab-color-text-faint: #{rgba($lab-ink, 0.28)};
 
   /* Overlay / focus */
   --lab-color-overlay-ink-92: #{rgba($lab-ink, 0.92)};
   --lab-color-shadow-ink-04: #{rgba($lab-ink, 0.04)};
   --lab-color-shadow-ink-08: #{rgba($lab-ink, 0.08)};
   --lab-color-shadow-ink-18: #{rgba($lab-ink, 0.18)};
-  --lab-color-focus-ring: #{rgba($lab-blue, 0.28)};
+  /* Focus ring — SOLID brand blue, 4.01:1 on page bg (WCAG 1.4.11 non-text ≥3:1).
+     Alpha rings fail visibility: rgba(.28) measured ≈1.2:1. */
+  --lab-color-focus-ring: #{$lab-blue};
 
   /* Dark mode — near-black, slight blue undertone */
   --lab-dark-surface: #1A1C20;
@@ -247,14 +288,18 @@ $lab-leading-loose: 1.75 !default;
   --lab-page-width-detail: #{$lab-page-width-detail};
   --lab-page-width: var(--lab-page-width-list); /* page kinds override below */
   --lab-card-gap: #{$lab-card-gap};
-  --lab-read-width: #{$lab-read-width};
+  --lab-row-media-width: #{$lab-row-media-width};
+  --lab-row-meta-width: #{$lab-row-meta-width};
+    --lab-read-width: #{$lab-read-width};
   --lab-read-width-detail: #{$lab-read-width-detail};
   --lab-navbar-height: #{$lab-navbar-height};
   --lab-navbar-height-sm: #{$lab-navbar-height-sm};
+  --lab-navbar-gutter: #{$lab-navbar-gutter};
 
   /* Type (CSS-accessible) */
   --lab-font-sans: #{$lab-font-sans};
   --lab-font-serif: #{$lab-font-serif};
+  --lab-font-mono: #{$lab-font-mono};
   --lab-text-display: #{$lab-text-display};
   --lab-text-heading: #{$lab-text-heading};
   --lab-weight-display: #{$lab-weight-display};
@@ -278,10 +323,12 @@ $lab-leading-loose: 1.75 !default;
   --lab-color-line: #26282E;
   --lab-card-bg: #1A1C20;
   --lab-card-border: #2A2D33;
-  --lab-color-link: #6799FE;
+  --lab-color-link: #6C9CF2;
+  --lab-color-brand: #6C9CF2;
+  --lab-color-focus-ring: #6C9CF2;
   --lab-color-blue-wash: #141B2E;
-  --lab-color-accent-blue-04: rgba(103, 153, 254, 0.08);
-  --lab-color-border-blue-40: rgba(103, 153, 254, 0.45);
+  --lab-color-accent-wash: rgba(108, 156, 242, 0.1);
+  --lab-color-border-blue-strong: rgba(108, 156, 242, 0.45);
   --lab-dark-surface: #1A1C20;
   --lab-dark-border: #2A2D33;
   --lab-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);

@@ -8,7 +8,7 @@ authors:
 date: "2013-01-01T00:00:00Z"
 publication_types: ["article-journal"]
 publication: "西北工业大学学报"
-publication_short: "西北工业大学学报"
+publication_short: "Journal of Northwestern Polytechnical University"
 volume: "31"
 issue: "2"
 pages: "311-316"

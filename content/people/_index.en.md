@@ -5,7 +5,7 @@ date: 2022-10-24
 summary: ''
 # "Current Students" aggregates Ph.D. Students + M.S. Year 1-3 + Undergraduates (grade-sorted); "Alumni" likewise
 user_groups:
-  - Supervisor
+  - Advisors
   - Current Students
   - Alumni
 sort_ascending: true

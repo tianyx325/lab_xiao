@@ -10,7 +10,7 @@ last_name: 肖
 superuser: true
 
 # Role/position（整段放在一行，或用引号包起来）
-role: "教授，副院长 / 实验室负责人"
+role: "教授，博士生导师\n副院长"
 
 # Sort order within user group
 weight: 1

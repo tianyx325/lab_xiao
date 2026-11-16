@@ -2,6 +2,7 @@
 title: Human Action Recognition
 date: 2026-10-13
 weight: 40
+placeholder_art: action
 summary: "Focusing on human behavior understanding, this direction studies skeleton-based and visual-feature-based action recognition methods, covering spatio-temporal modeling, robust representation, and behavior understanding applications in real-world scenarios."
 tags:
   - action recognition
@@ -15,21 +16,21 @@ Human action recognition requires jointly characterizing appearance, posture, an
 
 ### Research Topics
 
-- Skeleton-based human action recognition with graph convolution / temporal modeling
-- Spatio-temporal feature learning and long-term dependency modeling for action sequences
-- Fusion frameworks combining visual and skeleton features
-- Robust behavior understanding under occlusion, viewpoint changes, and noise
-- Data collection, evaluation, and system demonstrations for real-world scenarios
+- **Model skeleton sequences**: skeleton-based action recognition with graph convolution / temporal modeling
+- **Learn spatio-temporal features**: spatio-temporal feature learning and long-term dependency modeling for action sequences
+- **Fuse dual-path features**: complementary recognition frameworks combining visual and skeleton features
+- **Strengthen robust representation**: behavior understanding under occlusion, viewpoint changes, and noise
+- **Validate real-world scenarios**: data collection, evaluation, and system demonstrations for deployment
 
 ### Key Challenges
 
-- Inter-class similarity between actions makes fine-grained discrimination difficult
-- Occlusion, multiple viewpoints, and background clutter destabilize representations
-- Long-term actions span wide time ranges with sparse key frames
-- Distribution gap between laboratory data and real deployment environments
+- **Fine-grained discrimination**: high inter-class similarity between actions makes separation difficult
+- **Representation stability**: occlusion, multiple viewpoints, and background clutter cause drift
+- **Long-term dependencies**: wide time spans with sparse key frames
+- **Distribution gap**: laboratory data differs from real deployment environments
 
 ### Technical Approach
 
-- Model joint relations with skeleton graph structures, combined with temporal networks to capture action dynamics
-- Introduce attention and keyframe selection to improve long-sequence modeling efficiency
-- Enhance generalization in real-world scenarios through multimodal fusion and data augmentation
+- **Model graph structures**: represent joint relations with skeleton graphs, capture action dynamics with temporal networks
+- **Introduce attention**: combine keyframe selection to improve long-sequence modeling efficiency
+- **Advance multimodal fusion**: enhance real-world generalization through complementary features and data augmentation

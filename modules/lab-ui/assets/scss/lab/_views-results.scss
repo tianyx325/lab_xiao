@@ -1,456 +1,5 @@
 /* Layer 5a · result views: papers, news, projects, patents, awards
    Source: template.scss lines 773-1351 (order-preserving split). */
-/* ── Papers: folio / stacked sheets / ruled field ── */
-.lab-card--publication .lab-card-media--placeholder {
-  --lab-ph-accent: #{rgba($lab-blue, 0.16)};
-  background:
-    linear-gradient(180deg, transparent 0 18%, var(--lab-ph-ink-soft) 18% 18.6%, transparent 18.6%),
-    linear-gradient(180deg, transparent 0 28%, var(--lab-ph-ink-soft) 28% 28.6%, transparent 28.6%),
-    linear-gradient(180deg, transparent 0 38%, var(--lab-ph-ink-soft) 38% 38.6%, transparent 38.6%),
-    linear-gradient(155deg, #{$lab-blue-wash} 0%, #{$lab-card-bg} 42%, #{$lab-surface-alt} 100%);
-}
-
-.lab-card--publication .lab-card-ph-a {
-  left: 14%;
-  top: 16%;
-  width: 48%;
-  height: 62%;
-  border: 1px solid var(--lab-ph-ink);
-  background: color-mix(in srgb, #{$lab-card-bg} 82%, transparent);
-  box-shadow: 6px 8px 0 var(--lab-ph-accent-soft);
-}
-
-.lab-card--publication .lab-card-ph-b {
-  left: 22%;
-  top: 24%;
-  width: 48%;
-  height: 62%;
-  border: 1px solid var(--lab-ph-ink);
-  background: color-mix(in srgb, #{$lab-white} 55%, transparent);
-}
-
-.lab-card--publication .lab-card-ph-c {
-  left: 28%;
-  top: 34%;
-  width: 36%;
-  height: 2px;
-  background: var(--lab-ph-accent);
-  box-shadow:
-    0 10px 0 var(--lab-ph-ink-soft),
-    0 20px 0 var(--lab-ph-ink-soft),
-    0 30px 0 var(--lab-ph-ink-soft);
-}
-
-.lab-card--publication:nth-child(4n + 2) .lab-card-ph-a {
-  left: auto;
-  right: 12%;
-  width: 42%;
-  height: 70%;
-  box-shadow: -6px 8px 0 var(--lab-ph-accent-soft);
-}
-
-.lab-card--publication:nth-child(4n + 2) .lab-card-ph-b {
-  left: auto;
-  right: 20%;
-}
-
-.lab-card--publication:nth-child(4n + 2) .lab-card-ph-c {
-  left: auto;
-  right: 26%;
-}
-
-.lab-card--publication:nth-child(4n + 3) .lab-card-ph-a {
-  inset: 18% 16% 22% 16%;
-  width: auto;
-  height: auto;
-  box-shadow: none;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 11px,
-      var(--lab-ph-ink-soft) 11px,
-      var(--lab-ph-ink-soft) 12px
-    );
-}
-
-.lab-card--publication:nth-child(4n + 3) .lab-card-ph-b {
-  left: 22%;
-  top: 28%;
-  width: 56%;
-  height: 8%;
-  border: none;
-  background: var(--lab-ph-accent);
-  opacity: 0.55;
-}
-
-.lab-card--publication:nth-child(4n + 3) .lab-card-ph-c {
-  left: 22%;
-  top: 42%;
-  width: 40%;
-  height: 3px;
-  box-shadow:
-    0 12px 0 var(--lab-ph-ink-soft),
-    0 24px 0 var(--lab-ph-ink-soft);
-}
-
-.lab-card--publication:nth-child(4n + 4) .lab-card-ph-a {
-  left: 18%;
-  top: 20%;
-  width: 64%;
-  height: 58%;
-  border-radius: 2px 18px 2px 2px;
-  box-shadow: none;
-}
-
-.lab-card--publication:nth-child(4n + 4) .lab-card-ph-b {
-  display: none;
-}
-
-.lab-card--publication:nth-child(4n + 4) .lab-card-ph-c {
-  left: 26%;
-  top: 36%;
-  width: 44%;
-  height: 2px;
-}
-
-/* ── News: editorial bands / soft orbs / asymmetric bars ── */
-.lab-card--post .lab-card-media--placeholder {
-  background:
-    radial-gradient(70% 60% at 78% 22%, var(--lab-ph-accent), transparent 60%),
-    linear-gradient(210deg, #{$lab-surface-alt} 0%, #{$lab-blue-wash} 55%, #{$lab-placeholder-bg} 100%);
-}
-
-.lab-card--post .lab-card-ph-a {
-  left: -8%;
-  top: 58%;
-  width: 70%;
-  height: 38%;
-  background: color-mix(in srgb, #{$lab-blue} 8%, transparent);
-  transform: skewY(-8deg);
-}
-
-.lab-card--post .lab-card-ph-b {
-  right: 10%;
-  top: 14%;
-  width: 34%;
-  height: 34%;
-  border-radius: 50%;
-  border: 1px solid var(--lab-ph-accent);
-  background: color-mix(in srgb, #{$lab-white} 40%, transparent);
-}
-
-.lab-card--post .lab-card-ph-c {
-  left: 12%;
-  top: 22%;
-  width: 42%;
-  height: 4px;
-  background: var(--lab-ph-ink);
-  box-shadow: 0 12px 0 var(--lab-ph-ink-soft), 0 24px 0 var(--lab-ph-accent-soft);
-}
-
-.lab-card--post:nth-child(4n + 2) .lab-card-ph-a {
-  left: auto;
-  right: -10%;
-  top: 8%;
-  width: 55%;
-  height: 70%;
-  transform: skewY(6deg);
-  background: color-mix(in srgb, #{$lab-blue} 6%, transparent);
-}
-
-.lab-card--post:nth-child(4n + 2) .lab-card-ph-b {
-  left: 12%;
-  right: auto;
-  top: auto;
-  bottom: 14%;
-  width: 28%;
-  height: 28%;
-}
-
-.lab-card--post:nth-child(4n + 2) .lab-card-ph-c {
-  left: auto;
-  right: 18%;
-  top: 48%;
-  width: 28%;
-}
-
-.lab-card--post:nth-child(4n + 3) .lab-card-media--placeholder {
-  background:
-    linear-gradient(115deg, transparent 42%, var(--lab-ph-accent-soft) 42% 58%, transparent 58%),
-    linear-gradient(200deg, #{$lab-card-bg}, #{$lab-blue-wash});
-}
-
-.lab-card--post:nth-child(4n + 3) .lab-card-ph-a {
-  left: 10%;
-  top: 18%;
-  width: 80%;
-  height: 64%;
-  transform: none;
-  border: 1px solid var(--lab-ph-ink-soft);
-  background: transparent;
-}
-
-.lab-card--post:nth-child(4n + 3) .lab-card-ph-b {
-  left: 18%;
-  top: 28%;
-  width: 22%;
-  height: 22%;
-  right: auto;
-  border-radius: 4px;
-  border: none;
-  background: var(--lab-ph-accent);
-  opacity: 0.7;
-}
-
-.lab-card--post:nth-child(4n + 3) .lab-card-ph-c {
-  left: 18%;
-  top: 58%;
-  width: 54%;
-  height: 3px;
-  box-shadow: 0 10px 0 var(--lab-ph-ink-soft);
-}
-
-.lab-card--post:nth-child(4n + 4) .lab-card-ph-a {
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  transform: none;
-  background:
-    repeating-linear-gradient(
-      -18deg,
-      transparent,
-      transparent 14px,
-      var(--lab-ph-ink-soft) 14px,
-      var(--lab-ph-ink-soft) 15px
-    );
-  opacity: 0.9;
-}
-
-.lab-card--post:nth-child(4n + 4) .lab-card-ph-b {
-  left: 50%;
-  top: 50%;
-  width: 46%;
-  height: 46%;
-  right: auto;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 1px solid var(--lab-ph-accent);
-  background: color-mix(in srgb, #{$lab-card-bg} 70%, transparent);
-}
-
-.lab-card--post:nth-child(4n + 4) .lab-card-ph-c {
-  display: none;
-}
-
-/* ── Projects: nodes / brackets / schematic ── */
-.lab-card--project .lab-card-media--placeholder {
-  background:
-    radial-gradient(circle at 22% 30%, var(--lab-ph-accent) 0 2px, transparent 2.5px),
-    radial-gradient(circle at 70% 62%, var(--lab-ph-accent) 0 2px, transparent 2.5px),
-    linear-gradient(145deg, #{$lab-surface-alt} 0%, #{$lab-placeholder-bg} 50%, #{$lab-blue-wash} 100%);
-}
-
-.lab-card--project .lab-card-ph-a {
-  left: 16%;
-  top: 20%;
-  width: 28%;
-  height: 28%;
-  border: 1px solid var(--lab-ph-ink);
-  border-right: none;
-  border-bottom: none;
-}
-
-.lab-card--project .lab-card-ph-b {
-  right: 16%;
-  bottom: 18%;
-  width: 28%;
-  height: 28%;
-  border: 1px solid var(--lab-ph-ink);
-  border-left: none;
-  border-top: none;
-}
-
-.lab-card--project .lab-card-ph-c {
-  left: 30%;
-  top: 36%;
-  width: 40%;
-  height: 1px;
-  background: var(--lab-ph-accent);
-  transform: rotate(28deg);
-  transform-origin: left center;
-  box-shadow: 0 0 0 0 transparent;
-}
-
-.lab-card--project .lab-card-ph-c::after {
-  content: '';
-  position: absolute;
-  right: -4px;
-  top: -3px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--lab-ph-accent);
-}
-
-.lab-card--project:nth-child(4n + 2) .lab-card-ph-a {
-  left: 20%;
-  top: 22%;
-  width: 60%;
-  height: 56%;
-  border: 1px dashed var(--lab-ph-ink);
-  border-right: 1px dashed var(--lab-ph-ink);
-  border-bottom: 1px dashed var(--lab-ph-ink);
-}
-
-.lab-card--project:nth-child(4n + 2) .lab-card-ph-b {
-  left: 36%;
-  top: 36%;
-  right: auto;
-  bottom: auto;
-  width: 28%;
-  height: 28%;
-  border: 1px solid var(--lab-ph-accent);
-  border-radius: 50%;
-}
-
-.lab-card--project:nth-child(4n + 2) .lab-card-ph-c {
-  display: none;
-}
-
-.lab-card--project:nth-child(4n + 3) .lab-card-media--placeholder {
-  background:
-    linear-gradient(90deg, transparent 0 20%, var(--lab-ph-ink-soft) 20% 20.5%, transparent 20.5%),
-    linear-gradient(90deg, transparent 0 50%, var(--lab-ph-ink-soft) 50% 50.5%, transparent 50.5%),
-    linear-gradient(90deg, transparent 0 80%, var(--lab-ph-ink-soft) 80% 80.5%, transparent 80.5%),
-    linear-gradient(180deg, transparent 0 30%, var(--lab-ph-ink-soft) 30% 30.5%, transparent 30.5%),
-    linear-gradient(180deg, transparent 0 70%, var(--lab-ph-ink-soft) 70% 70.5%, transparent 70.5%),
-    linear-gradient(160deg, #{$lab-card-bg}, #{$lab-blue-wash});
-}
-
-.lab-card--project:nth-child(4n + 3) .lab-card-ph-a,
-.lab-card--project:nth-child(4n + 3) .lab-card-ph-b {
-  width: 10px;
-  height: 10px;
-  border: none;
-  border-radius: 50%;
-  background: var(--lab-ph-accent);
-}
-
-.lab-card--project:nth-child(4n + 3) .lab-card-ph-a {
-  left: 18%;
-  top: 26%;
-}
-
-.lab-card--project:nth-child(4n + 3) .lab-card-ph-b {
-  right: 22%;
-  bottom: 24%;
-  left: auto;
-  top: auto;
-}
-
-.lab-card--project:nth-child(4n + 3) .lab-card-ph-c {
-  left: 22%;
-  top: 30%;
-  width: 52%;
-  height: 1px;
-  transform: rotate(18deg);
-}
-
-.lab-card--project:nth-child(4n + 4) .lab-card-ph-a {
-  left: 18%;
-  top: 18%;
-  width: 64%;
-  height: 64%;
-  border: 1px solid var(--lab-ph-ink-soft);
-  border-radius: 50% 50% 4px 50%;
-}
-
-.lab-card--project:nth-child(4n + 4) .lab-card-ph-b {
-  left: 34%;
-  top: 34%;
-  right: auto;
-  bottom: auto;
-  width: 32%;
-  height: 32%;
-  border: 1px solid var(--lab-ph-accent);
-  border-radius: 4px;
-  transform: rotate(12deg);
-}
-
-.lab-card--project:nth-child(4n + 4) .lab-card-ph-c {
-  display: none;
-}
-
-/* Patent / award / research / default — quieter cousins of project / paper */
-.lab-card--patent .lab-card-media--placeholder,
-.lab-card--award .lab-card-media--placeholder {
-  background:
-    linear-gradient(180deg, #{$lab-blue-wash} 0%, #{$lab-surface-alt} 100%);
-}
-
-.lab-card--patent .lab-card-ph-a,
-.lab-card--award .lab-card-ph-a {
-  left: 18%;
-  top: 18%;
-  width: 64%;
-  height: 64%;
-  border: 1px solid var(--lab-ph-ink);
-  border-radius: 2px;
-}
-
-.lab-card--patent .lab-card-ph-b,
-.lab-card--award .lab-card-ph-b {
-  left: 28%;
-  top: 30%;
-  width: 44%;
-  height: 3px;
-  background: var(--lab-ph-accent);
-  box-shadow: 0 14px 0 var(--lab-ph-ink-soft), 0 28px 0 var(--lab-ph-ink-soft);
-}
-
-.lab-card--patent .lab-card-ph-c,
-.lab-card--award .lab-card-ph-c {
-  display: none;
-}
-
-.lab-card--patent:nth-child(odd) .lab-card-ph-a,
-.lab-card--award:nth-child(3n) .lab-card-ph-a {
-  border-radius: 50% 2px 2px 2px;
-}
-
-.lab-card--research .lab-card-media--placeholder,
-.lab-card--default .lab-card-media--placeholder {
-  background:
-    radial-gradient(80% 70% at 70% 30%, var(--lab-ph-accent-soft), transparent 65%),
-    linear-gradient(160deg, #{$lab-card-bg}, #{$lab-surface-alt});
-}
-
-.lab-card--research .lab-card-ph-a,
-.lab-card--default .lab-card-ph-a {
-  left: 20%;
-  top: 24%;
-  width: 60%;
-  height: 52%;
-  border: 1px solid var(--lab-ph-ink-soft);
-}
-
-.lab-card--research .lab-card-ph-b,
-.lab-card--default .lab-card-ph-b {
-  left: 28%;
-  top: 36%;
-  width: 44%;
-  height: 2px;
-  background: var(--lab-ph-accent);
-  box-shadow: 0 12px 0 var(--lab-ph-ink-soft);
-}
-
-.lab-card--research .lab-card-ph-c,
-.lab-card--default .lab-card-ph-c {
-  display: none;
-}
-
 .lab-card-body,
 .lab-card-meta,
 .lab-card-title,
@@ -476,14 +25,25 @@
   gap: $lab-space-1;
   min-width: 0;
   margin: 0;
-  font-size: $lab-text-xs;
-  line-height: 1.3;
+  @include lab-type-mono;
+  line-height: $lab-leading-ui;
   letter-spacing: 0.02em;
   color: var(--lab-color-text-secondary);
 }
 
 .lab-card-meta-sep {
   opacity: 0.45;
+}
+
+/* Type glyph — mono "icon" slot of the three-part row (glyph / title / summary) */
+.lab-card-meta-glyph {
+  margin-right: var(--lab-space-1);
+  color: var(--lab-color-link-soft);
+  font-weight: $lab-weight-semibold;
+  letter-spacing: 0.06em;
+  /* Optical alignment: uppercase mono mass sits high next to lowercase meta
+     text — nudge down to the perceived baseline (token: $lab-align-glyph-nudge) */
+  transform: translateY($lab-align-glyph-nudge);
 }
 
 /* Read-only meta text (not a chip) — inherits .lab-card-meta sizing,
@@ -500,19 +60,28 @@
   color: inherit;
 }
 
+/* Full author line — media-row cards (papers / patents) */
+.lab-card-authors {
+  margin: 0;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-snug;
+  color: var(--lab-color-text-secondary);
+}
+
+/* Member authors are clickable — same accent-link treatment as the detail
+   page byline (colour + soft underline, full underline on hover) */
 .lab-card-author-link {
   position: relative;
   z-index: 2;
   pointer-events: auto;
-  color: inherit !important;
-  text-decoration: none !important;
-  border-bottom: none !important;
+  @extend %lab-accent-link;
 }
 
 .lab-card-author-link:hover {
-  color: var(--lab-color-link) !important;
-  border-bottom: 1px solid var(--lab-color-link) !important;
-  text-decoration: none !important;
+  @extend %lab-accent-link-hover;
+  /* Bootstrap's `a:hover { text-decoration: underline }` outspecifies the
+     base class, adding a second line under the accent border on hover */
+  text-decoration: none;
 }
 
 .lab-card[class*="lab-card--"] {
@@ -539,7 +108,13 @@
 }
 
 .lab-card.view-card:hover .lab-card-title {
-  color: var(--lab-color-link) !important;
+  color: var(--lab-color-link-hover) !important;
+}
+
+/* Hovering a member-author link targets the profile, not the card — the
+   title must not light up as if the card itself were the target. */
+.lab-card:has(.lab-card-author-link:hover) .lab-card-title {
+  color: var(--lab-color-text) !important;
 }
 
 .lab-card-summary {
@@ -547,7 +122,7 @@
   font-size: $lab-text-sm;
   line-height: $lab-summary-lh;
   letter-spacing: 0.01em;
-  color: var(--lab-color-text-muted-90);
+  color: var(--lab-color-text-secondary);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -562,12 +137,12 @@
   font-size: $lab-text-lg !important;
   font-weight: $lab-weight-semibold !important;
   letter-spacing: 0.03em;
-  line-height: 1.45;
+  line-height: $lab-leading-snug;
   margin: $lab-space-1 0 $lab-space-2 !important;
 }
 
 .pub-list-item {
-  line-height: 1.75;
+  line-height: $lab-leading-body;
   font-size: $lab-text-md;
 }
 

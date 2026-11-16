@@ -19,22 +19,6 @@ sections:
   - block: markdown
     content:
       title:
-      text: '{{< lab-section-head title="研究方向" >}}'
-    design:
-      columns: '1'
-      css_class: lab-block-head
-
-  - block: markdown
-    content:
-      title:
-      text: '{{< lab-research-cards count="3" >}}'
-    design:
-      columns: '1'
-      css_class: lab-major
-
-  - block: markdown
-    content:
-      title:
       text: '{{< lab-section-head title="导师团队" >}}'
     design:
       columns: '1'

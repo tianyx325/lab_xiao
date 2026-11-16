@@ -1,5 +1,5 @@
 {{- $title := .Get "title" | default "" -}}
-{{- $more := .Get "more" | default "全部" -}}
+{{- $more := .Get "more" | default (cond (eq site.Language.Lang "en") "All" "全部") -}}
 {{- $href := .Get "href" | default "" -}}
 <div class="section-head">
   <h2>{{- $title -}}</h2>

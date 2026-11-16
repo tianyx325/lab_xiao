@@ -14,15 +14,15 @@
   {{- .Store.Set "has_gallery" true -}}
   {{- $album := printf "lab-%s" (.RelPermalink | anchorize) -}}
   {{- $count := len $gallery -}}
-<section class="lab-article-gallery" aria-label="图集" data-lab-gallery-root{{ if le $count 3 }} data-lab-gallery-short{{ end }}>
+<section class="lab-article-gallery" aria-label="{{ i18n "lab_gallery" }}" data-lab-gallery-root{{ if le $count 3 }} data-lab-gallery-short{{ end }}>
   <div class="lab-gallery-head">
-    <h2 class="lab-article-media-title">图集</h2>
+    <h2 class="lab-article-media-title">{{ i18n "lab_gallery" }}</h2>
     {{- if gt $count 3 -}}
-    <div class="lab-gallery-nav" role="group" aria-label="图集翻页">
-      <button type="button" class="lab-btn--icon lab-gallery-prev" aria-label="上一组" disabled>
+    <div class="lab-gallery-nav" role="group" aria-label="{{ i18n "lab_gallery_nav" }}">
+      <button type="button" class="lab-btn--icon lab-gallery-prev" aria-label="{{ i18n "lab_gallery_prev" }}" disabled>
         <span aria-hidden="true">‹</span>
       </button>
-      <button type="button" class="lab-btn--icon lab-gallery-next" aria-label="下一组">
+      <button type="button" class="lab-btn--icon lab-gallery-next" aria-label="{{ i18n "lab_gallery_next" }}">
         <span aria-hidden="true">›</span>
       </button>
     </div>

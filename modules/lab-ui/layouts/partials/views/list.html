@@ -7,6 +7,17 @@
   {{- $target = "target=\"_blank\" rel=\"noopener\"" -}}
 {{- end -}}
 {{- $year := $item.Date.Format "2006" -}}
+{{- /* Mono type glyph — icon slot of the three-part row */ -}}
+{{- $glyph := "" -}}
+{{- $glyphs := dict
+  "publication" "PUB"
+  "patent" "PAT"
+  "award" "AWD"
+  "post" "BLOG"
+  "project" "PRJ"
+  "research" "DIR"
+-}}
+{{- $glyph = index $glyphs $item.Type | default "" -}}
 {{- $meta := "" -}}
 {{- if eq $item.Type "publication" -}}
   {{- $meta = $item.Params.publication_short | default ($item.Params.publication | default "") -}}
@@ -33,17 +44,29 @@
   {{- end -}}
 {{- end -}}
 
+{{- $mediaData := partial "components/featured-image.html" $item -}}
+{{- $mediaURL := $mediaData.src | default "" -}}
+
 <article class="lab-row">
   <a class="lab-row-link" href="{{ $link }}" {{ $target | safeHTMLAttr }}>
-    <h3 class="lab-row-title">{{ $item.Title }}</h3>
-    {{- if $authorItems -}}
-    <p class="lab-row-authors">
-      {{- range $i, $m := $authorItems -}}
-        {{- if $i -}}<span class="lab-row-sep"> · </span>{{- end -}}
-        <span>{{ $m.name }}</span>
+    <span class="lab-row-media" aria-hidden="true">
+      {{- with $mediaURL -}}
+      <img src="{{ . }}" srcset="{{ $mediaData.srcset }}" sizes="160px" alt="" width="{{ $mediaData.width }}" height="{{ $mediaData.height }}" loading="lazy" decoding="async">
+      {{- else -}}
+      <span class="lab-row-ph">{{ $glyph }}</span>
       {{- end -}}
-    </p>
-    {{- end -}}
+    </span>
+    <span class="lab-row-text">
+      <h3 class="lab-row-title">{{ $item.Title }}</h3>
+      {{- if $authorItems -}}
+      <p class="lab-row-authors">
+        {{- range $i, $m := $authorItems -}}
+          {{- if $i -}}<span class="lab-row-sep"> · </span>{{- end -}}
+          <span>{{ $m.name }}</span>
+        {{- end -}}
+      </p>
+      {{- end -}}
+    </span>
     <p class="lab-row-meta">
       {{- with $meta -}}<span class="lab-row-venue">{{ . | plainify }}</span>{{- end -}}
       {{- with $year -}}<span class="lab-row-year">{{ . }}</span>{{- end -}}

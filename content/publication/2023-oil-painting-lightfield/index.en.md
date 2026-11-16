@@ -9,7 +9,7 @@ date: "2023-10-19T00:00:00Z"
 doi: "10.11834/jig.220774"
 publication_types: ["article-journal"]
 publication: "中国图象图形学报"
-publication_short: "中国图象图形学报"
+publication_short: "Journal of Image and Graphics"
 volume: "28"
 issue: "10"
 pages: "3123-3135"

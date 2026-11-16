@@ -1,4 +1,6 @@
-{{ $show_navbar := ((site.Params.header.navbar.enable | default true) | and (ne .Params.header.navbar.enable false)) | or .Params.header.navbar.enable }}
+{{/* Page param overrides site param; unset → site default true.
+   (Was a triple-nested vendor boolean — behavior identical, now readable.) */}}
+{{ $show_navbar := default (site.Params.header.navbar.enable | default true) .Params.header.navbar.enable }}
 {{ if $show_navbar }}
 
 {{ $current_page := . }}
@@ -18,9 +20,16 @@
     <div class="container-fluid lab-navbar-inner">
 
       {{if $show_logo}}
-      <a class="navbar-brand lab-navbar-brand" href="{{ site.Home.RelPermalink }}">
+      {{/* EN uses the short lab.name_en so the floating pill can fit menu + icons;
+           full title stays on the hero / document title. */}}
+      {{- $brand := site.Params.lab.name | default site.Title -}}
+      {{- $brandFull := $brand -}}
+      {{- if eq site.Language.Lang "en" -}}
+        {{- $brand = site.Params.lab.name_en | default $brand -}}
+      {{- end -}}
+      <a class="navbar-brand lab-navbar-brand" href="{{ site.Home.RelPermalink }}"{{ if ne $brand $brandFull }} title="{{ $brandFull }}"{{ end }}>
         <span class="lab-logo"></span>
-        {{- site.Params.lab.name | default site.Title -}}
+        {{- $brand -}}
       </a>
       {{end}}
 
@@ -139,76 +148,62 @@
         {{ $show_search := site.Params.header.navbar.show_search | default true }}
         {{ if and site.Params.features.search.provider $show_search | and (ne (lower site.Params.features.search.provider) "docsearch") }}
         <li class="nav-item">
-          <a class="nav-link js-search" href="#" aria-label="{{ i18n "search" }}"><i class="fas fa-search" aria-hidden="true"></i></a>
+          <button type="button" class="nav-link js-search" aria-label="{{ i18n "search" }}"><svg class="lab-ic" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.3 16.3L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
         </li>
         {{ end }}
 
         {{ $show_day_night := site.Params.header.navbar.show_day_night | default true }}
         {{ $has_day_night_themes := (and site.Params.appearance.theme_day site.Params.appearance.theme_night) }}
         {{ if and $has_day_night_themes $show_day_night }}
+        {{/* cond-based zh/en strings (used 5× in this file): the site ships
+           exactly two languages, so a full i18n layer would be overkill. */}}
         {{ $is_en := eq .Lang "en" }}
         <li class="nav-item dropdown theme-dropdown">
-          <a href="#" class="nav-link lab-nav-text-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="{{ i18n "theme_selector" | default "Display preferences" }}">
+          <button type="button" class="nav-link lab-nav-text-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="{{ i18n "theme_selector" | default "Display preferences" }}">
             {{/* Icon shows the CURRENT mode: sun in light, moon in dark */}}
-            <svg class="lab-ic lab-theme-ic-sun" viewBox="2.5 2.5 19 19" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="4.4" fill="currentColor"/>
-              <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                <path d="M12 3.4v2M12 18.6v2M3.4 12h2M18.6 12h2M5.9 5.9l1.4 1.4M16.7 16.7l1.4 1.4M18.1 5.9l-1.4 1.4M7.3 16.7l-1.4 1.4"/>
+            <svg class="lab-ic lab-theme-ic-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+              <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41"/>
               </g>
             </svg>
             <svg class="lab-ic lab-theme-ic-moon" viewBox="2.6 2.5 19.2 19.6" fill="none" aria-hidden="true">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" fill="currentColor"/>
               <path d="M17.6 3.2l.62 1.68 1.68.62-1.68.62-.62 1.68-.62-1.68-1.68-.62 1.68-.62Z" fill="currentColor" opacity="0.85"/>
             </svg>
-          </a>
+          </button>
           <div class="dropdown-menu dropdown-menu-right lab-nav-menu">
-            {{/* Menu icons: same hand-drawn SVG set as the triggers, 16px */}}
-            <a href="#" class="dropdown-item js-set-theme-light">
-              <svg class="lab-ic lab-ic-sm" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <circle cx="12" cy="12" r="4.4" fill="currentColor"/>
-                <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                  <path d="M12 3.4v2M12 18.6v2M3.4 12h2M18.6 12h2M5.9 5.9l1.4 1.4M16.7 16.7l1.4 1.4M18.1 5.9l-1.4 1.4M7.3 16.7l-1.4 1.4"/>
-                </g>
-              </svg>
+            <button type="button" class="dropdown-item js-set-theme-light">
               <span>{{ cond $is_en "Light" "浅色" }}</span>
-              <svg class="lab-ic lab-ic-sm lab-opt-check" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="#" class="dropdown-item js-set-theme-dark">
-              <svg class="lab-ic lab-ic-sm" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" fill="currentColor"/>
-                <path d="M17.6 3.2l.62 1.68 1.68.62-1.68.62-.62 1.68-.62-1.68-1.68-.62 1.68-.62Z" fill="currentColor" opacity="0.85"/>
-              </svg>
+            </button>
+            <button type="button" class="dropdown-item js-set-theme-dark">
               <span>{{ cond $is_en "Dark" "深色" }}</span>
-              <svg class="lab-ic lab-ic-sm lab-opt-check" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="#" class="dropdown-item js-set-theme-auto">
-              <svg class="lab-ic lab-ic-sm" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <circle cx="12" cy="12" r="8.4" stroke="currentColor" stroke-width="1.8"/>
-                <path d="M12 3.6a8.4 8.4 0 0 1 0 16.8Z" fill="currentColor"/>
-              </svg>
+            </button>
+            <button type="button" class="dropdown-item js-set-theme-auto">
               <span>{{ cond $is_en "Auto" "自动" }}</span>
-            </a>
+            </button>
           </div>
         </li>
         {{ end }}
 
         {{ $show_translations := site.Params.header.navbar.show_translations | default true }}
         {{ if .IsTranslated | and $show_translations }}
-        {{ $is_en := eq .Lang "en" }}
         <li class="nav-item dropdown i18n-dropdown">
-          <a href="#" class="nav-link lab-nav-text-toggle" data-toggle="dropdown"
+          <button type="button" class="nav-link lab-nav-text-toggle" data-toggle="dropdown"
              aria-haspopup="true" aria-expanded="false" aria-label="{{ i18n "languages" | default "Languages" }}">
-            <span class="lab-lang-pill">{{ cond $is_en "EN" "中" }}</span>
-          </a>
+            {{/* Translate icon (文+A composite, Material-style fill) — aligned
+                with new-api's navbar language trigger */}}
+            <svg class="lab-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.35 3.12 5.14l-4.36 4.36L4 18.86 8.36 14.5l2.68 2.68 2.83-2.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+            </svg>
+          </button>
           <div class="dropdown-menu dropdown-menu-right lab-nav-menu">
-            <div class="dropdown-item dropdown-item-active">
-              <span>{{ cond $is_en "EN" "中" }}</span>
-              <svg class="lab-ic lab-ic-sm lab-opt-check lab-opt-check-on" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 12.5l5 5 10-11" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="dropdown-item dropdown-item-active" data-lang="{{ .Lang }}" aria-current="true">
+              <span>{{ cond (eq .Lang "zh") "简体中文" "English" }}</span>
             </div>
             {{ range .Translations }}
-            {{ $t_short := cond (eq .Lang "zh") "中" "EN" }}
-            <a class="dropdown-item" href="{{ .RelPermalink }}">
-              <span>{{ $t_short }}</span>
+            <a class="dropdown-item" href="{{ .RelPermalink }}" data-lang="{{ .Lang }}">
+              <span>{{ cond (eq .Lang "zh") "简体中文" "English" }}</span>
             </a>
             {{ end }}
           </div>

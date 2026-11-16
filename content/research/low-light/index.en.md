@@ -2,6 +2,7 @@
 title: Low-Light Vision Enhancement
 date: 2026-10-13
 weight: 20
+placeholder_art: lowlight
 summary: "Addressing low illumination and complex lighting, this direction studies image/video enhancement, denoising, and feature representation, improving the usability of downstream tasks such as focusing, matching, and reconstruction under low-light conditions."
 tags:
   - low-light enhancement
@@ -15,20 +16,20 @@ Low-light imaging commonly suffers from low signal-to-noise ratio, drowned-out d
 
 ### Research Topics
 
-- Low-light image / video enhancement, denoising, and color correction
-- Feature representation, optical flow, and motion estimation under low-light conditions
-- Enhancement and feature computation methods for autofocusing, matching, and reconstruction
-- Combining low-light scenarios with computational imaging such as light fields
-- Customized low-light enhancement algorithms and system validation for practical applications
+- **Restore image quality**: low-light image / video enhancement, denoising, and color correction
+- **Represent low-light features**: feature representation, optical flow, and motion estimation under low light
+- **Serve downstream tasks**: enhancement and feature computation methods for autofocusing, matching, and reconstruction
+- **Combine computational imaging**: integrating light fields and other modalities with low-light scenarios
+- **Customize deployable systems**: tailored enhancement algorithms and system validation for practical applications
 
 ### Key Challenges
 
-- Under extreme low illumination, details and noise are hard to balance, prone to over-smoothing or artifacts
-- Misalignment between enhancement and downstream task objectives, leading to "better visuals, worse tasks"
-- Complex distribution of real low-light data; evaluation and generalization remain challenging
+- **Balance detail and noise**: extreme low illumination risks over-smoothing or introducing artifacts
+- **Align enhancement with tasks**: objective mismatch leads to "better visuals, worse tasks"
+- **Ensure evaluation generalization**: complex distributions of real low-light data challenge evaluation and transfer
 
 ### Technical Approach
 
-- Joint modeling in the image domain and latent space, strengthening contour, texture, and motion consistency
-- Constraining enhancement networks with task losses (focusing, optical flow, matching, etc.) to achieve task-oriented enhancement
-- Incorporating multi-dimensional imaging information such as light fields to improve feature separability and stability under low-light conditions
+- **Joint dual-domain modeling**: strengthen contour, texture, and motion consistency across image and latent spaces
+- **Apply task losses**: constrain enhancement networks with focusing, optical flow, and matching objectives to achieve task-oriented enhancement
+- **Incorporate multi-dimensional imaging**: improve feature separability and stability under low-light conditions with light-field information

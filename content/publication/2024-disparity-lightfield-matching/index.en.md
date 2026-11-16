@@ -9,7 +9,7 @@ date: "2024-01-01T00:00:00Z"
 doi: "10.3788/lop241287"
 publication_types: ["article-journal"]
 publication: "激光与光电子学进展"
-publication_short: "激光与光电子学进展"
+publication_short: "Laser & Optoelectronics Progress"
 volume: "61"
 issue: "16"
 pages: "1611012"

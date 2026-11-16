@@ -7,7 +7,7 @@
 {{- $raw := printf "%v" .id -}}
 {{- $id := $raw -}}
 {{- $page := .page -}}
-{{- with site.Data.lab_author_aliases -}}
+{{- with hugo.Data.lab_author_aliases -}}
   {{- with index . $raw -}}
     {{- $id = . -}}
   {{- end -}}

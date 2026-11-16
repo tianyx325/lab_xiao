@@ -1,7 +1,7 @@
 {{- /*
   Shared list-page renderer.
   Usage: {{ partial "listing/list-page.html" . }}
-  Handles: filter collection, header, grid, filter script.
+  Handles: filter config, header, grid, filter script.
   Section-specific logic (filter types, item classes) is internal.
 */ -}}
 
@@ -11,75 +11,32 @@
 {{- /* Disable isotope — we use CSS grid */ -}}
 {{- $.Page.Store.Set "has_isotope" false -}}
 
-{{- /* Collect year options */ -}}
-{{- $yearOpts := partial "listing/collect-years.html" (dict "pages" $pages "scratch" $.Scratch) -}}
+{{- $cfg := partial "listing/filter-config.html" (dict "section" $section "pages" $pages) -}}
+{{- $filterable := $cfg.filterable -}}
 
-{{- /* Section-specific filter config */ -}}
-{{- $selects := slice -}}
-{{- $placeholder := "搜索标题、摘要…" -}}
-{{- $filterable := false -}}
-
-{{- if eq $section "publication" -}}
-  {{- $filterable = true -}}
-  {{- $placeholder = "搜索论文…" -}}
-  {{- $typeOpts := slice -}}
-  {{- range $index, $taxonomy := site.Taxonomies.publication_types -}}
-    {{- $label := i18n (printf "pub_%s" (strings.Replace $index "-" "_")) | default (strings.Title $index) -}}
-    {{- $typeOpts = $typeOpts | append (dict "value" (printf ".pubtype-%s" $index) "text" $label) -}}
-  {{- end -}}
-  {{- $selects = $selects | append
-    (dict "label" "类型" "group" "pubtype" "all" "类型" "options" $typeOpts)
-    (dict "label" "年份" "group" "year" "all" "年份" "options" $yearOpts)
-  -}}
-{{- else if eq $section "post" -}}
-  {{- $filterable = true -}}
-  {{- $placeholder = "搜索新闻…" -}}
-  {{- range $pages -}}
-    {{- range (.Params.categories | default slice) -}}
-      {{- $slug := . | urlize -}}
-      {{- $.Scratch.SetInMap "cats" $slug . -}}
-    {{- end -}}
-  {{- end -}}
-  {{- $catOpts := slice -}}
-  {{- range $slug, $label := ($.Scratch.Get "cats" | default dict) -}}
-    {{- $catOpts = $catOpts | append (dict "value" (printf ".cat-%s" $slug) "text" $label) -}}
-  {{- end -}}
-  {{- if $catOpts -}}
-    {{- $selects = $selects | append (dict "label" "分类" "group" "cat" "all" "分类" "options" $catOpts) -}}
-  {{- end -}}
-  {{- $selects = $selects | append (dict "label" "年份" "group" "year" "all" "年份" "options" $yearOpts) -}}
-{{- else if eq $section "project" -}}
-  {{- $filterable = true -}}
-  {{- $placeholder = "搜索项目…" -}}
-  {{- $selects = $selects | append (dict "label" "状态" "group" "status" "all" "状态" "options" (slice
-    (dict "value" ".status-ongoing" "text" "在研")
-    (dict "value" ".status-completed" "text" "已结题")
-  )) -}}
-  {{- $selects = $selects | append (dict "label" "年份" "group" "year" "all" "年份" "options" $yearOpts) -}}
-{{- else if eq $section "patent" -}}
-  {{- $filterable = true -}}
-  {{- $placeholder = "搜索专利…" -}}
-  {{- $selects = $selects | append (dict "label" "状态" "group" "status" "all" "状态" "options" (slice
-    (dict "value" ".status-granted" "text" "已授权")
-  )) -}}
-  {{- $selects = $selects | append (dict "label" "年份" "group" "year" "all" "年份" "options" $yearOpts) -}}
-{{- else if eq $section "award" -}}
-  {{- $filterable = true -}}
-  {{- $placeholder = "搜索奖项…" -}}
-  {{- $selects = $selects | append (dict "label" "年份" "group" "year" "all" "年份" "options" $yearOpts) -}}
+{{- $view := $.Params.view | default "card" -}}
+{{- $cardStyle := $.Params.card_style | default "" -}}
+{{- $gridID := cond (eq $section "publication") "container-publications" "" -}}
+{{- $gridClass := "lab-list-grid" -}}
+{{- if eq $view "list" -}}
+  {{- $gridClass = printf "%s lab-list-grid--rows" $gridClass -}}
+{{- else if eq $cardStyle "media-row" -}}
+  {{- $gridClass = printf "%s lab-list-grid--media-rows" $gridClass -}}
 {{- end -}}
 
-<div class="lab-list-page lab-list-page--{{ $section }}">
+<div class="lab-list-page lab-list-page--{{ $section }}{{ if eq $cardStyle "media-row" }} lab-list-page--col-media-rows{{ end }}">
   {{ if $filterable }}
     {{ partial "listing/header.html" (dict
       "title" .Title
       "lead" (partial "components/section-lead.html" (dict "page" . "key" $section))
-      "filters" (dict "placeholder" $placeholder "selects" $selects)
+      "filters" (dict "placeholder" $cfg.placeholder "selects" $cfg.selects)
+      "sticky" true
     ) }}
   {{ else }}
     {{ partial "listing/header.html" (dict
       "title" .Title
       "lead" (partial "components/section-lead.html" (dict "page" . "key" $section))
+      "sticky" true
     ) }}
   {{ end }}
 
@@ -88,45 +45,20 @@
       <div class="article-style lab-list-intro">{{ . }}</div>
     {{ end }}
 
-    {{- $view := $.Params.view | default "card" -}}
-    {{- $gridID := cond (eq $section "publication") "container-publications" "" -}}
-    {{- $gridClass := "lab-list-grid" -}}
-    {{- if eq $view "list" -}}
-      {{- $gridClass = printf "%s lab-list-grid--rows" $gridClass -}}
-    {{- end -}}
-    <div{{ with $gridID }} id="{{ . }}"{{ end }} class="{{ $gridClass }}"{{ if $filterable }} data-lab-filter-root data-page-size="12"{{ end }}>
-      {{ if $filterable }}
-        {{ range $index, $item := $pages }}
-          {{ $classes := slice (printf "year-%s" (.Date.Format "2006")) }}
-          {{ if eq $section "publication" }}
-            {{ $pubtype := "0" }}
-            {{ with .Params.publication_types }}{{ $pubtype = index . 0 }}{{ end }}
-            {{ $classes = $classes | append (printf "pubtype-%s" $pubtype) }}
-          {{ else if eq $section "project" }}
-            {{ with .Params.project_status }}{{ $classes = $classes | append (printf "status-%s" .) }}{{ end }}
-          {{ else if eq $section "patent" }}
-            {{ with .Params.patent_status }}{{ $classes = $classes | append (printf "status-%s" .) }}{{ end }}
-          {{ else if eq $section "post" }}
-            {{ range (.Params.categories | default slice) }}
-              {{ $classes = $classes | append (printf "cat-%s" (. | urlize)) }}
-            {{ end }}
-          {{ end }}
-          <div class="lab-list-item {{ delimit $classes " " }}">
-            {{ partial "functions/render_view" (dict "page" $ "item" . "view" $view "index" $index) }}
-          </div>
-        {{ end }}
-      {{ else }}
-        {{ $paginator := .Paginate .Pages 12 }}
-        {{ range $index, $item := $paginator.Pages }}
-          {{ partial "functions/render_view" (dict "page" $ "item" . "view" $view "index" $index) }}
-        {{ end }}
-      {{ end }}
-    </div>
+    {{ partial "listing/filter-body.html" (dict
+      "page" $ "section" $section "pages" $pages "config" $cfg
+      "view" $view "cardStyle" $cardStyle "gridID" $gridID "gridClass" $gridClass
+    ) }}
 
     {{ if not $filterable }}
       {{ partial "pagination" . }}
     {{ end }}
   </div>
+
+  {{/* Long-list affordance: back-to-top (revealed by scroll listener) */}}
+  <button type="button" class="lab-top-btn" aria-label="{{ i18n "back_to_top" }}" hidden>
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
 </div>
 
 {{ if $filterable }}

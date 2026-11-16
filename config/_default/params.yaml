@@ -29,7 +29,7 @@ lab:
     - name: 计算机科学与技术学院
       url: https://jsj.xaut.edu.cn/
     - name: 西安理工大学研究生院
-      url: https://gra.xaut.edu.cn/
+      url: https://yjsy.xaut.edu.cn/index.htm
   ui:
     # 空则自动为「{name}团队成员」
     people_lead: ''
@@ -39,37 +39,28 @@ lab:
     email_label: 邮箱
     address_label: 地址
     map_aria: 实验室位置地图
-    section_leads:
-      people: 导师与学生团队
-      publication: 发表的期刊与会议论文
-      project: 承担的科研项目
-      patent: 授权发明专利
-      award: 相关奖项与荣誉
-      research: 主要研究方向与课题布局
-      post: 学术动态与活动
   admit:
     sections:
       - title: 硕士 / 博士
-        lead: 常年招募计算机视觉、图像处理、人工智能方向研究生。
+        lead: 计算机视觉、图像处理、人工智能方向，常年招募。
         bullets:
-          - 提升意愿强烈，迎难而上
-          - 扎实数学基础与英语读写能力
-          - 具备较强编程实践能力
-          - 本硕连读、本博连读优先
+          - 提升意愿强，能迎难而上
+          - 扎实数学基础与英语读写
+          - 较强编程实践能力
+          - 本硕 / 本博连读优先
       - title: 优秀本科生
-        lead: 欢迎参与科研项目与科技竞赛的低年级同学。
+        lead: 欢迎低年级同学参与科研与竞赛。
         bullets:
-          - 面向 1–3 年级本科生
-          - 每年招收约 3–5 名
-          - 可参与课题研究与竞赛辅导
+          - 面向 1–3 年级
+          - 每年约 3–5 名
+          - 可参与课题与竞赛辅导
           - 邮件联系并附简要自我介绍
       - title: 申请方式
-        lead: 请将以下材料发送至导师邮箱，我们将尽快回复。
-        show_email: true
+        lead: 将材料发至导师邮箱，我们会尽快回复。
         bullets:
-          - 邮件标题格式：报考咨询-姓名-学校
-          - 必附材料：个人简历、成绩单
-          - 可选材料：论文、项目或竞赛经历
+          - 标题：报考咨询-姓名-学校
+          - 必附：个人简历、成绩单
+          - 可选：论文、项目或竞赛经历
 
 # Appearance
 
@@ -104,6 +95,9 @@ marketing:
 # Site header
 
 header:
+  # stay = navbar always visible; disables vendor Headroom entirely
+  # (our CSS forces transform:none, so Headroom was running for nothing)
+  on_scroll: stay
   navbar:
     enable: true
     # r: logo left, destination links + theme/lang on the right

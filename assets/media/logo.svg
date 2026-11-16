@@ -2,5 +2,5 @@
   <!-- 暗室显影：暗场中的一点光（弱光增强 / 智能感知） -->
   <rect x="4" y="4" width="56" height="56" rx="16" fill="#1E232C"/>
   <path d="M39 27 L23 43" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
-  <circle cx="41" cy="24" r="8" fill="#4D6BFE"/>
+  <circle cx="41" cy="24" r="8" fill="#4176E6"/>
 </svg>

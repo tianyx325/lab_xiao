@@ -12,7 +12,7 @@
   font-size: $lab-text-xs;
   font-weight: $lab-weight-medium;
   letter-spacing: 0.04em;
-  line-height: 1.45;
+  line-height: $lab-leading-snug;
   color: var(--lab-color-text-secondary);
   background: none;
   border: none;
@@ -29,8 +29,8 @@
   font-size: $lab-text-sm;
   font-weight: $lab-weight-medium;
   letter-spacing: 0.02em;
-  line-height: 1.45;
-  color: var(--lab-color-link) !important;
+  line-height: $lab-leading-snug;
+  color: var(--lab-color-link-soft) !important;
   background: none !important;
   border: none !important;
   border-radius: 0;
@@ -42,8 +42,8 @@
 }
 
 %lab-text-link-hover {
-  color: var(--lab-color-link) !important;
-  border-bottom-color: var(--lab-color-link) !important;
+  color: var(--lab-color-link-hover) !important;
+  border-bottom-color: var(--lab-color-link-hover) !important;
   opacity: 0.85;
   background: none !important;
 }
@@ -65,45 +65,75 @@
   opacity: 0.85;
 }
 
-/* "查看更多 / More" link — brand color with underline offset */
+/* Navigation link — the ONE affordance for "go to" semantics (hero CTAs,
+   查看更多, 全部, 进入方向). Brand ink + trailing arrow; hover slides the
+   arrow. Buttons (actions) and chips (tags) use their own components —
+   links never wear borders or padding. */
 %lab-more-link {
   display: inline-flex;
   align-items: center;
+  gap: 0.3em;
   font-size: $lab-text-sm;
-  letter-spacing: 0.08em;
-  line-height: 1 !important;
-  color: var(--lab-color-link) !important;
+  letter-spacing: 0.04em;
+  line-height: $lab-leading-none !important;
+  color: var(--lab-color-link-soft) !important;
   text-decoration: none;
   white-space: nowrap;
-  padding-bottom: $lab-space-1 !important;
   position: relative;
   font-weight: $lab-weight-medium;
   transition: color $lab-transition, opacity $lab-transition;
 }
 
+%lab-more-link::after {
+  content: "\2192"; /* → */
+  font-size: 1.05em;
+  line-height: $lab-leading-none;
+  /* Optical alignment: "→" mass sits low in its em box — nudge up to the
+     perceived text baseline (token: $lab-align-arrow-nudge) */
+  transform: translateY($lab-align-arrow-nudge);
+  transition: transform $lab-transition;
+}
+
 %lab-more-link-hover {
-  color: var(--lab-color-link) !important;
+  color: var(--lab-color-link-hover) !important;
   opacity: 0.82;
   font-weight: $lab-weight-medium;
 }
 
-/* Clickable-capable capsule chip — the ONE sanctioned pill form
-   (member direction tags, future tag filtering) */
-.lab-chip {
-  display: inline-flex;
-  align-items: center;
-  max-width: 100%;
-  font-size: $lab-text-xs;
-  line-height: 1.5;
-  font-weight: $lab-weight-medium;
-  color: var(--lab-color-link);
-  background: var(--lab-color-accent-blue-04);
-  border: 1px solid var(--lab-color-border-blue-40);
-  border-radius: 999px;
-  padding: 0.1rem var(--lab-space-3);
-  white-space: nowrap;
-  text-decoration: none;
+%lab-more-link-hover::after {
+  /* Keep the optical nudge on the Y axis while sliding right on hover */
+  transform: translate(3px, $lab-align-arrow-nudge);
 }
+
+/* ── External-link marker — the ONE site-wide 站内/站外 distinction ──
+   Rendered links get .lab-ext from the render-link hook; hand-written
+   template links add it explicitly. The NE arrow (↗) says "leaves this
+   site"; internal links stay quiet. */
+a.lab-ext::after {
+  content: "\2197"; /* ↗ */
+  display: inline-block;
+  margin-left: 0.25em;
+  font-size: 0.8em;
+  line-height: 1;
+  opacity: 0.7;
+  transition: transform $lab-transition;
+}
+
+a.lab-ext:hover::after {
+  transform: translate(1px, -1px);
+}
+
+/* The marker is a text-link affordance — never on buttons or icon links */
+a.btn.lab-ext::after,
+.lab-member-social a.lab-ext::after,
+#navbar-main a.lab-ext::after {
+  content: none;
+}
+
+/* NOTE: the old `.lab-text-link` concrete class was removed — it extended
+   %lab-more-link while sharing a name with %lab-text-link, and had zero
+   template usage. Concrete jump-link classes should be created only when
+   a template actually needs one, with an unambiguous name. */
 
 /* Scroll-reveal entrance (pairs with js/lab-reveal.js — JS adds .lab-reveal
    to targets, .lab-reveal-in when they enter the viewport).

@@ -3,7 +3,7 @@
 {{/* Taxonomy-only names (not in content/authors/) — head already meta-refreshes to /people/ */}}
 {{ if not .File }}
 {{ $people := "/people/" | relLangURL }}
-<p class="universal-wrapper pt-3"><a href="{{ $people }}">返回成员列表</a></p>
+<p class="universal-wrapper pt-3"><a href="{{ $people }}">{{ i18n "lab_back_to_people" }}</a></p>
 {{ else }}
 {{- $person := .Params -}}
 {{- $avatar := (.Resources.ByType "image").GetMatch "*avatar*" -}}
@@ -20,7 +20,7 @@
        match this member's slug, display name, or any alias mapping to the slug. */ -}}
 {{- $slug := .File.ContentBaseName -}}
 {{- $ids := slice $slug .Title -}}
-{{- with site.Data.lab_author_aliases -}}
+{{- with hugo.Data.lab_author_aliases -}}
   {{- range $k, $v := . -}}
     {{- if eq $v $slug -}}{{- $ids = $ids | append $k -}}{{- end -}}
   {{- end -}}
@@ -43,7 +43,8 @@
 {{- $labOrg := "" -}}
 {{- with site.Params.lab -}}{{- $labOrg = .org_name | default "" -}}{{- end -}}
 
-{{- $isAdvisor := in (.Params.user_groups | default slice) "导师" -}}
+{{- $ug := .Params.user_groups | default slice -}}
+{{- $isAdvisor := or (in $ug "导师") (in $ug "Supervisor") (in $ug "Advisors") -}}
 {{- /* Students: official research list tags. Advisors: free-text split (original). Body always free-text. */ -}}
 {{- $researchPages := slice -}}
 {{- $focusTopics := slice -}}
@@ -147,7 +148,7 @@
               {{- if and .name (ne .name $labOrg) -}}
                 {{- if not $orgShown -}}<div class="lab-member-identity-orgs">{{- $orgShown = true -}}{{- end -}}
                 <p class="lab-member-identity-org">
-                  {{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}
+                  {{ with .url }}<a class="lab-ext" href="{{ . }}" target="_blank" rel="noopener">{{ end }}
                   {{- .name -}}
                   {{ if .url }}</a>{{ end }}
                 </p>
@@ -166,7 +167,7 @@
             {{- end -}}
           {{- end -}}
           {{- with $otherSocial -}}
-          <ul class="lab-member-social" aria-label="社交链接">
+          <ul class="lab-member-social" aria-label="{{ i18n "lab_social_links" }}">
             {{- range . -}}
             {{- $pack := or .icon_pack "fas" -}}
             {{- $packPrefix := $pack -}}
@@ -214,7 +215,7 @@
 
     {{- with $academic -}}
     {{ partial "components/member-works-section.html" (dict
-      "title" "学术成果"
+      "title" (i18n "lab_member_outputs")
       "items" .
       "limit" $worksLimit
       "show_kind" true
@@ -223,7 +224,7 @@
 
     {{- with $projects -}}
     {{ partial "components/member-works-section.html" (dict
-      "title" "研究项目"
+      "title" (i18n "lab_member_projects")
       "items" .
       "limit" $worksLimit
       "show_kind" false

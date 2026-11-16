@@ -19,22 +19,6 @@ sections:
   - block: markdown
     content:
       title:
-      text: '{{< lab-section-head title="Research" >}}'
-    design:
-      columns: '1'
-      css_class: lab-block-head
-
-  - block: markdown
-    content:
-      title:
-      text: '{{< lab-research-cards count="3" >}}'
-    design:
-      columns: '1'
-      css_class: lab-major
-
-  - block: markdown
-    content:
-      title:
       text: '{{< lab-section-head title="Advisors" >}}'
     design:
       columns: '1'
@@ -44,7 +28,7 @@ sections:
     content:
       title:
       user_groups:
-        - 导师
+        - Supervisor
       sort_by: Params.last_name
       sort_ascending: true
     design:

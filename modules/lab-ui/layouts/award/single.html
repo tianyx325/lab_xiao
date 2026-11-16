@@ -2,17 +2,17 @@
 
 {{ $metaTags := slice }}
 {{ with .Date }}
-  {{ $metaTags = $metaTags | append (dict "label" "获奖年份" "value" (.Format "2006")) }}
+  {{ $metaTags = $metaTags | append (dict "label" (i18n "lab_label_award_year") "value" (.Format "2006")) }}
 {{ end }}
 {{ if .Params.authors }}
   {{ $authors := partial "components/detail-authors.html" . }}
-  {{ $metaTags = $metaTags | append (dict "label" "获奖人" "value" ($authors | safeHTML)) }}
+  {{ $metaTags = $metaTags | append (dict "label" (i18n "lab_label_awardees") "value" ($authors | safeHTML)) }}
 {{ end }}
 {{ $levelKeys := slice "国家级" "省级" "市级" "校级" }}
 {{ with .Params.tags }}
   {{ range . }}
-    {{ $label := "类别" }}
-    {{ if in $levelKeys . }}{{ $label = "级别" }}{{ end }}
+    {{ $label := i18n "lab_label_category" }}
+    {{ if in $levelKeys . }}{{ $label = i18n "lab_label_level" }}{{ end }}
     {{ $metaTags = $metaTags | append (dict "label" $label "value" .) }}
   {{ end }}
 {{ end }}

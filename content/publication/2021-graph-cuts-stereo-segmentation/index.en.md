@@ -9,7 +9,7 @@ date: "2021-08-10T00:00:00Z"
 doi: "10.11896/jsjkx.200800221"
 publication_types: ["article-journal"]
 publication: "计算机科学"
-publication_short: "计算机科学"
+publication_short: "Computer Science"
 volume: "48"
 issue: "8"
 pages: "150-156"

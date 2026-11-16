@@ -21,32 +21,32 @@
 {{- end -}}
 
 {{- with .Params.project_code -}}
-  {{- $metaTags = $metaTags | append (dict "label" "编号" "value" .) -}}
+  {{- $metaTags = $metaTags | append (dict "label" (i18n "lab_label_project_code") "value" .) -}}
 {{- end -}}
 {{- if and .Params.date .Params.date_end -}}
   {{- $value := printf "%s – %s" (.Params.date | time.Format "2006/01") (.Params.date_end | time.Format "2006/01") -}}
-  {{- $metaTags = $metaTags | append (dict "label" "起止时间" "value" $value) -}}
+  {{- $metaTags = $metaTags | append (dict "label" (i18n "lab_label_period") "value" $value) -}}
 {{- else if .Params.date -}}
-  {{- $metaTags = $metaTags | append (dict "label" "起始" "value" (.Params.date | time.Format "2006/01")) -}}
+  {{- $metaTags = $metaTags | append (dict "label" (i18n "lab_label_start") "value" (.Params.date | time.Format "2006/01")) -}}
 {{- end -}}
 {{- if .Params.authors -}}
   {{- $authors := partial "components/detail-authors.html" . -}}
-  {{- $metaTags = $metaTags | append (dict "label" "负责人" "value" ($authors | safeHTML)) -}}
+  {{- $metaTags = $metaTags | append (dict "label" (i18n "lab_label_pi") "value" ($authors | safeHTML)) -}}
 {{- end -}}
 {{- $st := .Params.project_status | default "" -}}
 {{- if eq $st "ongoing" -}}
-  {{- $metaTags = $metaTags | append (dict "label" "状态" "value" "在研") -}}
+  {{- $metaTags = $metaTags | append (dict "label" (i18n "lab_label_status") "value" (i18n "lab_status_ongoing")) -}}
 {{- else if eq $st "completed" -}}
-  {{- $metaTags = $metaTags | append (dict "label" "状态" "value" "已结题") -}}
+  {{- $metaTags = $metaTags | append (dict "label" (i18n "lab_label_status") "value" (i18n "lab_status_completed")) -}}
 {{- end -}}
 {{- with $source -}}
-  {{- $metaTags = $metaTags | append (dict "label" "来源" "value" .) -}}
+  {{- $metaTags = $metaTags | append (dict "label" (i18n "lab_label_source") "value" .) -}}
 {{- end -}}
 {{- with $level -}}
-  {{- $metaTags = $metaTags | append (dict "label" "级别" "value" .) -}}
+  {{- $metaTags = $metaTags | append (dict "label" (i18n "lab_label_level") "value" .) -}}
 {{- end -}}
 {{- with $keywords -}}
-  {{- $metaTags = $metaTags | append (dict "label" "关键词" "value" (delimit . " · ")) -}}
+  {{- $metaTags = $metaTags | append (dict "label" (i18n "lab_label_keywords") "value" (delimit . " · ")) -}}
 {{- end -}}
 
 {{- .Scratch.Set "lab_article_meta_tags" $metaTags -}}

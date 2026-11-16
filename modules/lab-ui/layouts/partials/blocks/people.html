@@ -9,7 +9,7 @@
     {{ $peopleLead = . }}
   {{ else }}
     {{ with $lab.name }}
-      {{ $peopleLead = printf "%s团队成员" . }}
+      {{ $peopleLead = i18n "lab_people_lead" . }}
     {{ end }}
   {{ end }}
 {{ end }}

@@ -1,14 +1,16 @@
-{{- /* Homepage: selected papers as cards. */ -}}
+{{- /* Homepage: latest papers reusing the /publication/ list-page style —
+      media-row cards in the single-column 888px grid. The explicit
+      card_style key pins the skin regardless of page/item params. */ -}}
 {{- $count := int (.Get "count" | default 4) -}}
 {{- $is_en := eq site.Language.Lang "en" -}}
 {{- $pubs := first $count (sort (where site.RegularPages "Section" "publication") "Date" "desc") -}}
-<div class="lab-outcomes lab-outcomes--paper-cards">
-  <div class="lab-outcomes-cards">
+<div class="lab-outcomes">
+  <div class="lab-list-grid lab-list-grid--media-rows">
     {{- range $i, $p := $pubs -}}
-      {{ partial "functions/render_view" (dict "page" $ "item" $p "view" "card" "index" $i) }}
+      {{ partial "views/card.html" (dict "page" $ "item" $p "index" $i "card_style" "media-row") }}
     {{- else -}}
       <p class="lab-outcomes-empty">{{ cond $is_en "None yet" "暂无" }}</p>
     {{- end -}}
   </div>
-  <a class="lab-outcomes-more" href="{{ "publication/" | relLangURL }}">{{ cond $is_en "More papers" "查看更多" }}</a>
+  <a class="lab-outcomes-more" href="{{ "publications/" | relLangURL }}">{{ cond $is_en "More papers" "查看更多" }}</a>
 </div>

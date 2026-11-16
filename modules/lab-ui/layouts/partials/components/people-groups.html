@@ -110,7 +110,7 @@
 
       {{ with $phds }}
       <h3 class="lab-people-subgroup-title">{{ cond $is_en "Ph.D. Students" "博士生" }}</h3>
-      <div class="lab-people-grid lab-people-grid--dots">
+      <div class="lab-people-grid lab-people-grid--students">
         {{ range . }}{{ partial "components/member-card.html" .page }}{{ end }}
       </div>
       {{ end }}
@@ -125,7 +125,7 @@
           {{ if lt .coh 2100 }}
           <div class="lab-people-cohort-title">{{ cond $is_en (printf "Cohort %d" .coh) (printf "%d级" .coh) }}</div>
           {{ end }}
-          <div class="lab-people-grid lab-people-grid--dots">
+          <div class="lab-people-grid lab-people-grid--students">
           {{ $prevCoh = .coh }}
           {{ $gridOpen = true }}
         {{ end }}
@@ -136,7 +136,7 @@
 
       {{ with $ugs }}
       <h3 class="lab-people-subgroup-title">{{ if $isAlumni }}{{ cond $is_en "Others" "其他成员" }}{{ else }}{{ cond $is_en "Undergraduates" "本科生" }}{{ end }}</h3>
-      <div class="lab-people-grid lab-people-grid--dots">
+      <div class="lab-people-grid lab-people-grid--students">
         {{ range . }}{{ partial "components/member-card.html" .page }}{{ end }}
       </div>
       {{ end }}
@@ -144,7 +144,10 @@
     {{ end }}
   {{ else }}
     {{- /* ---- Advisor (or any legacy explicit) group: weight/title sort ---- */ -}}
-    {{ $query = where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice $groupName) }}
+    {{- /* Match ZH/EN advisor labels so home/people filters don't miss members. */ -}}
+    {{- $advisorNames := slice "导师" "Supervisor" "Advisors" -}}
+    {{- $matchGroups := cond (in $advisorNames $groupName) $advisorNames (slice $groupName) -}}
+    {{ $query = where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" $matchGroups }}
     {{ $sort_order := cond $sort_ascending "asc" "desc" }}
     {{/* Sort by Params.weight if exists, otherwise by Title */}}
     {{ $with_sort := slice }}
@@ -159,11 +162,12 @@
     {{ $with_sort = sort $with_sort "Params.weight" $sort_order }}
     {{ $without_sort = sort $without_sort "Title" $sort_order }}
     {{ $query = $with_sort | append $without_sort }}
-    {{/* Lab director always first within the group */}}
+    {{/* Lab director always first within the group. Director = role mentions
+        实验室负责人, or the HugoBlox-convention superuser page (site PI). */}}
     {{ $directors := slice }}
     {{ $others := slice }}
     {{ range $query }}
-      {{ if in (.Params.role | default "" | string) "实验室负责人" }}
+      {{ if or (in (.Params.role | default "" | string) "实验室负责人") (.Params.superuser) }}
         {{ $directors = $directors | append . }}
       {{ else }}
         {{ $others = $others | append . }}
@@ -176,7 +180,7 @@
       {{ if gt (len $groups) 1 }}
       <h2 class="lab-people-group-title">{{ $groupName | markdownify }}</h2>
       {{ end }}
-      <div class="lab-people-grid lab-people-grid--rows" data-count="{{ len $query }}">
+      <div class="lab-people-grid lab-people-grid--advisors" data-count="{{ len $query }}">
         {{ range $query }}
           {{ partial "components/member-card.html" . }}
         {{ end }}

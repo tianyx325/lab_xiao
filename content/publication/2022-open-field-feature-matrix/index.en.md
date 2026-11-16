@@ -9,7 +9,7 @@ date: "2022-01-01T00:00:00Z"
 doi: "10.11834/jig.210606"
 publication_types: ["article-journal"]
 publication: "中国图象图形学报"
-publication_short: "中国图象图形学报"
+publication_short: "Journal of Image and Graphics"
 volume: "27"
 issue: "3"
 pages: "988-1000"

@@ -1,0 +1,5 @@
+{{- /* Homepage research scroll-story (sticky index + panels).
+      Params: count (optional, default all). */ -}}
+{{- $ctx := dict "page" .Page -}}
+{{- with .Get "count" -}}{{- $ctx = merge $ctx (dict "count" .) -}}{{- end -}}
+{{ partial "components/research-story.html" $ctx }}

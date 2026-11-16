@@ -2,6 +2,7 @@
 title: Depth Estimation
 date: 2026-10-13
 weight: 30
+placeholder_art: depth
 summary: "Addressing both standard and degraded scenarios, this direction studies depth estimation under monocular, low-light, and event-camera conditions, exploring semantic guidance, multimodal fusion, and robust 3D perception methods."
 tags:
   - depth estimation
@@ -15,21 +16,21 @@ Depth estimation is the key link between 2D perception and 3D understanding. The
 
 ### Research Topics
 
-- Monocular depth estimation and semantically guided geometric reasoning
-- Robust depth estimation in degraded scenarios such as low light and low texture
-- Event-camera depth estimation and multimodal fusion with conventional cameras
-- Consistency constraints, scale recovery, and uncertainty modeling for depth results
-- Application validation of depth for reconstruction, focusing, and scene understanding
+- **Estimate monocular depth**: monocular depth estimation with semantically guided geometric reasoning
+- **Handle degraded scenarios**: robust depth estimation under low light and low texture
+- **Fuse event cameras**: event-camera depth estimation and multimodal fusion with conventional cameras
+- **Constrain depth consistency**: scale recovery and uncertainty modeling for depth results
+- **Validate downstream tasks**: application validation for reconstruction, focusing, and scene understanding
 
 ### Key Challenges
 
-- Scale ambiguity and geometric ambiguity in monocular settings
-- Boundary and detail degradation caused by low light and motion blur
-- Spatio-temporal alignment and fusion strategies for heterogeneous sensors (RGB / event, etc.)
-- Propagation and controllability of depth errors in downstream tasks
+- **Scale ambiguity**: geometric ambiguity in monocular settings
+- **Boundary degradation**: detail loss caused by low light and motion blur
+- **Heterogeneous alignment**: spatio-temporal alignment and fusion strategies across RGB / event sensors
+- **Error propagation**: propagation and controllability of depth errors in downstream tasks
 
 ### Technical Approach
 
-- Combine semantic and geometric priors to improve estimation quality at structural boundaries and in planar regions
-- Design robust features and training strategies for low-light and event data
-- Enhance the stability and transferability of depth estimation through multi-task learning and consistency losses
+- **Introduce semantic priors**: improve estimation quality at structural boundaries and in planar regions
+- **Design robust features**: build feature representations and training strategies for low-light and event data
+- **Joint multi-task learning**: enhance stability and transferability of depth estimation through consistency losses

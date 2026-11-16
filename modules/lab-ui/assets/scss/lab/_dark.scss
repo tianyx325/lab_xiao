@@ -3,7 +3,7 @@
 /* Dark mode */
 .dark .media.stream-item,
 .dark .pub-list-item,
-.dark .lab-member-row {
+.dark .lab-member-card {
   background: var(--lab-card-bg) !important;
   border-color: var(--lab-card-border) !important;
   box-shadow: var(--lab-card-shadow) !important;
@@ -19,16 +19,18 @@
   background: var(--lab-dark-surface);
 }
 
+/* Placeholder hue system is theme-aware: grounds mix hue into
+   var(--lab-card-bg)/--lab-surface-alt (which flip in dark), accents derive
+   from the hue at fixed alpha — so hue classes need no dark overrides.
+   Only the ink line strength is re-tuned for near-black grounds. */
 .dark .lab-card-media--placeholder {
-  --lab-ph-ink: rgba(255, 255, 255, 0.14);
-  --lab-ph-ink-soft: rgba(255, 255, 255, 0.08);
-  --lab-ph-accent: rgba(115, 163, 210, 0.3);
-  --lab-ph-accent-soft: rgba(115, 163, 210, 0.15);
+  --lab-ph-ink: rgba(255, 255, 255, 0.16);
+  --lab-ph-ink-soft: rgba(255, 255, 255, 0.09);
 }
 
 .dark .media.stream-item:hover,
 .dark .pub-list-item:hover,
-.dark .lab-member-row:hover {
+.dark .lab-member-card:hover {
   border-color: var(--lab-card-border-hover) !important;
   box-shadow: var(--lab-card-shadow-hover) !important;
 }

@@ -7,20 +7,33 @@ zh:
   params:
     description: 本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。
     lead: 聚焦大模型与智能体、弱光视觉、深度估计，做能落地的感知与决策研究
-    intro: 实验室隶属西安理工大学计算机科学与技术学院，沿「感知—决策」主线开展视觉与智能体研究，成果落地于安防监控、工业检测与水下探测等真实场景。
 
 en:
   locale: en-US
   title: Intelligent Perception & Decision Lab
-  languageName: English
+  label: English
   params:
     description: Research on large models and agents, low-light vision, depth estimation, and human action recognition.
     lead: Large models and agents, low-light vision, and depth estimation — perception and decision research that ships.
-    intro: Affiliated with the School of Computer Science and Technology, Xi'an University of Technology, the lab works along a perception-to-decision research line, with results deployed in surveillance, industrial inspection, and underwater exploration.
+    marketing:
+      seo:
+        org_name: Intelligent Perception & Decision Lab
+        description: Research on large models and agents, low-light vision, depth estimation, and human action recognition.
     lab:
+      name: Intelligent Perception & Decision Lab
+      name_en: IPD Lab
+      org_name: School of Computer Science and Engineering, Xi'an University of Technology
+      seo_description: Research on large models and agents, low-light vision, depth estimation, and human action recognition.
       email: zhaolin.xiao@xaut.edu.cn
       address: Room 417, Teaching Building 3, Jinhua Campus, Xi'an University of Technology
       admit_lead: 'We welcome motivated students interested in computer vision, image processing, and AI research to join the lab.'
+      friend_links:
+        - name: Xi'an University of Technology
+          url: https://www.xaut.edu.cn/
+        - name: School of Computer Science and Engineering
+          url: https://jsj.xaut.edu.cn/
+        - name: Graduate School
+          url: https://yjsy.xaut.edu.cn/index.htm
       ui:
         contact_title: Contact & Admissions
         admit_kind: Admissions
@@ -28,3 +41,26 @@ en:
         email_label: Email
         address_label: Address
         map_aria: Lab location map
+        people_lead: Lab members
+      admit:
+        sections:
+          - title: M.S. / Ph.D.
+            lead: Year-round openings in computer vision, image processing, and AI.
+            bullets:
+              - Strong drive and resilience
+              - Solid math and academic English
+              - Hands-on programming skills
+              - Integrated bachelor–master / bachelor–Ph.D. preferred
+          - title: Outstanding undergraduates
+            lead: Early-year students are welcome for research and contests.
+            bullets:
+              - Open to years 1–3
+              - About 3–5 seats each year
+              - Research projects and contest mentoring
+              - Email a brief self-introduction
+          - title: How to apply
+            lead: Send materials to the advisor's email; we reply as soon as we can.
+            bullets:
+              - "Subject: Application inquiry — Name — School"
+              - "Required: CV and transcript"
+              - "Optional: papers, projects, or contest experience"

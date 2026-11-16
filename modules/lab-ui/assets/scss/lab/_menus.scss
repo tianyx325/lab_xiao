@@ -19,19 +19,28 @@
   align-items: center;
   width: 100%;
   max-width: none;
-  padding-left: var(--lab-page-gutter);
-  padding-right: var(--lab-page-gutter);
+  min-width: 0;
+  /* Dedicated navbar gutter — constant on every page kind (see _tokens.scss) */
+  padding-left: var(--lab-navbar-gutter);
+  padding-right: var(--lab-navbar-gutter);
 }
 
 /* Logo left; destinations + icons sit on the right */
 #navbar-main .lab-navbar-inner > .navbar-collapse.main-menu-item {
   flex: 1 1 auto;
+  min-width: 0;
   justify-content: flex-end !important;
+}
+
+/* Keep the destination row from forcing the glass pill to clip on EN */
+#navbar-main .navbar-collapse.main-menu-item > .navbar-nav {
+  flex-wrap: nowrap;
+  min-width: 0;
 }
 
 /* Quiet action link — mirrors boguan’s right-side CTA, parchment-safe */
 #navbar-main .navbar-nav.ml-md-auto > .nav-item > .nav-link {
-  color: var(--lab-color-link) !important;
+  color: var(--lab-color-link-soft) !important;
   font-weight: $lab-weight-medium;
 }
 
@@ -50,6 +59,9 @@
   font-size: $lab-text-base; /* keep search icon readable */
 }
 
+/* Theme & language triggers also live inside ul.nav-icons (see navbar.html),
+   so the circular-button rules above already cover them. */
+
 #navbar-main ul.nav-icons > li {
   padding-right: 0;
 }
@@ -65,6 +77,7 @@
   justify-content: center;
   width: 2rem;
   height: 2rem;
+  padding: 0 !important; /* kill vendor .nav-link padding inside the circle */
   border-radius: 50%;
   color: var(--lab-color-text-secondary) !important;
   transition: color $lab-transition, background-color $lab-transition;
@@ -77,7 +90,7 @@
 #navbar-main ul.nav-icons .nav-link:hover,
 #navbar-main ul.nav-icons .nav-link:focus-visible,
 #navbar-main ul.nav-icons .nav-link[aria-expanded="true"] {
-  color: var(--lab-color-link) !important;
+  color: var(--lab-color-link-hover) !important;
   background: var(--lab-color-surface-alt) !important;
 }
 
@@ -108,34 +121,14 @@
   display: none !important;
 }
 
-/* Language trigger — compact text pill, self-explanatory (no globe/map confusion) */
+/* Language trigger — icon-only button, same anatomy as the theme trigger;
+   hover/focus color comes from the shared nav-link rules. */
 #navbar-main ul.nav-icons .i18n-dropdown > .nav-link {
   width: auto;
-  border-radius: 999px;
 }
 
-#navbar-main .lab-lang-pill {
-  display: inline-flex;
-  align-items: center;
-  height: 1.625rem; /* 26px */
-  padding: 0 0.625rem;
-  border: 1px solid var(--lab-color-border);
-  border-radius: 999px;
-  font-family: $lab-font-sans;
-  font-size: $lab-text-xs;
-  font-weight: $lab-weight-medium;
-  letter-spacing: 0.05em;
-  line-height: 1;
-  color: var(--lab-color-text-secondary);
-  transition: border-color $lab-transition, color $lab-transition;
-}
-
-#navbar-main ul.nav-icons .i18n-dropdown > .nav-link:hover .lab-lang-pill,
-#navbar-main ul.nav-icons .i18n-dropdown > .nav-link:focus-visible .lab-lang-pill,
-#navbar-main ul.nav-icons .i18n-dropdown > .nav-link[aria-expanded="true"] .lab-lang-pill {
-  border-color: var(--lab-color-link);
-  color: var(--lab-color-link) !important;
-}
+/* All navbar control glyphs at ONE size — the deleted 24px theme/lang
+   override made .lab-ic's 22px the single source (search / theme / language) */
 
 #navbar-main .lab-nav-text-toggle {
   font-size: $lab-text-base; /* match search icon weight */
@@ -146,21 +139,12 @@
   transform: scaleX(1);
 }
 
-/* Shared liquid-glass menus: 成果 / 主题 / 语言 */
+/* Shared glass menus: 成果 / 主题 / 语言 — glass recipe lives in
+   .dropdown-menu (base); here only the layout deltas */
 #navbar-main .lab-nav-menu {
   min-width: 8rem;
   padding: var(--lab-space-1) 0;
   margin-top: var(--lab-space-1); /* hugs the trigger — reads as its extension */
-  background: rgba(255, 255, 255, 0.66) !important;
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  border: 1px solid rgba(30, 35, 44, 0.08) !important;
-  border-radius: 12px;
-  /* top inner sheen = the glass edge catching light */
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.65),
-    0 2px 6px var(--lab-color-shadow-ink-04),
-    0 8px 28px var(--lab-color-shadow-ink-08) !important;
 }
 
 /* Dropdown entrance — grows out of the trigger's corner (scale + fade) */
@@ -200,35 +184,11 @@
   display: none; /* no purple rail */
 }
 
-/* Current-option check marks */
-#navbar-main .lab-opt-check {
-  margin-left: auto;
-  color: var(--lab-color-link);
-  opacity: 0;
-  transition: opacity 0.15s ease;
-}
-
-#navbar-main .js-set-theme-light .lab-opt-check {
-  opacity: 1;
-}
-
-.dark #navbar-main .js-set-theme-light .lab-opt-check {
-  opacity: 0;
-}
-
-.dark #navbar-main .js-set-theme-dark .lab-opt-check {
-  opacity: 1;
-}
-
-#navbar-main .lab-opt-check-on {
-  opacity: 1 !important;
-}
-
 #navbar-main .lab-nav-menu .dropdown-item:hover,
 #navbar-main .lab-nav-menu .dropdown-item:focus-visible {
-  color: var(--lab-color-link) !important;
+  color: var(--lab-color-link-hover) !important;
   /* translucent ink wash — the glass stays see-through on hover */
-  background: rgba(30, 35, 44, 0.06) !important;
+  background: rgba($lab-ink, 0.06) !important;
 }
 
 #navbar-main .lab-nav-menu .dropdown-item-active {
@@ -249,12 +209,12 @@
 
 #navbar-main .navbar-toggler:hover,
 #navbar-main .navbar-toggler:focus-visible {
-  color: var(--lab-color-link);
+  color: var(--lab-color-link-hover);
   background: var(--lab-color-surface-alt);
 }
 
 /* Mobile: brand centered; solid menu panel + dim backdrop (no content bleed) */
-@media (max-width: 991px) {
+@include lab-bp-down(lg) {
   /* Floating pill tightens to the screen edges */
   .page-header {
     top: $lab-space-2;
@@ -326,7 +286,7 @@
     right: 0;
     top: 100%;
     width: 100%;
-    min-height: calc(100dvh - var(--lab-navbar-height-sm) + 4rem);
+    min-height: calc(100dvh - var(--lab-navbar-height-sm) + 4rem); /* +4rem: cover the fixed pill's top offset + breathing room (magic number kept intentional) */
     height: calc(100dvh - var(--lab-navbar-height-sm) + 4rem);
     max-height: none;
     overflow-x: hidden;
@@ -368,4 +328,84 @@
     background: transparent;
   }
 }
+
+/* ── Control semantics: actions are <button>, navigation is <a> ──
+   Search / theme / language triggers and theme options were converted
+   from <a href="#"> to real buttons. Strip UA button chrome so the
+   button siblings wear the exact same anatomy as the <a> nav-links. */
+#navbar-main ul.nav-icons button.nav-link {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+#navbar-main .dropdown-menu button.dropdown-item {
+  width: 100%;
+  text-align: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ── Search modal controls (FA glyphs removed → inline SVG system) ── */
+.lab-search-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: var(--lab-color-text-secondary);
+  cursor: pointer;
+  transition: color $lab-transition, background-color $lab-transition;
+}
+
+.lab-search-close:hover,
+.lab-search-close:focus-visible {
+  color: var(--lab-color-link-hover);
+  background: var(--lab-color-surface-alt);
+}
+
+.lab-search-close svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.lab-search-queries-title {
+  padding-bottom: var(--lab-space-3);
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-semibold;
+  letter-spacing: 0.04em;
+  color: var(--lab-color-text);
+}
+
+.lab-search-queries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lab-search-queries li {
+  padding-bottom: var(--lab-space-3);
+  line-height: $lab-leading-body;
+}
+
+.lab-search-queries a {
+  @extend %lab-text-link;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lab-space-2);
+}
+
+.lab-search-queries a svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 

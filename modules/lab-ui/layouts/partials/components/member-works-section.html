@@ -7,9 +7,9 @@
     <li{{ if ge $i $.limit }} class="lab-member-works-extra" hidden{{ end }}>
       {{- if $.show_kind -}}
       {{- $kind := "" -}}
-      {{- if eq $item.Section "publication" -}}{{- $kind = "论文" -}}
-      {{- else if eq $item.Section "patent" -}}{{- $kind = "专利" -}}
-      {{- else if eq $item.Section "award" -}}{{- $kind = "奖项" -}}
+      {{- if eq $item.Section "publication" -}}{{- $kind = i18n "lab_kind_paper" -}}
+      {{- else if eq $item.Section "patent" -}}{{- $kind = i18n "lab_kind_patent" -}}
+      {{- else if eq $item.Section "award" -}}{{- $kind = i18n "lab_kind_award" -}}
       {{- end -}}
       {{- with $kind -}}
       <span class="lab-member-works-kind lab-member-works-kind--{{ $item.Section }}">{{ . }}</span>
@@ -23,6 +23,6 @@
     {{- end -}}
   </ul>
   {{- if gt (len .items) .limit -}}
-  <button type="button" class="lab-member-works-more" data-lab-works-more>查看更多</button>
+  <button type="button" class="lab-member-works-more" data-lab-works-more>{{ i18n "lab_more" }}</button>
   {{- end -}}
 </section>

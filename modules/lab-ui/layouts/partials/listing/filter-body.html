@@ -1,0 +1,70 @@
+{{- /*
+  Filterable list body — year-grouped card grid.
+  Shared by standalone list pages and the outputs hub panels; the filter
+  row itself lives in the sticky band (page header / hub filter bar).
+  Usage: {{ partial "listing/filter-body.html" (dict
+    "page" $page "section" $section "pages" $pages "config" $cfg
+    "view" "card" "cardStyle" "media-row" "gridID" "" "gridClass" "lab-list-grid") }}
+  The filter script binds to [data-lab-filter-root] and finds its controls
+  via [data-filter-for] (hub) or the page header (list pages).
+*/ -}}
+
+{{- $page := .page -}}
+{{- $section := .section -}}
+{{- $pages := .pages -}}
+{{- $cfg := .config -}}
+{{- $view := .view | default "card" -}}
+{{- $cardStyle := .cardStyle | default "" -}}
+{{- $gridID := .gridID | default "" -}}
+{{- $gridClass := .gridClass | default "lab-list-grid" -}}
+{{- /* Anchor prefix keeps #yYYYY ids unique when several lists share a page */ -}}
+{{- $idPrefix := .idPrefix | default "" -}}
+{{- $filterable := $cfg.filterable -}}
+{{- $measure := $cfg.measure -}}
+{{- $yearCounts := $cfg.yearCounts -}}
+{{- $yearGrouped := $cfg.yearGrouped -}}
+{{- $longList := or $yearGrouped (eq $view "list") (eq $cardStyle "media-row") -}}
+
+<div class="lab-list-scope" data-lab-list-scope>
+  <div{{ with $gridID }} id="{{ . }}"{{ end }} class="{{ $gridClass }}"{{ if $filterable }} data-lab-filter-root data-page-size="{{ if $longList }}999{{ else }}12{{ end }}"{{ end }}>
+    {{ if $filterable }}
+      {{ $lastYear := "" }}
+      {{ range $index, $item := $pages }}
+        {{- if and $yearGrouped (ne ($item.Date.Format "2006") $lastYear) -}}
+        <div class="lab-year-head" data-year="{{ $item.Date.Format "2006" }}">
+          <h2 id="{{ $idPrefix }}y{{ $item.Date.Format "2006" }}" class="lab-year-title">{{ $item.Date.Format "2006" }}</h2>
+          <span class="lab-year-count">{{ index $yearCounts ($item.Date.Format "2006") }} {{ $measure }}</span>
+        </div>
+        {{- end -}}
+        {{ $lastYear = $item.Date.Format "2006" }}
+        {{ $classes := slice (printf "year-%s" (.Date.Format "2006")) }}
+        {{ if eq $section "publication" }}
+          {{ $pubtype := "0" }}
+          {{ with .Params.publication_types }}{{ $pubtype = index . 0 }}{{ end }}
+          {{ $classes = $classes | append (printf "pubtype-%s" $pubtype) }}
+        {{ else if eq $section "project" }}
+          {{ with .Params.project_status }}{{ $classes = $classes | append (printf "status-%s" .) }}{{ end }}
+        {{ else if eq $section "patent" }}
+          {{ with .Params.patent_status }}{{ $classes = $classes | append (printf "status-%s" .) }}{{ end }}
+        {{ else if eq $section "post" }}
+          {{ range (.Params.categories | default slice) }}
+            {{ $classes = $classes | append (printf "cat-%s" (. | urlize)) }}
+          {{ end }}
+        {{ end }}
+        <div class="lab-list-item {{ delimit $classes " " }}">
+          {{ if $cardStyle }}
+            {{/* Explicit skin wins: render_view does not forward card_style */}}
+            {{ partial "views/card.html" (dict "page" $page "item" . "index" $index "card_style" $cardStyle) }}
+          {{ else }}
+            {{ partial "functions/render_view" (dict "page" $page "item" . "view" $view "index" $index) }}
+          {{ end }}
+        </div>
+      {{ end }}
+    {{ else }}
+      {{ $paginator := $page.Paginate $pages 12 }}
+      {{ range $index, $item := $paginator.Pages }}
+        {{ partial "functions/render_view" (dict "page" $page "item" . "view" $view "index" $index) }}
+      {{ end }}
+    {{ end }}
+  </div>
+</div>

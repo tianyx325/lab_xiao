@@ -4,7 +4,7 @@
 
     {{ if and (eq .Section "project") .Params.url_external }}
     <p class="lab-article-links">
-      <a href="{{ .Params.url_external }}" target="_blank" rel="noopener">项目主页</a>
+      <a class="lab-ext" href="{{ .Params.url_external }}" target="_blank" rel="noopener">{{ i18n "lab_project_homepage" | default (i18n "open_project_site") }}</a>
     </p>
     {{ end }}
 

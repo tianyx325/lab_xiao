@@ -1,10 +1,16 @@
 {{- define "main" -}}
 
 {{/* People list page — standard lab-list-page shell, same as publication/post/project */}}
+{{ $isEn := eq site.Language.Lang "en" }}
 <div class="lab-list-page lab-list-page--people">
   {{ partial "listing/header.html" (dict
     "title" .Title
     "lead" (partial "components/section-lead.html" (dict "page" . "key" "people"))
+    "aside" (dict
+      "label" (cond $isEn "Filter by group" "按分组筛选")
+      "all" (cond $isEn "All" "全部")
+    )
+    "sticky" true
   ) }}
 
   <div class="lab-list-body container">

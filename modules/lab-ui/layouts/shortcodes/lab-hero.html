@@ -8,10 +8,6 @@
 {{- $lead := site.Params.lead | default ($lab.lead | default "") -}}
 {{- $intro := site.Params.intro | default "" -}}
 {{- $is_en := eq site.Language.Lang "en" -}}
-{{- $pubs := len (where site.RegularPages "Section" "publication") -}}
-{{- $pats := len (where site.RegularPages "Section" "patent") -}}
-{{- $awds := len (where site.RegularPages "Section" "award") -}}
-{{- $team := len (where site.Pages "Section" "authors") -}}
 <div class="lab-hero">
   <h1 class="lab-hero-brand">{{- $name -}}</h1>
   {{- with $tagline -}}
@@ -23,6 +19,13 @@
   {{- with $intro -}}
   <p class="lab-hero-intro">{{- . -}}</p>
   {{- end -}}
+{{- /* Stats block is gated: hidden by default, enable via
+      params.lab.show_hero_stats: true (counts stay build-time aggregated) */ -}}
+{{- if site.Params.lab.show_hero_stats | default false -}}
+{{- $pubs := len (where site.RegularPages "Section" "publication") -}}
+{{- $pats := len (where site.RegularPages "Section" "patent") -}}
+{{- $awds := len (where site.RegularPages "Section" "award") -}}
+{{- $team := len (where site.Pages "Section" "authors") -}}
   <dl class="lab-hero-stats">
     <div class="lab-hero-stat">
       <dt class="lab-hero-stat-num">{{ $pubs }}</dt>
@@ -41,8 +44,9 @@
       <dd class="lab-hero-stat-label">{{ cond $is_en "Members" "成员" }}</dd>
     </div>
   </dl>
+{{- end -}}
   <div class="lab-hero-actions">
-    <a class="lab-btn--quiet" href="{{ "research/" | relLangURL }}">{{ cond $is_en "Research" "研究方向" }}</a>
-    <a class="lab-btn--quiet" href="{{ "contact/" | relLangURL }}">{{ cond $is_en "Join us" "加入我们" }}</a>
+    <a class="lab-btn--solid" href="{{ "research/" | relLangURL }}">{{ cond $is_en "Research" "研究方向" }}</a>
+    <a class="lab-btn--outline" href="{{ "contact/" | relLangURL }}">{{ cond $is_en "Join us" "加入我们" }}</a>
   </div>
 </div>
