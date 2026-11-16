@@ -8,23 +8,14 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 
 - Requires **Hugo 0.168 extended** and **Dart Sass** on `PATH` (standalone or `sass-embedded`; the plain `sass` npm package is pure JS and cannot speak the embedded protocol Hugo needs). CI installs it via `scripts/install-dart-sass.sh`.
 - `hugo mod get/vendor/tidy` require a Go toolchain.
-- Dev server: `hugo server -D`
-- Production build: `hugo --minify`
+- Dev server: `.\scripts\dev.ps1`
+- Production build: `hugo --gc --minify --noBuildLock`
 - SCSS lint: `npm ci && npm run lint:css` (stylelint, correctness rules only)
 - Always verify zero warnings after changes. Known exception: blox-seo v0.3.1 ships a misplaced `sitemap.xml`, which Hugo 0.168 skips with one warning; do not hand-patch `_vendor`.
 
 ## Directory Structure
 
-- `content/` — Markdown content by section: `publication/`, `patent/`, `award/`, `project/`, `research/`, `post/`, `authors/`
-- `modules/lab-ui/` — Self-contained theme module (see its README.md)
-  - `modules/lab-ui/layouts/partials/{components,listing,article}/` — Grouped partials; top-level unprefixed files are vendor overrides (keep names)
-  - `modules/lab-ui/assets/scss/template.scss` — Entry; layered via `@import` (order = cascade order, do not reorder)
-  - `modules/lab-ui/assets/scss/lab/_tokens.scss` — Sole design-token source (`$lab-*` / `--lab-*`)
-  - `modules/lab-ui/assets/scss/lab/_type.scss` — Typography mixins (text roles + display/section titles)
-  - `modules/lab-ui/assets/js/` — Single-purpose vanilla JS components
-- `assets/media/` — Site media only (logo/icon); no site-level scss/js
-- `data/fonts/lab.toml` — Inter + Noto Sans SC (`appearance.font: lab`)
-- `config/_default/` — Hugo config split into `hugo.yaml`, `params.yaml`, `languages.yaml`, `menus.yaml`, `module.yaml`
+结构见 [README.md](README.md)。
 
 ## Constraints
 
@@ -40,12 +31,14 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 - Template lookup: `modules/lab-ui/layouts/<section>/single.html` for detail pages, `section/<name>.html` for list pages, `_default/list.html` as fallback.
 - Shared partials in `modules/lab-ui/layouts/partials/`, grouped by domain: `components/`, `listing/`, `article/`; vendor-override files keep their original top-level names.
 - Shortcodes in `modules/lab-ui/layouts/shortcodes/` for content-embeddable components.
+- Lab JS: `modules/lab-ui/assets/js/lab/lab-*.js`, loaded by `partials/custom_js.html`. `wowchemy-map.js` stays in `assets/js/`. Site `assets/media/` is logo/icon only.
 
 ## Content Types
 
 | Section | Purpose | Key Front Matter |
 |---------|---------|-----------------|
 | publication | Academic papers | `publication_types`, `authors`, `abstract`, `doi` |
+| outcomes | Outputs hub. Keep `type: publications` and `url: /publications/` so the public URL and hub layout stay put | `type`, `url` |
 | patent | Patents | `authors` (inventors), `patent_number` |
 | award | Awards/honors | `authors` (display), `level`, `rank` |
 | project | Research projects | `project_type`, `funding`, `url_external`, `image` |
@@ -55,6 +48,7 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 ## SCSS Conventions
 
 - Design tokens: define in `modules/lab-ui/assets/scss/lab/_tokens.scss` only. Prefer `var(--lab-*)` in rules; use `$lab-*` for Sass math / maps.
+- `template.scss` import order is the cascade order. Do not reorder. View layers are `lab/views/{results,people,pages,home,listing}/`.
 - Do not hardcode brand hex/rgba in view stylesheets — add a token, then reference it.
 - Brand accent is Brand blue `#4176E6` (user-specified) (SCSS name `$lab-blue`, kept for legacy reasons) — interaction only: buttons, active, focus, hover borders. Body links inherit the same accent; page is `#F2FAFF` (user-specified) with white cards `#FDFEFF`. Ink is blue-tinted `#1E232C`; borders are ink-alpha (`rgba(30,35,44,.14)`), never standalone grays. Dark mode is near-black `#0A0A0A` with lifted blue `#6C9CF2` links. No gradients, no glow — premium comes from ink quality and whitespace (reference: deepseek.com `--ds-color-*` tokens).
 - Color contrast (WCAG 2.1 AA) baseline: body text ≥4.5:1, large/incidental text and non-text UI (focus ring) ≥3:1 — verified pairs live in `scripts/check_contrast.py` (run after ANY `_tokens.scss` change). USER RULE: no blue may be deeper than the primary #4176E6 — body links/buttons sit ON the primary (4.19:1 / white-on-primary 4.23:1, user-approved AA exceptions); hover and link-soft LIGHTEN via white color-mix, never deepen toward ink. `--lab-color-text-faint` (.28) is decorative-only; information-bearing de-emphasis uses `--lab-color-text-tertiary` or muted.
