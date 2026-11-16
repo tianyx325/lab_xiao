@@ -1,5 +1,5 @@
 [build]
-  command = "npm install -g sass && hugo --gc --minify -b $URL"
+  command = 'PATH="$(bash scripts/install-dart-sass.sh):$PATH" hugo --gc --minify -b $URL'
   publish = "public"
 
 [build.environment]
@@ -10,10 +10,10 @@
   HUGO_ENV = "production"
 
 [context.deploy-preview]
-  command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
+  command = 'PATH="$(bash scripts/install-dart-sass.sh):$PATH" hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL'
 
 [context.branch-deploy]
-  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
+  command = 'PATH="$(bash scripts/install-dart-sass.sh):$PATH" hugo --gc --minify -b $DEPLOY_PRIME_URL'
 
 [[plugins]]
   package = "netlify-plugin-hugo-cache-resources"

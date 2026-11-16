@@ -34,7 +34,7 @@ jobs:
           extended: true
 
       - name: Install Dart Sass
-        run: npm install --global sass
+        run: echo "$(bash scripts/install-dart-sass.sh)" >> "$GITHUB_PATH"
 
       - uses: actions/cache@v4
         with:
