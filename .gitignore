@@ -15,3 +15,6 @@ __pycache__/
 
 # Local scratch builds
 .workbuddy/tmp/
+
+# Node tooling (lint)
+node_modules/

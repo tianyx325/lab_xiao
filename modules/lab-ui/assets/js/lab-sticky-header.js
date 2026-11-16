@@ -47,7 +47,16 @@
     io.observe(sentinel);
   }
 
-  window.addEventListener('resize', setHeight);
+  /* Resize fires in bursts; coalesce the layout reads into one frame */
+  var raf = 0;
+  function onResize() {
+    if (raf) return;
+    raf = window.requestAnimationFrame(function () {
+      raf = 0;
+      setHeight();
+    });
+  }
+  window.addEventListener('resize', onResize);
   setHeight();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(setHeight);
 })();

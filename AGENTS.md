@@ -10,6 +10,7 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 - `hugo mod get/vendor/tidy` require a Go toolchain.
 - Dev server: `hugo server -D`
 - Production build: `hugo --minify`
+- SCSS lint: `npm ci && npm run lint:css` (stylelint, correctness rules only)
 - Always verify zero warnings after changes. Known exception: blox-seo v0.3.1 ships a misplaced `sitemap.xml`, which Hugo 0.168 skips with one warning; do not hand-patch `_vendor`.
 
 ## Directory Structure
@@ -31,6 +32,7 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 - **Do NOT add JavaScript framework dependencies.** This is a Hugo static site; use vanilla JS or Hugo Pipes.
 - **All color/spacing values must use design tokens** (CSS custom properties `--lab-*` or SCSS variables `$lab-*`). Never hardcode raw values.
 - **Chinese is the primary language.** Content and UI labels are in Chinese.
+- **Browser baseline:** latest two versions of Chrome, Edge, Firefox and Safari. Modern CSS (`:has()`, `color-mix()`, `dvh`) may be used without fallbacks; revisit if the baseline changes.
 
 ## Theme Architecture
 

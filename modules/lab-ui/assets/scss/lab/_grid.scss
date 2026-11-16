@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /* ── Grid system — the ONLY sanctioned way to declare responsive grids ──
    Best-practice basis (CSS Grid era, verified 2025+):
    · CSS Grid owns 2D layout; flexbox stays for 1D component internals.
@@ -14,14 +16,14 @@ $lab-bp-map: (sm: $lab-bp-sm, md: $lab-bp-md, lg: $lab-bp-lg);
 
 /* Desktop-first down breakpoint — matches the existing cascade style. */
 @mixin lab-bp-down($name) {
-  @media (max-width: #{map-get($lab-bp-map, $name) - 1}) {
+  @media (max-width: #{map.get($lab-bp-map, $name) - 1}) {
     @content;
   }
 }
 
 /* Mobile-first up breakpoint — for new mobile-first blocks. */
 @mixin lab-bp-up($name) {
-  @media (min-width: #{map-get($lab-bp-map, $name)}) {
+  @media (min-width: #{map.get($lab-bp-map, $name)}) {
     @content;
   }
 }

@@ -91,6 +91,7 @@ body {
   background-color: var(--lab-color-page) !important;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E") !important;
   background-repeat: repeat !important;
+  padding-top: calc(var(--lab-navbar-height) + #{$lab-space-3} + #{$lab-space-2});
 }
 
 .article-title,
@@ -220,10 +221,6 @@ a.lab-member-card:focus-visible {
 
 .page-header.scrolled {
   box-shadow: 0 2px 8px var(--lab-color-shadow-ink-04), 0 8px 32px var(--lab-color-shadow-ink-08);
-}
-
-body {
-  padding-top: calc(var(--lab-navbar-height) + #{$lab-space-3} + #{$lab-space-2});
 }
 
 @include lab-bp-down(lg) {

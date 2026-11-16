@@ -235,6 +235,8 @@ $lab-leading-loose: 1.75 !default;
   --lab-color-shadow-ink-04: #{rgba($lab-ink, 0.04)};
   --lab-color-shadow-ink-08: #{rgba($lab-ink, 0.08)};
   --lab-color-shadow-ink-18: #{rgba($lab-ink, 0.18)};
+  /* Opaque stop for mask-image gradients */
+  --lab-color-mask: #000;
   /* Focus ring — SOLID brand blue, 4.01:1 on page bg (WCAG 1.4.11 non-text ≥3:1).
      Alpha rings fail visibility: rgba(.28) measured ≈1.2:1. */
   --lab-color-focus-ring: #{$lab-blue};
@@ -245,6 +247,16 @@ $lab-leading-loose: 1.75 !default;
   --lab-dark-border-hover: #{rgba(255, 255, 255, 0.28)};
   --lab-dark-text-muted: #8A919E;
   --lab-dark-shadow: #{rgba(0, 0, 0, 0.35)};
+  /* Night-ground glass: dropdown panes + floating navbar */
+  --lab-dark-glass: #{rgba(22, 25, 31, 0.62)};
+  --lab-dark-glass-border: #{rgba(255, 255, 255, 0.1)};
+  --lab-dark-glass-highlight: #{rgba(255, 255, 255, 0.08)};
+  --lab-dark-glass-hover: #{rgba(255, 255, 255, 0.08)};
+  --lab-dark-glass-shadow: 0 2px 8px #{rgba(0, 0, 0, 0.35)}, 0 10px 32px #{rgba(0, 0, 0, 0.45)};
+  --lab-dark-shadow-sm: 0 1px 2px #{rgba(0, 0, 0, 0.4)}, 0 6px 28px #{rgba(0, 0, 0, 0.4)};
+  --lab-dark-shadow-md: 0 2px 8px #{rgba(0, 0, 0, 0.4)}, 0 10px 36px #{rgba(0, 0, 0, 0.5)};
+  --lab-ph-ink-dark: #{rgba(255, 255, 255, 0.16)};
+  --lab-ph-ink-soft-dark: #{rgba(255, 255, 255, 0.09)};
 
   /* Card */
   --lab-card-bg: #{$lab-card-bg};

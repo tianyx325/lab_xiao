@@ -32,6 +32,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-hugomod-
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Install lint tooling
+        run: npm ci
+
+      - name: Lint SCSS
+        run: npm run lint:css
+
       - name: Check color contrast
         run: python scripts/check_contrast.py
 

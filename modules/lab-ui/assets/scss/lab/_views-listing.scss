@@ -26,6 +26,9 @@ body {
   --lab-list-column: calc(
     var(--lab-page-width) - 2 * var(--lab-page-gutter) - 2 * var(--lab-shell-gutter, 0px)
   );
+  /* Section accent, matching the card / detail category colours */
+  --lab-list-accent: #{$lab-blue};
+  --lab-list-wash: #{$lab-blue-wash};
 }
 
 .lab-list-page--col-media-rows,
@@ -157,6 +160,10 @@ body {
     background-position: left $lab-space-2 center;
     background-repeat: no-repeat;
     background-size: 12px 12px;
+    /* Shrink-friendly: it gives way before the title does */
+    flex: 0 1 10rem;
+    width: auto;
+    min-width: 0;
   }
 
   .lab-list-header--filters .lab-list-filters select.lab-filter-control,
@@ -205,14 +212,7 @@ body {
     transform: translateY($lab-space-1);
   }
 
-  /* Shrink-friendly controls: they give way before the title does */
-  .lab-list-header--filters .lab-list-filters .filter-search,
-  .lab-hub-filters .lab-hub-filter .lab-list-filters .filter-search {
-    flex: 0 1 10rem;
-    width: auto;
-    min-width: 0;
-  }
-
+  
   .lab-list-header--filters .lab-list-filters select.lab-filter-control,
   .lab-hub-filters .lab-hub-filter .lab-list-filters select.lab-filter-control {
     min-width: 0;
@@ -656,6 +656,7 @@ body {
 .lab-list-item {
   display: flex;
   flex-direction: column;
+  transition: opacity $lab-transition, transform $lab-transition;
 }
 
 .lab-list-item > .lab-card {
@@ -740,11 +741,6 @@ button.lab-pagination-link {
   background: transparent !important;
 }
 
-/* List page accent tokens (match card / detail categories) */
-.lab-list-page {
-  --lab-list-accent: #{$lab-blue};
-  --lab-list-wash: #{$lab-blue-wash};
-}
 
 /* List pagination — clear prev/numbers/next; accent follows section */
 .lab-pagination {
@@ -1038,9 +1034,6 @@ a.lab-meta-tag.lab-meta-tag-link:hover,
 }
 
 /* ---------- Filter animations ---------- */
-.lab-list-item {
-  transition: opacity $lab-transition, transform $lab-transition;
-}
 
 .lab-list-item.is-filtered-out,
 .lab-list-item.is-paged-out {

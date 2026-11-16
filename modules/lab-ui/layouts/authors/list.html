@@ -9,11 +9,13 @@
 {{- $avatar := (.Resources.ByType "image").GetMatch "*avatar*" -}}
 {{- $avatarShape := site.Params.features.avatar.shape | default "circle" -}}
 {{- $src := "" -}}
+{{- $srcset := "" -}}
 {{- if site.Params.features.avatar.gravatar -}}
   {{- $src = printf "https://s.gravatar.com/avatar/%s?s=224" (md5 $person.email) -}}
 {{- else if $avatar -}}
-  {{- $avatarImage := $avatar.Fill "320x320 Center" -}}
+  {{- $avatarImage := $avatar.Fill "168x168 Center" -}}
   {{- $src = $avatarImage.RelPermalink -}}
+  {{- $srcset = printf "%s 1x, %s 2x" $src ($avatar.Fill "336x336 Center").RelPermalink -}}
 {{- end -}}
 {{- /* Authors taxonomy is disabled (hugo.yaml) → .Pages is always empty.
        Collect works from site.RegularPages by Params.authors membership:
@@ -71,7 +73,7 @@
         <div class="lab-member-avatar{{ if not $src }} is-placeholder{{ end }}">
           {{ if $src }}
           <img class="lab-member-avatar-img{{ if eq $avatarShape "square" }} is-square{{ end }}"
-               src="{{ $src }}" alt="{{ .Title }}" width="168" height="168" loading="eager">
+               src="{{ $src }}"{{ with $srcset }} srcset="{{ . }}" sizes="168px"{{ end }} alt="{{ .Title }}" width="168" height="168" loading="eager">
           {{ else }}
           <span class="lab-member-avatar-initial" aria-hidden="true">{{ $initial }}</span>
           {{ end }}

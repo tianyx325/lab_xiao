@@ -79,9 +79,13 @@ $lab-home-sections: (
 }
 
 .lab-outcomes-more {
+  @extend %lab-more-link;
   display: block;
   width: fit-content;
   margin: var(--lab-space-block) auto 0 !important;
+  padding: 0 !important;
+  height: 1.2em;
+  text-align: center;
 }
 
 /* Homepage reuse of the list-page card grids: the section container already
@@ -119,15 +123,6 @@ $lab-home-sections: (
 /* Match .section-head a (“全部”) — always centered.
    One top-gap for EVERY “more” link on the page (was 12/16/32 mix):
    var(--lab-space-block), mirroring the head→content gap above it. */
-.lab-outcomes-more {
-  @extend %lab-more-link;
-  display: block;
-  width: fit-content;
-  margin: var(--lab-space-block) auto 0 !important;
-  padding: 0 !important;
-  height: 1.2em;
-  text-align: center;
-}
 
 .lab-section-more {
   display: flex;
@@ -300,15 +295,15 @@ $lab-home-sections: (
     radial-gradient(56rem 26rem at 50% 0%, rgba($lab-blue, 0.12), transparent 72%),
     radial-gradient(30rem 18rem at 84% 2%, rgba($lab-blue, 0.06), transparent 70%),
     radial-gradient(26rem 16rem at 8% 78%, rgba($lab-blue, 0.045), transparent 70%);
-  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 96%);
-  mask-image: linear-gradient(180deg, #000 55%, transparent 96%);
+  -webkit-mask-image: linear-gradient(180deg, var(--lab-color-mask) 55%, transparent 96%);
+  mask-image: linear-gradient(180deg, var(--lab-color-mask) 55%, transparent 96%);
 }
 
 .dark .home-section.lab-hero-section::before {
   background-image:
-    radial-gradient(56rem 26rem at 50% 0%, rgba(108, 156, 242, 0.14), transparent 72%),
-    radial-gradient(30rem 18rem at 84% 2%, rgba(108, 156, 242, 0.07), transparent 70%),
-    radial-gradient(26rem 16rem at 8% 78%, rgba(108, 156, 242, 0.05), transparent 70%);
+    radial-gradient(56rem 26rem at 50% 0%, color-mix(in srgb, var(--lab-color-link) 14%, transparent), transparent 72%),
+    radial-gradient(30rem 18rem at 84% 2%, color-mix(in srgb, var(--lab-color-link) 7%, transparent), transparent 70%),
+    radial-gradient(26rem 16rem at 8% 78%, color-mix(in srgb, var(--lab-color-link) 5%, transparent), transparent 70%);
 }
 
 .home-section.lab-hero-section::after {

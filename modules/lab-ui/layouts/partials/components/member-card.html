@@ -10,10 +10,12 @@
   {{- $link = .RelPermalink -}}
 {{- end -}}
 {{- $src := "" -}}
+{{- $srcset := "" -}}
 {{- if site.Params.features.avatar.gravatar -}}
   {{- $src = printf "https://s.gravatar.com/avatar/%s?s=480" (md5 $page.Params.email) -}}
 {{- else if $avatar -}}
-  {{- $src = ($avatar.Fill "480x480 Smart").RelPermalink -}}
+  {{- $src = ($avatar.Fill "88x88 Smart").RelPermalink -}}
+  {{- $srcset = printf "%s 1x, %s 2x" $src ($avatar.Fill "176x176 Smart").RelPermalink -}}
 {{- end -}}
 {{- $initial := substr $page.Title 0 1 -}}
 
@@ -24,7 +26,7 @@
 {{ end }}
   <span class="lab-member-card-avatar{{ if not $src }} is-placeholder{{ end }}">
     {{- if $src -}}
-    <img src="{{ $src }}" alt="{{ $page.Title }}" loading="lazy" width="480" height="480">
+    <img src="{{ $src }}"{{ with $srcset }} srcset="{{ . }}" sizes="88px"{{ end }} alt="{{ $page.Title }}" loading="lazy" width="480" height="480">
     {{- else -}}
     <span class="lab-member-photo-initial" aria-hidden="true">{{ $initial }}</span>
     {{- end -}}

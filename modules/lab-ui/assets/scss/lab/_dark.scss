@@ -24,8 +24,8 @@
    from the hue at fixed alpha — so hue classes need no dark overrides.
    Only the ink line strength is re-tuned for near-black grounds. */
 .dark .lab-card-media--placeholder {
-  --lab-ph-ink: rgba(255, 255, 255, 0.16);
-  --lab-ph-ink-soft: rgba(255, 255, 255, 0.09);
+  --lab-ph-ink: var(--lab-ph-ink-dark);
+  --lab-ph-ink-soft: var(--lab-ph-ink-soft-dark);
 }
 
 .dark .media.stream-item:hover,
@@ -45,25 +45,24 @@
 
 /* Liquid-glass dropdowns on night ground — dark translucent pane + faint cool edge */
 .dark #navbar-main .lab-nav-menu {
-  background: rgba(22, 25, 31, 0.62) !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: var(--lab-dark-glass) !important;
+  border-color: var(--lab-dark-glass-border) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 2px 8px rgba(0, 0, 0, 0.35),
-    0 10px 32px rgba(0, 0, 0, 0.45) !important;
+    inset 0 1px 0 var(--lab-dark-glass-highlight),
+    var(--lab-dark-glass-shadow) !important;
 }
 
 .dark #navbar-main .lab-nav-menu .dropdown-item:hover,
 .dark #navbar-main .lab-nav-menu .dropdown-item:focus-visible {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: var(--lab-dark-glass-hover) !important;
 }
 
 /* Floating pill navbar — darker glass edge + deeper elevation on night ground */
 .dark .page-header {
   border-color: var(--lab-color-border);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 28px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--lab-dark-shadow-sm);
 }
 
 .dark .page-header.scrolled {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 10px 36px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--lab-dark-shadow-md);
 }
