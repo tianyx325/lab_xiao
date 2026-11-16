@@ -1422,6 +1422,27 @@ body:has(.page-body [data-lab-sticky]) .lab-list-body {
   padding-bottom: var(--lab-page-end);
 }
 
+/* ---------- Detail pages: same scroll model as list pages ----------
+   The whole document stays put; .page-body is the single scroller. This
+   gives detail and list pages identical scrollbar-gutter, overscroll and
+   scroll-restoration behaviour. The article header scrolls with the
+   content (it has no controls to keep pinned). */
+body:has(.lab-page--detail .lab-article) {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+body:has(.lab-page--detail .lab-article) .page-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges;
+  scroll-padding-top: $lab-space-4;
+}
+
 /* Year-nav anchors land inside the page-body scroller */
 body:has(.page-body [data-lab-sticky]) .lab-year-head {
   top: var(--lab-sticky-h, 0px);
