@@ -1,0 +1,258 @@
+/* Sticky title + filter band (list pages). lab-sticky-header.js adds
+   .is-stuck once the band reaches the navbar and publishes its height as
+   --lab-sticky-h so year heads stack below it. */
+.lab-list-header[data-lab-sticky] {
+  position: sticky;
+  top: calc(var(--lab-navbar-height) + #{$lab-space-3} + #{$lab-space-2});
+  z-index: 20;
+  margin-bottom: 0;
+  /* Default top gap == stuck gap, so the title never shifts when it pins */
+  padding-top: var(--lab-space-5);
+}
+
+/* Header margin moved to the body so nothing scrolls through a transparent gap */
+.lab-list-header[data-lab-sticky] + .lab-list-body {
+  margin-top: $lab-space-7;
+}
+
+.lab-list-header.is-stuck {
+  padding-bottom: var(--lab-space-4);
+}
+
+.lab-list-header.is-stuck .lab-list-lead {
+  display: none;
+}
+
+.lab-sticky-sentinel {
+  height: 1px;
+  margin-bottom: -1px;
+}
+
+@include lab-bp-down(lg) {
+  .lab-list-header[data-lab-sticky] {
+    top: calc(var(--lab-navbar-height-sm) + #{$lab-space-3} + #{$lab-space-2});
+  }
+}
+
+/* Specificity must beat .lab-page--list .page-body .container
+   (0,3,0 + !important → 1100px), or search+year sit on the page column
+   while media-row cards stay at 888px. */
+.page-body .lab-list-header .container,
+.page-body .lab-hub-sticky .container {
+  width: 100%;
+  max-width: calc(
+    var(--lab-list-column) + 2 * var(--lab-page-gutter) + 2 * var(--lab-shell-gutter, 0px)
+  ) !important;
+  margin: 0 auto;
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
+}
+
+.lab-list-title {
+  @include lab-section-title;
+  margin: 0 !important;
+  color: var(--lab-color-text);
+  text-align: center;
+}
+
+.lab-list-lead {
+  margin: $lab-space-3 auto 0 !important;
+  max-width: 32rem;
+  font-size: $lab-text-base;
+  line-height: $lab-leading-body;
+  color: var(--lab-color-text-secondary);
+  text-align: center;
+}
+
+.lab-list-body {
+  max-width: var(--lab-page-width) !important;
+}
+
+.lab-list-intro {
+  margin-bottom: $lab-space-5;
+  text-align: center;
+}
+
+/* Filter row under the list title */
+.lab-list-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: $lab-space-2;
+  margin: $lab-space-5 auto 0 !important;
+  max-width: 42rem;
+}
+
+.lab-list-header .lab-list-filters {
+  margin-bottom: 0 !important;
+}
+
+/* Temporarily surface search + year only, sitewide. The other selects stay
+   rendered by filters.html with all their options intact — delete this rule
+   to bring them back. (The people group dropdown has no data-filter-group,
+   so it is unaffected.) */
+.lab-list-filters select.lab-filter-control[data-filter-group]:not([data-filter-group="year"]) {
+  display: none !important;
+}
+
+.lab-filter-control,
+.lab-list-filters .lab-filter-control {
+  height: 2.25rem;
+  margin: 0;
+  padding: 0 $lab-space-3;
+  border: 1px solid var(--lab-color-border-light) !important;
+  border-radius: var(--lab-card-radius) !important;
+  background-color: var(--lab-color-white) !important;
+  color: var(--lab-color-text) !important;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-body;
+  letter-spacing: 0.04em;
+  /* 2.25rem fixed leading = control height sizing, not typographic leading — documented exception */
+  line-height: 2.25rem;
+  box-shadow: none !important;
+  transition: border-color $lab-transition, box-shadow $lab-transition;
+}
+
+.lab-list-filters .filter-search {
+  width: 13rem;
+  max-width: 100%;
+  text-align: left;
+}
+
+.lab-list-filters .filter-search::placeholder {
+  color: var(--lab-color-text-tertiary);
+  letter-spacing: 0.02em;
+}
+
+.lab-list-filters .filter-search::-webkit-search-cancel-button {
+  display: none;
+}
+
+.lab-list-filters select.lab-filter-control,
+.lab-list-header-aside select.lab-filter-control {
+  min-width: 6.75rem;
+  padding-right: $lab-space-6;
+  cursor: pointer;
+  appearance: none;
+  /* stroke ≈ $lab-ink #1e232c */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%231e232c' stroke-opacity='0.55' stroke-width='1.2' d='M1 1l4 4 4-4'/%3E%3C/svg%3E") !important;
+  background-position: right 0.65rem center !important;
+  background-size: 10px 6px !important;
+  background-repeat: no-repeat !important;
+}
+
+.lab-list-filters select.lab-filter-control option,
+.lab-list-header-aside select.lab-filter-control option {
+  letter-spacing: 0;
+  font-weight: $lab-weight-body;
+  font-size: $lab-text-sm;
+  color: var(--lab-color-text);
+  background: var(--lab-color-page);
+}
+
+.lab-filter-control:hover {
+  border-color: var(--lab-color-text-faint) !important;
+}
+
+.lab-filter-control:focus,
+.lab-list-filters .filter-search:focus {
+  outline: none !important;
+  border-color: rgba($lab-blue, 0.45) !important; /* pure-blue focus border — no ink deepening (user rule) */
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--lab-list-accent, $lab-blue) 10%, transparent) !important;
+}
+
+.lab-filter-empty {
+  margin: $lab-space-7 0 $lab-space-4 !important;
+  text-align: center;
+  font-size: $lab-text-sm;
+  letter-spacing: 0.04em;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-filter-empty[hidden] {
+  display: none !important;
+}
+
+#container-publications {
+  @include lab-card-grid;
+}
+
+#container-publications .isotope-item,
+#container-publications .grid-sizer {
+  position: static !important;
+  width: auto !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+}
+
+#container-publications .pub-list-item,
+#container-publications .lab-card.view-card {
+  max-width: none;
+  margin: 0 !important;
+  height: auto !important;
+}
+
+@include lab-bp-down(md) {
+  .lab-list-filters {
+    max-width: none;
+  }
+
+  .lab-list-filters .filter-search,
+  .lab-list-filters select.lab-filter-control {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Inside the sticky band keep controls on one scrollable row — stacked
+     full-width fields would pin a third of a phone screen. */
+  .lab-list-header .lab-list-filters,
+  .lab-hub-filters .lab-list-filters {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .lab-list-header .lab-list-filters .filter-search,
+  .lab-hub-filters .lab-list-filters .filter-search {
+    flex: 1 1 11rem;
+    width: auto;
+  }
+
+  .lab-list-header .lab-list-filters select.lab-filter-control,
+  .lab-hub-filters .lab-list-filters select.lab-filter-control {
+    flex: 0 0 auto;
+    width: auto;
+  }
+}
+
+.lab-list-grid {
+  @include lab-card-grid;
+  /* Poster pages (news / awards): smaller cards — 4 per line on desktop */
+  @include lab-grid-cols(4);
+  /* Vertical cards get the space back from tighter gutters */
+  gap: var(--lab-space-3);
+
+  @include lab-bp-down(lg) {
+    @include lab-grid-cols(3);
+  }
+
+  @include lab-bp-down(md) {
+    @include lab-grid-cols(2);
+  }
+
+  @include lab-bp-down(sm) {
+    @include lab-grid-cols(1);
+  }
+
+  /* !important guard: isotope JS may write inline display on the container */
+  display: grid !important;
+  align-items: stretch;
+  max-width: var(--lab-page-width);
+  margin: 0 auto;
+  container-type: inline-size;
+  container-name: lab-grid;
+}
+

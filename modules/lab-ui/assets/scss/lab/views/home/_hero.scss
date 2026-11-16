@@ -1,0 +1,239 @@
+/* Homepage hero — quiet academic ground */
+.home-section.lab-hero-section > .home-section-bg {
+  display: none !important;
+}
+
+.home-section.lab-hero-section {
+  position: relative;
+  min-height: 0;
+  display: flex;
+  align-items: flex-start;
+  padding-top: var(--lab-space-8);
+  isolation: isolate;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+  background: var(--lab-color-page) !important;
+}
+
+/* CSS-drawn ground, no patterns: three soft radial washes on the page color —
+   a main glow top-center (the logo's "light in darkness" motif), a faint
+   companion upper-right for depth, a whisper lower-left for balance.
+   Pure gradients, no images, no grid. Mask fades out before content. */
+.home-section.lab-hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(56rem 26rem at 50% 0%, rgba($lab-blue, 0.12), transparent 72%),
+    radial-gradient(30rem 18rem at 84% 2%, rgba($lab-blue, 0.06), transparent 70%),
+    radial-gradient(26rem 16rem at 8% 78%, rgba($lab-blue, 0.045), transparent 70%);
+  -webkit-mask-image: linear-gradient(180deg, var(--lab-color-mask) 55%, transparent 96%);
+  mask-image: linear-gradient(180deg, var(--lab-color-mask) 55%, transparent 96%);
+}
+
+.dark .home-section.lab-hero-section::before {
+  background-image:
+    radial-gradient(56rem 26rem at 50% 0%, color-mix(in srgb, var(--lab-color-link) 14%, transparent), transparent 72%),
+    radial-gradient(30rem 18rem at 84% 2%, color-mix(in srgb, var(--lab-color-link) 7%, transparent), transparent 70%),
+    radial-gradient(26rem 16rem at 8% 78%, color-mix(in srgb, var(--lab-color-link) 5%, transparent), transparent 70%);
+}
+
+.home-section.lab-hero-section::after {
+  display: none;
+}
+
+.home-section.lab-hero-section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.lab-hero {
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--lab-color-text);
+}
+
+.lab-hero-brand {
+  @include lab-display-title;
+  margin: 0 0 var(--lab-space-6) !important;
+  padding: 0 !important;
+  color: var(--lab-color-text) !important;
+  text-align: center;
+}
+
+.lab-hero-title {
+  margin: 0 0 var(--lab-space-4);
+  font-size: $lab-text-md;
+  font-weight: $lab-weight-body;
+  letter-spacing: $lab-tracking-body;
+  color: var(--lab-color-text-secondary) !important;
+}
+
+.lab-hero-lead {
+  margin: 0 auto;
+  max-width: 40rem;
+  font-size: $lab-text-hero-lead;
+  line-height: $lab-leading-loose;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-hero-intro {
+  margin: var(--lab-space-4) auto 0;
+  max-width: 36rem;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-loose;
+  color: var(--lab-color-muted);
+}
+
+/* Hero stats — proof bar, numbers aggregated at build time */
+.lab-hero-stats {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin: var(--lab-space-6) auto 0;
+  padding: 0;
+}
+
+.lab-hero-stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 6rem;
+  padding: 0 var(--lab-space-5);
+}
+
+.lab-hero-stat + .lab-hero-stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12%;
+  bottom: 12%;
+  width: 1px;
+  background: var(--lab-color-border-light);
+}
+
+.lab-hero-stat-num {
+  @include lab-font-serif;
+  margin: 0;
+  font-size: $lab-text-xl;
+  font-weight: $lab-weight-semibold;
+  line-height: $lab-leading-display;
+  color: var(--lab-color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.lab-hero-stat-label {
+  margin: var(--lab-space-1) 0 0;
+  font-size: $lab-text-xs;
+  letter-spacing: 0.06em;
+  color: var(--lab-color-muted);
+}
+
+@include lab-bp-down(sm) {
+  .lab-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--lab-space-4) 0;
+    max-width: 20rem;
+  }
+
+  .lab-hero-stat + .lab-hero-stat::before {
+    display: none;
+  }
+}
+
+/* Hero CTAs — one row: 研究方向 + 加入我们 */
+.lab-hero-actions {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--lab-space-inline);
+  margin: var(--lab-space-6) auto 0;
+}
+
+/* Research direction cards share the content-card template — four per row
+   (smaller tiles), no ordinal counter, content limited to title + summary. */
+.lab-research-cards {
+  @include lab-card-grid(4);
+  gap: var(--lab-space-3);
+  margin: var(--lab-space-block) auto 0;
+  max-width: var(--lab-page-width);
+  align-items: stretch;
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
+  box-sizing: border-box;
+  container-type: inline-size;
+  container-name: lab-cards;
+}
+
+.lab-research-cards > .lab-card {
+  margin: 0 !important;
+  height: auto !important;
+}
+
+/* Card-grid down-steps (2-col / 1-col) now live in the lab-card-grid mixin
+   (lab/_grid.scss) — only non-grid breakpoints are declared here. */
+
+@include lab-bp-down(md) {
+  .home-section.lab-hero-section {
+    min-height: 0;
+    padding-top: var(--lab-space-7) !important;
+  }
+
+  .lab-hero {
+    max-width: 100%;
+    padding: 0 var(--lab-space-1);
+  }
+
+  .lab-hero-brand {
+    margin-bottom: var(--lab-space-4) !important;
+  }
+
+  .lab-hero-lead {
+    max-width: 100%;
+  }
+
+  .lab-people-grid {
+    gap: var(--lab-space-inline);
+  }
+
+
+  .section-head {
+    padding: 0 $lab-space-2;
+  }
+
+  .section-head h2 {
+    max-width: none;
+    white-space: normal;
+  }
+
+  .section-head a {
+    position: static;
+    transform: none;
+    display: inline-flex;
+    margin-top: $lab-space-3 !important;
+    font-size: $lab-text-sm;
+    letter-spacing: $lab-tracking-body;
+  }
+
+  .home-section.lab-block-head,
+  .home-section.lab-row-head {
+    min-height: 0;
+    padding-top: $lab-space-8 !important;
+    margin-top: 0 !important;
+  }
+
+  .home-section.lab-last {
+    padding-bottom: var(--lab-page-end) !important;
+  }
+
+  .lab-contact-ways-map #map {
+    height: 14rem;
+  }
+}
+

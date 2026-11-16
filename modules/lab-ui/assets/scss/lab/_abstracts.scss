@@ -135,7 +135,7 @@ a.btn.lab-ext::after,
    template usage. Concrete jump-link classes should be created only when
    a template actually needs one, with an unambiguous name. */
 
-/* Scroll-reveal entrance (pairs with js/lab-reveal.js — JS adds .lab-reveal
+/* Scroll-reveal entrance (pairs with js/lab/lab-reveal.js — JS adds .lab-reveal
    to targets, .lab-reveal-in when they enter the viewport).
    JS skips when prefers-reduced-motion or no IntersectionObserver, so
    elements stay visible by default; these rules only apply after JS opted in. */

@@ -1,0 +1,266 @@
+/* Layer 5d · homepage views: hero, outcomes, mentors, research
+   Source: template.scss lines 3063-3952 (order-preserving split). */
+/* Homepage rhythm — keep contact map section padding */
+.home-section:not(.lab-hero-section):not(.lab-block-head):not(.lab-row-head):not(.lab-people-section):not(.lab-major):not(.lab-outcomes-section):not(.lab-news-section) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/*
+  Title strips: fixed height + flex 垂直居中
+  (标题在色带里上下居中，不是贴顶)
+*/
+.home-section.lab-block-head,
+.home-section.lab-row-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 0;
+  padding-top: var(--lab-space-section) !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  background: transparent !important;
+}
+
+$lab-home-sections: (
+  ".home-section.lab-block-head",
+  ".home-section.lab-row-head",
+  ".home-section.lab-major",
+  ".home-section.lab-outcomes-section",
+  ".home-section.lab-people-section",
+  ".home-section.lab-news-section",
+);
+
+@each $sec in $lab-home-sections {
+  #{$sec} > .container {
+    width: 100%;
+    max-width: var(--lab-page-width) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: var(--lab-page-gutter) !important;
+    padding-right: var(--lab-page-gutter) !important;
+  }
+
+  #{$sec} > .container > .row {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    justify-content: center !important;
+  }
+
+  #{$sec} .col-12 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* Homepage: 论文 / 专利 / 奖项 — 每列一条，首页更疏 */
+.home-section.lab-outcomes-section {
+  padding-top: var(--lab-space-section-sm) !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  background: transparent !important;
+}
+
+.home-section.lab-outcomes-section .section-heading {
+  display: none !important;
+}
+
+/* Homepage outcomes/news reuse the list-page card grids (lab-list-grid /
+   lab-list-grid--media-rows) — wrapper is a plain block; the "more" link
+   stays centered. */
+.lab-outcomes,
+.lab-news-list {
+  display: block;
+}
+
+.lab-outcomes-more {
+  @extend %lab-more-link;
+  display: block;
+  width: fit-content;
+  margin: var(--lab-space-block) auto 0 !important;
+  padding: 0 !important;
+  height: 1.2em;
+  text-align: center;
+}
+
+/* Homepage reuse of the list-page card grids: the section container already
+   carries the page gutter — no second pad, or the cards come out narrower
+   than the same wall on a list page. */
+
+.home-section.lab-news-section {
+  padding-top: var(--lab-space-section-sm) !important;
+  padding-bottom: 0 !important;
+  background: transparent !important;
+}
+
+.lab-outcomes-empty {
+  margin: 0;
+  padding: $lab-space-5 $lab-space-3;
+  font-size: $lab-text-sm;
+  color: var(--lab-color-text-secondary);
+  text-align: center;
+}
+
+/* 查看更多 / 全部 — unified jump-link affordance (arrow comes from
+   %lab-more-link); no underline animation, no borders. */
+.lab-outcomes-more,
+.section-head a {
+  border-bottom: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+
+.lab-outcomes-more:hover,
+.section-head a:hover {
+  @extend %lab-more-link-hover;
+}
+
+/* Match .section-head a (“全部”) — always centered.
+   One top-gap for EVERY “more” link on the page (was 12/16/32 mix):
+   var(--lab-space-block), mirroring the head→content gap above it. */
+
+.lab-section-more {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: var(--lab-space-block);
+}
+
+@include lab-bp-down(lg) {
+  .lab-outcomes {
+    grid-template-columns: 1fr;
+  }
+}
+
+.home-section.lab-people-section,
+.home-section.lab-major,
+.home-section.lab-news-section {
+  padding-top: var(--lab-space-section-sm) !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  background: transparent !important;
+}
+
+.home-section.lab-major {
+  background: transparent !important;
+}
+
+.home-section.lab-last {
+  padding-bottom: var(--lab-page-end) !important;
+}
+
+.home-section .section-heading {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  width: 100%;
+  max-width: var(--lab-page-width);
+}
+
+.home-section.lab-major .section-heading {
+  margin-bottom: 0 !important;
+}
+
+.home-section .section-heading h1 {
+  @include lab-section-title;
+  text-align: center !important;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-section .section-heading p {
+  font-size: $lab-text-md;
+  line-height: $lab-leading-body;
+  color: var(--lab-color-text-secondary);
+  margin-top: $lab-space-2 !important;
+  margin-bottom: 0 !important;
+  text-align: center !important;
+}
+
+.section-more,
+.see-all {
+  display: none !important;
+}
+
+/*
+  标题绝对居中（不受右侧「全部」宽度影响）
+  「全部」单独钉在右侧，与标题互不抢空间
+*/
+.section-head {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.section-head h2 {
+  @include lab-section-title;
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--lab-color-text);
+}
+
+.section-head a {
+  @extend %lab-more-link;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 1.2em;
+  opacity: 1;
+}
+
+.section-head a:hover {
+  @extend %lab-more-link-hover;
+}
+
+.home-section.lab-major .lab-research-cards,
+.home-section.lab-outcomes-section .lab-outcomes {
+  width: 100%;
+  max-width: none;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.home-section.lab-people-section .lab-people {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+

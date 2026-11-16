@@ -1,0 +1,172 @@
+/* ── Research scroll-story — sticky index + stacked panels ──
+   Quiet version of langchain.com's AADL wheel: scroll tracks the active
+   direction, nav marker moves (color/opacity only), panels stay calm. */
+.lab-story {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  gap: var(--lab-space-8);
+  align-items: start;
+  max-width: var(--lab-page-width);
+  margin: var(--lab-space-block) auto 0;
+  padding: 0 var(--lab-page-gutter);
+  box-sizing: border-box;
+}
+
+.lab-story-nav {
+  position: sticky;
+  top: calc(var(--lab-navbar-height) + var(--lab-space-5));
+  display: flex;
+  flex-direction: column;
+  gap: var(--lab-space-1);
+}
+
+.lab-story-nav-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--lab-space-inline);
+  padding: var(--lab-space-2) var(--lab-space-3);
+  border-left: 2px solid var(--lab-color-border-light);
+  color: var(--lab-color-text-secondary);
+  text-decoration: none !important;
+  border-bottom: none;
+  box-shadow: none;
+  transition:
+    color $lab-transition,
+    border-color $lab-transition,
+    background-color $lab-transition;
+}
+
+.lab-story-nav-item:hover {
+  color: var(--lab-color-link-hover);
+  opacity: 1;
+}
+
+.lab-story-nav-num {
+  @include lab-type-mono;
+  color: var(--lab-color-text-tertiary);
+  transition: color $lab-transition;
+}
+
+.lab-story-nav-name {
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-medium;
+  line-height: $lab-leading-snug;
+}
+
+.lab-story-nav-item.is-active {
+  color: var(--lab-color-text);
+  border-left-color: var(--lab-color-link);
+  background: var(--lab-color-accent-wash);
+}
+
+.lab-story-nav-item.is-active .lab-story-nav-num {
+  color: var(--lab-color-link);
+}
+
+.lab-story-panels {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lab-space-6);
+}
+
+.lab-story-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lab-space-stack);
+  padding: var(--lab-space-5) var(--lab-space-6);
+  border: 1px solid var(--lab-color-border);
+  border-radius: var(--lab-card-radius);
+  background: var(--lab-color-surface);
+  transition: border-color $lab-transition;
+}
+
+.lab-story-panel.is-active {
+  border-color: var(--lab-color-border-blue);
+}
+
+.lab-story-panel-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--lab-space-inline);
+}
+
+.lab-story-panel-num {
+  @include lab-type-mono;
+  color: var(--lab-color-link-soft);
+}
+
+.lab-story-panel-title {
+  @include lab-section-title;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--lab-color-text);
+}
+
+.lab-story-panel-lead {
+  margin: 0;
+  font-size: $lab-text-base;
+  line-height: $lab-leading-body;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-story-panel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lab-space-inline);
+}
+
+/* Keyword tags are LABELS, not controls: mono secondary ink, no border,
+   no pill chrome — chips (.lab-chip) stay reserved for interactive tags. */
+.lab-story-panel-tag {
+  @include lab-type-mono;
+  color: var(--lab-color-text-secondary);
+  white-space: nowrap;
+}
+
+.lab-story-panel-more {
+  @extend %lab-more-link;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lab-space-1);
+  width: fit-content;
+}
+
+@include lab-bp-down(lg) {
+  .lab-story {
+    grid-template-columns: 1fr;
+    gap: var(--lab-space-5);
+  }
+
+  .lab-story-nav {
+    position: sticky;
+    top: var(--lab-navbar-height-sm);
+    z-index: 3;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: var(--lab-space-2);
+    padding: var(--lab-space-2) 0;
+    background: var(--lab-color-page);
+    scrollbar-width: none;
+  }
+
+  .lab-story-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lab-story-nav-item {
+    flex: 0 0 auto;
+    border-left: none;
+    border: 1px solid var(--lab-color-border-light);
+    border-radius: 999px;
+    background: var(--lab-color-page);
+  }
+
+  .lab-story-nav-item.is-active {
+    border-color: var(--lab-color-border-blue);
+    background: var(--lab-color-accent-wash);
+  }
+
+  .lab-story-panel {
+    padding: var(--lab-space-4) var(--lab-space-5);
+  }
+}

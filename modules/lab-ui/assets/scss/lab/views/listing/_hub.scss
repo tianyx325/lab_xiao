@@ -1,0 +1,180 @@
+/* ---------- Academic outputs hub (学术成果) — tabbed categories ---------- */
+/* Segmented switch — the page's primary visual: a floating white track with
+   a brand-blue thumb that slides to the selected category. Three equal
+   columns, so a single 100% thumb translate covers every position. */
+.lab-hub-tabs {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: repeat(3, 5.5rem);
+  margin-top: var(--lab-space-block);
+  padding: 4px;
+  border: 1px solid var(--lab-color-border-blue-strong);
+  border-radius: calc(var(--lab-card-radius) + 2px);
+  background: var(--lab-card-bg);
+  box-shadow: var(--lab-card-shadow);
+}
+
+.lab-hub-tabs::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc((100% - 8px) / 3);
+  border-radius: var(--lab-card-radius);
+  background: var(--lab-color-link);
+  transform: translateX(calc(var(--lab-hub-index, 0) * 100%));
+  transition: transform $lab-transition;
+}
+
+.lab-hub-tab {
+  position: relative;
+  z-index: 1; /* label sits on the thumb, which is a positioned sibling */
+  appearance: none;
+  border: 0;
+  border-radius: var(--lab-card-radius);
+  background: none;
+  padding: $lab-space-1 $lab-space-2;
+  font-family: $lab-font-sans;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-medium;
+  line-height: $lab-leading-snug;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+  color: var(--lab-color-text-secondary);
+  cursor: pointer;
+  /* Snappier than the thumb so the label has finished fading in as it lands */
+  transition: color 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-hub-tabs::before {
+    transition: none;
+  }
+}
+
+.lab-hub-tab:hover {
+  color: var(--lab-color-text);
+}
+
+.lab-hub-tab[aria-selected="true"] {
+  color: var(--lab-color-white);
+}
+
+/* Dark: the lifted blue thumb needs ink text, not white */
+.dark .lab-hub-tab[aria-selected="true"] {
+  color: var(--lab-color-page);
+}
+
+.lab-hub-tab:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--lab-color-focus-ring);
+}
+
+.lab-hub-panel {
+  padding-top: var(--lab-space-5);
+}
+
+.lab-hub-panel[hidden] {
+  display: none;
+}
+
+/* Sticky hub band: title + category tabs + the active category's filters
+   stay pinned above the scrolling list. */
+.lab-hub-sticky {
+  position: sticky;
+  top: calc(var(--lab-navbar-height) + #{$lab-space-3} + #{$lab-space-2});
+  z-index: 20;
+  background: var(--lab-color-page);
+}
+
+/* No hairline between the band and the list — whitespace does the separating */
+.lab-hub-sticky .lab-list-header {
+  margin-bottom: 0;
+  padding-top: $lab-space-5;
+  padding-bottom: $lab-space-4;
+}
+
+.lab-hub-sticky .lab-hub-tabs {
+  margin-top: 0;
+}
+
+.lab-hub-filters {
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
+  padding-bottom: $lab-space-4;
+}
+
+.lab-hub-filters .lab-list-filters {
+  margin: var(--lab-space-2) auto 0 !important;
+}
+
+.lab-hub-filter[hidden] {
+  display: none;
+}
+
+.lab-hub-sticky.is-stuck .lab-list-lead {
+  display: none;
+}
+
+/* Hub title row (desktop): category tabs left · title centered · active
+   filters right. Below lg the four blocks stack in DOM order:
+   title · lead · tabs · filters. */
+.lab-list-header--hub .lab-hub-filters {
+  /* Now nested in the header container — no second gutter */
+  padding: 0;
+}
+
+@include lab-bp-up(lg) {
+  .lab-list-header--hub .container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-areas:
+      "tabs  title filters"
+      ".     lead  .";
+    align-items: center;
+    column-gap: $lab-space-6;
+  }
+
+  .lab-list-header--hub .lab-hub-tabs {
+    grid-area: tabs;
+    justify-self: start;
+    justify-content: flex-start;
+    margin-top: 0;
+  }
+
+  .lab-list-header--hub .lab-list-title {
+    grid-area: title;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .lab-list-header--hub .lab-list-lead {
+    grid-area: lead;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .lab-list-header--hub .lab-hub-filters {
+    grid-area: filters;
+    justify-self: stretch;
+    align-self: end;
+  }
+
+  .lab-list-header--hub .lab-hub-filters .lab-list-filters {
+    margin: 0 !important;
+  }
+}
+
+@include lab-bp-down(lg) {
+  .lab-hub-sticky .lab-list-header--hub .lab-hub-tabs {
+    margin-top: $lab-space-4;
+  }
+}
+
+@include lab-bp-down(lg) {
+  .lab-hub-sticky {
+    top: calc(var(--lab-navbar-height-sm) + #{$lab-space-3} + #{$lab-space-2});
+  }
+}
+

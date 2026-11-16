@@ -1,0 +1,225 @@
+/* Layer 5c · page views: contact, article reading
+   Source: template.scss lines 2403-3062 (order-preserving split). */
+/* Contact */
+.fa-ul.mb-0 li,
+.contact-widget li {
+  line-height: $lab-leading-body;
+}
+
+.home-section .contact-widget p {
+  line-height: $lab-leading-body;
+  opacity: 0.8;
+}
+
+/* ---------- Contact page ----------
+   Open editorial layout: no nested cards. Premium = ink + whitespace +
+   hairline rules (same language as list pages / deepseek-style tokens). */
+.lab-contact {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lab-contact .lab-list-body {
+  max-width: var(--lab-page-width);
+  /* Bottom gap comes from .lab-list-page { padding-bottom: var(--lab-page-end) } */
+}
+
+.lab-contact-section {
+  margin: 0 0 $lab-space-8;
+  padding: 0;
+}
+
+.lab-contact-section:last-child {
+  margin-bottom: 0;
+}
+
+.lab-contact-section-title {
+  @include lab-font-serif;
+  margin: 0 0 $lab-space-5 !important;
+  padding-bottom: $lab-space-3;
+  border-bottom: 1px solid var(--lab-color-line);
+  font-size: $lab-text-lg !important;
+  font-weight: $lab-weight-heading !important;
+  letter-spacing: $lab-tracking-heading;
+  line-height: $lab-leading-tight !important;
+  color: var(--lab-color-text);
+}
+
+/* Subgrid: title / lead / list share one row track across columns so
+   content baselines match even when copy lengths differ. */
+.lab-contact-admit-grid {
+  display: grid;
+  @include lab-grid-cols(3);
+  grid-template-rows: auto auto 1fr;
+  align-items: stretch;
+  column-gap: $lab-space-6;
+  row-gap: $lab-space-3;
+}
+
+.lab-contact-admit-col {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  min-width: 0;
+  padding: 0;
+  border-right: 1px solid var(--lab-color-line);
+  padding-right: $lab-space-6;
+}
+
+.lab-contact-admit-col:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.lab-contact-admit-title {
+  @include lab-font-sans;
+  margin: 0 !important;
+  font-size: $lab-text-md !important;
+  font-weight: $lab-weight-semibold !important;
+  letter-spacing: 0.02em;
+  line-height: $lab-leading-ui !important;
+  color: var(--lab-color-text);
+}
+
+.lab-contact-admit-lead {
+  @include lab-type-body;
+  margin: 0 !important;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-contact-admit-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-self: stretch;
+}
+
+.lab-contact-admit-list li {
+  position: relative;
+  margin: 0;
+  padding: $lab-space-2 0 $lab-space-2 $lab-space-4;
+  @include lab-type-body;
+  color: var(--lab-color-text);
+}
+
+.lab-contact-admit-list li + li {
+  border-top: 1px solid var(--lab-color-border-light);
+}
+
+.lab-contact-admit-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(#{$lab-space-2} + 0.55em);
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+  background: var(--lab-color-text-tertiary);
+}
+
+.lab-mailto-toast {
+  position: fixed;
+  left: 50%;
+  bottom: $lab-space-6;
+  z-index: 1080;
+  max-width: 28rem;
+  width: 90%;
+  padding: $lab-space-3 $lab-space-4;
+  @include lab-type-ui;
+  color: var(--lab-color-white);
+  background: var(--lab-color-overlay-ink-92);
+  border-radius: var(--lab-card-radius);
+  box-shadow: 0 8px 24px var(--lab-color-shadow-ink-18);
+  transform: translate(-50%, 0.75rem);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $lab-transition, transform $lab-transition;
+}
+
+.lab-mailto-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.lab-contact-mail {
+  margin: 0;
+  @include lab-type-body;
+  font-weight: $lab-weight-medium;
+  letter-spacing: 0.01em;
+  @extend %lab-accent-link;
+  word-break: break-all;
+}
+
+.lab-contact-mail:hover {
+  @extend %lab-accent-link-hover;
+}
+
+.lab-contact-ways-meta {
+  display: grid;
+  @include lab-grid-cols(2);
+  gap: $lab-space-6;
+  margin: 0 0 $lab-space-5;
+}
+
+.lab-contact-ways-item {
+  min-width: 0;
+  padding: 0;
+}
+
+.lab-contact-info-label {
+  display: block;
+  margin-bottom: $lab-space-2;
+  @include lab-type-caption;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lab-color-text-tertiary);
+}
+
+.lab-contact-ways-item p {
+  margin: 0 !important;
+  @include lab-type-body;
+  color: var(--lab-color-text) !important;
+}
+
+.lab-contact-ways-map #map {
+  /* Map stage height — not on the 8px spacing scale; keep restrained vs copy */
+  height: 17.5rem;
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--lab-color-border-light);
+  border-radius: var(--lab-card-radius);
+  overflow: hidden;
+  background: var(--lab-color-blue-wash);
+}
+
+@include lab-bp-down(lg) {
+  .lab-contact-admit-grid,
+  .lab-contact-ways-meta {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: 0;
+  }
+
+  .lab-contact-admit-col {
+    display: flex;
+    flex-direction: column;
+    grid-row: auto;
+    row-gap: $lab-space-3;
+    border-right: none;
+    border-bottom: 1px solid var(--lab-color-line);
+    padding: 0 0 $lab-space-5;
+    margin: 0 0 $lab-space-5;
+  }
+
+  .lab-contact-admit-col:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .lab-contact-ways-meta {
+    gap: $lab-space-5;
+  }
+}
+

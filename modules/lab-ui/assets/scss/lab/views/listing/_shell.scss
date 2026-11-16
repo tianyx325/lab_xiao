@@ -1,0 +1,93 @@
+/* =========================================================
+   List-page app shell — .page-body scrolls (main + the shared
+   site footer). Title band is position:sticky inside that pane.
+   Same footer markup/CSS as the homepage — no relocate, no fork.
+   ========================================================= */
+body:has(.page-body [data-lab-sticky]) {
+  height: 100dvh;
+  /* Beats body.page-wrapper's min-height:100vh (taller than dvh on mobile) */
+  min-height: 0;
+  overflow: hidden;
+}
+
+body:has(.page-body [data-lab-sticky]) .page-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges;
+  scroll-padding-top: $lab-space-4;
+}
+
+body:has(.page-body [data-lab-sticky]) .lab-list-page {
+  padding-bottom: 0;
+}
+
+/* Sticky band sits at the top of the page-body scroller (navbar already
+   cleared by body padding), not under a window-level offset. */
+body:has(.page-body [data-lab-sticky]) .lab-list-header[data-lab-sticky],
+body:has(.page-body [data-lab-sticky]) .lab-hub-sticky {
+  position: sticky;
+  top: 0;
+}
+
+/* List column insets — content only; footer uses the shared home template */
+body:has(.page-body [data-lab-sticky]) .lab-list-body {
+  width: 100%;
+  max-width: none !important;
+  margin: 0 !important;
+  /* Interpolated: libsass would try to evaluate the CSS max() itself.
+     !important beats the shared .container gutter rule in _menus.scss. */
+  padding-left: #{'max(var(--lab-page-gutter), calc((100% - var(--lab-page-width)) / 2 + var(--lab-page-gutter)))'} !important;
+  padding-right: #{'max(var(--lab-page-gutter), calc((100% - var(--lab-page-width)) / 2 + var(--lab-page-gutter)))'} !important;
+  /* Same content→footer gap as home / detail / non-shell lists */
+  padding-bottom: var(--lab-page-end);
+}
+
+/* ---------- Detail pages: same scroll model as list pages ----------
+   The whole document stays put; .page-body is the single scroller. This
+   gives detail and list pages identical scrollbar-gutter, overscroll and
+   scroll-restoration behaviour. The article header scrolls with the
+   content (it has no controls to keep pinned). */
+body:has(.lab-page--detail .lab-article) {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+body:has(.lab-page--detail .lab-article) .page-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges;
+  scroll-padding-top: $lab-space-4;
+}
+
+/* Year-nav anchors land inside the page-body scroller */
+body:has(.page-body [data-lab-sticky]) .lab-year-head {
+  top: var(--lab-sticky-h, 0px);
+  scroll-margin-top: var(--lab-sticky-h, 0px);
+}
+
+/* A permanently pinned band is expensive on small screens */
+@include lab-bp-down(md) {
+  body:has(.page-body [data-lab-sticky]) .lab-list-lead {
+    display: none;
+  }
+}
+
+/* Print: restore normal document flow so the whole list is on paper */
+@media print {
+  body:has(.page-body [data-lab-sticky]),
+  body:has(.page-body [data-lab-sticky]) .page-body,
+  body:has(.page-body [data-lab-sticky]) .lab-list-page,
+  body:has(.page-body [data-lab-sticky]) .lab-list-body {
+    display: block;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+}
