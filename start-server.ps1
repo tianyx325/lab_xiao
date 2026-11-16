@@ -7,6 +7,10 @@ $goBin = Join-Path $tools "go\bin"
 $dartSass = Join-Path $tools "dart-sass"
 
 if (-not (Test-Path $hugo)) {
+    $hugoCmd = Get-Command hugo -ErrorAction SilentlyContinue
+    if ($hugoCmd) { $hugo = $hugoCmd.Source }
+}
+if (-not (Test-Path $hugo)) {
     Write-Host "Hugo not found: $hugo" -ForegroundColor Red
     exit 1
 }

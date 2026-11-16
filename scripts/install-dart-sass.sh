@@ -7,7 +7,7 @@
 # `sass-embedded`, which bundles the standalone Dart Sass binary.
 set -euo pipefail
 
-npm install --global sass-embedded \
+npm install --global sass-embedded@1.108.2 \
   --registry="${NPM_REGISTRY:-https://registry.npmmirror.com}" \
   --no-audit --no-fund >/dev/null
 
