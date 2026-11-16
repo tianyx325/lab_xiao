@@ -103,7 +103,7 @@
   line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-break: break-word;
+  overflow-wrap: break-word;
   transition: color $lab-transition;
 }
 
@@ -129,7 +129,7 @@
   line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .portrait-title h2,

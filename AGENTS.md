@@ -6,9 +6,11 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 
 ## Build Commands
 
+- Requires **Hugo 0.168 extended** and **Dart Sass** on `PATH` (standalone or `sass-embedded`; the plain `sass` npm package is pure JS and cannot speak the embedded protocol Hugo needs). CI installs it via `scripts/install-dart-sass.sh`.
+- `hugo mod get/vendor/tidy` require a Go toolchain.
 - Dev server: `hugo server -D`
 - Production build: `hugo --minify`
-- Always verify zero warnings after changes.
+- Always verify zero warnings after changes. Known exception: blox-seo v0.3.1 ships a misplaced `sitemap.xml`, which Hugo 0.168 skips with one warning; do not hand-patch `_vendor`.
 
 ## Directory Structure
 
