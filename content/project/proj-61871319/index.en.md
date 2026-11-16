@@ -13,6 +13,6 @@ project_status: "completed"
 project_type: "vertical"
 funding: "国家自然科学基金·面上项目"
 tags:
-  - "Light field feature extraction"
-  - "Feature matching"
+  - 光场特征提取
+  - 特征匹配
 ---

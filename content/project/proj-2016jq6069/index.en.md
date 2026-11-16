@@ -6,9 +6,9 @@ date_end: 2017-12-01
 authors:
   - admin
 tags:
-  - "Shaanxi Natural Science Basic Research Program"
-  - "Depth estimation"
-  - "Light field imaging"
+  - 陕西省自然科学基础研究计划
+  - 深度估计
+  - 光场成像
 url_external: ''
 image:
   focal_point: Center

@@ -6,12 +6,14 @@ date_end: 2022-12-01
 authors:
   - admin
 tags:
-  - "Jianwei"
-  - "Infrared image processing"
-  - "Defect detection"
+  - 鉴微
+  - 红外图像处理
+  - 缺陷检测
 url_external: ''
 image:
   focal_point: Center
 project_status: "completed"
 project_type: "horizontal"
+aliases:
+  - /project/guang-fu-mian-ban-hong-wai-cheng-xiang-de-re-ban-que-xian-ji/
 ---

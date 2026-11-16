@@ -5,7 +5,9 @@ date: 2026-10-15
 authors:
 - admin
 categories:
-- Activities
+- 活动
+aliases:
+  - /post/South Wutai, Zhongnan Mountains/
 ---
 
 ![Group photo on the climb](01.jpg)

@@ -6,12 +6,14 @@ date_end: 2021-09-01
 authors:
   - admin
 tags:
-  - "Guangzhou Rongbang Technology"
-  - "Image security"
-  - "Pattern recognition"
+  - 广州荣邦科技有限公司
+  - 图像安全
+  - 模式识别
 url_external: ''
 image:
   focal_point: Center
 project_status: "completed"
 project_type: "horizontal"
+aliases:
+  - /project/ji-dong-che-xing-shi-zheng-dian-zi-cuan-gai-jian-ce-suan-fa/
 ---

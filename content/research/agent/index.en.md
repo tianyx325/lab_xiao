@@ -5,8 +5,8 @@ weight: 10
 placeholder_art: agent
 summary: "Focusing on large language models and agents, this direction studies task planning, tool use, and multi-agent collaboration, promoting application deployment, evaluation, and decision-making capabilities in vertical scenarios."
 tags:
-  - agent
-  - large models
+  - 智能体
+  - 大模型
 ---
 
 Focusing on large language models and agents, this direction centers on building decision-making capabilities within the closed loop of "perception — planning — execution": enabling models to understand task goals, invoke external tools and knowledge, and deliver measurable, deployable intelligent applications in vertical scenarios.

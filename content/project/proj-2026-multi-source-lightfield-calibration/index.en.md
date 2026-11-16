@@ -6,12 +6,14 @@ date_end: 2026-12-01
 authors:
   - admin
 tags:
-  - "Northwestern Polytechnical University"
-  - "Light field imaging"
-  - "Computational imaging"
+  - 西北工业大学
+  - 光场成像
+  - 计算成像
 url_external: ''
 image:
   focal_point: Center
 project_status: "ongoing"
 project_type: "horizontal"
+aliases:
+  - /project/duo-yuan-guang-chang-cheng-xiang-xi-tong-biao-ding-fang-fa/
 ---

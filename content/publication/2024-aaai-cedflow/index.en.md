@@ -22,4 +22,6 @@ url_code: "https://github.com/xautstuzfy"
 research:
   - low-light
 ccf: "A"
+aliases:
+  - /publication/cedflow-aaai-2024/
 ---

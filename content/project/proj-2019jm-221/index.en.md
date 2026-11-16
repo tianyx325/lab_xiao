@@ -6,9 +6,9 @@ date_end: 2020-12-01
 authors:
   - admin
 tags:
-  - "Shaanxi Natural Science Basic Research Program"
-  - "Light field features"
-  - "Feature representation"
+  - 陕西省自然科学基础研究计划
+  - 光场特征
+  - 特征表示
 url_external: ''
 image:
   focal_point: Center

@@ -6,12 +6,14 @@ date_end: 2018-12-01
 authors:
   - admin
 tags:
-  - "Northwestern Polytechnical University"
-  - "Coded imaging"
-  - "System calibration"
+  - 西北工业大学
+  - 编码成像
+  - 系统标定
 url_external: ''
 image:
   focal_point: Center
 project_status: "completed"
 project_type: "horizontal"
+aliases:
+  - /project/bao-zha-chang-bian-ma-zhao-ming-xi-tong-zhuang-zhi-ji-biao-d/
 ---

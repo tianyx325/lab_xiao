@@ -17,10 +17,10 @@ summary: "Defocus and disparity cues are extracted from the light field captured
 abstract: |
   Inspired by the depth perception mechanism of human vision and incorporating recent advances in light field analysis theory, this paper proposes a globally consistent depth estimation method that fuses multiple depth cues. The method first acquires light field data with a camera array, then obtains refocused light fields at specified depths via synthetic aperture imaging, from which defocus and disparity cues characterizing different dimensions of depth variation are extracted. Light field analysis is employed to compare the applicability of the defocus and disparity cues, and a multi-cue fusion algorithm is designed to achieve complementary advantages of different depth cues. Furthermore, to obtain accurate and consistent depth results, a global energy function with adaptive smoothness constraints is proposed on the basis of a Markov random field model. Finally, the graph cuts algorithm is used to minimize the global energy function, yielding smooth and accurate depth estimation results. The proposed method is tested on both virtual and real data, and compared with single-cue and local depth estimation methods, it combines the advantages of different depth cues and produces more robust depth results.
 tags:
-- "Camera array"
-- "Light-field analysis"
-- "Multi-cue fusion"
-- "Depth estimation"
+- "相机阵列"
+- "光场分析"
+- "多线索融合"
+- "深度估计"
 featured: false
 url_html: "http://cjc.ict.ac.cn/online/onlinepaper/ydg-2015112471336.pdf"
 url_pdf: "http://cjc.ict.ac.cn/online/onlinepaper/ydg-2015112471336.pdf"

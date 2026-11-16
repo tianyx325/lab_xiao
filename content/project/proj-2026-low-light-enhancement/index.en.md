@@ -6,13 +6,15 @@ date_end: 2026-12-01
 authors:
   - admin
 tags:
-  - "Northwestern Polytechnical University"
-  - "Low-light image enhancement"
-  - "Deep learning"
-  - "Image processing"
+  - 西北工业大学
+  - 弱光增强
+  - 深度学习
+  - 图像处理
 url_external: ''
 image:
   focal_point: Center
 project_status: "ongoing"
 project_type: "horizontal"
+aliases:
+  - /project/ruo-guang-tu-xiang-zeng-qiang-suan-fa-ding-zhi-kai-fa/
 ---

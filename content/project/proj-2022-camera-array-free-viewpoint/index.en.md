@@ -6,12 +6,14 @@ date_end: 2023-12-01
 authors:
   - admin
 tags:
-  - "Northwestern Polytechnical University"
-  - "Light field acquisition"
-  - "3D reconstruction"
+  - 西北工业大学
+  - 光场采集
+  - 三维重建
 url_external: ''
 image:
   focal_point: Center
 project_status: "completed"
 project_type: "horizontal"
+aliases:
+  - /project/xiang-ji-zhen-lie-guang-chang-cai-ji-ji-zi-you-shi-dian-guan/
 ---

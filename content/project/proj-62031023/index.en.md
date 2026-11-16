@@ -13,6 +13,6 @@ project_status: "completed"
 project_type: "vertical"
 funding: "国家自然科学基金·重点项目"
 tags:
-  - "Light field imaging"
-  - "Computational imaging"
+  - 光场成像
+  - 计算成像
 ---

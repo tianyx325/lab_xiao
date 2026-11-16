@@ -88,14 +88,16 @@
     crypto.FNV32a → mod 4 → lab-ph-hue-0..3 (blue/violet/green/gold).
     Stable across rebuilds, evenly scattered, never repeats the way
     nth-child cycles do. Drawing choice is a second draw below. */}}
+{{ $phSeed := $item.RelPermalink }}
+{{ with $item.File }}{{ with .Dir }}{{ $phSeed = . }}{{ end }}{{ end }}
 {{ $phHue := 0 }}
-{{ if not $mediaURL }}{{ $phHue = mod (hash.FNV32a $item.RelPermalink) 4 }}{{ end }}
+{{ if not $mediaURL }}{{ $phHue = mod (hash.FNV32a $phSeed) 4 }}{{ end }}
 
 {{/* Placeholder illustration — same idea one level down: FNV32a of
     "<url>#art" → mod 3 picks one of three type-specific drawings. Salted
     with a suffix so the variant is not correlated with the hue above. */}}
 {{ $phVariant := 0 }}
-{{ if not $mediaURL }}{{ $phVariant = mod (div (hash.FNV32a (printf "%s#art" $item.RelPermalink)) 32) 3 }}{{ end }}
+{{ if not $mediaURL }}{{ $phVariant = mod (div (hash.FNV32a (printf "%s#art" $phSeed)) 32) 3 }}{{ end }}
 
 {{/* Optional named drawing (front matter `placeholder_art`) — content with
     its own semantic illustration, e.g. the four research directions. */}}

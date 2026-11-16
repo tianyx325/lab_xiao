@@ -6,13 +6,15 @@ date_end: 2022-12-01
 authors:
   - admin
 tags:
-  - "Shaanxi 2020 Merit-Based Funding Program for Scientific and Technological Activities of Returned Overseas Researchers (Excellent Category)"
-  - "Excellent category"
-  - "Light field processing"
-  - "Computer vision"
+  - 陕西省2020年度留学人员科技活动择优资助项目（优秀类）
+  - 优秀类
+  - 光场处理
+  - 计算机视觉
 url_external: ''
 image:
   focal_point: Center
 project_status: "completed"
 project_type: "horizontal"
+aliases:
+  - /project/guang-chang-te-zheng-ti-qu-yu-ying-yong-fang-fa-yan-jiu/
 ---

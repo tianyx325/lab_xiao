@@ -13,6 +13,6 @@ project_status: "completed"
 project_type: "vertical"
 funding: "国家自然科学基金·青年项目"
 tags:
-  - "Light field imaging"
-  - "Image super-resolution"
+  - 光场成像
+  - 图像超分辨率
 ---

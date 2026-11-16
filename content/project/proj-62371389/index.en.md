@@ -13,6 +13,6 @@ project_status: "ongoing"
 project_type: "vertical"
 funding: "国家自然科学基金·面上项目"
 tags:
-  - "Low-light image enhancement"
-  - "Light field imaging"
+  - 弱光增强
+  - 光场成像
 ---

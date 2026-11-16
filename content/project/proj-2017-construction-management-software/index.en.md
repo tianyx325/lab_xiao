@@ -6,12 +6,14 @@ date_end: 2018-06-01
 authors:
   - admin
 tags:
-  - "Zhenxi Enterprise Management"
-  - "Software development"
-  - "Engineering management"
+  - 臻希企业管理
+  - 软件开发
+  - 工程管理
 url_external: ''
 image:
   focal_point: Center
 project_status: "completed"
 project_type: "horizontal"
+aliases:
+  - /project/jia-ju-shi-gong-gong-cheng-xie-tong-guan-li-kong-zhi-ruan-ji/
 ---

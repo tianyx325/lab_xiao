@@ -6,12 +6,14 @@ date_end: 2021-12-01
 authors:
   - admin
 tags:
-  - "Institute of Acoustics, Chinese Academy of Sciences"
-  - "Acoustic imaging"
-  - "Target detection"
+  - 中科院声学所
+  - 声学成像
+  - 目标检测
 url_external: ''
 image:
   focal_point: Center
 project_status: "completed"
 project_type: "horizontal"
+aliases:
+  - /project/hai-sheng-cheng-xiang-shu-ju-chu-li-ji-mu-biao-jian-ce-fang/
 ---

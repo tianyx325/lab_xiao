@@ -6,8 +6,8 @@ date_end: 2017-12-01
 authors:
   - admin
 tags:
-  - "Light field imaging"
-  - "Image optimization"
+  - 光场成像
+  - 图像优化
 url_external: ''
 image:
   focal_point: Center
