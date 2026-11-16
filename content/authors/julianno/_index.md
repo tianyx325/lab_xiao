@@ -14,7 +14,7 @@ user_groups:
 email: "juliochinaone@gmail.com"
 ---
 
-**Julianno**，西安理工大学计算机科学与技术学院**博士研究生**（博一），导师：肖照林教授。
+**Julianno**，西安理工大学计算机科学与技术学院**博士研究生**，导师：肖照林教授。
 
 **研究方向：** Monocular depth estimation in low-light environments
 
