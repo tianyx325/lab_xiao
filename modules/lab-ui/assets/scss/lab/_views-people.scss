@@ -187,7 +187,7 @@ a.lab-member-card:hover .lab-member-card-name {
   justify-content: center;
   background:
     radial-gradient(70% 60% at 40% 35%, var(--lab-color-accent-wash), transparent 62%),
-    linear-gradient(160deg, #{$lab-surface-alt} 0%, #{$lab-placeholder-bg} 100%);
+    linear-gradient(160deg, var(--lab-color-surface-alt) 0%, var(--lab-color-placeholder-bg) 100%);
 }
 
 .lab-member-photo-initial {

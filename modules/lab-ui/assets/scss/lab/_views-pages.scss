@@ -545,7 +545,7 @@
   transform: scale(1.015);
 }
 
-@media (max-width: 639px) {
+@include lab-bp-down(md) {
   .lab-gallery-item {
     flex-basis: calc((100% - 0.65rem) / 2);
     width: calc((100% - 0.65rem) / 2);

@@ -235,6 +235,8 @@ $lab-leading-loose: 1.75 !default;
   --lab-color-shadow-ink-04: #{rgba($lab-ink, 0.04)};
   --lab-color-shadow-ink-08: #{rgba($lab-ink, 0.08)};
   --lab-color-shadow-ink-18: #{rgba($lab-ink, 0.18)};
+  /* Translucent hover wash on glass surfaces */
+  --lab-color-hover-wash: #{rgba($lab-ink, 0.06)};
   /* Opaque stop for mask-image gradients */
   --lab-color-mask: #000;
   /* Focus ring — SOLID brand blue, 4.01:1 on page bg (WCAG 1.4.11 non-text ≥3:1).
@@ -330,6 +332,12 @@ $lab-leading-loose: 1.75 !default;
   --lab-color-text-secondary: #A9B0BC;
   --lab-color-muted: #8A919E;
   --lab-color-ink: #F2F4F8;
+  /* De-emphasis and ink-alpha borders must invert with the ground */
+  --lab-color-text-tertiary: #{rgba(242, 244, 248, 0.55)};
+  --lab-color-text-faint: #{rgba(242, 244, 248, 0.28)};
+  --lab-color-border-ink-14: #{rgba(255, 255, 255, 0.14)};
+  --lab-color-border-ink-28: #{rgba(255, 255, 255, 0.28)};
+  --lab-color-hover-wash: #{rgba(255, 255, 255, 0.08)};
   --lab-color-border: #26282E;
   --lab-color-border-light: rgba(255, 255, 255, 0.08);
   --lab-color-line: #26282E;

@@ -2,8 +2,8 @@
    Source: template.scss lines 8-591 (order-preserving split). */
 @mixin lab-placeholder-bg {
   background:
-    radial-gradient(ellipse 70% 55% at 50% 35%, rgba($lab-white, 0.5), transparent 70%),
-    linear-gradient(165deg, rgba($lab-ink, 0.04) 0%, $lab-blue-wash 50%, rgba($lab-ink, 0.06) 100%);
+    radial-gradient(ellipse 70% 55% at 50% 35%, color-mix(in srgb, var(--lab-color-ink) 5%, transparent), transparent 70%),
+    linear-gradient(165deg, color-mix(in srgb, var(--lab-color-ink) 4%, transparent) 0%, var(--lab-color-blue-wash) 50%, color-mix(in srgb, var(--lab-color-ink) 6%, transparent) 100%);
 }
 
 // Make page header alignment consistent with widget page header alignment
@@ -569,7 +569,7 @@ body.page-wrapper {
   text-decoration: none;
 }
 
-@media (max-width: 768px) {
+@include lab-bp-down(md) {
   .lab-footer {
     padding-top: var(--lab-space-4);
   }

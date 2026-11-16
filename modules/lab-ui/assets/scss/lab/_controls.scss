@@ -231,7 +231,7 @@ a.lab-card.view-card:hover {
   overflow: hidden;
   border-radius: 0;
   pointer-events: none;
-  background: #{$lab-surface-alt};
+  background: var(--lab-color-surface-alt);
 }
 
 .lab-card-media img {

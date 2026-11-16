@@ -188,7 +188,7 @@
 #navbar-main .lab-nav-menu .dropdown-item:focus-visible {
   color: var(--lab-color-link-hover) !important;
   /* translucent ink wash — the glass stays see-through on hover */
-  background: rgba($lab-ink, 0.06) !important;
+  background: var(--lab-color-hover-wash) !important;
 }
 
 #navbar-main .lab-nav-menu .dropdown-item-active {

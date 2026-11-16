@@ -533,7 +533,7 @@ body {
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: var(--lab-card-radius);
-  background: #{$lab-surface-alt};
+  background: var(--lab-color-surface-alt);
 }
 
 .lab-row-media img {
@@ -553,10 +553,10 @@ body {
   @include lab-type-mono;
   font-size: $lab-text-xs;
   letter-spacing: 0.08em;
-  color: rgba($lab-ink, 0.22);
+  color: color-mix(in srgb, var(--lab-color-ink) 22%, transparent);
   background:
     radial-gradient(120% 80% at 12% 18%, var(--lab-color-accent-wash), transparent 55%),
-    linear-gradient(165deg, #{$lab-card-bg} 0%, #{$lab-surface-alt} 48%, #{$lab-placeholder-bg} 100%);
+    linear-gradient(165deg, var(--lab-card-bg) 0%, var(--lab-color-surface-alt) 48%, var(--lab-color-placeholder-bg) 100%);
 }
 
 .lab-row-text {
