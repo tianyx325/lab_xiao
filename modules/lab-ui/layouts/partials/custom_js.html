@@ -22,12 +22,12 @@
 {{- if $isList -}}
   {{- $scripts = $scripts | append (slice "js/lab-sticky-header.js") -}}
 {{- end -}}
-{{- if or $isList .IsHome (eq $section "publications") -}}
+{{- if or $isList .IsHome (eq .Type "publications") -}}
   {{- $scripts = $scripts | append (slice "js/lab-card-budget.js") -}}
 {{- end -}}
 
-{{/* Publications hub: category tabs */}}
-{{- if eq $section "publications" -}}
+{{/* Publications hub: category tabs. Type stays "publications" after the content dir rename. */}}
+{{- if eq .Type "publications" -}}
   {{- $scripts = $scripts | append (slice "js/lab-hub-tabs.js") -}}
 {{- end -}}
 
