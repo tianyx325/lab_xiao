@@ -1,0 +1,173 @@
+{{ $item := .item }}
+
+{{ $link := $item.RelPermalink }}
+{{ $target := "" }}
+{{ if $item.Params.url_external }}
+  {{ $link = $item.Params.url_external }}
+  {{ $target = printf "target=\"_blank\" rel=\"noopener\" aria-label=\"%s\"" (i18n "lab_open_external") }}
+{{ end }}
+
+{{ $summary := "" }}
+{{ if $item.Params.summary }}
+  {{ $summary = $item.Params.summary | plainify }}
+{{ else if $item.Params.abstract }}
+  {{ $summary = $item.Params.abstract | plainify | truncate 140 }}
+{{ end }}
+
+{{/* Resolve every author; lab members (href) render as links, the rest as
+    plain text — no filtering, so the full author list is always complete. */}}
+{{ $authorItems := slice }}
+{{ range $item.Params.authors }}
+  {{ partial "components/resolve-author.html" (dict "id" . "page" $item) }}
+  {{ $authorItems = $authorItems | append (dict
+    "name" ($item.Scratch.Get "lab_author_name")
+    "href" ($item.Scratch.Get "lab_author_href")) }}
+{{ end }}
+
+{{ $year := $item.Date.Format "2006" }}
+{{ $isEn := eq site.Language.Lang "en" }}
+{{ $dateLabel := cond $isEn ($item.Date.Format "Jan 2, 2006") ($item.Date.Format "2006年1月2日") }}
+{{ $badge := "" }}
+{{ $category := "" }}
+{{ $typeClass := "lab-card--default" }}
+{{/* Mono type glyph — the "icon" slot of the three-part row (glyph / title / summary).
+    Post cards skip it: date + category badge are enough. */}}
+{{ $glyph := "" }}
+{{ $glyphs := dict
+  "lab-card--publication" "PUB"
+  "lab-card--patent" "PAT"
+  "lab-card--award" "AWD"
+  "lab-card--project" "PRJ"
+}}
+
+{{ $mediaData := partial "components/featured-image.html" $item }}
+{{ $mediaURL := $mediaData.src | default "" }}
+
+{{ if eq $item.Type "publication" }}
+  {{ $typeClass = "lab-card--publication" }}
+  {{ with $item.Params.publication_short }}
+    {{ $badge = . | plainify }}
+  {{ else }}
+    {{ with $item.Params.publication }}
+      {{ $badge = . | plainify }}
+    {{ end }}
+  {{ end }}
+{{ else if eq $item.Type "patent" }}
+  {{ $typeClass = "lab-card--patent" }}
+  {{ $badge = partial "components/status-label.html" (dict "kind" "patent" "page" $item) }}
+{{ else if eq $item.Type "award" }}
+  {{ $typeClass = "lab-card--award" }}
+  {{ with $item.Params.tags }}
+    {{ $badge = index . 0 }}
+  {{ end }}
+{{ else if eq $item.Type "post" }}
+  {{ $typeClass = "lab-card--post" }}
+  {{ with $item.Params.categories }}
+    {{ $category = index . 0 }}
+  {{ end }}
+{{ else if eq $item.Type "project" }}
+  {{ $typeClass = "lab-card--project" }}
+  {{ $badge = partial "components/status-label.html" (dict "kind" "project" "page" $item) }}
+{{ else if eq $item.Type "research" }}
+  {{ $typeClass = "lab-card--research" }}
+{{ end }}
+
+{{/* One card, two skins — the DOM is identical; only the modifier class
+    differs. Default: poster (image-hero, for showcase content). Pages opt
+    into the media-row skin (image-aid, one per line) via front matter
+    `card_style: media-row` on the list page (item-level param overrides).
+    Callers may also pass an explicit `card_style` key (highest priority),
+    e.g. homepage shortcodes reusing the list-page skins. */}}
+{{ $cardStyle := "lab-card--poster" }}
+{{ if eq $item.Type "project" }}{{ $cardStyle = "lab-card--media-row" }}{{ end }}
+{{ with .page.Params.card_style }}{{ $cardStyle = printf "lab-card--%s" . }}{{ end }}
+{{ with $item.Params.card_style }}{{ $cardStyle = printf "lab-card--%s" . }}{{ end }}
+{{ with .card_style }}{{ $cardStyle = printf "lab-card--%s" . }}{{ end }}
+
+{{/* Placeholder hue — deterministic pseudo-random from the card URL:
+    crypto.FNV32a → mod 4 → lab-ph-hue-0..3 (blue/violet/green/gold).
+    Stable across rebuilds, evenly scattered, never repeats the way
+    nth-child cycles do. Drawing choice is a second draw below. */}}
+{{ $phSeed := $item.RelPermalink }}
+{{ with $item.File }}{{ with .Dir }}{{ $phSeed = . }}{{ end }}{{ end }}
+{{/* Shared-element name: matches the detail page title for View Transitions */}}
+{{ $vtName := printf "lab-vt-%d" (hash.FNV32a $phSeed) }}
+{{ $vtMedia := printf "lab-vt-media-%d" (hash.FNV32a $phSeed) }}
+{{ $phHue := 0 }}
+{{ if not $mediaURL }}{{ $phHue = mod (hash.FNV32a $phSeed) 4 }}{{ end }}
+
+{{/* Placeholder illustration — same idea one level down: FNV32a of
+    "<url>#art" → mod 3 picks one of three type-specific drawings. Salted
+    with a suffix so the variant is not correlated with the hue above. */}}
+{{ $phVariant := 0 }}
+{{ if not $mediaURL }}{{ $phVariant = mod (div (hash.FNV32a (printf "%s#art" $phSeed)) 32) 3 }}{{ end }}
+
+{{/* Optional named drawing (front matter `placeholder_art`) — content with
+    its own semantic illustration, e.g. the four research directions. */}}
+{{ $phArt := "" }}
+{{ if not $mediaURL }}{{ $phArt = $item.Params.placeholder_art | default "" }}{{ end }}
+
+<article class="view-card lab-card {{ $cardStyle }} {{ $typeClass }}{{ if $mediaURL }} has-media{{ end }}">
+  <a class="lab-card-cover" href="{{ $link }}" {{ $target | safeHTMLAttr }} aria-label="{{ $item.Title }}"></a>
+
+  <div class="lab-card-media{{ if not $mediaURL }} lab-card-media--placeholder{{ end }} lab-ph-hue-{{ $phHue }}" style="view-transition-name:{{ $vtMedia }}" aria-hidden="true">
+    {{ with $mediaData.src }}
+    <img src="{{ . }}" srcset="{{ $mediaData.srcset }}" sizes="(max-width: 767px) 92vw, 33vw" alt="" width="{{ $mediaData.width }}" height="{{ $mediaData.height }}" loading="lazy" decoding="async">
+    {{ else }}
+    {{ partial "components/placeholder-art.html" (dict "type" $item.Type "variant" $phVariant "art" $phArt) }}
+    {{ end }}
+  </div>
+
+  <div class="lab-card-body">
+    {{- /* Research cards keep only title + summary — no meta row */ -}}
+    {{- if ne $typeClass "lab-card--research" }}
+    <div class="lab-card-meta">
+      {{- if ne $cardStyle "lab-card--media-row" -}}
+      {{- with index $glyphs $typeClass -}}
+      <span class="lab-card-meta-glyph" aria-hidden="true">{{ . }}</span>
+      {{- end -}}
+      {{- end -}}
+      {{- if eq $typeClass "lab-card--publication" -}}
+        <time datetime="{{ $item.Date.Format "2006" }}">{{ $year }}</time>
+        {{- with $badge -}}
+          <span class="lab-card-meta-sep" aria-hidden="true">·</span>
+          <span class="lab-card-meta-badge">{{ . }}</span>
+        {{- end -}}
+      {{- else if eq $typeClass "lab-card--post" -}}
+        <time datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $dateLabel }}</time>
+        {{- with $category -}}
+          <span class="lab-card-meta-sep" aria-hidden="true">·</span>
+          <span class="lab-card-meta-badge">{{ . }}</span>
+        {{- end -}}
+      {{- else -}}
+        <time datetime="{{ $item.Date.Format "2006" }}">{{ $year }}</time>
+        {{- with $badge -}}
+          <span class="lab-card-meta-sep" aria-hidden="true">·</span>
+          <span class="lab-card-meta-badge">{{ . }}</span>
+        {{- end -}}
+      {{- end -}}
+    </div>
+    {{- end }}
+
+    <div class="lab-card-text">
+      <div class="lab-card-title" style="view-transition-name:{{ $vtName }}">{{ $item.Title }}</div>
+
+      {{- if and $authorItems (eq $cardStyle "lab-card--media-row") -}}
+      <p class="lab-card-authors">
+        {{- range $i, $m := $authorItems -}}
+          {{- if $i -}}<span class="lab-row-sep" aria-hidden="true"> · </span>{{- end -}}
+          {{- if .href -}}
+          <a class="lab-card-author-link" href="{{ .href }}">{{ .name }}</a>
+          {{- else -}}
+          <span>{{ .name }}</span>
+          {{- end -}}
+        {{- end -}}
+      </p>
+      {{- end -}}
+
+      <div class="lab-card-summary">
+        {{ with $summary }}{{ . }}{{ else }}&nbsp;{{ end }}
+      </div>
+    </div>
+  </div>
+</article>

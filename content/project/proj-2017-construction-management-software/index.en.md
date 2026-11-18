@@ -6,9 +6,9 @@ date_end: 2018-06-01
 authors:
   - admin
 tags:
-  - 臻希企业管理
-  - 软件开发
-  - 工程管理
+  - Zhenxi Enterprise Management
+  - Software Development
+  - Engineering Management
 url_external: ''
 image:
   focal_point: Center

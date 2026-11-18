@@ -6,10 +6,10 @@ date_end: 2026-12-01
 authors:
   - admin
 tags:
-  - 西北工业大学
-  - 弱光增强
-  - 深度学习
-  - 图像处理
+  - Northwestern Polytechnical University
+  - Low-Light Enhancement
+  - Deep Learning
+  - Image Processing
 url_external: ''
 image:
   focal_point: Center

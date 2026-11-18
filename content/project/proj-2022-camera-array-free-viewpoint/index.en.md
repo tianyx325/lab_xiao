@@ -6,9 +6,9 @@ date_end: 2023-12-01
 authors:
   - admin
 tags:
-  - 西北工业大学
-  - 光场采集
-  - 三维重建
+  - Northwestern Polytechnical University
+  - Light Field Capture
+  - 3D Reconstruction
 url_external: ''
 image:
   focal_point: Center

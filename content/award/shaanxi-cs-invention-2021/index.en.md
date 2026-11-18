@@ -7,5 +7,5 @@ summary: "Broke through key technologies in visual computing and promoted engine
 level: "provincial"
 rank: "first"
 tags:
-  - 技术发明
+  - Technical Invention
 ---

@@ -1,0 +1,99 @@
+/* List pagination — clear prev/numbers/next; accent follows section */
+.lab-pagination {
+  display: flex;
+  justify-content: center;
+  margin: $lab-space-8 0 0;
+  padding: 0;
+}
+
+.lab-pagination-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: $lab-space-1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lab-pagination-item {
+  margin: 0;
+  padding: 0;
+}
+
+.lab-pagination-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  padding: 0 $lab-space-2;
+  box-sizing: border-box;
+  font-size: $lab-text-sm;
+  letter-spacing: 0.04em;
+  line-height: $lab-leading-none;
+  color: var(--lab-color-text) !important;
+  text-decoration: none !important;
+  border: 1px solid var(--lab-color-border-ink-14);
+  border-radius: var(--lab-card-radius);
+  background: var(--lab-color-white);
+  transition: border-color $lab-transition, color $lab-transition, background-color $lab-transition;
+}
+
+.lab-pagination-link--text {
+  min-width: auto;
+  padding-left: $lab-space-3;
+  padding-right: $lab-space-3;
+  letter-spacing: 0.08em;
+  /* prev/next pill — soft neumorphic raise (controlled clause: border +
+     focus ring retained). Number chips stay flat for scannability. */
+  background: var(--lab-card-bg);
+  box-shadow:
+    inset 1px 1px 1px var(--lab-color-white),
+    inset -1px -1px 1px var(--lab-color-shadow-ink-04),
+    0 1px 2px var(--lab-color-shadow-ink-04);
+}
+
+.lab-pagination-link:hover:not(.is-disabled):not(.is-current) {
+  color: var(--lab-list-accent, var(--lab-color-link)) !important;
+  border-color: color-mix(in srgb, var(--lab-list-accent, var(--lab-color-link)) 45%, transparent);
+  background: var(--lab-list-wash, var(--lab-color-blue-wash));
+}
+
+.lab-pagination-link.is-current {
+  color: var(--lab-color-white) !important;
+  border-color: var(--lab-list-accent, var(--lab-color-link));
+  background: var(--lab-list-accent, var(--lab-color-link));
+  font-weight: $lab-weight-semibold;
+  pointer-events: none;
+}
+
+.lab-pagination-link.is-disabled {
+  color: var(--lab-color-text-tertiary) !important;
+  border-color: var(--lab-color-border-light);
+  background: var(--lab-color-disabled-bg);
+  cursor: default;
+}
+
+.lab-pagination-link:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--lab-list-accent, var(--lab-color-link)) 45%, transparent);
+  outline-offset: 2px;
+}
+
+/* Card-grid down-steps (2-col / 1-col) now live in the lab-card-grid mixin
+   (lab/_grid.scss) — see the base rules near the top of this file. */
+
+@include lab-bp-down(md) {
+  .lab-list-header {
+    min-height: 0;
+    padding: $lab-space-7 0 $lab-space-6;
+    margin-bottom: $lab-space-6;
+  }
+
+  .lab-list-filters .filter-search,
+  .lab-list-filters .form-control {
+    min-width: 100%;
+  }
+}
+

@@ -1,0 +1,28 @@
+{{/*
+  lab-menu-url: build a language-prefixed, subpath-aware href from a menu URL.
+
+  Hugo canonifies config-defined menu URLs against the baseURL, so a menu
+  entry `url: /research/` arrives here as `/lab_xiao/research/` when the
+  baseURL contains a subpath. Applying `relLangURL` would prepend `/en`
+  BEFORE the subpath, producing a broken `/en/lab_xiao/research/`.
+
+  This partial strips the baseURL subpath, inserts the language segment for
+  non-default languages, and re-attaches the subpath:
+    zh: /lab_xiao/research/
+    en: /lab_xiao/en/research/
+
+  Usage: {{ partial "lab-menu-url" .URL }}
+*/}}
+{{- $u := . -}}
+{{- if or (strings.HasPrefix $u "http://") (strings.HasPrefix $u "https://") (strings.HasPrefix $u "//") -}}
+  {{- return $u -}}{{/* external or protocol-relative URL — pass through untouched */}}
+{{- end -}}
+{{- $base := (urls.Parse site.BaseURL).Path | default "/" -}}
+{{- $base = strings.TrimSuffix "/" $base -}}
+{{- $rel := strings.TrimPrefix $base $u -}}
+{{- $langSeg := "" -}}
+{{- $defaultLang := site.Sites.Default.Language.Lang -}}
+{{- if and (ne site.Language.Lang $defaultLang) (ne site.Language.Lang "") -}}
+  {{- $langSeg = printf "/%s" site.Language.Lang -}}
+{{- end -}}
+{{- printf "%s%s%s" $base $langSeg $rel -}}

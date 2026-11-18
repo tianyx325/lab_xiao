@@ -1,0 +1,265 @@
+/* Media-row list: one horizontal card per line (projects/publications/
+   patents). Cards are capped at 888px and centered — full 1100px rows made
+   the right-side meta feel adrift. */
+.lab-list-grid--media-rows {
+  grid-template-columns: minmax(0, #{$lab-list-media-row-width}) !important;
+  justify-content: center;
+  gap: var(--lab-space-4) !important;
+}
+
+/* Row list (papers first; reusable via view: list) */
+.lab-list-grid--rows,
+#container-publications.lab-list-grid--rows,
+.lab-list-page #container-publications.lab-list-grid--rows {
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+  max-width: var(--lab-read-width);
+}
+
+.lab-list-grid--rows > .lab-list-item,
+#container-publications.lab-list-grid--rows .lab-list-item {
+  height: auto !important;
+  border-bottom: 1px solid var(--lab-color-border-light);
+}
+
+.lab-list-grid--rows > .lab-list-item:last-child,
+#container-publications.lab-list-grid--rows .lab-list-item:last-child {
+  border-bottom: none;
+}
+
+.lab-row {
+  margin: 0;
+  padding: 0;
+}
+
+.lab-row-link {
+  display: grid;
+  grid-template-columns: var(--lab-row-media-width) minmax(0, 1fr) var(--lab-row-meta-width);
+  align-items: center;
+  column-gap: var(--lab-space-4);
+  padding: var(--lab-space-4) 0;
+  text-decoration: none !important;
+  color: var(--lab-color-text);
+  transition: color $lab-transition;
+}
+
+.lab-row-link:hover {
+  color: var(--lab-color-link-hover);
+}
+
+/* Left media slot — 16:9 thumbnail; quiet type-glyph placeholder until a
+   featured image is added (adding one to front matter switches automatically) */
+.lab-row-media {
+  width: var(--lab-row-media-width);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--lab-card-radius);
+  background: var(--lab-color-surface-alt);
+}
+
+.lab-row-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.lab-row-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  @include lab-type-mono;
+  font-size: $lab-text-xs;
+  letter-spacing: 0.08em;
+  color: color-mix(in srgb, var(--lab-color-ink) 22%, transparent);
+  background:
+    radial-gradient(120% 80% at 12% 18%, var(--lab-color-accent-wash), transparent 55%),
+    linear-gradient(165deg, var(--lab-card-bg) 0%, var(--lab-color-surface-alt) 48%, var(--lab-color-placeholder-bg) 100%);
+}
+
+.lab-row-text {
+  min-width: 0;
+}
+
+/* Right rail — venue/patent number + year anchor the row's right edge so
+   short text never leaves the row feeling lopsided */
+.lab-row-link > .lab-row-meta {
+  justify-content: flex-end;
+  align-self: center;
+  margin: 0;
+  text-align: right;
+}
+
+.lab-row-link > .lab-row-meta .lab-row-venue {
+  max-width: 100%;
+}
+
+@include lab-bp-down(md) {
+  .lab-row-link {
+    grid-template-columns: 7rem minmax(0, 1fr);
+  }
+
+  .lab-row-media {
+    width: 7rem;
+  }
+
+  .lab-row-link > .lab-row-meta {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    padding-left: calc(7rem + var(--lab-space-4));
+    text-align: left;
+  }
+}
+
+.lab-row-title {
+  margin: 0;
+  font-family: $lab-font-serif;
+  font-size: $lab-text-base;
+  font-weight: $lab-weight-heading;
+  line-height: $lab-leading-snug;
+  letter-spacing: $lab-tracking-heading;
+  color: inherit;
+}
+
+/* Mono type glyph — icon slot of the three-part row (glyph / title / meta) */
+.lab-row-glyph {
+  @include lab-type-mono;
+  margin-right: var(--lab-space-2);
+  color: var(--lab-color-link-soft);
+  font-weight: $lab-weight-semibold;
+  letter-spacing: 0.06em;
+}
+
+.lab-row-authors {
+  margin: var(--lab-space-1) 0 0;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-snug;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-row-sep {
+  color: var(--lab-color-text-faint);
+}
+
+.lab-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--lab-space-2);
+  margin: var(--lab-space-2) 0 0;
+  font-size: $lab-text-xs;
+  letter-spacing: 0.02em;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-row-venue::after {
+  content: "·";
+  margin-left: var(--lab-space-2);
+  color: var(--lab-color-text-faint);
+}
+
+.lab-row-year {
+  color: var(--lab-color-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.lab-list-grid > .lab-card,
+.lab-list-grid > .card-simple,
+.lab-list-grid > .lab-list-item {
+  margin: 0 !important;
+  height: auto !important;
+  min-width: 0;
+}
+
+.lab-list-item {
+  display: flex;
+  flex-direction: column;
+  transition: opacity $lab-transition, transform $lab-transition;
+}
+
+.lab-list-item > .lab-card {
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto !important;
+  margin: 0 !important;
+}
+
+/* Publications: CSS grid; override Isotope collapse (overflow/height).
+   Columns mirror lab-card-grid's 3→2→1 downgrade (the isotope override
+   out-specifies the mixin, so the responsive steps must live HERE too) */
+#container-publications.lab-list-grid,
+.lab-list-page #container-publications {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--lab-card-gap);
+  position: static !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 0 !important;
+
+  @include lab-bp-down(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include lab-bp-down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+#container-publications .isotope-item,
+#container-publications .lab-list-item,
+#container-publications .grid-sizer {
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  width: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  float: none !important;
+  display: flex !important;
+  flex-direction: column;
+  height: auto !important;
+}
+
+/* Media-row skin beats the isotope override (same !important tier, later
+   + higher specificity): publications render one row-card per line */
+#container-publications.lab-list-grid--media-rows {
+  grid-template-columns: minmax(0, #{$lab-list-media-row-width}) !important;
+  justify-content: center;
+  gap: var(--lab-space-4) !important;
+}
+
+/* Must beat #container-publications .lab-list-item { display:flex !important } */
+#container-publications .lab-list-item.is-filtered-out,
+#container-publications .lab-list-item.is-paged-out,
+.lab-list-page .lab-list-item.is-filtered-out,
+.lab-list-page .lab-list-item.is-paged-out,
+.lab-list-item.is-paged-out {
+  display: none !important;
+}
+
+button.lab-pagination-link {
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+}
+
+/* Hide old dual page headers on list pages we restyled */
+.lab-list-page + .universal-wrapper,
+.page-body > .universal-wrapper.pt-3:has(+ .lab-list-page) {
+  display: none;
+}
+
+/* Research list page: cards sit inside lab-list-body container — align to container edges */
+.lab-list-page--research .lab-research-cards {
+  margin: 0 auto;
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+  background: transparent !important;
+}
+
+

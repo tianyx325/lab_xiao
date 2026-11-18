@@ -6,9 +6,9 @@ date_end: 2026-12-01
 authors:
   - admin
 tags:
-  - 西北工业大学
-  - 光场成像
-  - 计算成像
+  - Northwestern Polytechnical University
+  - Light Field Imaging
+  - Computational Imaging
 url_external: ''
 image:
   focal_point: Center

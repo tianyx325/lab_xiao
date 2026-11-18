@@ -6,9 +6,9 @@ date_end: 2018-12-01
 authors:
   - admin
 tags:
-  - 西北工业大学
-  - 编码成像
-  - 系统标定
+  - Northwestern Polytechnical University
+  - Coded Imaging
+  - System Calibration
 url_external: ''
 image:
   focal_point: Center

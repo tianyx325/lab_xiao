@@ -68,7 +68,7 @@ FIELD_CONTRACT: dict[str, set[str]] = {
     "award": _HUGO_COMMON | {
         "title", "authors", "date", "summary", "level", "rank", "tags"},
     "research": _HUGO_COMMON | {
-        "title", "date", "weight", "summary", "tags"},
+        "title", "date", "weight", "summary", "tags", "placeholder_art"},
     "post": _HUGO_COMMON | {
         "title", "summary", "date", "authors", "categories", "image"},
 }

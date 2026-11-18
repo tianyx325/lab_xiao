@@ -215,3 +215,21 @@
 
 - id: lab_people_lead
   translation: '{{ . }} members'
+
+- id: lab_search_loading
+  translation: Searching…
+
+- id: lab_search_error
+  translation: Search is temporarily unavailable. Check your connection and try again.
+
+- id: lab_search_retry
+  translation: Retry
+
+- id: lab_search_browse
+  translation: Browse research outputs
+
+- id: lab_search_contact
+  translation: Contact us
+
+- id: lab_filter_clear
+  translation: Clear filters

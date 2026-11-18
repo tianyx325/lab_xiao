@@ -17,6 +17,7 @@ sections:
       css_class: lab-hero-section
 
   - block: markdown
+    id: advisors-head
     content:
       title:
       text: '{{< lab-section-head title="导师团队" >}}'
@@ -38,6 +39,7 @@ sections:
       css_class: lab-people-section
 
   - block: markdown
+    id: outcomes-head
     content:
       title:
       text: '{{< lab-section-head title="学术成果" >}}'
@@ -46,6 +48,7 @@ sections:
       css_class: lab-block-head
 
   - block: markdown
+    id: outcomes-grid
     content:
       title:
       text: '{{< lab-outcomes-grid count="3" >}}'
@@ -54,6 +57,7 @@ sections:
       css_class: lab-outcomes-section
 
   - block: markdown
+    id: news-head
     content:
       title:
       text: '{{< lab-section-head title="新闻动态" >}}'
@@ -62,6 +66,7 @@ sections:
       css_class: lab-row-head
 
   - block: markdown
+    id: news-list
     content:
       title:
       text: '{{< lab-news-list count="6" >}}'

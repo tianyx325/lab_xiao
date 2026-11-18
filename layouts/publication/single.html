@@ -1,0 +1,105 @@
+{{- define "main" -}}
+
+{{- $pub_type_display := "" -}}
+{{- if and .Params.publication_types (reflect.IsSlice .Params.publication_types) -}}
+  {{- $pub_type_csl := index .Params.publication_types 0 -}}
+  {{- $pub_type_display = i18n (printf "pub_%s" (strings.Replace $pub_type_csl "-" "_")) | default (strings.Title $pub_type_csl) -}}
+{{- end -}}
+
+{{/* Venue and year stay separate chips. */}}
+{{- $venue := "" -}}
+{{- if .Params.publication_short -}}
+  {{- $venue = .Params.publication_short | plainify -}}
+{{- else if .Params.publication -}}
+  {{- $venue = .Params.publication | plainify -}}
+{{- end -}}
+
+{{- $authorRow := slice -}}
+{{- $factRow := slice -}}
+{{- $linkRow := slice -}}
+{{- if .Params.authors -}}
+  {{- $authors := partial "components/detail-authors.html" . -}}
+  {{- $authorRow = $authorRow | append (dict "label" (i18n "lab_label_authors") "value" ($authors | safeHTML)) -}}
+{{- end -}}
+{{- with .Date -}}
+  {{- $factRow = $factRow | append (dict "label" (i18n "lab_label_year") "value" (.Format "2006")) -}}
+{{- end -}}
+{{- if $venue -}}
+  {{- $factRow = $factRow | append (dict "label" (i18n "lab_label_venue") "value" $venue) -}}
+{{- end -}}
+{{- $vol := .Params.volume | default "" -}}
+{{- $iss := .Params.issue | default "" -}}
+{{- $pages := .Params.pages | default "" -}}
+{{- $cite := "" -}}
+{{- if and $vol $iss -}}
+  {{- $cite = printf "%s(%s)" $vol $iss -}}
+{{- else if $vol -}}
+  {{- $cite = printf "%s" $vol -}}
+{{- end -}}
+{{- if $pages -}}
+  {{- if $cite -}}
+    {{- $cite = printf "%s: %s" $cite $pages -}}
+  {{- else -}}
+    {{- $cite = printf "%s" $pages -}}
+  {{- end -}}
+{{- end -}}
+{{- if $cite -}}
+  {{- $factRow = $factRow | append (dict "label" (i18n "lab_label_volume") "value" $cite) -}}
+{{- end -}}
+{{- if $pub_type_display -}}
+  {{- $factRow = $factRow | append (dict "label" (i18n "lab_label_type") "value" $pub_type_display) -}}
+{{- end -}}
+{{- $paperHref := "" -}}
+{{- $pdfHref := "" -}}
+{{- with .Params.url_html -}}
+  {{- $paperHref = . -}}
+{{- end -}}
+{{- with .Params.url_pdf -}}
+  {{- $pdfLike := or (in (lower .) ".pdf") (or (in (lower .) "/pdf") (or (in (lower .) "pdfdirect") (or (in (lower .) "create_pdf") (in (lower .) "type=pdf")))) -}}
+  {{- if $pdfLike -}}
+    {{- $pdfHref = . -}}
+  {{- else if not $paperHref -}}
+    {{- $paperHref = . -}}
+  {{- end -}}
+{{- end -}}
+{{- with $paperHref -}}
+  {{- $linkRow = $linkRow | append (dict "label" (i18n "lab_label_paper") "href" .) -}}
+{{- end -}}
+{{- with $pdfHref -}}
+  {{- $linkRow = $linkRow | append (dict "label" "PDF" "href" .) -}}
+{{- end -}}
+{{- range $pair := slice
+  (dict "key" "url_code" "label" (i18n "lab_label_code"))
+  (dict "key" "url_dataset" "label" (i18n "lab_label_dataset"))
+  (dict "key" "url_poster" "label" (i18n "lab_label_poster"))
+-}}
+  {{- with index $.Params $pair.key -}}
+    {{- $linkRow = $linkRow | append (dict "label" $pair.label "href" .) -}}
+  {{- end -}}
+{{- end -}}
+{{- if and .Params.doi (ne .Params.doi "") -}}
+  {{- $doiHref := printf "https://doi.org/%s" .Params.doi -}}
+  {{- $linkRow = $linkRow | append (dict "label" "DOI" "href" $doiHref) -}}
+{{- end -}}
+{{- .Scratch.Set "lab_article_meta_tags" (slice $authorRow $factRow $linkRow) -}}
+
+{{ partial "article/shell-start.html" . }}
+
+    {{ if or .Params.abstract .Params.tags }}
+    <div class="lab-article-abstract">
+      {{ with .Params.abstract }}
+      <span class="lab-article-abstract-label">{{ i18n "abstract" }}</span>
+      <div class="lab-article-abstract-body">{{ . | markdownify }}</div>
+      {{ end }}
+      {{ with .Params.tags }}
+      <div class="lab-article-keywords">
+        <span class="lab-article-abstract-label">{{ i18n "lab_label_keywords" }}</span>
+        <p>{{ delimit . " · " }}</p>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+
+{{ partial "article/shell-end.html" . }}
+
+{{- end -}}

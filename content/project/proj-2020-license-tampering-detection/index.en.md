@@ -6,9 +6,9 @@ date_end: 2021-09-01
 authors:
   - admin
 tags:
-  - 广州荣邦科技有限公司
-  - 图像安全
-  - 模式识别
+  - "Guangzhou Rongbang Technology Co Ltd"
+  - Image Security
+  - Pattern Recognition
 url_external: ''
 image:
   focal_point: Center

@@ -23,11 +23,11 @@ abstract: |
   **Conclusions**　A weight-sharing dual-branch Siamese network is adopted to accurately encode normal-light and low-light optical flow features, and supervised learning is employed to achieve accurate low-light optical flow estimation. Experimental results show that the proposed method has significant advantages in low-light optical flow estimation accuracy and generalization. The code of this paper is available at https://github.com/suzhansz/LLCV-net.git.
 summary: "A latent feature-supervised Siamese network is proposed, in which normal-light motion features supervise the learning of low-light optical flow, avoiding the loss of motion information in the enhance-then-estimate pipeline."
 tags:
-- 光流估计
-- 孪生网络
-- 相关性卷表
-- 全局运动聚合
-- 弱光图像增强
+- Optical Flow Estimation
+- Siamese Networks
+- Correlation Volume
+- Global Motion Aggregation
+- Low-Light Image Enhancement
 featured: false
 url_pdf: "http://cjig.ijournals.cn/jig/ch/reader/create_pdf.aspx?file_no=230093&flag=1&year_id=2024&quarter_id=1"
 url_html: "http://cjig.ijournals.cn/jig/ch/reader/view_abstract.aspx?file_no=230093"

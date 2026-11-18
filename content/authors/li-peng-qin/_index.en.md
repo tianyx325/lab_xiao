@@ -15,12 +15,12 @@ social:
 enroll_year: 2026
 ---
 
-**李鹏钦**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
+**Pengqin Li** is an **M.S. student** at the School of Computer Science and Engineering, Xi'an University of Technology, supervised by Professor Zhaolin Xiao.
 
-**研究方向：** 深度估计
+**Research Focus:** Depth estimation
 
-**学习与研究**
+**Study and Research**
 
-- 本科毕业于西安理工大学计算机科学与技术专业
-- 目前通过文献调研与组会学习深入深度估计方向
-- 参与课题组相关基础工作
+- Completed a B.S. in Computer Science and Technology at Xi'an University of Technology
+- Currently deepening his understanding of depth estimation through literature review and group meetings
+- Participating in foundational work of the research group

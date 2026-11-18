@@ -4,32 +4,8 @@
 ## Docs: https://gohugo.io/hugo-modules/
 ############################
 
-# Local reusable UI (no network). Keep code in modules/lab-ui.
-# lab-ui is self-contained: tokens/scss/js live inside the module.
-mounts:
-  - source: modules/lab-ui/layouts
-    target: layouts
-  - source: modules/lab-ui/assets
-    target: assets
-  - source: modules/lab-ui/static
-    target: static
-  - source: modules/lab-ui/archetypes
-    target: archetypes
-  # Site defaults (required when custom mounts are declared)
-  - source: layouts
-    target: layouts
-  - source: assets
-    target: assets
-  - source: static
-    target: static
-  - source: archetypes
-    target: archetypes
-  - source: content
-    target: content
-  - source: data
-    target: data
-  - source: i18n
-    target: i18n
+# Site files use Hugo's default mounts (layouts/assets/static/archetypes/
+# content/data/i18n at the repository root).
 
 imports:
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-decap-cms

@@ -5,7 +5,7 @@ weight: 20
 placeholder_art: lowlight
 summary: "Addressing low illumination and complex lighting, this direction studies image/video enhancement, denoising, and feature representation, improving the usability of downstream tasks such as focusing, matching, and reconstruction under low-light conditions."
 tags:
-  - 弱光增强
+  - Low-Light Enhancement
 ---
 
 Targeting degraded scenarios such as low illumination, high noise, and complex lighting, this direction studies the restoration, enhancement, and robust feature representation of visual information, so that enhanced results are not only "better looking" but also serve downstream tasks such as focusing, matching, optical flow, and reconstruction.

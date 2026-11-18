@@ -1,0 +1,96 @@
+{{- define "main" -}}
+
+{{/* Academic outputs hub (学术成果) — three tabbed panels (papers / patents /
+     awards), each the complete section list with its search box, filter
+     selects, year quick-nav and pagination. Old section URLs redirect here. */}}
+{{ $isEn := eq site.Language.Lang "en" }}
+{{ $hubLead := partial "components/section-lead.html" (dict "page" . "key" "publications") }}
+
+{{ $defs := slice
+  (dict "id" "pub" "section" "publication" "label" (cond $isEn "Papers" "论文"))
+  (dict "id" "pat" "section" "patent" "label" (cond $isEn "Patents" "专利"))
+  (dict "id" "award" "section" "award" "label" (cond $isEn "Awards" "奖项"))
+}}
+{{ $panels := slice }}
+{{ range $defs }}
+  {{ $pages := sort (where site.RegularPages "Section" .section) "Date" "desc" }}
+  {{ $view := "card" }}
+  {{ $style := "" }}
+  {{ with site.GetPage (printf "/%s" .section) }}
+    {{ $view = .Params.view | default "card" }}
+    {{ $style = .Params.card_style | default "" }}
+  {{ end }}
+  {{ $panels = $panels | append (dict
+    "id" .id
+    "section" .section
+    "label" .label
+    "pages" $pages
+    "config" (partial "listing/filter-config.html" (dict "section" .section "pages" $pages))
+    "view" $view
+    "cardStyle" $style
+    "gridClass" (partial "listing/grid-class.html" (dict "view" $view "cardStyle" $style))
+    "idPrefix" (printf "%s-" .id)
+  ) }}
+{{ end }}
+
+<div class="lab-list-page lab-list-page--overview">
+  {{/* Sticky band: title, category tabs and the active tab's filter row all
+       stay pinned so long lists never scroll their controls away. */}}
+  <div class="lab-hub-sticky" data-lab-sticky>
+    {{/* One title row on desktop: category tabs left, title centered, the
+         active category's filters right. Below lg everything stacks. */}}
+    <header class="lab-list-header lab-list-header--hub">
+      <div class="container">
+        <h1 class="lab-list-title">{{ .Title | markdownify | emojify }}</h1>
+        {{ with $hubLead }}
+        <p class="lab-list-lead">{{ . | markdownify | emojify }}</p>
+        {{ end }}
+
+        {{/* Progressive enhancement: tabs are only meaningful with JS. Without
+             JS the whole tablist + filter row is hidden and every panel stays
+             open (see .js-enabled rules in _hub.scss), so no content is lost. */}}
+        <noscript>
+          <style>.lab-hub-tabs,.lab-hub-filters{display:none!important}.lab-hub-panel-fallback-title{display:block!important}</style>
+        </noscript>
+        <div class="lab-hub-tabs" role="tablist" aria-label="{{ cond $isEn "Output categories" "成果分类" }}">
+          {{ range $i, $panel := $panels }}
+          <button class="lab-hub-tab" type="button" role="tab" id="lab-hub-tab-{{ $panel.id }}"
+            aria-controls="lab-hub-panel-{{ $panel.id }}" aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}"{{ if ne $i 0 }} tabindex="-1"{{ end }}>{{ $panel.label }}</button>
+          {{ end }}
+        </div>
+
+        <div class="lab-hub-filters">
+          {{ range $i, $panel := $panels }}
+          <div class="lab-hub-filter" data-filter-for="lab-hub-panel-{{ $panel.id }}"{{ if ne $i 0 }} hidden{{ end }}>
+            {{ partial "listing/filters.html" (dict "placeholder" $panel.config.placeholder "selects" $panel.config.selects) }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <div class="lab-list-body container">
+    {{ with .Content }}
+    <div class="article-style lab-list-intro">{{ . }}</div>
+    {{ end }}
+
+    {{ range $i, $panel := $panels }}
+    <section class="lab-hub-panel" id="lab-hub-panel-{{ $panel.id }}" role="tabpanel" aria-labelledby="lab-hub-tab-{{ $panel.id }}"{{ if ne $i 0 }} data-collapsible{{ end }}>
+      {{/* Without JS all panels are open; each needs a visible category label.
+           With JS the tab bar already names the active panel, so hide it. */}}
+      <h2 class="lab-hub-panel-fallback-title">{{ $panel.label }} <span class="lab-hub-panel-fallback-count">({{ len $panel.pages }})</span></h2>
+      {{ partial "listing/filter-body.html" (dict
+        "page" $ "section" $panel.section "pages" $panel.pages "config" $panel.config
+        "view" $panel.view "cardStyle" $panel.cardStyle "gridClass" $panel.gridClass
+        "idPrefix" $panel.idPrefix) }}
+    </section>
+    {{ end }}
+  </div>
+
+  {{ partial "components/back-to-top.html" . }}
+</div>
+
+{{ partial "listing/filter-script.html" . }}
+
+{{- end -}}

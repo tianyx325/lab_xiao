@@ -6,9 +6,9 @@ date_end: 2017-12-01
 authors:
   - admin
 tags:
-  - 陕西省自然科学基础研究计划
-  - 深度估计
-  - 光场成像
+  - Shaanxi Natural Science Basic Research Plan
+  - Depth Estimation
+  - Light Field Imaging
 url_external: ''
 image:
   focal_point: Center

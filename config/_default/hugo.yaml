@@ -4,7 +4,8 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: 智能感知与决策实验室 # Website name (synced from lab.name)
-# 生产域名；Netlify/GitHub Pages 构建时会用 -b $URL 覆盖
+# 生产域名；GitHub Pages 项目站由 CI 用 SITE_BASE_URL 覆盖为 /lab_xiao/ 子路径。
+# 这里必须保持根路径，否则本地 hugo server 会把 css/js 指到 /lab_xiao/ 下而 404。
 baseURL: 'https://lab.xaut.edu.cn/'
 
 ############################

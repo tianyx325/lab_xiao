@@ -1,0 +1,252 @@
+/* Homepage hero — quiet academic ground */
+.home-section.lab-hero-section > .home-section-bg {
+  display: none !important;
+}
+
+.home-section.lab-hero-section {
+  position: relative;
+  min-height: 0;
+  display: flex;
+  align-items: flex-start;
+  padding-top: var(--lab-space-8);
+  isolation: isolate;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+  background: var(--lab-color-page) !important;
+}
+
+/* One wash, from the accent token, so light and dark stay the same shape. */
+.home-section.lab-hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Gradient mesh — three soft blobs (blue / teal / accent wash), masked fade.
+     The only mesh on the site; see SCHEMA "视觉风格边界". */
+  background:
+    radial-gradient(38rem 22rem at 16% 8%, var(--lab-mesh-a), transparent 70%),
+    radial-gradient(32rem 20rem at 84% 16%, var(--lab-mesh-b), transparent 72%),
+    radial-gradient(42rem 16rem at 50% 0%, var(--lab-color-accent-wash), transparent 72%);
+  -webkit-mask-image: linear-gradient(180deg, var(--lab-color-mask) 62%, transparent);
+  mask-image: linear-gradient(180deg, var(--lab-color-mask) 62%, transparent);
+}
+
+.home-section.lab-hero-section::after {
+  display: none;
+}
+
+.home-section.lab-hero-section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.lab-hero {
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--lab-color-text);
+}
+
+.lab-hero-brand {
+  @include lab-display-title;
+  margin: 0 0 var(--lab-space-6) !important;
+  padding: 0 !important;
+  color: var(--lab-color-text) !important;
+  text-align: center;
+}
+
+.lab-hero-title {
+  @include lab-type-lead;
+  margin: 0 0 var(--lab-space-4);
+  color: var(--lab-color-text-secondary) !important;
+}
+
+.lab-hero-lead {
+  margin: 0 auto;
+  max-width: 40rem;
+  font-size: $lab-text-lg;
+  font-weight: $lab-weight-body;
+  line-height: $lab-leading-body;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-hero-intro {
+  @include lab-type-ui;
+  margin: var(--lab-space-4) auto 0;
+  max-width: 36rem;
+  font-weight: $lab-weight-body;
+  line-height: $lab-leading-body;
+  color: var(--lab-color-text-secondary);
+}
+
+/* Hero stats — proof bar, numbers aggregated at build time */
+.lab-hero-stats {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin: var(--lab-space-6) auto 0;
+  padding: 0;
+}
+
+.lab-hero-stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 6rem;
+  padding: 0 var(--lab-space-5);
+}
+
+.lab-hero-stat + .lab-hero-stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12%;
+  bottom: 12%;
+  width: 1px;
+  background: var(--lab-color-border-light);
+}
+
+.lab-hero-stat-num {
+  @include lab-font-serif;
+  margin: 0;
+  font-size: $lab-text-xl;
+  font-weight: $lab-weight-semibold;
+  line-height: $lab-leading-display;
+  color: var(--lab-color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.lab-hero-stat-label {
+  margin: var(--lab-space-1) 0 0;
+  font-size: $lab-text-xs;
+  letter-spacing: 0.06em;
+  color: var(--lab-color-muted);
+}
+
+@include lab-bp-down(sm) {
+  .lab-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--lab-space-4) 0;
+    max-width: 20rem;
+  }
+
+  .lab-hero-stat + .lab-hero-stat::before {
+    display: none;
+  }
+}
+
+/* Hero CTAs — one row: 研究方向 + 加入我们 */
+.lab-hero-actions {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--lab-space-inline);
+  margin: var(--lab-space-6) auto 0;
+}
+
+/* Research direction cards share the content-card template — four per row
+   (smaller tiles), no ordinal counter, content limited to title + summary. */
+.lab-research-cards {
+  @include lab-card-grid(4);
+  gap: var(--lab-space-3);
+  margin: var(--lab-space-block) auto 0;
+  max-width: var(--lab-page-width);
+  align-items: stretch;
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
+  box-sizing: border-box;
+  container-type: inline-size;
+  container-name: lab-cards;
+}
+
+.lab-research-cards > .lab-card {
+  margin: 0 !important;
+  height: auto !important;
+}
+
+/* Card-grid down-steps (2-col / 1-col) now live in the lab-card-grid mixin
+   (lab/_grid.scss) — only non-grid breakpoints are declared here. */
+
+@include lab-bp-down(md) {
+  .home-section.lab-hero-section {
+    min-height: 0;
+    padding-top: var(--lab-space-7) !important;
+  }
+
+  .lab-hero {
+    max-width: 100%;
+    padding: 0 var(--lab-space-1);
+  }
+
+  .lab-hero-brand {
+    margin-bottom: var(--lab-space-4) !important;
+  }
+
+  .lab-hero-lead {
+    max-width: 100%;
+  }
+
+  .lab-people-grid {
+    gap: var(--lab-space-inline);
+  }
+
+
+  .section-head {
+    padding: 0 $lab-space-2;
+  }
+
+  .section-head h2 {
+    max-width: none;
+    white-space: normal;
+  }
+
+  .section-head a {
+    position: static;
+    transform: none;
+    display: inline-flex;
+    margin-top: $lab-space-3 !important;
+    font-size: $lab-text-sm;
+    letter-spacing: $lab-tracking-body;
+  }
+
+  .home-section.lab-block-head,
+  .home-section.lab-row-head {
+    min-height: 0;
+    padding-top: $lab-space-8 !important;
+    margin-top: 0 !important;
+  }
+
+  .home-section.lab-last {
+    padding-bottom: var(--lab-page-end) !important;
+  }
+
+  .lab-contact-ways-map #map {
+    height: 14rem;
+  }
+}
+
+
+/* Text mask: the hero wordmark carries a faint paper-fibre grain.
+   Pure CSS, static, clipped to the glyphs; forced-colors falls back to ink. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .lab-hero-brand {
+    background-color: var(--lab-color-text);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.08'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 120px 120px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .lab-hero-brand {
+    background: none !important;
+    color: CanvasText !important;
+  }
+}

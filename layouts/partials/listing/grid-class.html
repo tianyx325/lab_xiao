@@ -1,0 +1,13 @@
+{{- /*
+  List grid class from a section's view + card_style.
+  Usage: {{ partial "listing/grid-class.html" (dict "view" $view "cardStyle" $style) }}
+*/ -}}
+{{- $view := .view | default "card" -}}
+{{- $style := .cardStyle | default "" -}}
+{{- $class := "lab-list-grid" -}}
+{{- if eq $view "list" -}}
+  {{- $class = "lab-list-grid lab-list-grid--rows" -}}
+{{- else if eq $style "media-row" -}}
+  {{- $class = "lab-list-grid lab-list-grid--media-rows" -}}
+{{- end -}}
+{{- return $class -}}

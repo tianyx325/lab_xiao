@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Academic research lab site (智能感知与决策实验室) built with Hugo + HugoBlox (blox-bootstrap v5). Content is Markdown in `content/`; the custom theme is the self-contained module `modules/lab-ui/` (layouts + SCSS + JS). Deployed to GitHub Pages via `gh-pages` branch.
+Academic research lab site (智能感知与决策实验室) built with Hugo + HugoBlox (blox-bootstrap v5). Content is Markdown in `content/`; the theme lives at the repository root (`layouts/`, `assets/scss/`, `assets/js/`). Deployed to GitHub Pages via `gh-pages` branch.
 
 ## Build Commands
 
@@ -11,15 +11,16 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 - Dev server: `.\scripts\dev.ps1`
 - Production build: `hugo --gc --minify --noBuildLock`
 - SCSS lint: `npm ci && npm run lint:css` (stylelint, correctness rules only)
+- Performance budget: `python scripts/check_budget.py` (run after `hugo --minify`)
 - Always verify zero warnings after changes. Known exception: blox-seo v0.3.1 ships a misplaced `sitemap.xml`, which Hugo 0.168 skips with one warning; do not hand-patch `_vendor`.
 
 ## Directory Structure
 
-结构见 [README.md](README.md)。
+结构见 `content/`、`layouts/`、`assets/`、`config/`、`scripts/`。
 
 ## Constraints
 
-- **Do NOT modify `_vendor/` directory.** It's managed by Hugo Modules. Override by placing files in `modules/lab-ui/layouts/` with matching paths.
+- **Do NOT modify `_vendor/` directory.** It's managed by Hugo Modules. Override by placing files in `layouts/` with matching paths.
 - **Do NOT add JavaScript framework dependencies.** This is a Hugo static site; use vanilla JS or Hugo Pipes.
 - **All color/spacing values must use design tokens** (CSS custom properties `--lab-*` or SCSS variables `$lab-*`). Never hardcode raw values.
 - **Chinese is the primary language.** Content and UI labels are in Chinese.
@@ -27,11 +28,11 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 
 ## Theme Architecture
 
-- Hugo Modules manage the base theme (`blox-bootstrap/v5`). Custom overrides live in `modules/lab-ui/`.
-- Template lookup: `modules/lab-ui/layouts/<section>/single.html` for detail pages, `section/<name>.html` for list pages, `_default/list.html` as fallback.
-- Shared partials in `modules/lab-ui/layouts/partials/`, grouped by domain: `components/`, `listing/`, `article/`; vendor-override files keep their original top-level names.
-- Shortcodes in `modules/lab-ui/layouts/shortcodes/` for content-embeddable components.
-- Lab JS: `modules/lab-ui/assets/js/lab/lab-*.js`, loaded by `partials/custom_js.html`. `wowchemy-map.js` stays in `assets/js/`. Site `assets/media/` is logo/icon only.
+- Hugo Modules manage the base theme (`blox-bootstrap/v5`); site overrides live at the repository root.
+- Template lookup: `layouts/<section>/single.html` for detail pages, `section/<name>.html` for list pages, `_default/list.html` as fallback.
+- Shared partials in `layouts/partials/`, grouped by domain: `components/`, `listing/`, `article/`; vendor-override files keep their original top-level names.
+- Shortcodes in `layouts/shortcodes/` for content-embeddable components.
+- Lab JS: `assets/js/lab/lab-*.js`, loaded by `partials/custom_js.html`. `wowchemy-map.js` stays in `assets/js/`. Site `assets/media/` is logo/icon only.
 
 ## Content Types
 
@@ -47,7 +48,7 @@ Academic research lab site (智能感知与决策实验室) built with Hugo + Hu
 
 ## SCSS Conventions
 
-- Design tokens: define in `modules/lab-ui/assets/scss/lab/_tokens.scss` only. Prefer `var(--lab-*)` in rules; use `$lab-*` for Sass math / maps.
+- Design tokens: define in `assets/scss/lab/_tokens.scss` only. Prefer `var(--lab-*)` in rules; use `$lab-*` for Sass math / maps.
 - `template.scss` import order is the cascade order. Do not reorder. View layers are `lab/views/{results,people,pages,home,listing}/`.
 - Do not hardcode brand hex/rgba in view stylesheets — add a token, then reference it.
 - Brand accent is Brand blue `#4176E6` (user-specified) (SCSS name `$lab-blue`, kept for legacy reasons) — interaction only: buttons, active, focus, hover borders. Body links inherit the same accent; page is `#F2FAFF` (user-specified) with white cards `#FDFEFF`. Ink is blue-tinted `#1E232C`; borders are ink-alpha (`rgba(30,35,44,.14)`), never standalone grays. Dark mode is near-black `#0A0A0A` with lifted blue `#6C9CF2` links. No gradients, no glow — premium comes from ink quality and whitespace (reference: deepseek.com `--ds-color-*` tokens).

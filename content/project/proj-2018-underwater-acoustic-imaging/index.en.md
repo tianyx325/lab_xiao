@@ -6,9 +6,9 @@ date_end: 2021-12-01
 authors:
   - admin
 tags:
-  - 中科院声学所
-  - 声学成像
-  - 目标检测
+  - "Institute of Acoustics, CAS"
+  - Acoustic Imaging
+  - Object Detection
 url_external: ''
 image:
   focal_point: Center

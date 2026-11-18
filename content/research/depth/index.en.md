@@ -5,7 +5,7 @@ weight: 30
 placeholder_art: depth
 summary: "Addressing both standard and degraded scenarios, this direction studies depth estimation under monocular, low-light, and event-camera conditions, exploring semantic guidance, multimodal fusion, and robust 3D perception methods."
 tags:
-  - 深度估计
+  - Depth Estimation
 ---
 
 Addressing both standard and degraded scenarios, this direction studies depth estimation methods that recover 3D structure from 2D observations, covering monocular vision, low-light conditions, and emerging sensing modalities such as event cameras, serving the front end of 3D perception, reconstruction, and decision-making.

@@ -7,5 +7,5 @@ summary: "Carried out systematic research and application demonstrations on vide
 level: "provincial"
 rank: "second"
 tags:
-  - 技术发明
+  - Technical Invention
 ---

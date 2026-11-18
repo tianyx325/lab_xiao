@@ -1,0 +1,612 @@
+/* Layer 4 · shared controls: buttons, page titles, card chrome
+   Source: template.scss lines 592-772 (order-preserving split). */
+/* Buttons — exactly 4 sanctioned variants (solid / outline / quiet / icon).
+   New buttons MUST use a .lab-btn--* class; Bootstrap classes below are
+   legacy aliases that map onto the same skeleton. */
+.lab-btn--solid,
+.lab-btn--outline,
+.lab-btn--quiet,
+.lab-btn--icon,
+.btn,
+.btn-primary,
+.btn-light,
+.btn-outline-primary,
+.btn-outline-primary.btn-sm,
+.btn-page-header {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: var(--lab-space-2) var(--lab-space-5) !important;
+  border-radius: var(--lab-card-radius) !important;
+  border: 1px solid transparent !important;
+  font-family: $lab-font-sans;
+  font-size: $lab-text-sm !important;
+  font-weight: $lab-weight-medium !important;
+  letter-spacing: 0.02em;
+  line-height: $lab-leading-ui !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  transition: color $lab-transition, border-color $lab-transition,
+    background-color $lab-transition, opacity $lab-transition;
+}
+
+/* Primary action — filled brand blue.
+   Hover: same-family tone shift only (lighter blue, white text unchanged).
+   No opacity dims, no hue flips — quiet academic affordance. */
+.lab-btn--solid,
+.btn-primary {
+  background-color: var(--lab-color-link) !important;
+  border-color: var(--lab-color-link) !important;
+  color: var(--lab-color-white) !important;
+}
+
+.lab-btn--solid:hover,
+.btn-primary:hover {
+  background-color: var(--lab-color-link-hover) !important;
+  border-color: var(--lab-color-link-hover) !important;
+  color: var(--lab-color-white) !important;
+}
+
+/* Magnetic CTA — JS sets a max 4px pull; absent values mean "at rest". */
+.lab-btn--solid[data-lab-magnetic] {
+  transform: translate(var(--lab-magnet-x, 0), var(--lab-magnet-y, 0));
+  transition: transform 0.18s ease-out, background-color $lab-transition,
+    border-color $lab-transition, color $lab-transition;
+  will-change: transform;
+}
+
+/* Secondary action — outlined brand blue.
+   Hover: whisper wash fill only; text and border stay exactly as at rest. */
+.lab-btn--outline,
+.btn-outline-primary,
+.btn-page-header.btn-outline-primary {
+  border-color: var(--lab-color-link) !important;
+  color: var(--lab-color-link) !important;
+  background: transparent !important;
+}
+
+.lab-btn--outline:hover,
+.btn-outline-primary:hover {
+  background-color: var(--lab-color-accent-wash) !important;
+  color: var(--lab-color-link) !important;
+  border-color: var(--lab-color-link) !important;
+}
+
+/* Auxiliary action — neutral ghost, warms to brand on hover (hero CTAs) */
+.lab-btn--quiet {
+  color: var(--lab-color-text);
+  background: transparent;
+  border-color: var(--lab-color-border-ink-28);
+  white-space: nowrap;
+}
+
+.lab-btn--quiet:hover {
+  color: var(--lab-color-link);
+  border-color: var(--lab-color-border-blue-strong);
+  background: var(--lab-color-accent-wash);
+}
+
+/* Compact square icon control (gallery nav etc.) */
+.lab-btn--icon {
+  min-height: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0 !important;
+  border-color: var(--lab-color-border-ink-14);
+  background: var(--lab-color-surface);
+  color: var(--lab-color-text);
+  font-size: $lab-text-lg;
+  line-height: $lab-leading-none;
+}
+
+.lab-btn--icon:hover:not(:disabled) {
+  border-color: var(--lab-article-accent, var(--lab-color-link));
+  color: var(--lab-article-accent, var(--lab-color-link));
+  background: var(--lab-article-wash, var(--lab-color-blue-wash));
+}
+
+.lab-btn--icon:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.btn-sm,
+.btn-outline-primary.btn-sm {
+  min-height: 2.125rem;
+  padding: var(--lab-space-1) var(--lab-space-4) !important;
+}
+
+.form-control,
+.form-control-sm {
+  border-radius: var(--lab-card-radius) !important;
+}
+
+/* Inner page titles */
+.universal-wrapper {
+  padding-top: var(--lab-space-8);
+  padding-bottom: var(--lab-space-8);
+}
+
+.universal-wrapper > h1,
+.article-header h1,
+.article-title {
+  font-weight: $lab-weight-semibold !important;
+  letter-spacing: 0.04em;
+  line-height: $lab-leading-ui;
+  color: var(--lab-color-text) !important;
+}
+
+.article-header {
+  margin-bottom: var(--lab-space-6);
+}
+
+.article-style,
+.article-body,
+.universal-wrapper p,
+.docs-article-container p {
+  line-height: $lab-leading-body;
+}
+
+.article-style h2,
+.article-style h3,
+.universal-wrapper h2,
+.universal-wrapper h3 {
+  font-weight: $lab-weight-semibold;
+  letter-spacing: 0.03em;
+  margin-top: $lab-space-6;
+}
+
+.article-metadata,
+.article-date {
+  font-size: $lab-text-sm;
+  opacity: 0.6;
+  letter-spacing: 0.03em;
+}
+
+/* ---------- List/stream soft panels (not poster cards) ---------- */
+.media.stream-item,
+.pub-list-item {
+  display: block;
+  padding: $lab-card-pad !important;
+  margin: 0 0 $lab-space-4 !important;
+  background: var(--lab-card-bg) !important;
+  border: 1px solid var(--lab-color-border-light) !important;
+  border-radius: var(--lab-card-radius) !important;
+  box-shadow: var(--lab-card-shadow);
+  transition: border-color $lab-transition, box-shadow $lab-transition;
+}
+
+.media.stream-item:hover,
+.pub-list-item:hover {
+  border-color: var(--lab-card-border-hover) !important;
+  box-shadow: var(--lab-card-shadow-hover);
+  transform: none !important;
+}
+
+/* Poster cards — whole card is 4:5; media fills remainder above text */
+$lab-summary-lh: 1.45;
+
+.lab-card.view-card,
+a.lab-card.view-card {
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--lab-color-text) !important;
+  text-decoration: none !important;
+  background: var(--lab-card-bg) !important;
+  border: 1px solid var(--lab-card-border) !important;
+  border-radius: var(--lab-card-radius) !important;
+  box-shadow: var(--lab-card-shadow) !important;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: border-color $lab-transition, background-color $lab-transition,
+    box-shadow $lab-transition, transform $lab-transition;
+}
+
+/* Same lift as the member cards — hover reads as one card language sitewide */
+.lab-card.view-card:hover,
+a.lab-card.view-card:hover {
+  background: var(--lab-card-bg) !important;
+  border-color: var(--lab-card-border-hover) !important;
+  box-shadow: var(--lab-card-shadow-hover) !important;
+  transform: translateY(-2px) !important;
+}
+
+.lab-card-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.lab-card-media {
+  position: relative;
+  z-index: 0;
+  /* Fixed cover height — text budgets below guarantee the body always fits */
+  flex: 0 0 48%;
+  max-height: 48%;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0;
+  pointer-events: none;
+  background: var(--lab-color-surface-alt);
+}
+
+.lab-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity $lab-transition, transform $lab-transition;
+}
+
+.lab-card.view-card:hover .lab-card-media img {
+  opacity: 0.88;
+  /* Gentle zoom says "this card is live" without breaking reading calm */
+  transform: scale(1.04);
+}
+
+
+.lab-card.view-card:hover .lab-card-ph-art {
+  opacity: 0.92;
+  transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-card.view-card:hover,
+  a.lab-card.view-card:hover {
+    transform: none !important;
+  }
+  .lab-card.view-card:hover .lab-card-media img,
+  .lab-card.view-card:hover .lab-card-ph-art {
+    transform: none;
+  }
+}
+
+/* Text wrapper — transparent in the poster skin (children flow as direct
+   flex items of the body); becomes the middle zone in media-row cards */
+.lab-card--poster .lab-card-text {
+  display: contents;
+}
+
+/* Poster budgets: meta exactly one line · title ≤2 · summary ≤3 base clamp
+   (lab-card-budget.js trims the summary to 2 when the title takes 2 lines) */
+.lab-card--poster .lab-card-meta {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.lab-card--poster .lab-card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Media-row cards — three zones fixed by proportion of the card width:
+   image 3.5/10, text 5/10, meta 1.5/10. The body shell dissolves into the
+   grid so the columns are measured against the card, not an inner padding
+   box. Stacks to image-top below md. */
+.lab-card.view-card.lab-card--media-row {
+  display: grid !important; /* base card rule is display: flex !important */
+  grid-template-columns: 35% 50% 15%;
+  align-items: center;
+  aspect-ratio: auto;
+}
+
+.lab-card.view-card.lab-card--media-row .lab-card-media {
+  grid-column: 1;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  aspect-ratio: 16 / 9;
+  align-self: center;
+}
+
+.lab-card.view-card.lab-card--media-row .lab-card-body {
+  display: contents;
+}
+
+.lab-card.view-card.lab-card--media-row .lab-card-text {
+  grid-column: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lab-space-1);
+  padding: var(--lab-space-4) var(--lab-space-5);
+}
+
+.lab-card.view-card.lab-card--media-row .lab-card-meta {
+  grid-column: 3;
+  /* DOM order is meta → text; without an explicit order the sparse grid
+     cursor would push the constrained-column text onto a second row */
+  order: 2;
+  align-self: center;
+  justify-content: flex-start;
+  padding: var(--lab-space-4) var(--lab-space-5) var(--lab-space-4) 0;
+  text-align: left;
+}
+
+/* 15% rail is narrow: venue names wrap onto extra lines rather than being
+   clipped with an ellipsis */
+.lab-card.view-card.lab-card--media-row .lab-card-meta-badge {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+/* Line budgets: title ≤2 · authors ≤1 · summary ≤3 */
+.lab-card.view-card.lab-card--media-row .lab-card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Full author list — all named, members linked; wraps instead of truncating */
+.lab-card.view-card.lab-card--media-row .lab-card-authors {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.lab-card.view-card.lab-card--media-row .lab-card-summary {
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+@include lab-bp-down(md) {
+  .lab-card.view-card.lab-card--media-row {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .lab-card.view-card.lab-card--media-row .lab-card-media {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* Back to a real shell when stacked: text and meta share one row again */
+  .lab-card.view-card.lab-card--media-row .lab-card-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--lab-space-5);
+    padding: var(--lab-space-3) var(--lab-space-4) var(--lab-space-4);
+  }
+
+  .lab-card.view-card.lab-card--media-row .lab-card-text,
+  .lab-card.view-card.lab-card--media-row .lab-card-meta {
+    padding: 0;
+  }
+
+  .lab-card.view-card.lab-card--media-row .lab-card-text {
+    flex: 1 1 auto;
+  }
+
+  .lab-card.view-card.lab-card--media-row .lab-card-meta {
+    flex: 0 0 auto;
+  }
+}
+
+/* Placeholder covers — type families + per-card variants (CSS only).
+   One hue var drives everything: accent strokes, glow, ground tints, inner
+   border all derive via color-mix, so the four .lab-ph-hue-* classes recolor
+   a whole cover. Grounds reference theme vars → dark mode tints itself. */
+.lab-card-media--placeholder {
+  --lab-ph-ink: #{rgba($lab-ink, 0.14)};
+  --lab-ph-ink-soft: #{rgba($lab-ink, 0.09)};
+  --lab-ph-hue: #{$lab-blue}; /* blue default; hue classes override */
+  --lab-ph-accent: color-mix(in srgb, var(--lab-ph-hue) 46%, transparent);
+  --lab-ph-accent-soft: color-mix(in srgb, var(--lab-ph-hue) 14%, transparent);
+  --lab-ph-g1: var(--lab-card-bg);
+  --lab-ph-g2: color-mix(in srgb, var(--lab-ph-hue) 14%, var(--lab-card-bg));
+  --lab-ph-g3: color-mix(in srgb, var(--lab-ph-hue) 8%, var(--lab-surface-alt));
+  background:
+    /* diagonal sheen — the "premium light" that flat washes lacked */
+    linear-gradient(118deg, var(--lab-color-sheen) 0%, transparent 42%),
+    radial-gradient(120% 80% at 12% 18%, var(--lab-ph-accent-soft), transparent 55%),
+    linear-gradient(165deg, var(--lab-ph-g1) 0%, var(--lab-ph-g2) 48%, var(--lab-ph-g3) 100%);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--lab-ph-hue) 16%, transparent);
+}
+
+/* Hue classes — muted, equal-lightness; assigned per card by URL hash */
+.lab-ph-hue-0 { --lab-ph-hue: #{$lab-blue}; }
+.lab-ph-hue-1 { --lab-ph-hue: #{$lab-ph-hue-violet}; }
+.lab-ph-hue-2 { --lab-ph-hue: #{$lab-ph-hue-green}; }
+.lab-ph-hue-3 { --lab-ph-hue: #{$lab-ph-hue-gold}; }
+
+/* Cover illustration — inline SVG, so every stroke resolves to the same
+   placeholder vars as the ground and repaints itself in dark mode. */
+.lab-card-ph-art {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity $lab-transition, transform $lab-transition;
+}
+
+.lab-ph-stroke,
+.lab-ph-stroke-soft {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lab-ph-stroke {
+  stroke: var(--lab-ph-accent);
+  stroke-width: 3;
+}
+
+.lab-ph-stroke-soft {
+  stroke: var(--lab-ph-ink-soft);
+  stroke-width: 2;
+}
+
+.lab-ph-wash {
+  fill: var(--lab-ph-accent-soft);
+}
+
+.lab-ph-wash-strong {
+  fill: color-mix(in srgb, var(--lab-ph-hue) 24%, transparent);
+}
+
+.lab-ph-dot {
+  fill: var(--lab-ph-hue);
+}
+
+/* ---------- Search overlay — lab ground, glass sticky header, brand focus ---------- */
+/* Vendor styles (wowchemy _search.scss) previously ran on raw $sta-* tokens:
+   #dedede borders, orange hit highlights, off-system radii. Everything below
+   re-grounds the overlay in lab tokens. */
+
+.search-modal {
+  background: var(--lab-color-page);
+}
+
+.dark .search-modal {
+  background: var(--lab-dark-surface);
+}
+
+.search-header {
+  background: var(--lab-color-glass-strong);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid var(--lab-color-border-light);
+}
+
+.dark .search-header {
+  background: var(--lab-dark-glass);
+  border-bottom-color: var(--lab-dark-glass-border);
+}
+
+.search-header h1 {
+  color: var(--lab-color-text);
+}
+
+.dark .search-header h1 {
+  color: var(--lab-color-white);
+}
+
+.col-search-close .js-search {
+  color: var(--lab-color-text-secondary);
+}
+
+.col-search-close .js-search:hover {
+  color: var(--lab-color-link);
+}
+
+#search-box #search-query {
+  background: var(--lab-color-white);
+  color: var(--lab-color-text);
+  border: 1px solid var(--lab-color-border-light);
+  border-radius: 999px;
+  font-family: inherit;
+  transition: border-color $lab-transition, box-shadow $lab-transition;
+}
+
+#search-box #search-query:focus,
+.form-control:focus {
+  border-color: var(--lab-color-link);
+  box-shadow: 0 0 0 2px var(--lab-color-focus-ring);
+  outline: none;
+}
+
+.dark #search-box #search-query {
+  background: var(--lab-dark-surface);
+  color: var(--lab-color-white);
+  border-color: var(--lab-dark-border);
+}
+
+/* Hit highlight — brand blue wash replaces the vendor orange */
+.search-hit em {
+  font-style: normal;
+  background: color-mix(in srgb, var(--lab-color-link) 16%, transparent);
+  color: inherit;
+  border-bottom: 1px solid var(--lab-color-link);
+}
+
+.search-hit-type {
+  color: var(--lab-color-text-secondary);
+}
+
+.search-hit-description {
+  color: var(--lab-color-text-secondary);
+}
+
+/* ---------- Search feedback: skeleton / error / empty ---------- */
+.lab-search-skeleton {
+  display: grid;
+  gap: var(--lab-space-3);
+  padding: var(--lab-space-5) 0;
+}
+
+.lab-search-skeleton .bar {
+  height: 3.5rem;
+  border-radius: var(--lab-card-radius);
+  background: var(--lab-color-surface-alt);
+  animation: lab-search-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes lab-search-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.lab-search-error {
+  padding: var(--lab-space-6) 0;
+  text-align: center;
+  color: var(--lab-color-text-secondary);
+}
+
+.lab-search-error p {
+  margin: 0 0 var(--lab-space-4);
+}
+
+.lab-search-retry {
+  appearance: none;
+  border: 1px solid var(--lab-color-border-blue-strong);
+  border-radius: var(--lab-card-radius);
+  background: transparent;
+  padding: $lab-space-2 $lab-space-4;
+  font-family: $lab-font-sans;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-medium;
+  color: var(--lab-color-link);
+  cursor: pointer;
+  transition: border-color $lab-transition, color $lab-transition;
+}
+
+.lab-search-retry:hover,
+.lab-search-retry:focus-visible {
+  border-color: var(--lab-color-link);
+  color: var(--lab-color-link-hover);
+}
+
+.lab-search-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--lab-space-3) var(--lab-space-4);
+  margin-top: var(--lab-space-4);
+}

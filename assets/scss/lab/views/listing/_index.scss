@@ -1,0 +1,12 @@
+/* Source order. Do not reorder: later slices override earlier ones.
+   motion also holds metadata links, skip link and view transitions.
+   years is the year-group heads; poster-card rules stay in header. */
+@import "page";
+@import "header";
+@import "rows";
+@import "pagination";
+@import "motion";
+@import "hub";
+@import "years";
+@import "back-to-top";
+@import "shell";

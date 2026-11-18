@@ -1,0 +1,52 @@
+/* Back-to-top: fixed quiet circle, appears after one viewport of scroll */
+.lab-top-btn {
+  position: fixed;
+  right: var(--lab-space-5);
+  bottom: var(--lab-space-6);
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  color: var(--lab-color-text-secondary);
+  background: var(--lab-color-surface);
+  border: 1px solid var(--lab-color-border-light);
+  border-radius: 50%;
+  /* Neumorphic soft raise (controlled clause): dual same-temperature shadows,
+     border + focus ring retained for accessibility. */
+  box-shadow:
+    inset 1px 1px 2px var(--lab-color-white),
+    inset -1px -1px 2px var(--lab-color-shadow-ink-08),
+    0 1px 2px var(--lab-color-shadow-ink-08);
+  cursor: pointer;
+  transition: color $lab-transition, border-color $lab-transition,
+    box-shadow $lab-transition;
+}
+
+.lab-top-btn:hover,
+.lab-top-btn:focus-visible {
+  color: var(--lab-color-link);
+  border-color: var(--lab-color-border-blue);
+  box-shadow:
+    inset 1px 1px 2px var(--lab-color-white),
+    inset -1px -1px 2px var(--lab-color-shadow-ink-08),
+    0 2px 6px var(--lab-color-shadow-ink-08);
+}
+
+.lab-top-btn:focus-visible {
+  outline: 2px solid var(--lab-color-focus-ring);
+  outline-offset: 2px;
+}
+
+.lab-top-btn svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+.lab-top-btn[hidden] {
+  display: none;
+}
+

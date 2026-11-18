@@ -215,3 +215,21 @@
 
 - id: lab_people_lead
   translation: '{{ . }}团队成员'
+
+- id: lab_search_loading
+  translation: 正在搜索…
+
+- id: lab_search_error
+  translation: 搜索暂时不可用，请检查网络后重试。
+
+- id: lab_search_retry
+  translation: 重试
+
+- id: lab_search_browse
+  translation: 浏览学术成果
+
+- id: lab_search_contact
+  translation: 联系我们
+
+- id: lab_filter_clear
+  translation: 清除筛选

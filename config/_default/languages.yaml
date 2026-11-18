@@ -42,6 +42,18 @@ en:
         address_label: Address
         map_aria: Lab location map
         people_lead: Lab members
+        section_leads:
+          publications: A complete view of our papers, patents, and awards — the lab's recent academic and research outputs.
+          publication: Peer-reviewed journal and conference papers from the lab.
+          patent: Granted and pending invention patents from the lab.
+          award: Research and competition awards received by the lab and its members.
+          project: Competitive and industry-funded research projects undertaken by the lab.
+          post: Lab news, announcements, and events.
+          research: The lab's main research directions and frontier topics.
+          people: The lab's faculty advisors and graduate students.
+          categories: Browse lab content by topic.
+          tags: Browse lab content by keyword.
+          publication_types: Browse papers by publication type.
       admit:
         sections:
           - title: M.S. / Ph.D.

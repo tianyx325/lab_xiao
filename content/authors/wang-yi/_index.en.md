@@ -15,18 +15,18 @@ social:
 enroll_year: 2024
 ---
 
-**王熠**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
+**Yi Wang** is an **M.S. student** at the School of Computer Science and Engineering, Xi'an University of Technology, supervised by Professor Zhaolin Xiao.
 
-**研究方向：** 弱光图像增强
+**Research Focus:** Low-light image enhancement
 
-**学习与研究**
+**Study and Research**
 
-- 熟练使用 *PyTorch* 开展深度学习实验
-- 熟悉图像算法设计与模型压缩优化
-- 先后发表期刊论文两篇，并拥有软件著作权
+- Proficient in using *PyTorch* for deep learning experiments
+- Familiar with image algorithm design and model compression and optimization
+- Has published two journal papers and holds software copyrights
 
-**个人**
+**Personal**
 
-- 责任心强
-- 性格沉稳
-- 有良好执行力
+- Strong sense of responsibility
+- Calm and composed
+- Good execution and follow-through

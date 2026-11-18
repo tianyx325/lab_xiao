@@ -6,9 +6,9 @@ date_end: 2022-12-01
 authors:
   - admin
 tags:
-  - 鉴微
-  - 红外图像处理
-  - 缺陷检测
+  - Jianwei
+  - Infrared Image Processing
+  - Defect Detection
 url_external: ''
 image:
   focal_point: Center

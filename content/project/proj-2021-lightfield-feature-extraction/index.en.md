@@ -6,10 +6,10 @@ date_end: 2022-12-01
 authors:
   - admin
 tags:
-  - 陕西省2020年度留学人员科技活动择优资助项目（优秀类）
-  - 优秀类
-  - 光场处理
-  - 计算机视觉
+  - Shaanxi 2020 Overseas Returnees Science and Technology Activity Grant (Excellent)
+  - Excellent
+  - Light Field Processing
+  - Computer Vision
 url_external: ''
 image:
   focal_point: Center

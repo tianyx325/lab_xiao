@@ -13,16 +13,16 @@ user_groups:
 enroll_year: 2026
 ---
 
-**田朝扬**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
+**Zhaoyang Tian** is an **M.S. student** at the School of Computer Science and Engineering, Xi'an University of Technology, supervised by Professor Zhaolin Xiao.
 
-**研究方向：** 事件相机深度估计
+**Research Focus:** Event-camera depth estimation
 
-**学习与研究**
+**Study and Research**
 
-- 本科主修计算机科学与技术
-- 掌握 Python、*PyTorch* 等工具
-- 目前处于文献阅读与入门阶段
+- Majored in Computer Science and Technology as an undergraduate
+- Familiar with tools such as Python and *PyTorch*
+- Currently in the introductory stage, focusing on literature reading
 
-**个人**
+**Personal**
 
-- 平时爱好羽毛球
+- Enjoys playing badminton in his spare time

@@ -1,15 +1,48 @@
 #!/usr/bin/env python3
 """WCAG 2.1 AA contrast audit for the lab design tokens.
 
+Color values are parsed from _tokens.scss (the single source of truth), so the
+audit can never go "all green" against stale hardcoded values after a token
+change. If a token cannot be parsed, the script fails loudly.
+
 Baseline pairs are the semantic text/surface combinations that actually ship.
 Rules: body text >= 4.5:1; large text / de-emphasized incidental text >= 3:1;
 non-text UI (focus ring) >= 3:1. Run after ANY change to _tokens.scss:
 
     python scripts/check_contrast.py
 
-Exit code 1 if any pair fails. Keep pairs in sync with AGENTS.md color rules.
+Exit code 1 if any pair fails or tokens cannot be read.
 """
+import re
 import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+TOKENS = ROOT / "modules" / "lab-ui" / "assets" / "scss" / "lab" / "_tokens.scss"
+
+
+def load_tokens(path: Path) -> dict[str, str]:
+    """Extract `$name: #HEX !default;` 6-digit hex values from SCSS."""
+    text = path.read_text(encoding="utf-8")
+    found: dict[str, str] = {}
+    for m in re.finditer(r"^\$(lab-[\w-]+):\s*#([0-9a-fA-F]{6})\b", text, re.M):
+        found[m.group(1)] = m.group(2).upper()
+    required = [
+        "lab-blue", "lab-blue-dark", "lab-ink", "lab-muted",
+        "lab-page-bg", "lab-card-bg",
+        "lab-night-page", "lab-night-raised", "lab-night-ink",
+        "lab-night-secondary", "lab-night-muted",
+    ]
+    missing = [k for k in required if k not in found]
+    if missing:
+        raise SystemExit(
+            f"Cannot parse required color tokens from {path}: {missing}. "
+            "Do not fall back to hardcoded values — fix the token file or the parser."
+        )
+    return found
+
+
+T = load_tokens(TOKENS)
 
 # sRGB relative luminance (WCAG 2.1)
 def _srgb(c):
@@ -39,19 +72,26 @@ def mix(a, b, wa):
         for i in (0, 2, 4)
     )
 
-BLUE = "4176E6"      # $lab-blue (user-specified primary)
-INK = "1E232C"       # $lab-ink
-MUTED = "6E737B"     # $lab-muted
+# Semantic values derived from the parsed tokens.
+BLUE = T["lab-blue"]                       # $lab-blue (user-specified primary)
+INK = T["lab-ink"]                         # $lab-ink
+MUTED = T["lab-muted"]                     # $lab-muted
+PAGE = T["lab-page-bg"]                    # $lab-page-bg
+CARD = T["lab-card-bg"]                    # $lab-card-bg
+DARK_LINK = T["lab-blue-dark"]             # $lab-blue-dark
+NIGHT_PAGE = T["lab-night-page"]           # $lab-night-page
+NIGHT_RAISED = T["lab-night-raised"]       # $lab-night-raised
+NIGHT_INK = T["lab-night-ink"]             # $lab-night-ink
+NIGHT_SECONDARY = T["lab-night-secondary"]  # $lab-night-secondary
+NIGHT_MUTED = T["lab-night-muted"]         # $lab-night-muted
+
 # User rule: no blue text deeper than the primary. Body links/buttons sit ON
 # the primary; hover/soft LIGHTEN via white mix. 4.19:1 (link) and 4.23:1
 # (white on primary) are user-approved exceptions to strict AA 4.5:1.
 LINK = BLUE
 LINK_HOVER = mix(BLUE, "FFFFFF", 0.86)   # --lab-color-link-hover
 LINK_SOFT = mix(BLUE, "FFFFFF", 0.80)    # --lab-color-link-soft
-TERTIARY = composite(INK, 0.55, "FDFEFF")  # --lab-color-text-tertiary
-DARK_LINK = "6C9CF2"
-
-PAGE, CARD = "F2FAFF", "FDFEFF"
+TERTIARY = composite(INK, 0.55, CARD)    # --lab-color-text-tertiary
 
 # (label, fg, bg, minimum)  — min: 4.5 body · 3.0 large/incidental/non-text
 PAIRS = [
@@ -66,11 +106,11 @@ PAIRS = [
     ("light: tertiary on card",        TERTIARY, CARD, 3.0),
     ("light: focus ring on page",      BLUE, PAGE, 3.0),
     ("light: brand as UI on page",     BLUE, PAGE, 3.0),
-    ("dark: text on card",             "F2F4F8", "1A1C20", 4.5),
-    ("dark: text-secondary on card",   "A9B0BC", "1A1C20", 4.5),
-    ("dark: muted on page",            "8A919E", "0A0A0A", 4.5),
-    ("dark: link on card",             DARK_LINK, "1A1C20", 4.5),
-    ("dark: focus ring on card",       DARK_LINK, "1A1C20", 3.0),
+    ("dark: text on card",             NIGHT_INK, NIGHT_RAISED, 4.5),
+    ("dark: text-secondary on card",   NIGHT_SECONDARY, NIGHT_RAISED, 4.5),
+    ("dark: muted on page",            NIGHT_MUTED, NIGHT_PAGE, 4.5),
+    ("dark: link on card",             DARK_LINK, NIGHT_RAISED, 4.5),
+    ("dark: focus ring on card",       DARK_LINK, NIGHT_RAISED, 3.0),
 ]
 
 def main():
@@ -84,7 +124,7 @@ def main():
     if failed:
         print(f"\n{failed} pair(s) below threshold — fix _tokens.scss, do not lower the baseline.")
         return 1
-    print(f"\nAll {len(PAIRS)} pairs pass WCAG AA.")
+    print(f"\nAll {len(PAIRS)} pairs pass WCAG AA (colors read from _tokens.scss).")
     return 0
 
 if __name__ == "__main__":

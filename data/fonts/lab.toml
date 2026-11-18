@@ -1,5 +1,5 @@
-# Lab type stack — parchment academic:
-# headings Source Serif 4 + Noto Serif SC; body DM Sans + Noto Sans SC.
+# Lab type stack — clean blue-white academic:
+# headings & body DM Sans + Noto Sans SC (system-ui fallback).
 # Selected via config/_default/params.yaml → appearance.font: lab
 # Keep google_fonts weights in sync with $lab-weight-* in assets/scss/lab/_tokens.scss
 

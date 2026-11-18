@@ -1,0 +1,154 @@
+/* ── Shared placeholders — the site-wide interaction/label vocabulary ──
+   These are the ONLY sanctioned visual forms for labels, text links and
+   "more" links. View files must @extend these, never hand-roll variants.
+   (Moved out of _views-people / _views-home so every view can see them.) */
+
+/* Read-only label: captions, identity roles, meta badges */
+%lab-label {
+  display: inline;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: $lab-text-xs;
+  font-weight: $lab-weight-medium;
+  letter-spacing: 0.04em;
+  line-height: $lab-leading-snug;
+  color: var(--lab-color-text-secondary);
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Underlined text link — 35% accent underline, quiet on rest, solid on hover */
+%lab-text-link {
+  display: inline;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-medium;
+  letter-spacing: 0.02em;
+  line-height: $lab-leading-snug;
+  color: var(--lab-color-link-soft) !important;
+  background: none !important;
+  border: none !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--lab-color-link) 35%, transparent) !important;
+  transition: border-color $lab-transition, opacity $lab-transition;
+  overflow-wrap: break-word;
+}
+
+%lab-text-link-hover {
+  color: var(--lab-color-link-hover) !important;
+  border-bottom-color: var(--lab-color-link-hover) !important;
+  opacity: 0.85;
+  background: none !important;
+}
+
+/* In-context accent link (article body / byline / meta values / DOI rows).
+   Unlike %lab-text-link this does NOT lock font-size/weight — a link inside
+   running text inherits its surrounding typography. Accent resolves to the
+   per-page --lab-article-accent, falling back to the global link color. */
+%lab-accent-link {
+  color: var(--lab-article-accent, var(--lab-color-link)) !important;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--lab-article-accent, var(--lab-color-link)) 35%, transparent);
+  transition: border-color $lab-transition, opacity $lab-transition;
+  overflow-wrap: break-word;
+}
+
+%lab-accent-link-hover {
+  border-bottom-color: var(--lab-article-accent, var(--lab-color-link));
+  opacity: 0.85;
+}
+
+/* Navigation link — the ONE affordance for "go to" semantics (hero CTAs,
+   查看更多, 全部, 进入方向). Brand ink + trailing arrow; hover slides the
+   arrow. Buttons (actions) and chips (tags) use their own components —
+   links never wear borders or padding. */
+%lab-more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: $lab-space-1;
+  font-size: $lab-text-sm;
+  letter-spacing: 0.04em;
+  line-height: $lab-leading-none !important;
+  color: var(--lab-color-link-soft) !important;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  font-weight: $lab-weight-medium;
+  transition: color $lab-transition, opacity $lab-transition;
+}
+
+%lab-more-link::after {
+  content: "\2192"; /* → */
+  font-size: 1.05em;
+  line-height: $lab-leading-none;
+  /* Optical alignment: "→" mass sits low in its em box — nudge up to the
+     perceived text baseline (token: $lab-align-arrow-nudge) */
+  transform: translateY($lab-align-arrow-nudge);
+  transition: transform $lab-transition;
+}
+
+%lab-more-link-hover {
+  color: var(--lab-color-link-hover) !important;
+  opacity: 0.82;
+  font-weight: $lab-weight-medium;
+}
+
+%lab-more-link-hover::after {
+  /* Keep the optical nudge on the Y axis while sliding right on hover */
+  transform: translate(3px, $lab-align-arrow-nudge);
+}
+
+/* ── External-link marker — the ONE site-wide 站内/站外 distinction ──
+   Rendered links get .lab-ext from the render-link hook; hand-written
+   template links add it explicitly. The NE arrow (↗) says "leaves this
+   site"; internal links stay quiet. */
+a.lab-ext::after {
+  content: "\2197"; /* ↗ */
+  display: inline-block;
+  margin-left: 0.25em;
+  font-size: 0.8em;
+  line-height: 1;
+  opacity: 0.7;
+  transition: transform $lab-transition;
+}
+
+a.lab-ext:hover::after {
+  transform: translate(1px, -1px);
+}
+
+/* The marker is a text-link affordance — never on buttons or icon links */
+a.btn.lab-ext::after,
+.lab-member-social a.lab-ext::after,
+#navbar-main a.lab-ext::after {
+  content: none;
+}
+
+/* NOTE: the old `.lab-text-link` concrete class was removed — it extended
+   %lab-more-link while sharing a name with %lab-text-link, and had zero
+   template usage. Concrete jump-link classes should be created only when
+   a template actually needs one, with an unambiguous name. */
+
+/* Scroll-reveal entrance (pairs with js/lab/lab-reveal.js — JS adds .lab-reveal
+   to targets, .lab-reveal-in when they enter the viewport).
+   JS skips when prefers-reduced-motion or no IntersectionObserver, so
+   elements stay visible by default; these rules only apply after JS opted in. */
+.lab-reveal {
+  opacity: 0;
+  transform: translateY($lab-space-3);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+  will-change: opacity, transform;
+}
+
+.lab-reveal-in {
+  opacity: 1;
+  transform: none;
+}

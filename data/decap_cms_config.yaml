@@ -13,10 +13,13 @@ backend:
   branch: main
 
 media_folder: static/uploads
-public_folder: /uploads
+# Relative to site_url so uploads resolve under the /lab_xiao/ sub-path.
+# A leading slash would point at https://tianyx325.github.io/uploads (wrong).
+public_folder: uploads
 
 site_url: https://tianyx325.github.io/lab_xiao/
-locale: zh_Hans
+# BCP 47 language tag (Sveltia uses hyphenated form).
+locale: zh-Hans
 
 i18n:
   structure: multiple_files
@@ -98,6 +101,9 @@ collections:
       - { label: 摘要（列表卡片用）, name: summary, widget: string, required: false }
       - { label: 学术摘要, name: abstract, widget: text, required: false }
       - { label: 精选（首页优先展示）, name: featured, widget: boolean, default: false, required: false, i18n: duplicate }
+      - { label: 研究方向（外键）, name: research, widget: relation, collection: research, display_fields: [title], value_field: '{{slug}}', multiple: true, required: false, i18n: duplicate, hint: 取方向页 slug；用于按方向筛选 }
+      - { label: 标签（主题词）, name: tags, widget: list, required: false, hint: 中文页填中文；英文页填英文译名（见 scripts/migrate_en_taxonomy.py 词表） }
+      - { label: 旧链接别名, name: aliases, widget: list, required: false, i18n: duplicate, hint: 仅填 URL 路径，如 /publication/old-slug/ }
       - { label: 成果配图, name: image, widget: file, required: false, i18n: duplicate }
 
   # ── 专利 Patent：content/patent/<slug>/index.md ──
@@ -133,6 +139,7 @@ collections:
         i18n: duplicate
         options:
           - { label: 已授权, value: granted }
+          - { label: 申请中, value: pending }
       - { label: 标签（仅主题词）, name: tags, widget: list, required: false, hint: 类型与状态已由上方字段表达，此处勿再填 }
       - { label: 专利链接, name: url_patent, widget: string, required: false, i18n: duplicate }
       - { label: PDF 链接, name: url_pdf, widget: string, required: false, i18n: duplicate }
@@ -237,7 +244,19 @@ collections:
       - { label: 日期, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, required: false, i18n: duplicate }
       - { label: 排序权重（小在前）, name: weight, widget: number, default: 100, i18n: duplicate }
       - { label: 卡片摘要, name: summary, widget: string }
-      - { label: 标签, name: tags, widget: list, required: false }
+      - { label: 标签, name: tags, widget: list, required: false, hint: 中文页填中文；英文页填英文译名 }
+      - label: 方向插画
+        name: placeholder_art
+        widget: select
+        required: false
+        i18n: duplicate
+        options:
+          - { label: 无, value: '' }
+          - { label: action, value: action }
+          - { label: agent, value: agent }
+          - { label: depth, value: depth }
+          - { label: lowlight, value: lowlight }
+        hint: 无配图时的方向卡插画标识
       - { label: 方向页正文（方向简介/研究内容/关键问题/技术路线）, name: body, widget: markdown }
 
   # ── 动态 Post：content/post/<slug>/index.md ──

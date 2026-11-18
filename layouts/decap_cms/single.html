@@ -1,0 +1,56 @@
+{{- /* Sveltia CMS admin entry. Overrides blox-plugin-decap-cms single.html.
+     Config is auto-generated from data/decap_cms_config.yaml → /admin/config.yml. */ -}}
+{{- $isEn := eq site.Language.Lang "en" -}}
+{{- $icon := resources.GetMatch "media/icon.svg" | default (resources.GetMatch "media/icon.png") -}}
+<!doctype html>
+<html lang="{{ site.Language.Locale | default "zh-Hans" }}">
+<head>
+  <meta content="noindex" name="robots">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>{{ cond $isEn "Content Management" "内容管理" }} · {{ site.Title }}</title>
+  {{- with $icon }}
+  <link rel="icon" href="{{ .RelPermalink }}" type="{{ if eq .MediaType.SubType "svg" }}image/svg+xml{{ else }}image/png{{ end }}">
+  {{- end }}
+  <style>
+    /* Self-contained tokens: the CMS shell does not load the site theme CSS.
+       Values mirror the lab light-theme tokens in _tokens.scss. */
+    :root {
+      --lab-cms-bg: #F2FAFF;
+      --lab-cms-ink: #1E232C;
+      --lab-cms-code-bg: #EEF4FA;
+      --lab-cms-space-block: 4rem;
+    }
+    html, body { margin: 0; padding: 0; height: 100%; background: var(--lab-cms-bg); }
+    #lab-cms-fallback {
+      display: none;
+      max-width: 40rem;
+      margin: var(--lab-cms-space-block) auto;
+      font-family: "DM Sans", "Noto Sans SC", system-ui, sans-serif;
+      color: var(--lab-cms-ink);
+      line-height: 1.8;
+    }
+    #lab-cms-fallback code { background: var(--lab-cms-code-bg); padding: 0.1em 0.4em; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div id="lab-cms-fallback">
+    <h2>{{ cond $isEn "Failed to load content management" "内容管理加载失败" }}</h2>
+    <p>{{ cond $isEn "Unable to load the CMS script" "无法加载 CMS 脚本" }} (<code>/admin/sveltia-cms.js</code>). {{ cond $isEn "Please make sure" "请确认" }} <code>static/admin/sveltia-cms.js</code> {{ cond $isEn "exists and is published with the site; see" "存在并已随站点发布，详见" }} <code>docs/CMS.md</code>.</p>
+  </div>
+  <script src="{{ "admin/sveltia-cms.js" | relURL }}"></script>
+  <script>
+    window.addEventListener('load', function () {
+      if (!window.__sveltiaCMS && !document.querySelector('sveltia-cms, [data-sveltia]')) {
+        // Sveltia mounts its UI into #root / custom element; if nothing appeared, show fallback.
+        setTimeout(function () {
+          if (!document.querySelector('#root, sveltia-cms') || document.querySelector('#root:empty')) {
+            var fb = document.getElementById('lab-cms-fallback');
+            if (fb) fb.style.display = 'block';
+          }
+        }, 4000);
+      }
+    });
+  </script>
+</body>
+</html>

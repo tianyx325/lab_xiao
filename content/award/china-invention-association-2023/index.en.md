@@ -7,5 +7,5 @@ summary: "Conducted research and application transformation around key technolog
 level: "national"
 rank: "second"
 tags:
-  - 创新创业
+  - Innovation and Entrepreneurship
 ---

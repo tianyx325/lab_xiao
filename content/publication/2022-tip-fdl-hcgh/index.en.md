@@ -16,8 +16,8 @@ summary: "Performs Harris detection in scale–disparity space and extracts Four
 abstract: |
   Many computer vision applications rely on feature detection and description, hence the need for computationally efficient and robust 4D light field (LF) feature detectors and descriptors. In this paper, we propose a novel light field feature descriptor based on the Fourier disparity layer representation, for light field imaging applications. After the Harris feature detection in a scale-disparity space, the proposed feature descriptor is then extracted using a circular neighborhood rather than a square neighborhood. It is shown to yield more accurate feature matching, compared with the LiFF LF feature, with a lower computational complexity. In order to evaluate the feature matching performance with the proposed descriptor, we generated a synthetic stereo LF dataset with ground truth matching points. Experimental results with synthetic and real-world dataset show that our solution outperforms existing methods in terms of both feature detection robustness and feature matching accuracy.
 tags:
-- 光场
-- 特征匹配
+- Light Field
+- Feature Matching
 featured: true
 url_html: "https://doi.org/10.1109/tip.2022.3202099"
 url_pdf: "https://hal.science/hal-03763691/document"

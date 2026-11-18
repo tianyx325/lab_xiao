@@ -5,7 +5,7 @@ date: 2026-09-01
 authors:
 - admin
 categories:
-- 通知公告
+- Announcements
 ---
 
 Welcome to the new students of the Class of 2026 joining the Intelligent Perception and Decision Lab.
