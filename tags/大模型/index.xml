@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>大模型 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml"/><description>大模型</description><generator>HugoBlox Kit (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Tue, 13 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/icon_hu_2dc8a7743be9bda7.png</url><title>大模型</title><link>https://tianyx325.github.io/lab_xiao/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/</link></image><item><title>大模型和智能体应用</title><link>https://tianyx325.github.io/lab_xiao/research/agent/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/research/agent/</guid><description>&lt;p&gt;面向大语言模型与智能体，本方向聚焦「感知—规划—执行」闭环中的决策能力建设：让模型能够理解任务目标、调用外部工具与知识，并在垂直场景中完成可评测、可落地的智能应用。&lt;/p&gt;
+&lt;h3 id="方向简介"&gt;方向简介&lt;/h3&gt;
+&lt;p&gt;实验室将大模型视为可组合的认知与决策组件，围绕单智能体能力增强、多智能体协作与领域知识注入开展研究，并在文旅、教育等场景中进行系统验证。相关实践包括高校文旅大模型《易见博观·智绘万象》等应用探索。&lt;/p&gt;
+&lt;h3 id="研究内容"&gt;研究内容&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;建模垂直应用&lt;/strong&gt;：大模型在垂直场景中的应用建模、提示工程与效果评测&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;增强单智能体&lt;/strong&gt;：任务规划、工具调用与外部知识检索增强&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;组织多智能体协作&lt;/strong&gt;：角色分工、任务分配与协商机制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制推理过程&lt;/strong&gt;：复杂任务下的多步推理、决策轨迹与可控生成&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;集成落地系统&lt;/strong&gt;：接口规范、安全边界与人机协同流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="关键问题"&gt;关键问题&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;规划失效&lt;/strong&gt;：开放环境下任务目标模糊、工具接口异构&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;协作一致性&lt;/strong&gt;：多智能体协作中的冲突消解与成本控制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;知识融合&lt;/strong&gt;：领域知识与通用模型能力的有效融合及幻觉抑制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;评测缺位&lt;/strong&gt;：应用效果缺乏统一、可复现的评测协议&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="技术路线"&gt;技术路线&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;刻画任务图&lt;/strong&gt;：以任务图 / 工作流表达规划过程，结合检索与工具调用降低幻觉&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;建设评测闭环&lt;/strong&gt;：设计可观测的运行日志与评测指标，支持迭代优化&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;构建示范系统&lt;/strong&gt;：在垂直场景中贯通数据、模型与交互界面&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>
