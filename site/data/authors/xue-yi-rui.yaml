@@ -1,0 +1,35 @@
+schema: hugoblox/author/v1
+slug: xue-yi-rui
+is_owner: false
+name:
+  display: 薛奕瑞
+  given: 奕瑞
+  family: 薛
+  alternate: ''
+  pronunciation: ''
+  pronouns: ''
+postnominals: []
+status:
+  icon: ''
+role: 研一
+bio: 研究方向为智能体。
+affiliations:
+- name: 西安理工大学计算机科学与技术学院
+  url: https://jsj.xaut.edu.cn/
+links:
+- icon: at-symbol
+  url: mailto:2903465406@qq.com
+  label: Email
+interests: []
+education: []
+user_groups:
+- 研一
+weight: 6
+i18n:
+  en:
+    name:
+      display: Yirui Xue
+      given: Yirui
+      family: Xue
+    role: M.S. Student (Year 1)
+    bio: 'Research focus: LLM-based agents.'

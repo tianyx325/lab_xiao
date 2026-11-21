@@ -1,0 +1,35 @@
+{{ define "main" }}
+<div class="mx-auto max-w-screen-xl px-6 py-10 md:px-12">
+  <article class="mx-auto max-w-3xl">
+    <p class="text-sm font-medium text-primary-600 dark:text-primary-400 mb-3">
+      <a href="{{ "award/" | relLangURL }}" class="hover:underline">{{ i18n "lab_nav_awards" | default "获奖" }}</a>
+    </p>
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{{ .Title }}</h1>
+    {{ with .Params.summary }}
+    <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">{{ . }}</p>
+    {{ end }}
+
+    <dl class="mt-8 grid gap-3 text-sm text-slate-700 dark:text-slate-300">
+      {{ with .Date }}
+      <div class="flex gap-3"><dt class="w-24 shrink-0 text-slate-500">{{ i18n "lab_label_award_year" | default "年份" }}</dt><dd>{{ .Format "2006" }}</dd></div>
+      {{ end }}
+      {{ with .Params.level }}
+      <div class="flex gap-3"><dt class="w-24 shrink-0 text-slate-500">{{ i18n "lab_label_level" | default "级别" }}</dt><dd>{{ . }}</dd></div>
+      {{ end }}
+      {{ with .Params.rank }}
+      <div class="flex gap-3"><dt class="w-24 shrink-0 text-slate-500">{{ i18n "lab_label_rank" | default "等级" }}</dt><dd>{{ . }}</dd></div>
+      {{ end }}
+      {{ with .Params.authors }}
+      <div class="flex gap-3"><dt class="w-24 shrink-0 text-slate-500">{{ i18n "lab_label_awardees" | default "获奖人" }}</dt><dd>{{ delimit . " · " }}</dd></div>
+      {{ end }}
+      {{ with .Params.tags }}
+      <div class="flex gap-3"><dt class="w-24 shrink-0 text-slate-500">{{ i18n "lab_label_category" | default "分类" }}</dt><dd>{{ delimit . " · " }}</dd></div>
+      {{ end }}
+    </dl>
+
+    {{ with .Content }}
+    <div class="prose dark:prose-invert mt-10 max-w-none">{{ . }}</div>
+    {{ end }}
+  </article>
+</div>
+{{ end }}

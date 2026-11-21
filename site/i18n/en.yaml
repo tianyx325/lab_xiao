@@ -1,0 +1,62 @@
+- id: lab_nav_patents
+  translation: Patents
+- id: lab_nav_awards
+  translation: Awards
+- id: lab_nav_research
+  translation: Research
+- id: lab_label_patent_no
+  translation: Patent No.
+- id: lab_label_filed
+  translation: Filed
+- id: lab_label_granted_date
+  translation: Granted
+- id: lab_label_status
+  translation: Status
+- id: lab_label_type
+  translation: Type
+- id: lab_label_inventors
+  translation: Inventors
+- id: lab_label_keywords
+  translation: Keywords
+- id: lab_label_fulltext
+  translation: Full text
+- id: lab_label_award_year
+  translation: Year
+- id: lab_label_level
+  translation: Level
+- id: lab_label_rank
+  translation: Rank
+- id: lab_label_awardees
+  translation: Awardees
+- id: lab_label_category
+  translation: Category
+- id: lab_search_title_abstract
+  translation: Search title or abstract…
+- id: lab_search_papers
+  translation: Search papers…
+- id: lab_search_news
+  translation: Search news…
+- id: lab_search_projects
+  translation: Search projects…
+- id: lab_search_patents
+  translation: Search patents…
+- id: lab_search_awards
+  translation: Search awards…
+- id: lab_search_research
+  translation: Search research…
+- id: lab_filter_year
+  translation: Year
+- id: lab_filter_type
+  translation: Type
+- id: lab_filter_status
+  translation: Status
+- id: lab_filter_empty
+  translation: No matching items
+- id: lab_status_granted
+  translation: Granted
+- id: lab_status_pending
+  translation: Pending
+- id: lab_status_ongoing
+  translation: Ongoing
+- id: lab_status_completed
+  translation: Completed

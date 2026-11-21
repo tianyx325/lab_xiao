@@ -1,0 +1,69 @@
+zh:
+  locale: zh-Hans
+  title: 智能感知与决策实验室
+  params:
+    description: 本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。
+  menu:
+    main:
+      - name: 首页
+        url: /
+        weight: 5
+      - name: 方向
+        url: research/
+        weight: 10
+      - name: 论文
+        url: publications/
+        weight: 20
+      - name: 专利
+        url: patent/
+        weight: 25
+      - name: 获奖
+        url: award/
+        weight: 28
+      - name: 项目
+        url: projects/
+        weight: 30
+      - name: 成员
+        url: people/
+        weight: 40
+      - name: 动态
+        url: blog/
+        weight: 50
+      - name: 联系
+        url: contact/
+        weight: 60
+
+en:
+  locale: en-US
+  title: IPD Lab
+  params:
+    description: Research on large models and agents, low-light vision, depth estimation, and human action recognition.
+  menu:
+    main:
+      - name: Home
+        url: /
+        weight: 5
+      - name: Research
+        url: research/
+        weight: 10
+      - name: Publications
+        url: publications/
+        weight: 20
+      - name: Patents
+        url: patent/
+        weight: 25
+      - name: Awards
+        url: award/
+        weight: 28
+      - name: Projects
+        url: projects/
+        weight: 30
+      - name: People
+        url: people/
+        weight: 40
+      - name: News
+        url: blog/
+        weight: 50
+      - name: Contact
+        url: contact/
+        weight: 60

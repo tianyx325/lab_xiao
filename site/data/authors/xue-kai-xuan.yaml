@@ -1,0 +1,35 @@
+schema: hugoblox/author/v1
+slug: xue-kai-xuan
+is_owner: false
+name:
+  display: 薛凯旋
+  given: 凯旋
+  family: 薛
+  alternate: ''
+  pronunciation: ''
+  pronouns: ''
+postnominals: []
+status:
+  icon: ''
+role: 研三
+bio: 研究方向为弱光图像增强。
+affiliations:
+- name: 西安理工大学计算机科学与技术学院
+  url: https://jsj.xaut.edu.cn/
+links:
+- icon: at-symbol
+  url: mailto:xkx.kayle@qq.com
+  label: Email
+interests: []
+education: []
+user_groups:
+- 研三
+weight: 4
+i18n:
+  en:
+    name:
+      display: Kaixuan Xue
+      given: Kaixuan
+      family: Xue
+    role: M.S. Student (Year 3)
+    bio: 'Research focus: low-light image enhancement.'

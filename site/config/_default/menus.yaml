@@ -1,0 +1,2 @@
+# 默认菜单由 languages.yaml 按语言覆盖；此处保留兜底
+main: []

@@ -1,0 +1,35 @@
+schema: hugoblox/author/v1
+slug: zhou-guang-bin
+is_owner: false
+name:
+  display: 周广彬
+  given: 广彬
+  family: 周
+  alternate: ''
+  pronunciation: ''
+  pronouns: ''
+postnominals: []
+status:
+  icon: ''
+role: 博二
+bio: 研究方向为弱光增强与单目深度估计。
+affiliations:
+- name: 西安理工大学计算机科学与技术学院
+  url: https://jsj.xaut.edu.cn/
+links:
+- icon: at-symbol
+  url: mailto:alexgbzhou@gmail.com
+  label: Email
+interests: []
+education: []
+user_groups:
+- 博士生
+weight: 1
+i18n:
+  en:
+    name:
+      display: Guangbin Zhou
+      given: Guangbin
+      family: Zhou
+    role: Ph.D. Student (Year 2)
+    bio: 'Research focus: low-light enhancement and monocular depth estimation.'

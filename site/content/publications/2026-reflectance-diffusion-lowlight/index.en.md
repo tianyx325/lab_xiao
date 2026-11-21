@@ -1,0 +1,54 @@
+---
+title: Reflectance oriented diffusion with normalizing flow illumination enhancement
+  for the low-light images
+authors:
+- Hang Yang
+- admin
+- su-haonan
+date: '2026-06-01T00:00:00Z'
+publication_types:
+- article-journal
+publication:
+  name: Journal of Visual Communication and Image Representation
+  volume: '118'
+  pages: '104819'
+summary: Enhances illumination with a normalizing flow, restores reflectance detail
+  with a diffusion model, and corrects saturation after recombination, balancing enhancement
+  and noise suppression.
+abstract: 'Balancing illumination enhancement and noise suppression represents a fundamental
+  challenge in low-light image enhancement (LLIE). Existing methods often suffer from
+  artifacts induced during brightness adjustment, including detail loss, spatially
+  varying illumination, and color distortion. Diverging from conventional single-path
+  diffusion-based LLIE approaches, this paper proposes a novel dual-branch framework.
+  It consists of a normalizing flow branch, a diffusion branch, and a saturation post-adjustment
+  module. These components are designed to enhance illumination, recover details,
+  and optimize saturation, respectively. Following Retinex decomposition, the illumination
+  component is enhanced through the invertible mapping of the normalizing flow. This
+  approach provides a deterministic transformation and effectively minimizes artifacts.
+  Concurrently, the diffusion branch recovers reflectance details while effectively
+  suppressing severe noise inherent in dark regions. Then, a saturation post-adjustment
+  module compensates for saturation degradation arising from the multiplicative recombination
+  of illumination and reflectance. Most importantly, the proposed framework achieves
+  an optimal trade-off between illumination enhancement and detail preservation. Extensive
+  experiments demonstrate state-of-the-art performance, achieving 26.62 dB PSNR/0.94
+  SSIM on LOL and +1.26/+1.96 dB PSNR gains on LSRW, while improving downstream detection
+  on ExDark to 0.60 mAP@0.5/0.31 AP@[0.5:0.95]. Code is available at https://github.com/yangpipi-01/LLIE.
+
+  '
+featured: false
+tags:
+- 弱光增强
+- 深度学习
+hugoblox:
+  ids:
+    doi: 10.1016/j.jvcir.2026.104819
+links:
+- type: url
+  url: https://doi.org/10.1016/j.jvcir.2026.104819
+- type: code
+  url: https://github.com/yangpipi-01/LLIE
+ccf: C
+publication_short: JVCIR
+research:
+- low-light
+---

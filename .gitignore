@@ -1,0 +1,9 @@
+tools/
+*.zip
+site/public/
+site/resources/
+site/node_modules/
+site/.hugo_build.lock
+.DS_Store
+Thumbs.db
+*.log

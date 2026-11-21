@@ -1,0 +1,10 @@
+{{ if .IsSection }}
+  {{ $sec := .Section }}
+  {{ if or (eq $sec "patent") (eq $sec "award") (eq $sec "publications") (eq $sec "projects") (eq $sec "blog") (eq $sec "research") }}
+    {{ $js := resources.Get "js/lab-list-filter.js" }}
+    {{ if $js }}
+      {{ $js = $js | minify | fingerprint "sha256" }}
+      <script src="{{ $js.RelPermalink }}" defer></script>
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,7 @@
+build:
+  hugo_version: '0.168.0'
+deploy:
+  host: 'github-pages'
+template:
+  id: "lab-xiao"
+  name: "IPD Lab"

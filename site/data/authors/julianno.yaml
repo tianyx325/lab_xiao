@@ -1,0 +1,35 @@
+schema: hugoblox/author/v1
+slug: julianno
+is_owner: false
+name:
+  display: Julianno
+  given: Julianno
+  family: Julianno
+  alternate: ''
+  pronunciation: ''
+  pronouns: ''
+postnominals: []
+status:
+  icon: ''
+role: 博一
+bio: 研究方向为Monocular depth estimation in low-light environments。
+affiliations:
+- name: 西安理工大学计算机科学与技术学院
+  url: https://jsj.xaut.edu.cn/
+links:
+- icon: at-symbol
+  url: mailto:juliochinaone@gmail.com
+  label: Email
+interests: []
+education: []
+user_groups:
+- 博士生
+weight: 1
+i18n:
+  en:
+    name:
+      display: Julianno
+      given: Julianno
+      family: Julianno
+    role: Ph.D. Student (Year 1)
+    bio: 'Research focus: monocular depth estimation in low-light environments.'

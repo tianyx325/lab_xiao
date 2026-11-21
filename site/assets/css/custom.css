@@ -1,0 +1,97 @@
+/* Lab site — brand polish on HugoBlox Kit / Tailwind */
+
+:root {
+  --lab-blue: #4176e6;
+  --lab-blue-dark: #6c9cf2;
+  --lab-page: #f2faff;
+  --lab-ink: #1e232c;
+  --lab-muted: #6e737b;
+  --lab-card: #fdfeff;
+  --lab-border: rgba(30, 35, 44, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--lab-page);
+  color: var(--lab-ink);
+  font-family:
+    "Segoe UI",
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.dark body {
+  background-color: #0b1220;
+  color: #e5e7eb;
+}
+
+/* Links in prose */
+.prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  color: var(--lab-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.dark .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  color: var(--lab-blue-dark);
+}
+
+/* Quieter cards / collections */
+.lab-list__item a {
+  transition: color 0.15s ease;
+}
+
+.lab-list__filters {
+  border-color: var(--lab-border);
+}
+
+.lab-list__item {
+  border-color: var(--lab-border);
+}
+
+/* Landing: tighten hero markdown blocks */
+#hero .prose h1,
+#hero h1,
+section#hero h2 {
+  letter-spacing: -0.02em;
+}
+
+/* Soften default Kit card shadows on home collections */
+main .shadow-lg {
+  box-shadow:
+    0 1px 2px rgba(30, 35, 44, 0.04),
+    0 8px 24px rgba(65, 118, 230, 0.06);
+}
+
+main .ring-1 {
+  --tw-ring-color: var(--lab-border);
+}
+
+/* Prefer cool white surfaces */
+.bg-white\/90 {
+  background-color: color-mix(in srgb, var(--lab-card) 92%, transparent);
+}
+
+/* Focus ring uses brand blue */
+:focus-visible {
+  outline: 2px solid var(--lab-blue);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

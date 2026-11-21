@@ -1,0 +1,35 @@
+schema: hugoblox/author/v1
+slug: zhou-he-xin
+is_owner: false
+name:
+  display: 周贺鑫
+  given: 贺鑫
+  family: 周
+  alternate: ''
+  pronunciation: ''
+  pronouns: ''
+postnominals: []
+status:
+  icon: ''
+role: 研二
+bio: 研究方向为大模型应用。
+affiliations:
+- name: 西安理工大学计算机科学与技术学院
+  url: https://jsj.xaut.edu.cn/
+links:
+- icon: at-symbol
+  url: mailto:zhx_291217@163.com
+  label: Email
+interests: []
+education: []
+user_groups:
+- 研二
+weight: 5
+i18n:
+  en:
+    name:
+      display: Hexin Zhou
+      given: Hexin
+      family: Zhou
+    role: M.S. Student (Year 2)
+    bio: 'Research focus: LLM applications.'

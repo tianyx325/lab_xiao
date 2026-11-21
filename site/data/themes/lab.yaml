@@ -1,0 +1,41 @@
+# IPD Lab theme — brand blue aligned with legacy $lab-blue
+hugoblox:
+  meta:
+    format: "hugoblox-theme@1"
+    name: "IPD Lab"
+    vendor: "lab-xiao"
+    version: "1.0.0"
+    license: "MIT"
+    description: "Lab brand: #4176E6 on cool white"
+
+  type: "dual"
+
+  light:
+    colors:
+      primary: "#4176E6"
+      secondary: "#1E232C"
+      neutral: "#1E232C"
+    surfaces:
+      background: "#F2FAFF"
+      foreground: "#1E232C"
+      header:
+        background: "#FFFFFF"
+        foreground: "#1E232C"
+      footer:
+        background: "#F2FAFF"
+        foreground: "#6E737B"
+
+  dark:
+    colors:
+      primary: "#6C9CF2"
+      secondary: "#E5E7EB"
+      neutral: "#E5E7EB"
+    surfaces:
+      background: "#0B1220"
+      foreground: "#E5E7EB"
+      header:
+        background: "#111827"
+        foreground: "#F9FAFB"
+      footer:
+        background: "#0B1220"
+        foreground: "#9CA3AF"

@@ -1,0 +1,45 @@
+---
+title: Aliasing Detection and Reduction Scheme on Angularly Undersampled Light Fields
+authors:
+- admin
+- Qing Wang
+- Guoqing Zhou
+- Jingyi Yu
+date: '2017-05-01T00:00:00Z'
+publication_types:
+- article-journal
+publication:
+  name: IEEE Transactions on Image Processing
+  volume: '26'
+  issue: '5'
+  pages: 2103-2115
+summary: Locates aliasing regions caused by angular undersampling via spatial analysis
+  during refocusing, and removes aliasing only in those regions.
+abstract: 'When using plenoptic camera for digital refocusing, angular undersampling
+  can cause severe (angular) aliasing artifacts. Previous approaches have focused
+  on avoiding aliasing by pre-processing the acquired light field via prefiltering,
+  demosaicing, reparameterization, and so on. In this paper, we present a different
+  solution that first detects and then removes angular aliasing at the light field
+  refocusing stage. Different from previous frequency domain aliasing analysis, we
+  carry out a spatial domain analysis to reveal whether the angular aliasing would
+  occur and uncover where in the image it would occur. The spatial analysis also facilitates
+  easy separation of the aliasing versus non-aliasing regions and angular aliasing
+  removal. Experiments on both synthetic scene and real light field data sets (camera
+  array and Lytro camera) demonstrate that our approach has a number of advantages
+  over the classical prefiltering and depth-dependent light field rendering techniques.
+
+  '
+featured: false
+tags:
+- 光场成像
+hugoblox:
+  ids:
+    doi: 10.1109/TIP.2017.2668613
+links:
+- type: url
+  url: https://doi.org/10.1109/TIP.2017.2668613
+ccf: A
+publication_short: IEEE TIP
+research:
+- depth
+---

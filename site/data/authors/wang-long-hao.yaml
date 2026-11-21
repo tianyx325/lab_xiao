@@ -1,0 +1,35 @@
+schema: hugoblox/author/v1
+slug: wang-long-hao
+is_owner: false
+name:
+  display: 王龙豪
+  given: 龙豪
+  family: 王
+  alternate: ''
+  pronunciation: ''
+  pronouns: ''
+postnominals: []
+status:
+  icon: ''
+role: 研二
+bio: 研究方向为基于骨骼的人体动作识别。
+affiliations:
+- name: 西安理工大学计算机科学与技术学院
+  url: https://jsj.xaut.edu.cn/
+links:
+- icon: at-symbol
+  url: mailto:wlh2312087@163.com
+  label: Email
+interests: []
+education: []
+user_groups:
+- 研二
+weight: 2
+i18n:
+  en:
+    name:
+      display: Longhao Wang
+      given: Longhao
+      family: Wang
+    role: M.S. Student (Year 2)
+    bio: 'Research focus: skeleton-based human action recognition.'
