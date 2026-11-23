@@ -69,14 +69,14 @@ checkSection("projects", ["title"]);
 checkSection("patent", ["title"]);
 checkSection("award", ["title"]);
 
-// Dual-authority guard: outcomes hubs must not own entity bundles
+// Dual-authority guard: outcome hubs must not own entity bundles
 for (const sub of ["patents", "awards"]) {
-  const hub = join(content, "outcomes", sub);
+  const hub = join(content, "publications", sub);
   if (!existsSync(hub)) continue;
   for (const name of readdirSync(hub)) {
     const p = join(hub, name);
     if (statSync(p).isDirectory() && !name.startsWith(".")) {
-      errors.push(`outcomes/${sub}/${name}: entity bundle not allowed — keep entities in content/patent or content/award`);
+      errors.push(`publications/${sub}/${name}: entity bundle not allowed — keep entities in content/patent or content/award`);
     }
   }
 }
