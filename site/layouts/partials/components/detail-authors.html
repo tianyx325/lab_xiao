@@ -3,9 +3,9 @@
 {{- with $page.Params.authors -}}
   {{- $n := len . -}}
   {{- range $i, $a := . -}}
-    {{- partial "components/resolve-author.html" (dict "id" $a "page" $page) -}}
-    {{- $name := $page.Scratch.Get "lab_author_name" -}}
-    {{- $href := $page.Scratch.Get "lab_author_href" -}}
+    {{- $author := partial "components/resolve-author.html" (dict "id" $a) -}}
+    {{- $name := $author.name -}}
+    {{- $href := $author.href -}}
     {{- if $href -}}
       <a href="{{ $href }}">{{ $name }}</a>
     {{- else -}}

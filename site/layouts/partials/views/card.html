@@ -16,10 +16,10 @@
 
 {{ $authorItems := slice }}
 {{ range $item.Params.authors }}
-  {{ partial "components/resolve-author.html" (dict "id" . "page" $item) }}
+  {{ $author := partial "components/resolve-author.html" (dict "id" .) }}
   {{ $authorItems = $authorItems | append (dict
-    "name" ($item.Scratch.Get "lab_author_name")
-    "href" ($item.Scratch.Get "lab_author_href")) }}
+    "name" $author.name
+    "href" $author.href) }}
 {{ end }}
 
 {{ $year := $item.Date.Format "2006" }}
