@@ -1,2 +1,0 @@
-{{- $lab := site.Params.lab | default dict -}}
-{{- with $lab.seo_description -}}{{ . }}{{- else -}}{{ site.Params.marketing.seo.description | default "" }}{{- end -}}
