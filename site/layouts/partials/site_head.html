@@ -1,3 +1,6 @@
+{{- /* Intentional slim override of the vendored site_head: loads only the
+       lab host CSS/fonts/meta and drops unused theme features (CDN search,
+       maps, carousel, MathJax). Extend via hooks/head-* instead of editing. */ -}}
 {{ $scr := .Scratch }}
 <head>
   <meta charset="utf-8" />
@@ -25,9 +28,5 @@
   {{ partial "head/meta.html" . }}
 
   {{/* EXTENSIBILITY HOOK: HEAD-END */}}
-  {{/* Deprecated custom_head hook */}}
-  {{ if templates.Exists "partials/custom_head.html" }}
-    {{ partial "custom_head.html" . }}
-  {{ end }}
   {{ partial "blox-core/functions/get_hook.html" (dict "hook" "head-end" "context" .) }}
 </head>

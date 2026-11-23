@@ -25,7 +25,7 @@ sections:
       columns: '1'
       css_class: lab-block-head
 
-  - block: people
+  - block: lab-people
     content:
       title:
       user_groups:

@@ -17,7 +17,7 @@
 {{- $map_api_key := site.Params.features.map.api_key | default "" -}}
 {{- $sections := $admit.sections | default slice -}}
 
-{{/* Leaflet assets: loaded in partials/custom_head.html for provider=amap */}}
+{{/* Leaflet assets: loaded in hooks/head-end/lab-head.html for provider=amap */}}
 
 <div class="lab-contact lab-list-page">
   <header class="lab-list-header">

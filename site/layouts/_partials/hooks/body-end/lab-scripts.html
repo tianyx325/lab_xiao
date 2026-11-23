@@ -56,3 +56,10 @@
   {{- end -}}
 <script src="{{ $js.RelPermalink }}" defer></script>
 {{- end -}}
+
+{{/* Nav toggle/drawer — separate file, loaded after the page bundle. */}}
+{{ $nav := resources.Get "js/lab-nav.js" }}
+{{ if $nav }}
+  {{ $nav = $nav | minify | fingerprint "sha256" }}
+  <script src="{{ $nav.RelPermalink }}" defer></script>
+{{ end }}

@@ -1,3 +1,6 @@
+{{- /* Intentional slim override of the vendored site_js: loads only the lab
+       vendor bundle and its core JS, dropping unused theme JS (search, maps,
+       carousel, publications, announcements). Extend via hooks/body-end. */ -}}
 {{ $js := hugo.Data.assets.js }}
 
 {{ partial "js/vendor.html" . }}
@@ -44,8 +47,4 @@
 {{ partial "js/features.html" . }}
 
 {{/* EXTENSIBILITY HOOK: BODY-END */}}
-{{/* Deprecated custom_js hook */}}
-{{ if templates.Exists "partials/custom_js.html" }}
-  {{ partial "custom_js.html" . }}
-{{ end }}
 {{ partial "blox-core/functions/get_hook.html" (dict "hook" "body-end" "context" .) }}

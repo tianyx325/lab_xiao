@@ -102,6 +102,8 @@ header:
   on_scroll: stay
   navbar:
     enable: true
+    # Custom header block (partials/components/headers/lab-navbar.html)
+    block: lab-navbar
     # r: logo left, destination links + theme/lang on the right
     align: r
     show_logo: true
@@ -166,7 +168,7 @@ features:
       category: ''
       category_id: ''
   map:
-    # amap：custom_head 注入本地 Leaflet + wowchemy-map.js 用高德瓦片
+    # amap：hooks/head-end/lab-head.html 注入本地 Leaflet + wowchemy-map.js 用高德瓦片
     # （主题仅对 mapnik/mapbox 拉 CDN；短代码内 script 会被 markdown 丢掉）
     provider: 'amap'
     api_key: ''
