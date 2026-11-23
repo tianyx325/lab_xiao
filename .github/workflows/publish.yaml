@@ -2,7 +2,6 @@ name: Deploy to GitHub Pages
 
 env:
   HUGO_VERSION: '0.168.0'
-  SITE_BASE_URL: 'https://tianyx325.github.io/lab_xiao/'
 
 on:
   push:
@@ -52,7 +51,7 @@ jobs:
       - name: Build
         env:
           HUGO_ENVIRONMENT: production
-        run: hugo --minify --cleanDestinationDir --baseURL "${{ env.SITE_BASE_URL }}"
+        run: hugo --minify --cleanDestinationDir
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4

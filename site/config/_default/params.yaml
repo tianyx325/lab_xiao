@@ -5,8 +5,8 @@
 
 # ---------------------------------------------------------------------------
 # Lab identity — SINGLE SOURCE OF TRUTH for branding / contact / UI chrome
-# After editing `lab:`, run:  py -3 scripts/sync_lab_identity.py
-# (syncs hugo.yaml title, languages.yaml, marketing.seo, footer.copyright)
+# After editing `lab:`, manually keep in sync:
+# hugo.yaml title, languages.yaml titles/descriptions, marketing.seo, footer.copyright.
 # Theme primary: keep data/themes/minimal.toml primary == assets/scss/lab/_tokens.scss $lab-blue
 # ---------------------------------------------------------------------------
 lab:
@@ -80,7 +80,7 @@ marketing:
   seo:
     site_type: Organization
     local_business_type: ''
-    # DERIVED from lab.* — do not edit by hand; run sync_lab_identity.py
+    # Keep in sync with lab.* (no sync script — edit both places).
     org_name: '智能感知与决策实验室'
     description: '本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。'
     twitter: ''
@@ -118,7 +118,7 @@ power_ups:
 
 footer:
   copyright:
-    # DERIVED from lab.* — do not edit by hand; run sync_lab_identity.py
+    # Keep in sync with lab.* (no sync script — edit both places).
     notice: '智能感知与决策实验室'
     license:
       enable: false

@@ -19,8 +19,15 @@ cd D:\code-tyx\lab-xiao\lab-xiao\site
 npm run dev
 ```
 
-需要仓库内 `tools/dart-sass` 与 `tools/go`（Hugo Extended 0.168）。  
-手动等价：`site/scripts/dev.ps1`（清 `resources/_gen` + `hugo server --disableFastRender`）。
+需要 Hugo Extended 0.168 和 Dart Sass 1.77.8（仓库内 `tools/dart-sass` 已自带）。  
+`dev.ps1` 会自动把 `tools/dart-sass` 加入 PATH；在 Bash 下直接跑 `hugo` 前需手动：
+
+```bash
+export PATH="$PWD/tools/dart-sass/dart-sass:$PATH"
+```
+
+手动预览等价：清 `site/resources/_gen` 后 `hugo server --disableFastRender`。
+`tools/go` 仅在改动 `go.mod` 重新 `hugo mod vendor` 时需要。
 
 ## 校验
 
@@ -33,9 +40,10 @@ npm run check   # theme sync + content schema + lab 裸值扫描
 
 | 路径 | 说明 |
 |---|---|
-| `site/` | Hugo 站点（内容 + `_vendor` blox-bootstrap） |
+| `site/` | Hugo 站点（内容 + 已提交的 `_vendor`，离线可构建） |
 | `site/assets/scss/lab/` | **唯一**视觉层（tokens → chrome → views） |
 | `site/content/` | Markdown page bundles（契约见 [`site/CONTENT-SCHEMA.md`](site/CONTENT-SCHEMA.md)） |
 | `.github/workflows/` | 构建与发布 |
 
-生产：`https://lab.xaut.edu.cn/` · Pages：`https://tianyx325.github.io/lab_xiao/`
+部署：GitHub Pages `https://tianyx325.github.io/lab_xiao/`（`baseURL` 在 `site/config/_default/hugo.yaml`）。
+包管理：npm（`site/package-lock.json`）。Hugo 版本统一定在 `0.168.0`。

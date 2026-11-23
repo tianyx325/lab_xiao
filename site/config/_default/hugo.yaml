@@ -1,6 +1,6 @@
 title: 智能感知与决策实验室
-# 生产域名；GitHub Pages 由 CI 用 SITE_BASE_URL 覆盖为 /lab_xiao/ 子路径。
-baseURL: 'https://lab.xaut.edu.cn/'
+# GitHub Pages 部署地址（唯一部署目标）。
+baseURL: 'https://tianyx325.github.io/lab_xiao/'
 
 defaultContentLanguage: zh
 hasCJKLanguage: true
