@@ -5,8 +5,8 @@ Entities live in **one** directory each. Hubs are shells that list those entitie
 | User URL | Hub shell | Entity bundles |
 |---|---|---|
 | `/publications/` | `content/publications/_index.md` | `content/publications/*` |
-| `/publications/patents/` | `content/outcomes/patents/_index.md` (`hub_section: patent`) | `content/patent/*` |
-| `/publications/awards/` | `content/outcomes/awards/_index.md` (`hub_section: award`) | `content/award/*` |
+| `/publications/patents/` | `content/publications/patents/_index.md` (`hub_section: patent`) | `content/patent/*` |
+| `/publications/awards/` | `content/publications/awards/_index.md` (`hub_section: award`) | `content/award/*` |
 | `/people/` | `content/people/_index.md` | `content/authors/*` |
 | `/projects/` | `content/projects/_index.md` | `content/projects/*` |
 | `/research/` | `content/research/_index.md` | research pages |
@@ -18,6 +18,7 @@ Retired list URLs (redirect only — do not put entities here as second source):
 - `/patent/` → `/publications/patents/` (`content/patent/_index.md` layout: redirect)
 - `/award/` → `/publications/awards/` (`content/award/_index.md` layout: redirect)
 - `/outcomes/` → `/publications/` (alias on publications)
+- `/outcomes/awards/`, `/outcomes/patents/` → hub aliases on the new hubs
 
 ## Front matter contracts
 
