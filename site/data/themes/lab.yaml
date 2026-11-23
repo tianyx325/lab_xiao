@@ -1,41 +1,41 @@
-# IPD Lab theme — brand blue aligned with legacy $lab-blue
+# IPD Lab — LangChain-aligned ladders, brand #4176E6
 hugoblox:
   meta:
     format: "hugoblox-theme@1"
     name: "IPD Lab"
     vendor: "lab-xiao"
-    version: "1.0.0"
+    version: "1.1.0"
     license: "MIT"
-    description: "Lab brand: #4176E6 on cool white"
+    description: "Brand #4176E6 · CTA #BEB4FD · ink #000/#FFF · LC spacing"
 
   type: "dual"
 
   light:
     colors:
       primary: "#4176E6"
-      secondary: "#1E232C"
-      neutral: "#1E232C"
+      secondary: "#000000"
+      neutral: "#666666"
     surfaces:
       background: "#F2FAFF"
-      foreground: "#1E232C"
+      foreground: "#000000"
       header:
         background: "#FFFFFF"
-        foreground: "#1E232C"
+        foreground: "#000000"
       footer:
         background: "#F2FAFF"
-        foreground: "#6E737B"
+        foreground: "#666666"
 
   dark:
     colors:
-      primary: "#6C9CF2"
-      secondary: "#E5E7EB"
-      neutral: "#E5E7EB"
+      primary: "#6B94EC"
+      secondary: "#FFFFFF"
+      neutral: "#AAAAAA"
     surfaces:
-      background: "#0B1220"
-      foreground: "#E5E7EB"
+      background: "#030710"
+      foreground: "#FFFFFF"
       header:
-        background: "#111827"
-        foreground: "#F9FAFB"
+        background: "#161F34"
+        foreground: "#FFFFFF"
       footer:
-        background: "#0B1220"
-        foreground: "#9CA3AF"
+        background: "#030710"
+        foreground: "#AAAAAA"

@@ -1,0 +1,484 @@
+﻿/* Layer 4 · shared controls: buttons, page titles, card chrome
+   Source: template.scss lines 592-772 (order-preserving split). */
+/* Buttons — 3 variants: wash (= LC violet CTA) · outline · icon + .btn-sm.
+   .btn-primary → wash. Outline stays brand blue. */
+.lab-btn--wash,
+.lab-btn--outline,
+.lab-btn--icon,
+.btn,
+.btn-primary,
+.btn-light,
+.btn-outline-primary,
+.btn-outline-primary.btn-sm,
+.btn-page-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: $lab-control-min-height;
+  padding: var(--lab-space-2) var(--lab-space-4);
+  border-radius: var(--lab-card-radius);
+  border: $lab-hairline solid transparent;
+  font-family: $lab-font-sans;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-medium;
+  letter-spacing: $lab-tracking-label;
+  line-height: $lab-leading-ui;
+  text-decoration: none;
+  box-shadow: none;
+  cursor: pointer;
+  transition: color $lab-transition, border-color $lab-transition,
+    background-color $lab-transition, opacity $lab-transition;
+}
+
+/* Primary CTA — LC violet #BEB4FD + green-400 label */
+.lab-btn--wash,
+.btn-primary {
+  background-color: var(--lab-color-accent);
+  border-color: var(--lab-color-accent);
+  color: var(--lab-color-on-accent);
+}
+
+.lab-btn--wash:hover,
+.btn-primary:hover {
+  background-color: var(--lab-color-accent);
+  border-color: var(--lab-color-accent);
+  color: var(--lab-color-on-accent);
+  opacity: 0.92;
+}
+
+/* Magnetic CTA — JS sets a max 4px pull; absent values mean "at rest".
+   Variant-agnostic: any button may opt in via the data attribute. */
+[data-lab-magnetic] {
+  transform: translate(var(--lab-magnet-x, 0), var(--lab-magnet-y, 0));
+  transition: transform $lab-duration-fast ease-out, background-color $lab-transition,
+    border-color $lab-transition, color $lab-transition;
+  will-change: transform;
+}
+
+/* Secondary action — outlined brand blue.
+   Hover: whisper wash fill only; text and border stay exactly as at rest. */
+.lab-btn--outline,
+.btn-outline-primary,
+.btn-page-header.btn-outline-primary {
+  border-color: var(--lab-color-brand);
+  color: var(--lab-color-brand);
+  background: transparent;
+}
+
+.lab-btn--outline:hover,
+.btn-outline-primary:hover {
+  background-color: var(--lab-color-bg-brand-soft);
+  color: var(--lab-color-brand);
+  border-color: var(--lab-color-brand);
+}
+
+/* Compact square icon control (gallery nav etc.) */
+.lab-btn--icon {
+  min-height: 0;
+  width: $lab-control-height;
+  height: $lab-control-height;
+  padding: 0;
+  border-color: var(--lab-color-border);
+  background: var(--lab-color-bg);
+  color: var(--lab-color-fg);
+  font-size: $lab-text-lg;
+  line-height: $lab-leading-none;
+}
+
+.lab-btn--icon:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.lab-btn--icon:hover:not(:disabled) {
+  border-color: var(--lab-color-brand);
+  color: var(--lab-color-brand);
+  background: var(--lab-color-bg-brand-soft, var(--lab-color-bg-brand-soft));
+}
+
+
+/* Pressed feedback — confirms the click registered (best practice).
+   Motion-gated so reduced-motion users get color-only feedback. */
+@media (prefers-reduced-motion: no-preference) {
+  .lab-btn--wash:active,
+  .lab-btn--outline:active,
+  .lab-btn--icon:active,
+  .btn:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Touch targets — WCAG 2.2 SC 2.5.8 AA is 24px, but Apple HIG / mobile UX
+   recommend 44px on touch devices. Desktop visuals unchanged; coarse-pointer
+   devices get the $lab-touch-target size for icon-only controls (32px → 44px). */
+@media (pointer: coarse) {
+  .lab-btn--icon {
+    width: $lab-touch-target;
+    height: $lab-touch-target;
+  }
+}
+
+.btn-sm,
+.btn-outline-primary.btn-sm {
+  min-height: $lab-control-min-height;
+  padding: var(--lab-space-1) var(--lab-space-4);
+}
+
+.form-control,
+.form-control-sm {
+  border-radius: var(--lab-card-radius);
+}
+
+/* Inner page titles */
+.universal-wrapper {
+  padding-top: var(--lab-space-8);
+  padding-bottom: var(--lab-space-8);
+}
+
+.universal-wrapper > h1,
+.article-header h1,
+.article-title {
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-ui;
+  line-height: $lab-leading-ui;
+  color: var(--lab-color-fg);
+}
+
+.article-header {
+  margin-bottom: var(--lab-space-6);
+}
+
+.article-style,
+.article-body,
+.universal-wrapper p,
+.docs-article-container p {
+  line-height: $lab-leading-body;
+}
+
+.article-style h2,
+.article-style h3,
+.universal-wrapper h2,
+.universal-wrapper h3 {
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-meta;
+  margin-top: $lab-space-6;
+}
+
+.article-metadata,
+.article-date {
+  font-size: $lab-text-sm;
+  opacity: 0.6;
+  letter-spacing: $lab-tracking-meta;
+}
+
+/* ---------- List/stream soft panels (not poster cards) ---------- */
+.media.stream-item,
+.pub-list-item {
+  display: block;
+  padding: $lab-card-pad;
+  margin: 0 0 $lab-space-4;
+  background: var(--lab-color-bg-raised);
+  border: $lab-hairline solid var(--lab-color-border);
+  border-radius: var(--lab-card-radius);
+  box-shadow: var(--lab-color-elevate);
+  transition: border-color $lab-transition, box-shadow $lab-transition;
+}
+
+.media.stream-item:hover,
+.pub-list-item:hover {
+  border-color: var(--lab-color-border-brand);
+  box-shadow: var(--lab-color-elevate-hover);
+  transform: none;
+}
+
+/* Poster cards — whole card is 4:5; media fills remainder above text */
+$lab-summary-lh: 1.45;
+
+.lab-card.view-card,
+a.lab-card.view-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  color: var(--lab-color-fg);
+  text-decoration: none;
+  background: var(--lab-color-bg-raised);
+  border: $lab-hairline solid var(--lab-color-border);
+  border-radius: var(--lab-card-radius);
+  box-shadow: var(--lab-color-elevate);
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: border-color $lab-transition, background-color $lab-transition,
+    box-shadow $lab-transition, transform $lab-transition;
+}
+
+/* Same lift as the member cards — hover reads as one card language sitewide */
+.lab-card.view-card:hover,
+a.lab-card.view-card:hover {
+  background: var(--lab-color-bg-raised);
+  border-color: var(--lab-color-border-brand);
+  box-shadow: var(--lab-color-elevate-hover);
+  transform: translateY(-$lab-space-0-5);
+}
+
+.lab-card-cover {
+  position: absolute;
+  inset: 0;
+  z-index: $lab-z-raised;
+}
+
+.lab-card-media {
+  position: relative;
+  z-index: $lab-z-base;
+  /* Fixed cover height — text budgets below guarantee the body always fits */
+  flex: 0 0 48%;
+  max-height: 48%;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0;
+  pointer-events: none;
+  background: var(--lab-color-bg-subtle);
+}
+
+.lab-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity $lab-transition, transform $lab-transition;
+}
+
+.lab-card.view-card:hover .lab-card-media img {
+  opacity: 0.88;
+  /* Gentle zoom says "this card is live" without breaking reading calm */
+  transform: scale(1.04);
+}
+
+
+.lab-card-ph-art {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity $lab-transition, transform $lab-transition;
+}
+
+.lab-card.view-card:hover .lab-card-ph-art {
+  opacity: 0.92;
+  transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-card.view-card:hover,
+  a.lab-card.view-card:hover {
+    transform: none;
+  }
+  .lab-card.view-card:hover .lab-card-media img,
+  .lab-card.view-card:hover .lab-card-ph-art {
+    transform: none;
+  }
+}
+
+/* Text wrapper — transparent in the poster skin (children flow as direct
+   flex items of the body); becomes the middle zone in media-row cards */
+.lab-card--poster .lab-card-text {
+  display: contents;
+}
+
+/* Poster budgets: meta exactly one line · title ≤2 · summary ≤3 base clamp
+   (lab-card-budget.js trims the summary to 2 when the title takes 2 lines) */
+.lab-card--poster .lab-card-meta {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.lab-card--poster .lab-card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Media-row cards — three zones fixed by proportion of the card width:
+   image 3.5/10, text 5/10, meta 1.5/10. The body shell dissolves into the
+   grid so the columns are measured against the card, not an inner padding
+   box. Stacks to image-top below md. */
+.lab-card.view-card.lab-card--media-row {
+  display: grid; /* base card rule is display: flex */
+  grid-template-columns: 35% 50% 15%;
+  align-items: center;
+  aspect-ratio: auto;
+}
+
+.lab-card.view-card.lab-card--media-row .lab-card-media {
+  grid-column: 1;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  aspect-ratio: 16 / 9;
+  align-self: center;
+}
+
+.lab-card.view-card.lab-card--media-row .lab-card-body {
+  display: contents;
+}
+
+.lab-card.view-card.lab-card--media-row .lab-card-text {
+  grid-column: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lab-space-1);
+  padding: var(--lab-space-4) var(--lab-space-5);
+}
+
+.lab-card.view-card.lab-card--media-row .lab-card-meta {
+  grid-column: 3;
+  /* DOM order is meta → text; without an explicit order the sparse grid
+     cursor would push the constrained-column text onto a second row */
+  order: 2;
+  align-self: center;
+  justify-content: flex-start;
+  padding: var(--lab-space-4) var(--lab-space-5) var(--lab-space-4) 0;
+  text-align: left;
+}
+
+/* 15% rail is narrow: venue names wrap onto extra lines rather than being
+   clipped with an ellipsis */
+.lab-card.view-card.lab-card--media-row .lab-card-meta-badge {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+/* Line budgets: title ≤2 · authors ≤1 · summary ≤3 */
+.lab-card.view-card.lab-card--media-row .lab-card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Full author list — all named, members linked; wraps instead of truncating */
+.lab-card.view-card.lab-card--media-row .lab-card-authors {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.lab-card.view-card.lab-card--media-row .lab-card-summary {
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+@include lab-bp-down(md) {
+  .lab-card.view-card.lab-card--media-row {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .lab-card.view-card.lab-card--media-row .lab-card-media {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* Back to a real shell when stacked: text and meta share one row again */
+  .lab-card.view-card.lab-card--media-row .lab-card-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--lab-space-5);
+    padding: var(--lab-space-3) var(--lab-space-4) var(--lab-space-4);
+  }
+
+  .lab-card.view-card.lab-card--media-row .lab-card-text,
+  .lab-card.view-card.lab-card--media-row .lab-card-meta {
+    padding: 0;
+  }
+
+  .lab-card.view-card.lab-card--media-row .lab-card-text {
+    flex: 1 1 auto;
+  }
+
+  .lab-card.view-card.lab-card--media-row .lab-card-meta {
+    flex: 0 0 auto;
+  }
+}
+
+/* Placeholder covers — type families + per-card variants (CSS only).
+   One hue var drives everything: accent strokes, glow, ground tints, inner
+   border all derive via color-mix, so the four .lab-ph-hue-* classes recolor
+   a whole cover. Grounds reference theme vars → dark mode tints itself. */
+.lab-card-media--placeholder {
+  /* --lab-ph-ink / soft inherit from :root / .dark */
+  --lab-ph-hue: #{$lab-blue}; /* blue default; hue classes override */
+  --lab-ph-accent: color-mix(in srgb, var(--lab-ph-hue) 46%, transparent);
+  --lab-ph-accent-soft: color-mix(in srgb, var(--lab-ph-hue) 14%, transparent);
+  --lab-ph-g1: var(--lab-color-bg-raised);
+  --lab-ph-g2: color-mix(in srgb, var(--lab-ph-hue) 14%, var(--lab-color-bg-raised));
+  --lab-ph-g3: color-mix(in srgb, var(--lab-ph-hue) 8%, var(--lab-color-bg-subtle));
+  background:
+    /* diagonal sheen — the "premium light" that flat washes lacked */
+    linear-gradient(118deg, var(--lab-color-sheen) 0%, transparent 42%),
+    radial-gradient(120% 80% at 12% 18%, var(--lab-ph-accent-soft), transparent 55%),
+    linear-gradient(165deg, var(--lab-ph-g1) 0%, var(--lab-ph-g2) 48%, var(--lab-ph-g3) 100%);
+  box-shadow: inset 0 0 0 $lab-hairline color-mix(in srgb, var(--lab-ph-hue) 16%, transparent);
+}
+
+/* Hue classes — muted, equal-lightness; assigned per card by URL hash */
+.lab-ph-hue-0 { --lab-ph-hue: #{$lab-blue}; }
+.lab-ph-hue-1 { --lab-ph-hue: #{$lab-ph-hue-violet}; }
+.lab-ph-hue-2 { --lab-ph-hue: #{$lab-ph-hue-green}; }
+.lab-ph-hue-3 { --lab-ph-hue: #{$lab-ph-hue-gold}; }
+
+/* Cover illustration — inline SVG, so every stroke resolves to the same
+   placeholder vars as the ground and repaints itself in dark mode. */
+
+.lab-ph-stroke,
+.lab-ph-stroke-soft {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lab-ph-stroke {
+  stroke: var(--lab-ph-accent);
+  stroke-width: 3;
+}
+
+.lab-ph-stroke-soft {
+  stroke: var(--lab-ph-ink-soft);
+  stroke-width: 2;
+}
+
+.lab-ph-wash {
+  fill: var(--lab-ph-accent-soft);
+}
+
+.lab-ph-wash-strong {
+  fill: color-mix(in srgb, var(--lab-ph-hue) 24%, transparent);
+}
+
+.lab-ph-dot {
+  fill: var(--lab-ph-hue);
+}
+
+/* ---------- Search overlay — lab ground, glass sticky header, brand focus ---------- */
+.form-control:focus {
+  border-color: var(--lab-color-brand);
+  box-shadow: 0 0 0 $lab-focus-width var(--lab-color-brand);
+  outline: none;
+}

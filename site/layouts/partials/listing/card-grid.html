@@ -1,0 +1,18 @@
+{{- /* Shared card grid.
+   Usage: {{ partial "listing/card-grid.html" (dict
+     "page" $ "pages" $pages "card_style" "poster" "grid_class" "lab-list-grid"
+     "item_section" "blog") }}
+*/ -}}
+{{- $page := .page -}}
+{{- $pages := .pages | default slice -}}
+{{- $cardStyle := .card_style | default "" -}}
+{{- $gridClass := .grid_class | default "lab-list-grid" -}}
+{{- $itemSection := .item_section | default "" -}}
+{{- $leadFirst := .lead_first | default false -}}
+<div class="{{ $gridClass }}">
+  {{- range $i, $item := $pages -}}
+  <div class="lab-list-item{{ if and $leadFirst (eq $i 0) }} lab-list-item--lead{{ end }}{{ with $itemSection }} {{ partial "listing/item-classes.html" (dict "section" . "item" $item) }}{{ end }}">
+    {{ partial "views/card.html" (dict "page" $page "item" $item "index" $i "card_style" $cardStyle) }}
+  </div>
+  {{- end -}}
+</div>

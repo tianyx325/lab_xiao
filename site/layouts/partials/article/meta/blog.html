@@ -1,0 +1,9 @@
+{{- /* Blog / news meta: date + categories. */ -}}
+{{- $meta := slice -}}
+{{- with .Date -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_date") "value" (.Format "2006-01-02")) -}}
+{{- end -}}
+{{- with .Params.categories -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_category") "value" (delimit . " · ")) -}}
+{{- end -}}
+{{- return $meta -}}

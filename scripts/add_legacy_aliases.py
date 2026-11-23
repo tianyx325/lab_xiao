@@ -6,15 +6,14 @@ Chinese-first; EN pages must not get /en/... aliases (Hugo would nest en/en/).
 """
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
-import yaml
+from lab_io import load_fm, normalize_section, write_fm_file
 
 SITE = Path(__file__).resolve().parents[1] / "site"
 CONTENT = SITE / "content"
-FM_RE = re.compile(r"^---\s*\r?\n(.*?)\r?\n---\s*\r?\n?(.*)$", re.S)
 
+# (canonical section folder, legacy singular URL segment)
 MAPPINGS = (
     ("publications", "publication"),
     ("projects", "project"),
@@ -26,30 +25,10 @@ MAPPINGS = (
 )
 
 
-def load(path: Path) -> tuple[dict, str]:
-    text = path.read_text(encoding="utf-8")
-    m = FM_RE.match(text)
-    if not m:
-        raise ValueError(f"no front matter: {path}")
-    return yaml.safe_load(m.group(1)) or {}, m.group(2)
-
-
-def dump(data: dict) -> str:
-    return yaml.safe_dump(data, allow_unicode=True, sort_keys=False, default_flow_style=False)
-
-
-def write(path: Path, data: dict, body: str) -> None:
-    text = "---\n" + dump(data) + "---\n"
-    if body and not body.startswith("\n"):
-        text += "\n"
-    text += body if body else ""
-    if not text.endswith("\n"):
-        text += "\n"
-    path.write_text(text, encoding="utf-8")
-
-
 def ensure_aliases(path: Path, aliases: list[str]) -> bool:
-    data, body = load(path)
+    data, body = load_fm(path)
+    if not data and "---" not in path.read_text(encoding="utf-8")[:4]:
+        raise ValueError(f"no front matter: {path}")
     existing = data.get("aliases") or []
     if not isinstance(existing, list):
         existing = [existing]
@@ -57,13 +36,12 @@ def ensure_aliases(path: Path, aliases: list[str]) -> bool:
     if merged == existing:
         return False
     data["aliases"] = merged
-    write(path, data, body)
+    write_fm_file(path, data, body)
     return True
 
 
 def strip_en_prefixed_aliases(path: Path) -> bool:
-    """Remove mistaken /en/... aliases from EN content files."""
-    data, body = load(path)
+    data, body = load_fm(path)
     existing = data.get("aliases") or []
     if not isinstance(existing, list):
         existing = [existing] if existing else []
@@ -71,14 +49,14 @@ def strip_en_prefixed_aliases(path: Path) -> bool:
     if cleaned == existing:
         if not cleaned and "aliases" in data:
             del data["aliases"]
-            write(path, data, body)
+            write_fm_file(path, data, body)
             return True
         return False
     if cleaned:
         data["aliases"] = cleaned
     elif "aliases" in data:
         del data["aliases"]
-    write(path, data, body)
+    write_fm_file(path, data, body)
     return True
 
 
@@ -86,10 +64,10 @@ def main() -> None:
     n = 0
     stripped = 0
     for new_sec, old_sec in MAPPINGS:
+        assert normalize_section(new_sec) == new_sec
         sec_dir = CONTENT / new_sec
         if not sec_dir.is_dir():
             continue
-        # Clean EN files first
         for en_path in [sec_dir / "_index.en.md", *sec_dir.glob("*/index.en.md")]:
             if en_path.exists() and strip_en_prefixed_aliases(en_path):
                 stripped += 1

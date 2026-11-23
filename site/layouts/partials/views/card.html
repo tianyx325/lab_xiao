@@ -1,0 +1,126 @@
+{{ $item := .item }}
+
+{{ $link := $item.RelPermalink }}
+{{ $target := "" }}
+{{ if $item.Params.url_external }}
+  {{ $link = $item.Params.url_external }}
+  {{ $target = printf "target=\"_blank\" rel=\"noopener\" aria-label=\"%s\"" (i18n "lab_open_external") }}
+{{ end }}
+
+{{ $summary := "" }}
+{{ if $item.Params.summary }}
+  {{ $summary = $item.Params.summary | plainify }}
+{{ else if $item.Params.abstract }}
+  {{ $summary = $item.Params.abstract | plainify | truncate 140 }}
+{{ end }}
+
+{{ $authorItems := slice }}
+{{ range $item.Params.authors }}
+  {{ partial "components/resolve-author.html" (dict "id" . "page" $item) }}
+  {{ $authorItems = $authorItems | append (dict
+    "name" ($item.Scratch.Get "lab_author_name")
+    "href" ($item.Scratch.Get "lab_author_href")) }}
+{{ end }}
+
+{{ $year := $item.Date.Format "2006" }}
+{{ $isEn := eq site.Language.Lang "en" }}
+{{ $dateLabel := cond $isEn ($item.Date.Format "Jan 2, 2006") ($item.Date.Format "2006年1月2日") }}
+
+{{ $kind := partial "functions/card-kind.html" $item }}
+{{ $typeClass := $kind.type_class }}
+{{ $badge := $kind.badge }}
+{{ $category := $kind.category }}
+{{ $sec := $kind.section }}
+
+{{ $glyphs := dict
+  "lab-card--publication" "PUB"
+  "lab-card--patent" "PAT"
+  "lab-card--award" "AWD"
+  "lab-card--project" "PRJ"
+}}
+
+{{ $mediaData := partial "components/featured-image.html" $item }}
+{{ $mediaURL := $mediaData.src | default "" }}
+
+{{ $cardStyle := "lab-card--poster" }}
+{{ if eq $sec "projects" }}{{ $cardStyle = "lab-card--media-row" }}{{ end }}
+{{ with .page.Params.card_style }}{{ $cardStyle = printf "lab-card--%s" . }}{{ end }}
+{{ with $item.Params.card_style }}{{ $cardStyle = printf "lab-card--%s" . }}{{ end }}
+{{ with .card_style }}{{ $cardStyle = printf "lab-card--%s" . }}{{ end }}
+
+{{ $phSeed := $item.RelPermalink }}
+{{ with $item.File }}{{ with .Dir }}{{ $phSeed = . }}{{ end }}{{ end }}
+{{ $vtIndex := 0 }}
+{{ with .index }}{{ $vtIndex = int . }}{{ end }}
+{{ $vtActive := lt $vtIndex 12 }}
+{{ $vtName := printf "lab-vt-%d" (hash.FNV32a $phSeed) }}
+{{ $vtMedia := printf "lab-vt-media-%d" (hash.FNV32a $phSeed) }}
+{{ $phHue := 0 }}
+{{ if not $mediaURL }}{{ $phHue = mod (hash.FNV32a $phSeed) 4 }}{{ end }}
+{{ $phVariant := 0 }}
+{{ if not $mediaURL }}{{ $phVariant = mod (div (hash.FNV32a (printf "%s#art" $phSeed)) 32) 3 }}{{ end }}
+{{ $phArt := "" }}
+{{ if not $mediaURL }}{{ $phArt = $item.Params.placeholder_art | default "" }}{{ end }}
+
+<article class="view-card lab-card {{ $cardStyle }} {{ $typeClass }}{{ if $mediaURL }} has-media{{ end }}">
+  <a class="lab-card-cover" href="{{ $link }}" {{ $target | safeHTMLAttr }} aria-label="{{ $item.Title }}"></a>
+
+  <div class="lab-card-media{{ if not $mediaURL }} lab-card-media--placeholder{{ end }} lab-ph-hue-{{ $phHue }}"{{ if $vtActive }} style="view-transition-name:{{ $vtMedia }}"{{ end }} aria-hidden="true">
+    {{ with $mediaData.src }}
+    <img src="{{ . }}" srcset="{{ $mediaData.srcset }}" sizes="(max-width: 767px) 92vw, 33vw" alt="" width="{{ $mediaData.width }}" height="{{ $mediaData.height }}" loading="lazy" decoding="async">
+    {{ else }}
+    {{ partial "components/placeholder-art.html" (dict "type" $item.Type "variant" $phVariant "art" $phArt) }}
+    {{ end }}
+  </div>
+
+  <div class="lab-card-body">
+    {{- if eq $typeClass "lab-card--post" }}
+    <div class="lab-card-text">
+      {{- with $category -}}
+      <span class="lab-card-chip">{{ . }}</span>
+      {{- end -}}
+      <div class="lab-card-title"{{ if $vtActive }} style="view-transition-name:{{ $vtName }}"{{ end }}>{{ $item.Title }}</div>
+      <time class="lab-card-date" datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $dateLabel }}</time>
+      <div class="lab-card-summary">
+        {{ with $summary }}{{ . }}{{ else }}&nbsp;{{ end }}
+      </div>
+    </div>
+    {{- else -}}
+    {{- if ne $typeClass "lab-card--research" }}
+    <div class="lab-card-meta">
+      {{- if ne $cardStyle "lab-card--media-row" -}}
+      {{- with index $glyphs $typeClass -}}
+      <span class="lab-card-meta-glyph" aria-hidden="true">{{ . }}</span>
+      {{- end -}}
+      {{- end -}}
+      <time datetime="{{ $item.Date.Format "2006" }}">{{ $year }}</time>
+      {{- with $badge -}}
+        <span class="lab-card-meta-sep" aria-hidden="true">·</span>
+        <span class="lab-card-meta-badge">{{ . }}</span>
+      {{- end -}}
+    </div>
+    {{- end }}
+
+    <div class="lab-card-text">
+      <div class="lab-card-title"{{ if $vtActive }} style="view-transition-name:{{ $vtName }}"{{ end }}>{{ $item.Title }}</div>
+
+      {{- if and $authorItems (eq $cardStyle "lab-card--media-row") -}}
+      <p class="lab-card-authors">
+        {{- range $i, $m := $authorItems -}}
+          {{- if $i -}}<span class="lab-row-sep" aria-hidden="true"> · </span>{{- end -}}
+          {{- if .href -}}
+          <a class="lab-card-author-link lab-card-author-name" href="{{ .href }}">{{ .name }}</a>
+          {{- else -}}
+          <span class="lab-card-author-name">{{ .name }}</span>
+          {{- end -}}
+        {{- end -}}
+      </p>
+      {{- end -}}
+
+      <div class="lab-card-summary">
+        {{ with $summary }}{{ . }}{{ else }}&nbsp;{{ end }}
+      </div>
+    </div>
+    {{- end }}
+  </div>
+</article>

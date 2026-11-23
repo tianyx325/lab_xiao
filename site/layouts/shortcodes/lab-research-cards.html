@@ -1,0 +1,7 @@
+{{- /* Research cards from content/research/* (section root excluded via RegularPages). */ -}}
+{{- $rawCount := .Get "count" | default "" -}}
+{{- $ctx := dict "page" .Page -}}
+{{- if $rawCount -}}
+  {{- $ctx = merge $ctx (dict "count" $rawCount) -}}
+{{- end -}}
+{{ partial "components/research-cards.html" $ctx }}

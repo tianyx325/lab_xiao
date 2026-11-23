@@ -1,0 +1,12 @@
+  {{/* Load SEO module */}}
+  {{ partial "blox_seo.html" . }}
+
+  {{/* RSS Feed */}}
+  {{ with .OutputFormats.Get "RSS" }}
+    <link rel="alternate" href="{{ .RelPermalink }}" type="application/rss+xml" title="{{ site.Title }}" />
+  {{ end }}
+
+  {{ partial "cookie_consent.html" . }}
+
+  {{ $title := partial "blox-core/functions/get_page_title.html" . }}
+  <title>{{$title}}</title>

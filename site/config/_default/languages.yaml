@@ -7,30 +7,24 @@ zh:
     main:
       - name: 首页
         url: /
-        weight: 5
+        weight: 1
       - name: 方向
-        url: research/
+        url: /research/
         weight: 10
-      - name: 论文
-        url: publications/
+      - name: 成果
+        url: /publications/
         weight: 20
-      - name: 专利
-        url: patent/
-        weight: 25
-      - name: 获奖
-        url: award/
-        weight: 28
       - name: 项目
-        url: projects/
+        url: /projects/
         weight: 30
       - name: 成员
-        url: people/
+        url: /people/
         weight: 40
       - name: 动态
-        url: blog/
+        url: /blog/
         weight: 50
       - name: 联系
-        url: contact/
+        url: /contact/
         weight: 60
 
 en:
@@ -42,28 +36,22 @@ en:
     main:
       - name: Home
         url: /
-        weight: 5
+        weight: 1
       - name: Research
-        url: research/
+        url: /research/
         weight: 10
-      - name: Publications
-        url: publications/
+      - name: Papers
+        url: /publications/
         weight: 20
-      - name: Patents
-        url: patent/
-        weight: 25
-      - name: Awards
-        url: award/
-        weight: 28
       - name: Projects
-        url: projects/
+        url: /projects/
         weight: 30
       - name: People
-        url: people/
+        url: /people/
         weight: 40
       - name: News
-        url: blog/
+        url: /blog/
         weight: 50
       - name: Contact
-        url: contact/
+        url: /contact/
         weight: 60

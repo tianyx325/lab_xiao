@@ -1,0 +1,669 @@
+﻿/* Layer 3 · global base: alignment, gutters, navbar, footer
+   Source: template.scss lines 8-591 (order-preserving split). */
+@mixin lab-placeholder-bg {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 35%, color-mix(in srgb, var(--lab-color-fg) 5%, transparent), transparent 70%),
+    linear-gradient(165deg, color-mix(in srgb, var(--lab-color-fg) 4%, transparent) 0%, var(--lab-color-bg-brand-soft) 50%, color-mix(in srgb, var(--lab-color-fg) 6%, transparent) 100%);
+}
+
+// Make page header alignment consistent with widget page header alignment
+.universal-wrapper h1,
+.universal-wrapper h2,
+.article-header,
+.article-header h1,
+.page-header,
+.section-heading {
+  text-align: center;
+}
+
+.universal-wrapper > h1 {
+  @include lab-page-title;
+}
+
+.cta-group {
+  justify-content: center;
+}
+
+/* Page chrome — ONE gutter + ONE end everywhere; top differs only for
+   home (flush hero). List and detail share the same section-sm top. */
+.lab-page--home {
+  --lab-page-gutter: var(--lab-gutter-home);
+  --lab-page-top: var(--lab-page-top-home);
+  --lab-page-end: var(--lab-page-end-home);
+  --lab-page-width: var(--lab-page-width-home);
+}
+
+.lab-page--list {
+  --lab-page-gutter: var(--lab-gutter-list);
+  --lab-page-top: var(--lab-page-top-list);
+  --lab-page-end: var(--lab-page-end-list);
+  --lab-page-width: var(--lab-page-width-list);
+}
+
+.lab-page--detail {
+  --lab-page-gutter: var(--lab-gutter-detail);
+  --lab-page-top: var(--lab-page-top-detail);
+  --lab-page-end: var(--lab-page-end-detail);
+  --lab-page-width: var(--lab-page-width-detail);
+}
+
+/* Content column width per page kind — replaces Bootstrap container jumps.
+   --lab-page-width is the outer border-box (content + 2× gutter);
+   padding yields 900 (main) / 700 (reading). */
+.lab-page--list .page-body .container,
+.lab-page--home .page-body .container {
+  max-width: var(--lab-page-width);
+}
+
+.lab-page--detail .lab-article-header > .container,
+.lab-page--detail .lab-article-body {
+  max-width: var(--lab-page-width);
+}
+
+/* Detail-page orientation: one compact line above the article header. */
+.lab-breadcrumb-wrap {
+  max-width: var(--lab-page-width);
+  margin: 0 auto;
+  padding: $lab-space-3 var(--lab-page-gutter) 0;
+}
+
+.lab-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $lab-space-2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: $lab-text-xs;
+  line-height: $lab-leading-snug;
+  color: var(--lab-color-fg-muted);
+}
+
+.lab-breadcrumb li {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.lab-breadcrumb li + li::before {
+  content: "/";
+  margin-right: $lab-space-2;
+  color: var(--lab-color-border-brand);
+}
+
+.lab-breadcrumb a {
+  color: var(--lab-color-fg-muted);
+  text-decoration: none;
+  transition: color $lab-transition;
+}
+
+.lab-breadcrumb li[aria-current="page"] {
+  color: var(--lab-color-fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Global: quiet parchment academic ---------- */
+/* Fixed navbar: keep in-page anchor targets & keyboard focus clear of the pill
+   (WCAG 2.4.11 Focus Not Obscured / W3C C43 scroll-padding practice) */
+html {
+  scroll-padding-top: calc(var(--lab-navbar-height) + #{$lab-space-6});
+}
+
+@include lab-bp-down(lg) {
+  html {
+    scroll-padding-top: calc(var(--lab-navbar-height-sm) + #{$lab-space-6});
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth; /* #top / section anchors glide, no hard jump */
+  }
+}
+
+body {
+  @include lab-font-sans;
+  font-size: $lab-text-base;
+  font-weight: $lab-weight-body;
+  line-height: $lab-leading-prose;
+  letter-spacing: $lab-tracking-body;
+  color: var(--lab-color-fg);
+  /* Paper fill + faint grain (no stacking-context tricks) */
+  background-color: var(--lab-color-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  padding-top: calc(var(--lab-navbar-height) + #{$lab-space-3} + #{$lab-space-2});
+}
+
+.article-title,
+.page-header h1,
+.section-head h2,
+.home-section .section-heading h1,
+.lab-people-title,
+.lab-list-title {
+  font-family: $lab-font-serif;
+}
+
+.article-style,
+.lab-list-intro {
+  @include lab-type-body;
+}
+
+/* Unify theme link / active blues to brand blue */
+.nav-link.active,
+.navbar .nav-item.active > .nav-link,
+.navbar-nav .nav-link.active {
+  color: var(--lab-color-brand);
+}
+
+.article-style a,
+.portrait-title a,
+.page-body a:not(.btn):not(.nav-link):not(.dropdown-item):not(.lab-card):not(.lab-member-card):not(.lab-meta-tag-link):not(.lab-hub-tab) {
+  color: var(--lab-color-brand);
+}
+
+/* Card is an <a>; don't paint whole card blue — zones use category colors */
+a.lab-card.view-card,
+.lab-card.view-card,
+a.lab-member-card {
+  color: var(--lab-color-fg);
+}
+
+/* Button variants live in _controls.scss (4 sanctioned .lab-btn--* forms) */
+
+/* Alerts — system colors (info stays brand soft) */
+.article-style aside,
+.alert-note,
+.alert-info {
+  color: var(--lab-color-brand);
+  border-color: var(--lab-color-border-brand);
+  background-color: var(--lab-color-bg-brand-soft);
+}
+
+.alert-success {
+  color: var(--lab-color-success);
+  border-color: var(--lab-color-success);
+  background-color: var(--lab-color-success-soft);
+}
+
+.alert-warning {
+  color: var(--lab-color-warning);
+  border-color: var(--lab-color-warning);
+  background-color: var(--lab-color-warning-soft);
+}
+
+.alert-danger {
+  color: var(--lab-color-danger);
+  border-color: var(--lab-color-danger);
+  background-color: var(--lab-color-danger-soft);
+}
+
+.article-style aside p::before,
+div.alert > div:first-child::before {
+  color: inherit;
+}
+
+.form-control:focus,
+.btn:focus-visible,
+.page-link:focus-visible {
+  box-shadow: 0 0 0 $lab-focus-ring-spread var(--lab-color-brand);
+}
+
+/* Keyboard-only focus ring: :focus-visible never fires on mouse click,
+   so clicking nav items / dropdowns no longer flashes a box (WCAG 2.4.7 kept) */
+.navbar .nav-link:focus-visible,
+.navbar .dropdown-item:focus-visible,
+a.lab-card:focus-visible,
+a.lab-member-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 $lab-focus-width var(--lab-color-brand);
+}
+
+/* Floating navbar — fixed 1000×56, centered, position fixed */
+.page-header {
+  position: fixed;
+  top: $lab-space-3;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  z-index: $lab-z-nav;
+  display: flex;
+  align-items: center;
+  width: min(100% - #{$lab-space-5}, var(--lab-navbar-width));
+  max-width: var(--lab-navbar-width);
+  height: var(--lab-navbar-height);
+  margin: 0;
+  overflow: visible;
+  box-sizing: border-box;
+  background: var(--lab-color-bg-raised);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: $lab-hairline solid var(--lab-color-border);
+  border-radius: $lab-navbar-radius;
+  box-shadow:
+    inset 0 $lab-hairline 0 var(--lab-color-sheen),
+    0 $lab-hairline $lab-space-0-5 var(--lab-color-shadow),
+    0 $lab-space-1 $lab-space-5 var(--lab-color-shadow);
+  transition: box-shadow $lab-transition;
+}
+
+.navbar {
+  font-size: $lab-text-sm;
+  letter-spacing: $lab-tracking-label;
+}
+
+.page-header .navbar {
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Fill capsule; flex-center all chrome (brand + links) */
+#navbar-main {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Height fill only — display/grid owned by _menus.scss */
+#navbar-main .lab-navbar-inner {
+  height: 100%;
+}
+
+/* Scroll: shadow only — width/height/top stay fixed */
+.page-header.scrolled {
+  box-shadow:
+    0 $lab-space-0-5 $lab-space-2 var(--lab-color-shadow),
+    0 $lab-space-2 $lab-space-6 var(--lab-color-shadow);
+}
+
+@include lab-bp-down(lg) {
+  .page-header {
+    height: var(--lab-navbar-height-sm);
+  }
+}
+
+@include lab-bp-down(lg) {
+  body {
+    padding-top: calc(var(--lab-navbar-height-sm) + #{$lab-space-3} + #{$lab-space-2});
+  }
+}
+
+
+.navbar .container,
+.navbar .container-fluid,
+.navbar > .container,
+.navbar-nav,
+.navbar .navbar-brand {
+  display: flex;
+  align-items: center; /* 导航文字垂直居中 */
+}
+
+.navbar-brand,
+#navbar-main .lab-navbar-brand-link {
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-ui;
+  padding: 0; /* edge inset is --lab-navbar-gutter only */
+  margin: 0;
+  line-height: $lab-leading-ui;
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  height: auto;
+  gap: $lab-space-2;
+  color: var(--lab-color-fg);
+  text-decoration: none;
+  min-width: 0;
+}
+
+/* Lab title — always painted; layout width handled in _menus.scss */
+#navbar-main .lab-navbar-brand {
+  display: block;
+  position: static;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-semibold;
+  color: var(--lab-color-fg);
+  transform: none;
+}
+
+/* 隐藏原有 logo 图片 */
+.navbar-brand img {
+  display: none;
+}
+
+/* CSS 图标 - 智能体 + 视觉感知 */
+.lab-logo {
+  width: $lab-icon-lg;
+  height: $lab-icon-lg;
+  position: relative;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+/* 暗室显影 — 暗场方框中的一点光（assets/media/icon.svg 的主题感知孪生版） */
+.lab-logo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: $lab-icon-lg;
+  height: $lab-icon-lg;
+  /* Beam along the BL→TR diagonal; light mode: white on ink, dark mode: near-black on raised light */
+  background:
+    linear-gradient(135deg, transparent 38%, var(--lab-color-bg-raised) 46%, var(--lab-color-bg-raised) 58%, transparent 66%),
+    var(--lab-color-fg);
+  border-radius: $lab-radius-sm;
+}
+
+/* 增强的光点 — 品牌蓝 */
+.lab-logo::after {
+  content: '';
+  position: absolute;
+  top: $lab-space-1;
+  right: $lab-space-1;
+  width: $lab-icon-dot;
+  height: $lab-icon-dot;
+  background: var(--lab-color-brand);
+  border-radius: 50%;
+}
+
+.navbar .nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  padding: 0 var(--lab-space-3);
+  margin: 0;
+  line-height: $lab-leading-ui;
+  height: auto;
+  min-height: 0;
+  color: var(--lab-color-fg);
+  font-family: $lab-font-sans;
+  font-weight: $lab-weight-medium;
+  font-size: $lab-text-sm;
+  letter-spacing: $lab-tracking-label;
+  position: relative;
+  transition: color $lab-transition;
+}
+
+.navbar .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -$lab-nav-underline-nudge;
+  left: var(--lab-space-3);
+  right: var(--lab-space-3);
+  height: $lab-hairline;
+  background: var(--lab-color-brand);
+  transform: scaleX(0);
+  transition: transform $lab-transition;
+}
+
+.navbar .nav-link:hover {
+  color: color-mix(in srgb, var(--lab-color-brand) 86%, white);
+}
+
+.navbar .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Active section — color-only (no underline bar; selection is the blue ink) */
+
+/* Hide Bootstrap caret on parent items (成果) */
+#navbar-main .lab-nav-parent.dropdown-toggle::after,
+#navbar-main .navbar-nav .caret {
+  display: none;
+}
+
+/* Floating panel + item hover (vendor !important locks removed from _nav.scss). */
+.dropdown-menu {
+  border-radius: $lab-radius-md;
+  border: $lab-hairline solid var(--lab-color-border);
+  padding: $lab-space-1-5;
+  width: max-content;
+  min-width: 0;
+  max-width: min(100vw - #{$lab-space-5}, #{$lab-measure-sm});
+  height: auto;
+  background: var(--lab-color-bg-raised);
+  background-color: var(--lab-color-bg-raised);
+  color: var(--lab-color-fg);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: var(--lab-color-elevate-hover);
+}
+
+.dark .dropdown-menu {
+  background: var(--lab-color-bg-raised);
+  background-color: var(--lab-color-bg-raised);
+  color: var(--lab-color-fg);
+  border-color: var(--lab-color-border);
+  box-shadow:
+    inset 0 $lab-hairline 0 var(--lab-color-sheen),
+    var(--lab-color-elevate-hover);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: $lab-space-2;
+  margin: 0;
+  border-radius: $lab-radius-sm;
+  font-size: $lab-text-sm;
+  letter-spacing: $lab-tracking-label;
+  line-height: $lab-leading-display;
+  padding: $lab-space-2 $lab-space-3;
+  color: var(--lab-color-fg);
+  background: transparent;
+  background-color: transparent;
+  font-weight: $lab-weight-body;
+  cursor: pointer;
+  transition:
+    color $lab-duration-quick ease,
+    background-color $lab-duration-quick ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item:focus-visible {
+  color: var(--lab-color-brand);
+  background: var(--lab-color-bg-brand-soft);
+  background-color: var(--lab-color-bg-brand-soft);
+  text-decoration: none;
+}
+
+.dropdown-item.dropdown-item-active,
+.dropdown-item[aria-current="true"] {
+  color: var(--lab-color-brand);
+  font-weight: $lab-weight-medium;
+  background: var(--lab-color-bg-brand-soft);
+  background-color: var(--lab-color-bg-brand-soft);
+  cursor: default;
+}
+
+.dropdown-item.dropdown-item-active:hover,
+.dropdown-item[aria-current="true"]:hover,
+.dropdown-item.dropdown-item-active:focus,
+.dropdown-item[aria-current="true"]:focus {
+  background: var(--lab-color-bg-brand-soft);
+  background-color: var(--lab-color-bg-brand-soft);
+}
+
+/* Vendor may still call $.tooltip() — hide without fighting .show !important */
+.tooltip,
+.tooltip.show {
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Keep copyright footer pinned to the bottom of the viewport on short pages */
+body.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: $lab-viewport-height;
+}
+
+.page-body {
+  flex: 1 0 auto;
+}
+
+.page-footer {
+  flex-shrink: 0;
+  margin-top: auto;
+  width: 100%;
+}
+
+/* Detail pages without an article shell (404) get the same content→footer gap */
+body.lab-page--detail:has(.page-body > .universal-wrapper) .page-body > .universal-wrapper {
+  padding-bottom: var(--lab-page-end);
+}
+
+/* ---------- Footer — style only; same markup, quieter close ---------- */
+.lab-footer {
+  position: relative;
+  background: var(--lab-color-bg);
+  /* Vertical padding ≈ half of prior space-9 / space-7 */
+  padding: var(--lab-space-5) 0 var(--lab-space-4);
+  font-family: $lab-font-sans;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-body;
+  color: var(--lab-color-fg-muted);
+  border-top: $lab-hairline solid var(--lab-color-border);
+}
+
+.lab-footer-inner {
+  max-width: var(--lab-page-width-home);
+  margin: 0 auto;
+  padding: 0 var(--lab-gutter-home);
+  box-sizing: border-box;
+}
+
+.lab-footer-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  /* Tight column gap — title sits close to its values */
+  gap: var(--lab-space-1) var(--lab-space-2);
+}
+
+.lab-footer-row + .lab-footer-row {
+  margin-top: var(--lab-space-2);
+}
+
+/* Label column ≈ title width (4 CJK / “Contact”); keep rows aligned */
+.lab-footer-heading {
+  flex: 0 0 $lab-footer-label-width;
+  width: $lab-footer-label-width;
+  @include lab-type-mono;
+  line-height: $lab-leading-tight;
+  color: var(--lab-color-brand);
+  letter-spacing: $lab-tracking-label;
+}
+
+.lab-footer-items {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--lab-space-2) var(--lab-space-5);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lab-footer-meta {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--lab-space-1) var(--lab-space-2);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.lab-footer-meta-label {
+  flex-shrink: 0;
+  @include lab-type-mono;
+  line-height: $lab-leading-tight;
+  color: var(--lab-color-fg-muted);
+}
+
+.lab-footer-item {
+  min-width: 0;
+  color: var(--lab-color-fg-muted);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color $lab-duration-quick ease;
+}
+
+a.lab-footer-item:hover,
+a.lab-footer-item:focus-visible {
+  color: var(--lab-color-brand);
+}
+
+/* Same face/size as address & links — mono family looked smaller at equal px. */
+.lab-footer-item--mono {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+@include lab-bp-up(md) {
+  .lab-footer-heading {
+    flex-basis: $lab-footer-label-width-md;
+    width: $lab-footer-label-width-md;
+  }
+}
+
+@include lab-bp-down(md) {
+  .lab-footer {
+    padding: var(--lab-space-4) 0 var(--lab-space-3);
+  }
+
+  .lab-footer-row {
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: var(--lab-space-1);
+  }
+
+  .lab-footer-heading {
+    flex: none;
+    width: auto;
+  }
+
+  .lab-footer-items {
+    gap: var(--lab-space-1) var(--lab-space-2);
+  }
+
+  .lab-footer-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--lab-space-1);
+    width: 100%;
+  }
+
+  a.lab-footer-item {
+    display: inline-flex;
+    align-items: center;
+    min-height: $lab-touch-target;
+  }
+}
+
+.lab-breadcrumb a:hover {
+  color: var(--lab-color-brand);
+}

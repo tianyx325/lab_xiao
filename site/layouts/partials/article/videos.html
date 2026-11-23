@@ -1,0 +1,31 @@
+{{- /* Video links only (no embed). Sources: Params.videos[], Params.url_video */ -}}
+{{- $items := slice -}}
+{{- $videoFallback := i18n "lab_video" -}}
+{{- with .Params.url_video -}}
+  {{- $items = $items | append (dict "title" $videoFallback "url" .) -}}
+{{- end -}}
+{{- with .Params.videos -}}
+  {{- range . -}}
+    {{- if reflect.IsMap . -}}
+      {{- $u := .url | default .link | default "" -}}
+      {{- if $u -}}
+        {{- $items = $items | append (dict "title" (.title | default .name | default $videoFallback) "url" $u) -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $items = $items | append (dict "title" $videoFallback "url" .) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $items -}}
+<section class="lab-article-videos" aria-label="{{ i18n "lab_videos" }}">
+  <h2 class="lab-article-media-title">{{ i18n "lab_video" }}</h2>
+  <ul class="lab-article-video-list">
+    {{- range $items -}}
+    <li>
+      <a class="lab-ext" href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+      <span class="lab-article-video-url">{{ .url }}</span>
+    </li>
+    {{- end -}}
+  </ul>
+</section>
+{{- end -}}

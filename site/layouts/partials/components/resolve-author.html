@@ -1,0 +1,49 @@
+{{- /*
+  Resolve author id → display name + profile href.
+  Lab member = content/authors/<slug> with user_groups (legacy contract),
+  with data/authors + lab_author_aliases as fallbacks for name/slug.
+*/ -}}
+{{- $raw := printf "%v" .id -}}
+{{- $id := $raw -}}
+{{- $page := .page -}}
+{{- with hugo.Data.lab_author_aliases -}}
+  {{- with index . $raw -}}
+    {{- $id = . -}}
+  {{- end -}}
+{{- end -}}
+{{- $name := $raw -}}
+{{- $href := "" -}}
+{{- $slug := $id | urlize -}}
+
+{{- /* 1) Prefer real author pages (enables lab-card-author-link) */ -}}
+{{- with site.GetPage (printf "/authors/%s" $slug) -}}
+  {{- if .File -}}
+    {{- $name = .LinkTitle -}}
+    {{- if isset .Params "user_groups" -}}
+      {{- $href = .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* 2) data/authors overlay for display name when page missing or title weak */ -}}
+{{- with index (hugo.Data.authors | default dict) $slug -}}
+  {{- with .name -}}
+    {{- if reflect.IsMap . -}}
+      {{- $name = .display | default $name -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if and (eq site.Language.Lang "en") (reflect.IsMap .i18n) -}}
+    {{- with index .i18n "en" -}}
+      {{- with .name -}}{{- if reflect.IsMap . -}}{{- $name = .display | default $name -}}{{- end -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- /* If we have member data but still no page href, try people fallback */ -}}
+  {{- if and (not $href) (or .user_groups .is_owner) -}}
+    {{- with site.GetPage (printf "/authors/%s" $slug) -}}
+      {{- $href = .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $page.Scratch.Set "lab_author_name" $name -}}
+{{- $page.Scratch.Set "lab_author_href" $href -}}

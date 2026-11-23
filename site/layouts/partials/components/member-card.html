@@ -1,0 +1,47 @@
+{{- /*
+  Single member card — the one source of markup for homepage and /people/,
+  advisors and students alike: round avatar + name + role, centered.
+  Input: the member page object.
+*/ -}}
+{{- $page := . -}}
+{{- $avatar := ($page.Resources.ByType "image").GetMatch "*avatar*" -}}
+{{- $link := "" -}}
+{{- with site.GetPage (printf "/authors/%s" (path.Base $page.File.Dir)) -}}
+  {{- $link = .RelPermalink -}}
+{{- end -}}
+{{- $src := "" -}}
+{{- $srcset := "" -}}
+{{- if site.Params.features.avatar.gravatar -}}
+  {{- $src = printf "https://s.gravatar.com/avatar/%s?s=480" (md5 $page.Params.email) -}}
+{{- else if $avatar -}}
+  {{- $src = ($avatar.Fill "88x88 Smart").RelPermalink -}}
+  {{- $srcset = printf "%s 1x, %s 2x" $src ($avatar.Fill "176x176 Smart").RelPermalink -}}
+{{- end -}}
+{{- $initial := substr $page.Title 0 1 -}}
+
+{{ if $link }}
+<a class="lab-member-card" href="{{ $link }}">
+{{ else }}
+<article class="lab-member-card">
+{{ end }}
+  <span class="lab-member-card-avatar{{ if not $src }} is-placeholder{{ end }}">
+    {{- if $src -}}
+    <img src="{{ $src }}"{{ with $srcset }} srcset="{{ . }}" sizes="88px"{{ end }} alt="{{ $page.Title }}" loading="lazy" decoding="async" width="480" height="480">
+    {{- else -}}
+    <span class="lab-member-photo-initial" aria-hidden="true">{{ $initial }}</span>
+    {{- end -}}
+  </span>
+  <h3 class="lab-member-card-name">{{ $page.Title }}</h3>
+  {{- /* Role lines: front matter may carry "\n" — each line renders as its
+         own row (e.g. 教授，博士生导师 / 副院长) */ -}}
+  {{- with $page.Params.role }}
+  {{- range $line := split (replace (. | plainify) "\r" "") "\n" }}
+  {{- $t := trim $line " " }}
+  {{- if $t }}<p class="lab-member-card-role">{{ $t }}</p>{{ end }}
+  {{- end }}
+  {{- end }}
+{{ if $link }}
+</a>
+{{ else }}
+</article>
+{{ end }}

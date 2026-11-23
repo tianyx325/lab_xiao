@@ -1,0 +1,100 @@
+@use "sass:map";
+
+/* ── Grid system — the ONLY sanctioned way to declare responsive grids ──
+   Best-practice basis (CSS Grid era, verified 2025+):
+   · CSS Grid owns 2D layout; flexbox stays for 1D component internals.
+   · Tracks use repeat(n, minmax(0, 1fr)) — minmax(0, ·) stops long
+     unbreakable strings (DOIs, URLs) from blowing out the track.
+   · Breakpoints are tokens ($lab-bp-*, _tokens.scss); consume via the
+     lab-bp-* mixins below — raw px in @media is a defect.
+   · Gaps resolve to spacing tokens (var(--lab-card-gap), --lab-space-*).
+   · Equal-rhythm card walls use the lab-card-grid mixin; the .lab-grid
+     12-column primitive is reserved for future mixed-span layouts
+     (magazine hero, dashboards) — do not apply it to card walls. */
+
+$lab-bp-map: (sm: $lab-bp-sm, md: $lab-bp-md, lg: $lab-bp-lg, xl: $lab-bp-xl);
+
+/* Desktop-first down breakpoint — matches the existing cascade style. */
+@mixin lab-bp-down($name) {
+  @media (max-width: #{map.get($lab-bp-map, $name) - 1}) {
+    @content;
+  }
+}
+
+/* Mobile-first up breakpoint — for new mobile-first blocks. */
+@mixin lab-bp-up($name) {
+  @media (min-width: #{map.get($lab-bp-map, $name)}) {
+    @content;
+  }
+}
+
+/* Equal-width column track. */
+@mixin lab-grid-cols($n) {
+  grid-template-columns: repeat($n, minmax(0, 1fr));
+}
+
+/* Semantic card wall — the site-wide rhythm for publication / project /
+   research / news card grids: N cols desktop (default 3) → 2 tablet →
+   1 phone, gap = card-gap token. View files should @include this, never
+   re-declare the media queries by hand. */
+@mixin lab-card-grid($cols: 3) {
+  display: grid;
+  @include lab-grid-cols($cols);
+  gap: var(--lab-card-gap);
+
+  @include lab-bp-down(lg) {
+    @include lab-grid-cols(2);
+  }
+
+  @include lab-bp-down(md) {
+    @include lab-grid-cols(1);
+  }
+}
+
+/* ── 12-column primitive (mixed-span layouts only) ──
+   Base span classes apply at every width; -md- variants take over below
+   lg (tablet), -sm- variants below md (phone). Tier naming follows the
+   size the viewport IS AT, unlike Bootstrap's min-width tiers. */
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--lab-card-gap);
+}
+
+@for $i from 1 through 12 {
+  .lab-grid > .lab-col-#{$i} {
+    grid-column: span #{$i};
+  }
+}
+
+.lab-grid > .lab-col-full {
+  grid-column: 1 / -1;
+}
+
+@include lab-bp-down(lg) {
+  @for $i from 1 through 12 {
+    .lab-grid > .lab-col-md-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+}
+
+@include lab-bp-down(md) {
+  @for $i from 1 through 12 {
+    .lab-grid > .lab-col-sm-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+}
+
+/* ── Optical alignment helpers ──
+   Geometric centering is not perceived alignment. Uppercase mono glyphs
+   carry their mass high (nudge down); "→" sits low in its em box (nudge
+   up). Nudges are em-based so they scale with the text step. */
+.lab-align-glyph {
+  transform: translateY($lab-align-glyph-nudge);
+}
+
+.lab-align-arrow {
+  transform: translateY($lab-align-arrow-nudge);
+}

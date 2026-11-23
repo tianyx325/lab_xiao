@@ -1,0 +1,412 @@
+﻿/* ---------- Article reading pages ---------- */
+.lab-article {
+  max-width: none;
+  margin: 0;
+  padding: 0 0 var(--lab-page-end);
+}
+
+.lab-article-header {
+  margin: 0 0 var(--lab-space-section-sm);
+  padding: var(--lab-page-top) 0 0;
+  text-align: center;
+  background: var(--lab-color-bg);
+}
+
+.lab-article-header > .container {
+  width: 100%;
+  /* --lab-page-width on detail = 666px content + 2× gutter */
+  max-width: var(--lab-page-width);
+  margin: 0 auto;
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
+}
+
+.lab-article-title {
+  /* Narrow column + large title (reading pages) */
+  @include lab-display-title;
+  margin: 0;
+  color: var(--lab-color-fg);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.lab-page--detail .lab-article-title {
+  max-width: $lab-measure-md;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lab-article-byline {
+  margin: $lab-space-4 0 0;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-body;
+  color: var(--lab-color-fg-muted);
+  text-align: center;
+}
+
+.lab-article-byline a {
+  @extend %lab-accent-link;
+}
+
+.lab-article-byline a:hover {
+  @extend %lab-accent-link-hover;
+}
+
+.lab-article-dek {
+  margin: $lab-space-4 auto 0;
+  max-width: $lab-measure-2xl;
+  font-size: $lab-text-md;
+  line-height: $lab-leading-body;
+  color: var(--lab-color-fg-muted);
+  text-align: center;
+}
+
+.lab-article-body {
+  /* Same outer shell as header; padding yields 666px content. */
+  max-width: var(--lab-page-width);
+  margin: 0 auto;
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
+}
+
+.lab-article-abstract {
+  margin: 0 0 $lab-space-section-sm;
+  padding: 0;
+  @include lab-type-body;
+  color: var(--lab-color-fg);
+}
+
+.lab-article-abstract-label {
+  display: block;
+  margin: 0 0 $lab-space-4;
+  font-size: $lab-text-xs;
+  font-weight: $lab-weight-medium;
+  letter-spacing: $lab-tracking-xl;
+  line-height: $lab-leading-none;
+  color: var(--lab-color-fg-muted);
+}
+
+.lab-article-abstract-body p {
+  margin: 0 0 $lab-space-3;
+}
+
+.lab-article-keywords p {
+  margin: 0;
+}
+
+.lab-article-abstract-body p:last-child {
+  margin-bottom: 0;
+}
+
+.lab-article-abstract-body strong {
+  color: var(--lab-color-fg);
+  font-weight: $lab-weight-semibold;
+}
+
+.lab-article-abstract-body > *:first-child {
+  margin-top: 0;
+}
+
+.lab-article-abstract-body > *:last-child {
+  margin-bottom: 0;
+}
+
+.lab-article-keywords {
+  margin-top: $lab-space-4;
+}
+
+
+.lab-article-content {
+  @include lab-type-body;
+  color: var(--lab-color-fg);
+  text-align: left;
+}
+
+.lab-article-content > *:first-child {
+  margin-top: 0;
+}
+
+.lab-article-content h2 {
+  margin: $lab-space-section-sm 0 $lab-space-stack;
+  font-size: $lab-text-lg;
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-heading;
+  color: var(--lab-color-fg);
+  line-height: $lab-leading-tight;
+  text-wrap: balance;
+}
+
+/* h3 one step below h2 — scannable subheads */
+.lab-article-content h3 {
+  margin: $lab-space-block 0 $lab-space-2;
+  font-size: $lab-text-md;
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-label;
+  color: var(--lab-color-fg);
+  line-height: $lab-leading-tight;
+}
+
+/* Bold-only lines used as fake headings → still scannable */
+.lab-article-content > p > strong:only-child {
+  font-size: $lab-text-md;
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-heading;
+}
+
+.lab-article-content p,
+.lab-article-content li {
+  @include lab-type-body;
+  color: var(--lab-color-fg);
+}
+
+/* Chinese prose: first-line indent + justify (EN unchanged).
+   Skip figure wrappers, bold lead-ins, and ref blocks. */
+html[lang^="zh"] .lab-article-content > p,
+html[lang^="zh"] .lab-list-intro.article-style > p,
+html[lang^="zh"] .article-style.lab-list-intro > p {
+  text-indent: 2em;
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+
+html[lang^="zh"] .lab-article-content > p:has(.lab-content-figure),
+html[lang^="zh"] .lab-article-content > p:has(> strong:first-child),
+html[lang^="zh"] .lab-list-intro > p:has(.lab-content-figure),
+html[lang^="zh"] .lab-list-intro > p:has(> strong:first-child) {
+  text-indent: 0;
+  text-align: left;
+}
+
+/* Markdown meta lines at end of posts (e.g. **论文链接：** …) */
+.lab-article-content > p:has(> strong:first-child) {
+  margin-top: $lab-space-4;
+  @include lab-type-ui;
+  font-weight: $lab-weight-body;
+  overflow-wrap: anywhere;
+}
+
+.lab-article-content > p:has(> strong:first-child) + p:has(> strong:first-child) {
+  margin-top: $lab-space-2;
+}
+
+/* First meta line after prose — spacing only, no rule */
+.lab-article-content > p:not(:has(> strong:first-child)) + p:has(> strong:first-child) {
+  margin-top: $lab-space-section-sm;
+}
+
+.lab-article-content a:not(.btn):not([data-lab-lightbox]) {
+  @extend %lab-accent-link;
+}
+
+.lab-article-content a:not(.btn):not([data-lab-lightbox]):hover {
+  @extend %lab-accent-link-hover;
+}
+
+.lab-article-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $lab-space-3 $lab-space-5;
+  margin: $lab-space-section-sm 0 0;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-body;
+  color: var(--lab-color-fg-muted);
+}
+
+.lab-article-links a {
+  @extend %lab-accent-link;
+}
+
+.lab-article-links a:hover {
+  @extend %lab-accent-link-hover;
+}
+
+/* Body figures / Markdown images — same rounded-card language as every
+   other content image on the site (card radius + hairline border) */
+.lab-article-content img,
+.article-style img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: $lab-space-5 auto;
+  border-radius: var(--lab-card-radius);
+  border: $lab-hairline solid var(--lab-color-border);
+  box-sizing: border-box;
+}
+
+.lab-article-content figure,
+.article-style .lab-content-figure {
+  margin: $lab-space-5 0;
+}
+
+.lab-article-content figure img,
+.article-style .lab-content-figure img {
+  margin-bottom: $lab-space-2;
+}
+
+.lab-article-content figcaption,
+.article-style .lab-content-figure figcaption {
+  margin: 0;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-snug;
+  color: var(--lab-color-fg-muted);
+  text-align: center;
+}
+
+/* Video links (no embed) */
+.lab-article-videos,
+.lab-article-gallery {
+  margin-top: $lab-space-section-sm;
+}
+
+.lab-article-media-title {
+  margin: 0 0 $lab-space-4;
+  font-size: $lab-text-md;
+  font-weight: $lab-weight-medium;
+  letter-spacing: $lab-tracking-overline;
+  line-height: $lab-leading-ui;
+  color: var(--lab-color-fg);
+}
+
+.lab-article-video-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lab-article-video-list a,
+.lab-video-link a {
+  @extend %lab-accent-link;
+}
+
+.lab-article-video-list a:hover,
+.lab-video-link a:hover {
+  @extend %lab-accent-link-hover;
+}
+
+.lab-article-video-list li,
+.lab-video-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $lab-space-1;
+  margin: 0 0 $lab-space-3;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-snug;
+}
+
+.lab-article-video-url {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: $lab-text-xs;
+  color: var(--lab-color-fg-muted);
+  word-break: break-all;
+}
+
+
+/* ---------- Previous / next item ---------- */
+.lab-prev-next {
+  display: flex;
+  justify-content: space-between;
+  gap: $lab-space-5;
+  margin-top: $lab-space-section;
+}
+
+.lab-prev-next-link {
+  display: flex;
+  flex-direction: column;
+  gap: $lab-space-1;
+  min-width: 0;
+  max-width: 48%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.lab-prev-next-link--next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.lab-prev-next-label {
+  font-size: $lab-text-xs;
+  line-height: $lab-leading-snug;
+  letter-spacing: $lab-tracking-ui;
+  color: var(--lab-color-fg-muted);
+}
+
+.lab-prev-next-title {
+  overflow: hidden;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-medium;
+  line-height: $lab-leading-snug;
+  color: var(--lab-color-fg);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color $lab-transition;
+}
+
+.lab-prev-next-link:hover .lab-prev-next-title {
+  color: var(--lab-color-brand);
+}
+
+@include lab-bp-down(md) {
+  .lab-prev-next {
+    flex-direction: column;
+    gap: $lab-space-3;
+  }
+
+  .lab-prev-next-link {
+    max-width: none;
+  }
+
+  .lab-prev-next-link--next {
+    margin-left: 0;
+    text-align: left;
+  }
+}
+
+/* ---------- Reading progress: 1px line driven by the page scroller ---------- */
+.lab-reading-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: $lab-hairline;
+  z-index: $lab-z-progress;
+  pointer-events: none;
+}
+
+.lab-reading-progress span {
+  display: block;
+  height: 100%;
+  background: var(--lab-color-brand);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--lab-read-progress, 0));
+}
+
+body.lab-page--detail .page-body {
+  scroll-timeline-name: --lab-page;
+  scroll-timeline-axis: block;
+}
+
+@supports (animation-timeline: scroll()) {
+  .lab-reading-progress span {
+    animation: lab-read-progress linear both;
+    animation-timeline: --lab-page;
+  }
+
+  @keyframes lab-read-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* Information is preserved, but motion is not: the JS fallback takes over. */
+@media (prefers-reduced-motion: reduce) {
+  .lab-reading-progress span {
+    animation: none;
+  }
+}

@@ -1,0 +1,21 @@
+    {{/* Body = Markdown (.Content). Front-matter abstract also via markdownify. */}}
+    {{- if or .Params.abstract .Content -}}
+    <div class="article-style lab-article-content">
+      {{- with .Params.abstract -}}
+      <div class="lab-article-abstract">
+        {{- $lead := printf "**%s**\n\n%s" (i18n "abstract") . -}}
+        <div class="lab-article-abstract-body">{{ $lead | markdownify }}</div>
+      </div>
+      {{- end -}}
+      {{ .Content }}
+    </div>
+    {{- end -}}
+
+    {{ partial "article/videos.html" . }}
+    {{- $sec := partial "functions/normalize-section.html" .Section -}}
+    {{- if eq $sec "blog" -}}
+    {{ partial "article/gallery.html" . }}
+    {{- end -}}
+    {{ partial "article/prev-next.html" . }}
+  </div>
+</article>

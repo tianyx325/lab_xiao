@@ -1,0 +1,36 @@
+{{- /* Outcomes hub sticky header: title + tabs + filters.
+   Usage: {{ partial "listing/hub-header.html" (dict
+     "title" .Title "lead" $hubLead "section" $sectionKey "cfg" $cfg) }} */ -}}
+{{- $sectionKey := .section -}}
+{{- $cfg := .cfg -}}
+{{- $tabs := slice
+  (dict "section" "publications" "label" (i18n "lab_hub_tab_papers") "url" (relLangURL "publications/"))
+  (dict "section" "patent" "label" (i18n "lab_hub_tab_patents") "url" (relLangURL "publications/patents/"))
+  (dict "section" "award" "label" (i18n "lab_hub_tab_awards") "url" (relLangURL "publications/awards/"))
+-}}
+<div class="lab-hub-sticky" data-lab-sticky>
+  <header class="lab-list-header lab-list-header--hub">
+    <div class="container">
+      {{ with .title }}
+      <h1 class="lab-list-title">{{ . | markdownify | emojify }}</h1>
+      {{ end }}
+      {{ with .lead }}
+      <p class="lab-list-lead">{{ . | markdownify | emojify }}</p>
+      {{ end }}
+
+      <nav class="lab-hub-tabs" aria-label="{{ i18n "lab_hub_tabs_aria" }}">
+        {{ range $tabs }}
+        <a class="lab-hub-tab" href="{{ .url }}"{{ if eq .section $sectionKey }} aria-current="page"{{ end }}>{{ .label }}</a>
+        {{ end }}
+      </nav>
+
+      {{ if $cfg.filterable }}
+      <div class="lab-hub-filters">
+        <div class="lab-hub-filter">
+          {{ partial "listing/filters.html" (dict "placeholder" $cfg.placeholder "selects" $cfg.selects) }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </header>
+</div>

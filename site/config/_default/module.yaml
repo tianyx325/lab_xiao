@@ -4,26 +4,11 @@
 ## Docs: https://gohugo.io/hugo-modules/
 ############################
 
-imports:
-  - path: github.com/HugoBlox/kit/modules/integrations/netlify
-  - path: github.com/HugoBlox/kit/modules/blox
-  - path: github.com/HugoBlox/kit/modules/slides
+# Site files use Hugo's default mounts (layouts/assets/static/archetypes/
+# content/data/i18n at the repository root).
 
-# Install any Hugo Blox within the `hugo-blox/blox/` folder
-mounts:
-  - source: hugo-blox/blox/community
-    target: layouts/_partials/blox/community/
-    files:
-      - '**.html'
-  - source: hugo-blox/blox/all-access
-    target: layouts/_partials/blox/
-    files:
-      - '**.html'
-  - source: hugo-blox/blox
-    target: assets/dist/community/blox/
-    files:
-      - '**.css'
-  - source: layouts
-    target: layouts
-  - source: assets
-    target: assets
+imports:
+  - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-decap-cms
+  - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5
+  - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-core
+  - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-seo

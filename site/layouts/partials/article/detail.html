@@ -1,0 +1,5 @@
+{{- /* Unified detail page: title → metadata → body.
+   Excludes contact + member pages (those use their own shells). */ -}}
+{{ partial "article/meta/build.html" . }}
+{{ partial "article/shell-start.html" . }}
+{{ partial "article/shell-end.html" . }}

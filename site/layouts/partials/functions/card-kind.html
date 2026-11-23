@@ -1,0 +1,30 @@
+{{- /* Resolve card type class + badge/category from page.
+   Usage: {{ $k := partial "functions/card-kind.html" $item }}
+   Returns: type_class, badge, category */ -}}
+{{- $item := . -}}
+{{- $sec := partial "functions/normalize-section.html" $item.Section -}}
+{{- $type := $item.Type | default "" -}}
+{{- $typeClass := "lab-card--default" -}}
+{{- $badge := "" -}}
+{{- $category := "" -}}
+
+{{- if or (eq $type "publication") (eq $sec "publications") -}}
+  {{- $typeClass = "lab-card--publication" -}}
+  {{- $badge = partial "functions/pub-venue.html" $item -}}
+{{- else if or (eq $type "patent") (eq $sec "patent") -}}
+  {{- $typeClass = "lab-card--patent" -}}
+  {{- $badge = partial "components/status-label.html" (dict "kind" "patent" "page" $item) -}}
+{{- else if or (eq $type "award") (eq $sec "award") -}}
+  {{- $typeClass = "lab-card--award" -}}
+  {{- with $item.Params.tags -}}{{- $badge = index . 0 -}}{{- end -}}
+{{- else if or (eq $type "post") (eq $sec "blog") -}}
+  {{- $typeClass = "lab-card--post" -}}
+  {{- with $item.Params.categories -}}{{- $category = index . 0 -}}{{- end -}}
+{{- else if or (eq $type "project") (eq $sec "projects") -}}
+  {{- $typeClass = "lab-card--project" -}}
+  {{- $badge = partial "components/status-label.html" (dict "kind" "project" "page" $item) -}}
+{{- else if eq $type "research" -}}
+  {{- $typeClass = "lab-card--research" -}}
+{{- end -}}
+
+{{- return (dict "type_class" $typeClass "badge" $badge "category" $category "section" $sec) -}}

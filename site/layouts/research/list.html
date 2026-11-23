@@ -1,3 +1,22 @@
-{{ define "main" }}
-{{ partial "lab/filtered-list.html" . }}
-{{ end }}
+{{- define "main" -}}
+
+{{/* Research list page — standard lab-list-page shell + research cards */}}
+<div class="lab-list-page lab-list-page--research">
+  {{/* Short, filter-free list: no sticky band and no inner scroller, so a
+       four-card page never grows a phantom scrollbar. */}}
+  {{ partial "listing/header.html" (dict
+    "title" .Title
+    "lead" (partial "components/section-lead.html" (dict "page" . "key" "research"))
+    "sticky" false
+  ) }}
+
+  <div class="lab-list-body container">
+    {{ with .Content }}
+    <div class="article-style lab-list-intro">{{ . }}</div>
+    {{ end }}
+
+    {{ partial "components/research-cards.html" (dict "page" . "count" 99) }}
+  </div>
+</div>
+
+{{- end -}}

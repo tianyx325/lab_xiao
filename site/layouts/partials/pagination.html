@@ -1,0 +1,38 @@
+{{- /*
+  List pagination (USWDS / W3C practices):
+  - labeled <nav>, prev / numbers / next
+  - aria-current on active page; clear link labels
+  - show all page numbers when TotalPages is small (typical for this site)
+*/ -}}
+{{- $pag := .Paginator -}}
+{{- if gt $pag.TotalPages 1 -}}
+<nav class="lab-pagination" aria-label="{{ i18n "lab_pagination" }}">
+  <ul class="lab-pagination-list">
+    <li class="lab-pagination-item">
+      {{- if $pag.HasPrev -}}
+      <a class="lab-pagination-link lab-pagination-link--text" href="{{ $pag.Prev.URL }}" rel="prev">{{ i18n "previous" }}</a>
+      {{- else -}}
+      <span class="lab-pagination-link lab-pagination-link--text is-disabled" aria-disabled="true">{{ i18n "previous" }}</span>
+      {{- end -}}
+    </li>
+
+    {{- range $pag.Pagers -}}
+    <li class="lab-pagination-item">
+      {{- if eq . $pag -}}
+      <a class="lab-pagination-link is-current" href="{{ .URL }}" aria-current="page" aria-label="{{ i18n "lab_page_n_of" (dict "n" .PageNumber "total" $pag.TotalPages) }}">{{ .PageNumber }}</a>
+      {{- else -}}
+      <a class="lab-pagination-link" href="{{ .URL }}" aria-label="{{ i18n "lab_page_n" .PageNumber }}">{{ .PageNumber }}</a>
+      {{- end -}}
+    </li>
+    {{- end -}}
+
+    <li class="lab-pagination-item">
+      {{- if $pag.HasNext -}}
+      <a class="lab-pagination-link lab-pagination-link--text" href="{{ $pag.Next.URL }}" rel="next">{{ i18n "next" }}</a>
+      {{- else -}}
+      <span class="lab-pagination-link lab-pagination-link--text is-disabled" aria-disabled="true">{{ i18n "next" }}</span>
+      {{- end -}}
+    </li>
+  </ul>
+</nav>
+{{- end -}}

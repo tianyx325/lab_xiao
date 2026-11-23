@@ -1,0 +1,81 @@
+{{- $lab := site.Params.lab | default dict -}}
+{{- $ui := $lab.ui | default dict -}}
+{{- $admit := $lab.admit | default dict -}}
+{{- $email := $lab.email | default "" -}}
+{{- $address := $lab.address | default "" -}}
+{{- $lat := printf "%v" ($lab.latitude | default "0") -}}
+{{- $lng := printf "%v" ($lab.longitude | default "0") -}}
+{{- $isEn := eq site.Language.Lang "en" -}}
+{{- $pageTitle := $ui.contact_title | default (cond $isEn "Contact & Admissions" "联系与招生") -}}
+{{- $admitKind := $ui.admit_kind | default (cond $isEn "Admissions" "招生信息") -}}
+{{- $contactKind := $ui.contact_kind | default (cond $isEn "Contact" "联系方式") -}}
+{{- $emailLabel := $ui.email_label | default (cond $isEn "Email" "邮箱") -}}
+{{- $addressLabel := $ui.address_label | default (cond $isEn "Address" "地址") -}}
+{{- $mapAria := $ui.map_aria | default (cond $isEn "Lab location map" "实验室位置地图") -}}
+{{- $map_provider := lower (site.Params.features.map.provider | default "mapnik") -}}
+{{- $map_zoom := site.Params.features.map.zoom | default "15" -}}
+{{- $map_api_key := site.Params.features.map.api_key | default "" -}}
+{{- $sections := $admit.sections | default slice -}}
+
+{{/* Leaflet assets: loaded in partials/custom_head.html for provider=amap */}}
+
+<div class="lab-contact lab-list-page">
+  <header class="lab-list-header">
+    <div class="container">
+      <h1 class="lab-list-title">{{ $pageTitle }}</h1>
+    </div>
+  </header>
+
+  <div class="lab-list-body container">
+    <section class="lab-contact-section" aria-labelledby="lab-contact-admit-title">
+      <h2 id="lab-contact-admit-title" class="lab-contact-section-title">{{ $admitKind }}</h2>
+      <div class="lab-contact-admit-grid">
+        {{- range $sections }}
+        <article class="lab-contact-admit-col">
+          <h3 class="lab-contact-admit-title">{{ .title }}</h3>
+          <p class="lab-contact-admit-lead">{{ .lead | default "" }}</p>
+          <ul class="lab-contact-admit-list">
+            {{- range (.bullets | default slice) }}
+            <li>{{ . }}</li>
+            {{- end }}
+          </ul>
+        </article>
+        {{- end }}
+      </div>
+    </section>
+
+    <section class="lab-contact-section" aria-labelledby="lab-contact-ways-title">
+      <h2 id="lab-contact-ways-title" class="lab-contact-section-title">{{ $contactKind }}</h2>
+      <div class="lab-contact-ways">
+        <div class="lab-contact-ways-meta">
+          {{ with $email }}
+          <div class="lab-contact-ways-item">
+            <span class="lab-contact-info-label">{{ $emailLabel }}</span>
+            <a class="lab-contact-mail" href="mailto:{{ . }}">{{ . }}</a>
+          </div>
+          {{ end }}
+          {{ with $address }}
+          <div class="lab-contact-ways-item">
+            <span class="lab-contact-info-label">{{ $addressLabel }}</span>
+            <p>{{ . }}</p>
+          </div>
+          {{ end }}
+        </div>
+        {{ if $map_provider }}
+        <div class="lab-contact-ways-map">
+          <div class="d-none">
+            <input id="map-provider" value="{{ $map_provider }}">
+            <input id="map-lat" value="{{ $lat }}">
+            <input id="map-lng" value="{{ $lng }}">
+            <input id="map-dir" value="{{ $address }}">
+            <input id="map-zoom" value="{{ $map_zoom }}">
+            <input id="map-api-key" value="{{ $map_api_key }}">
+            <input id="map-leaflet-img" value="{{ "vendor/leaflet/images/" | relURL }}">
+          </div>
+          <div id="map" role="region" aria-label="{{ $mapAria }}"></div>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+  </div>
+</div>

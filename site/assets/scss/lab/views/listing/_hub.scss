@@ -1,0 +1,191 @@
+﻿/* ---------- Academic outputs hub (学术成果) — tabbed categories ---------- */
+/* Content-sized tabs: width follows the labels; height and type match the
+   search / filter controls on the right. */
+.lab-hub-tabs {
+  display: inline-flex;
+  align-items: stretch;
+  gap: $lab-space-0-5;
+  width: max-content;
+  max-width: 100%;
+  height: var(--lab-control-height-sm);
+  margin-top: var(--lab-space-block);
+  /* Narrow viewports: tabs that don't fit must be scrollable, not clipped
+     (same hidden-scrollbar pattern as .lab-story-nav) */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  border: $lab-hairline solid var(--lab-color-border-brand);
+  border-radius: var(--lab-card-radius);
+  background: var(--lab-color-bg-raised);
+  box-shadow: var(--lab-color-elevate);
+}
+
+.lab-hub-tab {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 var(--lab-space-4);
+  border: 0;
+  border-radius: calc(var(--lab-card-radius) - #{$lab-hairline});
+  background: none;
+  font-family: $lab-font-sans;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-medium;
+  white-space: nowrap;
+  letter-spacing: $lab-tracking-body;
+  color: var(--lab-color-fg-muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color $lab-duration-quick ease, color $lab-duration-quick ease;
+}
+
+.lab-hub-tab:hover {
+  background: var(--lab-color-bg-brand-soft);
+  color: var(--lab-color-fg);
+}
+
+.lab-hub-tab[aria-selected="true"],
+.lab-hub-tab[aria-current="page"] {
+  background: var(--lab-color-brand);
+  color: var(--lab-color-on-brand);
+}
+
+.lab-hub-tab:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 $lab-focus-width var(--lab-color-brand);
+}
+
+.lab-hub-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* Sticky hub band: title + category tabs + the active category's filters
+   stay pinned above the scrolling list. */
+.lab-hub-sticky {
+  position: sticky;
+  top: calc(var(--lab-navbar-height) + #{$lab-space-3} + #{$lab-space-2});
+  z-index: $lab-z-sticky;
+  background: var(--lab-color-bg);
+}
+
+/* No hairline between the band and the list — whitespace does the separating */
+.lab-hub-sticky .lab-list-header {
+  margin-bottom: 0;
+  padding-top: $lab-space-5;
+  padding-bottom: $lab-space-4;
+}
+
+.lab-hub-sticky .lab-hub-tabs {
+  margin-top: 0;
+}
+
+.lab-hub-filters {
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
+  padding-bottom: $lab-space-4;
+}
+
+.lab-hub-filters .lab-list-filters {
+  margin: var(--lab-space-2) auto 0;
+}
+
+.lab-hub-filter[hidden] {
+  display: none;
+}
+
+/* Client-side result count (hub search/filter) — mono micro-line above grid */
+.lab-filter-count {
+  margin: 0 0 var(--lab-space-2);
+  @include lab-type-mono;
+  color: var(--lab-color-fg-muted);
+}
+
+/* Index fetch in flight: quiet dimming — the stale server list stays visible
+   but reads as "not final"; the search field carries aria-busy for AT. */
+[data-hub-grid].is-indexing {
+  opacity: 0.55;
+  transition: opacity $lab-duration-normal ease;
+}
+
+.lab-hub-sticky.is-stuck .lab-list-lead {
+  display: none;
+}
+
+/* Hub title row (desktop): category tabs left · title centered · active
+   filters right. Below lg the four blocks stack in DOM order:
+   title · lead · tabs · filters. */
+.lab-list-header--hub .lab-hub-filters {
+  /* Now nested in the header container — no second gutter */
+  width: 100%;
+  padding: 0;
+}
+
+/* The toolbar and the card grid must share one column. Both are centered
+   at exactly --lab-list-column; below that width both use the page gutter. */
+.page-body .lab-list-header--hub .container {
+  width: min(calc(100% - 2 * var(--lab-page-gutter)), var(--lab-list-column));
+  max-width: var(--lab-list-column);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Desktop hub header: tabs left · title centered · filters right, all on
+   one shared column */
+@include lab-bp-up(lg) {
+  .lab-list-header--hub .container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-areas:
+      "tabs  title filters"
+      ".     lead  .";
+    align-items: end;
+    column-gap: $lab-space-6;
+  }
+
+  .lab-list-header--hub .lab-hub-tabs {
+    grid-area: tabs;
+    justify-self: start;
+    justify-content: flex-start;
+    margin-top: 0;
+  }
+
+  .lab-list-header--hub .lab-list-title {
+    grid-area: title;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .lab-list-header--hub .lab-list-lead {
+    grid-area: lead;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .lab-list-header--hub .lab-hub-filters {
+    grid-area: filters;
+    justify-self: stretch;
+    align-self: end;
+  }
+
+  .lab-list-header--hub .lab-hub-filters .lab-list-filters {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@include lab-bp-down(lg) {
+  .lab-hub-sticky .lab-list-header--hub .lab-hub-tabs {
+    margin-top: $lab-space-4;
+  }
+}
+
+@include lab-bp-down(lg) {
+  .lab-hub-sticky {
+    top: calc(var(--lab-navbar-height-sm) + #{$lab-space-3} + #{$lab-space-2});
+  }
+}
+

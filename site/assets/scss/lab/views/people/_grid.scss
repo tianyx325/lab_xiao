@@ -1,0 +1,347 @@
+﻿/* Layer 5b · people views: member cards, profiles, roles
+   Source: template.scss lines 1648-2402 (order-preserving split). */
+/* Shared member cards (homepage + /people/) — whole card is square */
+.home-section.lab-people-section {
+  background: var(--lab-color-bg);
+  padding-top: var(--lab-space-section);
+  padding-bottom: 0;
+}
+
+.lab-people {
+  max-width: var(--lab-page-width);
+  margin: 0 auto;
+}
+
+.lab-people-header {
+  text-align: center;
+  margin: 0 0 $lab-space-section-sm;
+}
+
+.lab-people-title {
+  @include lab-section-title;
+  margin: 0;
+  color: var(--lab-color-fg);
+}
+
+.lab-people-lead {
+  margin: $lab-space-3 0 0;
+  color: var(--lab-color-fg-muted);
+  font-size: $lab-text-base;
+  line-height: $lab-leading-body;
+}
+
+.lab-people-group + .lab-people-group {
+  margin-top: $lab-space-section-sm;
+}
+
+.lab-people-group-title {
+  margin: 0 0 $lab-space-4;
+  text-align: center;
+  font-size: $lab-text-md;
+  font-weight: $lab-weight-medium;
+  letter-spacing: $lab-tracking-xl;
+  color: var(--lab-color-fg-muted);
+}
+
+/* Sub-sections inside an aggregated group: 博士生 / 研究生 / 本科生 */
+.lab-people-subgroup-title {
+  margin: $lab-space-block 0 $lab-space-4;
+  text-align: center;
+  font-size: $lab-text-md;
+  font-weight: $lab-weight-medium;
+  letter-spacing: $lab-tracking-xl;
+  color: var(--lab-color-fg-muted);
+}
+
+.lab-people-group-title + .lab-people-subgroup-title {
+  margin-top: 0;
+}
+
+/* Enrollment-cohort labels (2024级) inside 研究生 */
+.lab-people-cohort-title {
+  margin: $lab-space-block 0 $lab-space-3;
+  text-align: center;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-medium;
+  letter-spacing: $lab-tracking-overline-wide;
+  color: var(--lab-color-fg-muted);
+}
+
+.lab-people-subgroup-title + .lab-people-cohort-title {
+  margin-top: 0;
+}
+
+.lab-people-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--lab-card-gap);
+  width: 100%;
+}
+
+/* Unified member card — one component for advisors AND students:
+   round avatar + name + role, centered, inside a compact card shell.
+   Flex-wrap centered: full rows AND the leftover partial row (e.g. two
+   advisors on the homepage) all sit centered; the container is capped at
+   5 card widths so desktop never exceeds 5 per row. */
+.lab-people-grid--advisors,
+.lab-people-grid--students {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--lab-card-gap);
+  max-width: calc(5 * $lab-row-media-width + 4 * var(--lab-card-gap));
+  margin-inline: auto;
+}
+
+a.lab-member-card,
+.lab-member-card {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: $lab-row-media-width;
+  padding: var(--lab-space-4) var(--lab-space-3);
+  text-align: center;
+  text-decoration: none;
+  color: var(--lab-color-fg);
+  background: var(--lab-color-bg-raised);
+  border: $lab-hairline solid var(--lab-color-border);
+  border-radius: var(--lab-card-radius);
+  box-shadow: var(--lab-color-elevate);
+  transition: border-color $lab-transition, box-shadow $lab-transition, transform $lab-duration-pulse ease;
+}
+
+a.lab-member-card:hover {
+  color: var(--lab-color-fg);
+  border-color: var(--lab-color-border-brand);
+  box-shadow: var(--lab-color-elevate-hover);
+  transform: translateY(-$lab-space-0-5);
+}
+
+/* Members list: five to a row by default. The basis splits the row into five
+   (partial rows stay centered), capped at the standard card width so wide
+   layouts never stretch the cards. */
+.lab-list-page--people .lab-member-card {
+  flex: 0 1 calc((100% - 4 * var(--lab-card-gap)) / 5);
+  width: auto;
+  max-width: $lab-row-media-width;
+}
+
+/* Phones: five columns would crush the cards — natural wrapping again */
+@include lab-bp-down(md) {
+  .lab-list-page--people .lab-member-card {
+    flex: 0 0 auto;
+    width: $lab-row-media-width;
+    max-width: none;
+  }
+}
+
+.lab-member-card-avatar {
+  flex: 0 0 auto;
+  width: $lab-member-photo;
+  height: $lab-member-photo;
+  border-radius: 50%;
+  overflow: hidden;
+  border: $lab-hairline solid var(--lab-color-border);
+  background: var(--lab-color-bg-subtle);
+}
+
+.lab-member-card-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.lab-member-card-name {
+  margin: var(--lab-space-3) 0 0;
+  max-width: 100%;
+  font-size: $lab-text-base;
+  font-weight: $lab-weight-medium;
+  line-height: $lab-leading-snug;
+  color: var(--lab-color-fg);
+  transition: color $lab-duration-quick ease;
+}
+
+a.lab-member-card:hover .lab-member-card-name {
+  color: color-mix(in srgb, var(--lab-color-brand) 86%, white);
+}
+
+.lab-member-card-role {
+  margin: var(--lab-space-1) 0 0;
+  max-width: 100%;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-ui;
+  color: var(--lab-color-fg-muted);
+}
+
+/* No photo: soft wash placeholder + brand-tinted initial */
+.lab-member-card-avatar.is-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lab-color-bg-brand-soft);
+}
+
+.lab-member-photo-initial {
+  font-family: $lab-font-serif;
+  font-size: $lab-text-xl;
+  font-weight: $lab-weight-heading;
+  letter-spacing: $lab-tracking-heading;
+  line-height: $lab-leading-none;
+  color: color-mix(in srgb, var(--lab-color-brand) 80%, white); /* brand-tinted initial reads deliberate, not broken */
+  opacity: 0.55;
+  user-select: none;
+}
+
+/* Avatar drifts in slightly on hover — same motion as the result-card imagery */
+.lab-member-card-avatar img,
+.lab-member-photo-initial {
+  transition: transform $lab-duration-avatar ease;
+}
+
+a.lab-member-card:hover .lab-member-card-avatar img,
+a.lab-member-card:hover .lab-member-photo-initial {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.lab-member-card:hover,
+  a.lab-member-card:hover .lab-member-card-avatar img,
+  a.lab-member-card:hover .lab-member-photo-initial {
+    transform: none;
+  }
+}
+
+.lab-member-profile {
+  --lab-detail-accent: #{$lab-blue};
+  --lab-detail-wash: var(--lab-color-bg-brand-soft);
+}
+
+.lab-member-identity-band {
+  margin: 0 0 $lab-space-6;
+  padding: $lab-space-5 0 0;
+  background: var(--lab-color-bg);
+}
+
+.lab-member-identity-band > .container {
+  width: 100%;
+  max-width: var(--lab-page-width);
+  margin: 0 auto;
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
+}
+
+.lab-member-profile .lab-list-body {
+  max-width: var(--lab-page-width);
+}
+
+/* Avatar left · name / tags right; text column height == avatar */
+$lab-member-avatar-sm: $lab-member-avatar-sm;
+$lab-member-avatar-lg: $lab-member-avatar-lg;
+
+.lab-member-identity {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: $lab-space-4;
+  text-align: left;
+}
+
+.lab-member-avatar {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  margin: 0;
+  width: $lab-member-avatar-sm;
+  height: $lab-member-avatar-sm;
+}
+
+.lab-member-avatar-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  border: $lab-hairline solid var(--lab-color-border-brand);
+  background: var(--lab-color-bg-brand-soft);
+}
+
+.lab-member-avatar-img.is-square {
+  border-radius: var(--lab-card-radius);
+}
+
+.lab-member-avatar.is-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--lab-card-radius);
+  border: $lab-hairline solid var(--lab-color-border-brand);
+  @include lab-placeholder-bg;
+}
+
+.lab-member-avatar-initial {
+  font-size: $lab-text-display;
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-wide;
+  line-height: $lab-leading-none;
+  color: color-mix(in srgb, var(--lab-color-brand) 80%, white);
+  opacity: 0.72;
+  user-select: none;
+}
+
+.lab-member-identity-side {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $lab-space-3;
+}
+
+/* Name + role/email + tags — grow with content (do not clip to avatar height) */
+.lab-member-identity-main {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: $lab-space-2;
+  overflow: visible;
+}
+
+.lab-member-identity-name {
+  flex: 0 0 auto;
+  margin: 0;
+  font-size: $lab-text-lg;
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-wide;
+  line-height: $lab-leading-tight;
+  color: var(--lab-color-fg);
+}
+
+.lab-member-identity-meta {
+  flex: 0 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $lab-space-1;
+  margin: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.lab-member-identity-focus {
+  flex: 0 1 auto;
+  min-height: 0;
+  margin: 0;
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+

@@ -1,0 +1,46 @@
+﻿/* Shared card chrome (chips, dates, poster scan) — not blog-only */
+
+.lab-card-chip {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  @include lab-type-caption;
+  letter-spacing: $lab-tracking-label;
+  color: var(--lab-color-brand);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lab-card-date {
+  margin: 0;
+  @include lab-type-caption;
+  font-weight: $lab-weight-body;
+  color: var(--lab-color-fg-muted);
+}
+
+.lab-card--poster.lab-card--post .lab-card-media {
+  flex-basis: 56%;
+  max-height: 56%;
+}
+
+.lab-card--poster .lab-card-title {
+  font-size: $lab-text-md;
+  font-weight: $lab-weight-heading;
+  letter-spacing: $lab-tracking-heading;
+  line-height: $lab-leading-tight;
+}
+
+.lab-card--poster.view-card:hover,
+a.lab-card--poster.view-card:hover {
+  transform: none;
+  box-shadow: var(--lab-color-elevate);
+  border-color: var(--lab-color-border);
+}
+
+.lab-card--poster.view-card:hover .lab-card-title {
+  color: var(--lab-color-brand);
+}

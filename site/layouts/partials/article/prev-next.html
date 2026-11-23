@@ -1,0 +1,18 @@
+{{- $prev := .PrevInSection -}}
+{{- $next := .NextInSection -}}
+{{- if or $prev $next }}
+<nav class="lab-prev-next" aria-label="{{ i18n "lab_prev_next" | default "Previous and next" }}">
+  {{- with $prev }}
+  <a class="lab-prev-next-link lab-prev-next-link--prev" href="{{ .RelPermalink }}" rel="prev">
+    <span class="lab-prev-next-label"><span aria-hidden="true">←</span> {{ i18n "lab_prev_item" | default "Previous" }}</span>
+    <span class="lab-prev-next-title">{{ .LinkTitle }}</span>
+  </a>
+  {{- end }}
+  {{- with $next }}
+  <a class="lab-prev-next-link lab-prev-next-link--next" href="{{ .RelPermalink }}" rel="next">
+    <span class="lab-prev-next-label">{{ i18n "lab_next_item" | default "Next" }} <span aria-hidden="true">→</span></span>
+    <span class="lab-prev-next-title">{{ .LinkTitle }}</span>
+  </a>
+  {{- end }}
+</nav>
+{{- end }}

@@ -1,0 +1,58 @@
+{{/* Lab site helpers — only load what the current page actually uses. */}}
+{{- $scripts := slice "js/lab/lab-navbar-scroll.js" "js/lab/lab-back-to-top.js" "js/lab/lab-mailto.js" "js/lab/lab-theme-sync.js" "js/lab/lab-lang.js" "js/lab/lab-reveal.js" -}}
+{{- $section := .Section -}}
+{{- $secNorm := partial "functions/normalize-section.html" $section -}}
+{{- $isList := in (slice "section" "taxonomy" "term") .Kind -}}
+
+{{- if in (slice "people" "authors") $section -}}
+  {{- $scripts = $scripts | append (slice "js/lab/lab-people-nav.js" "js/lab/lab-member-works.js") -}}
+{{- end -}}
+
+{{- if and (eq $secNorm "blog") .IsPage -}}
+  {{- $scripts = $scripts | append (slice "js/lab/lab-gallery.js") -}}
+{{- end -}}
+
+{{- if $isList -}}
+  {{- $scripts = $scripts | append (slice "js/lab/lab-sticky-header.js") -}}
+{{- end -}}
+{{- if or $isList .IsHome (eq .Type "publications") -}}
+  {{- $scripts = $scripts | append (slice "js/lab/lab-card-budget.js") -}}
+{{- end -}}
+
+{{/* Shared filter core whenever list or hub filtering runs. */}}
+{{- $needsFilterCore := or
+  ($.Page.Store.Get "lab_needs_list_filter")
+  (eq .Type "publications")
+-}}
+{{- if $needsFilterCore -}}
+  {{- $scripts = $scripts | append "js/lab/lab-filter-core.js" -}}
+{{- end -}}
+{{- if $.Page.Store.Get "lab_needs_list_filter" -}}
+  {{- $scripts = $scripts | append "js/lab/lab-list-filter-engine.js" -}}
+{{- end -}}
+{{- if eq .Type "publications" -}}
+  {{- $scripts = $scripts | append "js/lab/lab-hub-search.js" -}}
+{{- end -}}
+
+{{- if .IsHome -}}
+  {{- $scripts = $scripts | append (slice "js/lab/lab-magnetic.js") -}}
+{{- end -}}
+
+{{- if .IsPage -}}
+  {{- $scripts = $scripts | append (slice "js/lab/lab-reading-progress.js") -}}
+{{- end -}}
+
+{{- $bundleParts := slice -}}
+{{- range $scripts -}}
+  {{- with resources.Get . -}}
+    {{- $bundleParts = $bundleParts | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- with $bundleParts -}}
+  {{- $bundlePath := printf "js/lab/lab-page-%d.js" (hash.FNV32a (delimit $scripts "|")) -}}
+  {{- $js := . | resources.Concat $bundlePath -}}
+  {{- if hugo.IsProduction -}}
+    {{- $js = $js | minify | fingerprint "md5" -}}
+  {{- end -}}
+<script src="{{ $js.RelPermalink }}" defer></script>
+{{- end -}}

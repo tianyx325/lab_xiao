@@ -1,0 +1,15 @@
+{{- /* Shared empty state.
+   Usage: {{ partial "listing/empty.html" (dict
+     "title" "暂无动态" "lead" "稍后再来…" "cta_href" ("publications/" | relLangURL) "cta" "浏览成果") }}
+*/ -}}
+<div class="lab-blog-empty" role="status">
+  {{- with .title -}}
+  <p class="lab-blog-empty-title">{{ . }}</p>
+  {{- end -}}
+  {{- with .lead -}}
+  <p class="lab-blog-empty-lead">{{ . }}</p>
+  {{- end -}}
+  {{- if and .cta .cta_href -}}
+  <a class="lab-btn--outline" href="{{ .cta_href }}">{{ .cta }}</a>
+  {{- end -}}
+</div>

@@ -1,0 +1,15 @@
+{{- /* Venue string for a publication page/item.
+   Usage: {{ partial "functions/pub-venue.html" $page }} */ -}}
+{{- $venue := "" -}}
+{{- with .Params.publication_short -}}
+  {{- $venue = . | plainify -}}
+{{- else -}}
+  {{- with .Params.publication -}}
+    {{- if reflect.IsMap . -}}
+      {{- $venue = .name | default "" | plainify -}}
+    {{- else -}}
+      {{- $venue = . | plainify -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $venue -}}

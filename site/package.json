@@ -1,19 +1,17 @@
 {
   "name": "lab-xiao",
-  "version": "1.0.0",
   "private": true,
-  "packageManager": "pnpm@10.14.0",
-  "description": "IPD Lab website (HugoBlox Kit / Tailwind)",
+  "type": "module",
   "scripts": {
-    "dev": "hugo server --disableFastRender",
-    "build": "hugo --minify && pnpm run pagefind",
-    "pagefind": "pagefind --site public"
+    "dev": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev.ps1",
+    "check:theme": "node scripts/check-theme-sync.mjs",
+    "check:content": "node scripts/check-content-schema.mjs",
+    "check:tokens": "node scripts/check-lab-hardcodes.mjs",
+    "check": "npm run check:theme && npm run check:content && npm run check:tokens",
+    "build:lab-css": "node scripts/check-lab-compile.mjs && node scripts/merge-lab-css.mjs",
+    "build": "hugo --minify"
   },
-  "dependencies": {
-    "@tailwindcss/cli": "^4.1.12",
-    "@tailwindcss/typography": "^0.5.10",
-    "pagefind": "^1.4.0",
-    "preact": "^10.27.2",
-    "tailwindcss": "^4.1.12"
+  "devDependencies": {
+    "sass": "^1.93.2"
   }
 }

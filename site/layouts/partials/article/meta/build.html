@@ -1,0 +1,17 @@
+{{- /* Set Scratch lab_article_meta_tags from section-specific builders. */ -}}
+{{- $section := partial "functions/normalize-section.html" .Section -}}
+{{- $meta := slice -}}
+{{- if eq $section "blog" -}}
+  {{- $meta = partial "article/meta/blog.html" . -}}
+{{- else if eq $section "publications" -}}
+  {{- $meta = partial "article/meta/publication.html" . -}}
+{{- else if eq $section "patent" -}}
+  {{- $meta = partial "article/meta/patent.html" . -}}
+{{- else if eq $section "award" -}}
+  {{- $meta = partial "article/meta/award.html" . -}}
+{{- else if eq $section "projects" -}}
+  {{- $meta = partial "article/meta/project.html" . -}}
+{{- else -}}
+  {{- $meta = partial "article/meta/default.html" . -}}
+{{- end -}}
+{{- .Scratch.Set "lab_article_meta_tags" $meta -}}

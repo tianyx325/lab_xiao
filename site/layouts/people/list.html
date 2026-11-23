@@ -1,0 +1,27 @@
+{{- define "main" -}}
+
+{{/* People list page — standard lab-list-page shell, same as publication/post/project */}}
+<div class="lab-list-page lab-list-page--people">
+  {{ partial "listing/header.html" (dict
+    "title" .Title
+    "lead" (partial "components/section-lead.html" (dict "page" . "key" "people"))
+    "aside" (dict
+      "label" (i18n "lab_people_filter_group")
+      "all" (i18n "lab_people_filter_all")
+    )
+    "sticky" true
+  ) }}
+
+  <div class="lab-list-body container">
+    {{ with .Content }}
+    <div class="article-style lab-list-intro">{{ . }}</div>
+    {{ end }}
+
+    {{ partial "components/people-groups.html" (dict
+      "groups" (.Params.user_groups | default slice)
+      "sort_ascending" (.Params.sort_ascending | default true)
+    ) }}
+  </div>
+</div>
+
+{{- end -}}

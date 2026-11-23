@@ -1,0 +1,43 @@
+{{ $scr := .Scratch }}
+  {{ $css := hugo.Data.assets.css }}
+  {{ $js := hugo.Data.assets.js }}
+
+  {{/* Config LaTeX math rendering. */}}
+  {{ if or .Params.math site.Params.features.math.enable }}
+    {{ $mathjax_config := resources.Get "js/mathjax-config.js" }}
+    <script src="{{ $mathjax_config.RelPermalink }}"></script>
+  {{ end }}
+
+  {{/* Font Awesome is no longer loaded: UI glyphs are inline SVG. */}}
+  {{ $scr.Set "vendor_css_filename" "main.min.css" }}
+  {{ $scr.Set "vendor_js_filename" "main.min.js" }}
+  {{ if and (fileExists (printf "static/css/vendor/%s" ($scr.Get "vendor_css_filename"))) (fileExists (printf "static/js/vendor/%s" ($scr.Get "vendor_js_filename"))) }}
+    {{ $scr.Set "use_cdn" 0 }}
+    <link rel="stylesheet" href="{{ printf "/css/vendor/%s" ($scr.Get "vendor_css_filename") | relURL }}" />
+  {{ else }}
+    {{ $scr.Set "use_cdn" 1 }}
+    {{ if site.Params.extensions.academicons.enable }}
+      {{ printf "<link rel=\"stylesheet\" href=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\" media=\"print\" onload=\"this.media='all'\">" (printf $css.academicons.url $css.academicons.version) $css.academicons.sri | safeHTML }}
+    {{ end }}
+
+    {{/* Maps CSS. */}}
+    {{ $map_provider := lower site.Params.features.map.provider }}
+    {{ if in (slice "mapnik" "mapbox") $map_provider }}
+      {{ printf "<link rel=\"stylesheet\" href=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\" media=\"print\" onload=\"this.media='all'\">" (printf $css.leaflet.url $css.leaflet.version) $css.leaflet.sri | safeHTML }}
+    {{ end }}
+
+    {{/* Load async scripts. */}}
+    {{ range $k, $v := hugo.Data.assets.js }}
+      {{/* TODO: investigate why `where ... "async" true` does not work. */}}
+      {{ $load := $v.async }}
+
+      {{/* Only load MathJax if required. */}}
+      {{ if (eq $k "mathJax") | and (not (or $.Params.math site.Params.features.math.enable)) }}
+        {{ $load = false }}
+      {{ end }}
+
+      {{ if $load }}
+        {{ printf "<script src=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\" async></script>" (printf $v.url $v.version) $v.sri | safeHTML }}
+      {{ end }}
+    {{ end }}
+  {{ end }}

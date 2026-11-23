@@ -1,0 +1,15 @@
+<div class="lab-reading-progress" aria-hidden="true"><span></span></div>
+<article class="lab-article">
+  {{- $vtMedia := "" -}}
+  {{- with .File }}{{ with .Dir }}{{ $vtMedia = printf "lab-vt-media-%d" (hash.FNV32a .) }}{{ end }}{{ end -}}
+  <header class="lab-article-header"{{ with $vtMedia }} style="view-transition-name:{{ . }}"{{ end }}>
+    <div class="container">
+      {{- $vtName := "" -}}
+      {{- with .File }}{{ with .Dir }}{{ $vtName = printf "lab-vt-%d" (hash.FNV32a .) }}{{ end }}{{ end -}}
+      <h1 class="lab-article-title"{{ with $vtName }} style="view-transition-name:{{ . }}"{{ end }}>{{ .Title }}</h1>
+      {{ with .Scratch.Get "lab_article_meta_tags" }}
+      {{ partial "article/meta-tags.html" (dict "items" .) }}
+      {{ end }}
+    </div>
+  </header>
+  <div class="lab-article-body container">

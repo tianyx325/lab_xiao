@@ -1,0 +1,22 @@
+{{/* Mindmaps */}}
+{{ if .Page.Store.Get "has_markmap" -}}
+  <style>
+    .markmap > svg {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <script>
+    window.markmap = {
+      autoLoader: {
+        manual: false,
+        onReady() {
+          const { autoLoader, builtInPlugins } = window.markmap;
+          // Disable Prism highlighting plugin as it conflicts and attempts to re-render code blocks outside of Markmap.
+          autoLoader.transformPlugins = builtInPlugins.filter(plugin => plugin.name !== 'prism');
+        },
+      },
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader"></script>
+{{ end -}}

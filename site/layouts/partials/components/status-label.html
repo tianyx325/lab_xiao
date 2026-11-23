@@ -1,0 +1,35 @@
+{{/* Shared status / badge label for project & patent cards and meta bars.
+    Usage: {{ partial "components/status-label.html" (dict "kind" "project" "page" .) }}
+    Returns plain text (may be empty). */}}
+{{- $kind := .kind | default "" -}}
+{{- $p := .page -}}
+{{- $out := "" -}}
+{{- if eq $kind "project" -}}
+  {{- /* 资助类别角标：优先 funding 字段，兼容旧 tags */ -}}
+  {{- $funding := $p.Params.funding | default "" -}}
+  {{- $tags := $p.Params.tags | default slice -}}
+  {{- $hay := printf "%s %s" $funding (delimit $tags " ") -}}
+  {{- if in $hay "重点项目" -}}{{- $out = i18n "lab_funding_key" -}}
+  {{- else if in $hay "面上项目" -}}{{- $out = i18n "lab_funding_general" -}}
+  {{- else if in $hay "省级基金" -}}{{- $out = i18n "lab_funding_provincial" -}}
+  {{- else if in $hay "青年" -}}{{- $out = i18n "lab_funding_youth" -}}
+  {{- else if in $hay "国家自然科学基金" -}}{{- $out = i18n "lab_funding_nsfc" -}}
+  {{- end -}}
+  {{- $st := $p.Params.project_status | default "" -}}
+  {{- if eq $st "ongoing" -}}
+    {{- if $out -}}{{- $out = printf "%s · %s" $out (i18n "lab_status_ongoing") -}}{{- else -}}{{- $out = i18n "lab_status_ongoing" -}}{{- end -}}
+  {{- else if eq $st "completed" -}}
+    {{- if $out -}}{{- $out = printf "%s · %s" $out (i18n "lab_status_completed") -}}{{- else -}}{{- $out = i18n "lab_status_completed" -}}{{- end -}}
+  {{- end -}}
+{{- else if eq $kind "patent" -}}
+  {{- if eq ($p.Params.patent_status | default "") "granted" -}}
+    {{- $out = i18n "lab_status_granted" -}}
+  {{- else -}}
+    {{- $pt := $p.Params.patent_type | default "invention" -}}
+    {{- if eq $pt "utility" -}}{{- $out = i18n "lab_patent_utility" -}}
+    {{- else if eq $pt "design" -}}{{- $out = i18n "lab_patent_design" -}}
+    {{- else -}}{{- $out = i18n "lab_patent_invention" -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

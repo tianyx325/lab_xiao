@@ -1,0 +1,29 @@
+# Aligned to LangChain light/dark blue ladders; brand locked to #4176E6
+# Page #F2FAFF = LC c-blue-light-300 · Dark page #030710 = LC c-blue-dark-900
+name = "Minimal"
+
+[light]
+  primary = "#4176E6"
+
+  menu_primary = "#FFFFFF"
+  menu_text = "#000000"
+  menu_text_active = "#4176E6"
+  menu_title = "#000000"
+
+  home_section_odd = "#F2FAFF"
+  home_section_even = "#F2FAFF"
+
+[dark]
+  # mix(white, #4176E6, 22%)
+  primary = "#6B94EC"
+
+  link = "#6B94EC"
+  link_hover = "#96BBF7"
+
+  menu_primary = "#161F34"
+  menu_text = "#FFFFFF"
+  menu_text_active = "#6B94EC"
+  menu_title = "#FFFFFF"
+
+  home_section_odd = "#030710"
+  home_section_even = "#030710"

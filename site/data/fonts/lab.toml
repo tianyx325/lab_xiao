@@ -1,0 +1,14 @@
+# Lab type — system+CJK stack (LangChain uses Manrope; we keep system for CJK).
+# Size/weight/tracking live in assets/scss/lab/_tokens.scss (LC-aligned scale).
+# Selected via config/_default/params.yaml → appearance.font: lab
+
+name = "Lab"
+
+# display=swap appended by site_head — do not include it here (avoids duplicate)
+google_fonts = ""
+
+# Same stack everywhere — fewer faces, consistent CJK + Latin
+heading_font = "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif"
+body_font = "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif"
+nav_font = "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif"
+mono_font = "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif"

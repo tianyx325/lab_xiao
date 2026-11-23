@@ -1,0 +1,27 @@
+{{- $meta := slice -}}
+{{- with .Params.patent_number -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_patent_no") "value" .) -}}
+{{- end -}}
+{{- with .Params.application_date -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_filed") "value" (. | time.Format "2006-01-02")) -}}
+{{- end -}}
+{{- with .Date -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_granted_date") "value" (.Format "2006-01-02")) -}}
+{{- end -}}
+{{- if .Params.authors -}}
+  {{- $authors := partial "components/detail-authors.html" . -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_inventors") "value" ($authors | safeHTML)) -}}
+{{- end -}}
+{{- with partial "components/status-label.html" (dict "kind" "patent" "page" .) -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_status") "value" .) -}}
+{{- end -}}
+{{- with .Params.tags -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_keywords") "value" (delimit . " · ")) -}}
+{{- end -}}
+{{- with .Params.url_patent -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_fulltext") "href" .) -}}
+{{- end -}}
+{{- with .Params.url_pdf -}}
+  {{- $meta = $meta | append (dict "label" "PDF" "href" .) -}}
+{{- end -}}
+{{- return $meta -}}

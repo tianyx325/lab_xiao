@@ -1,0 +1,491 @@
+/* Design tokens — SINGLE source for color / space / type / layout.
+   Layers: Primitive (seeds) → Semantic (roles) → Component (navbar/card).
+   Rule: consumers use $lab-* or var(--lab-*); never raw hex/rem/px.
+   Change here → Hugo recompiles template.scss → whole site updates.
+   Sync check: npm run check:theme (minimal.toml + lab.yaml).
+   Do NOT dump a second copy via assets/css/custom.css. */
+
+/* ═══ PRIMITIVE · COLOR SEEDS ═══ */
+$lab-blue: #4176E6 !default;
+$lab-page-bg: #F2FAFF !default; /* LC c-blue-light-300 */
+$lab-white: #fff !default;
+$lab-black: #000 !default;
+
+/* ═══ LIGHT · LC c-blue-light ladder (brand stays #4176E6) ═══ */
+$lab-blue-wash: #E5F4FF !default; /* LC light-400 */
+$lab-surface-alt: #E5F4FF !default; /* subtle band = light-400 */
+$lab-card-bg: #FFFFFF !default; /* LC background-primary */
+$lab-placeholder-bg: #CCE9FF !default; /* LC light-500 */
+$lab-navbar-bg: $lab-card-bg !default;
+$lab-disabled-bg: $lab-surface-alt !default;
+/* Text: LC uses pure black/white for primary ink */
+$lab-ink: #000 !default;
+$lab-muted: #666 !default; /* LC neutral--neutral */
+$lab-stroke: #DAE1E6 !default; /* LC c-stroke-light */
+$lab-sheen: rgba($lab-white, 0.55) !default;
+$lab-ph-ink: rgba($lab-ink, 0.14) !default;
+$lab-ph-ink-soft: rgba($lab-ink, 0.09) !default;
+
+/* CTA violet (LC button fill) + on-accent (LC green-400 on violet) */
+$lab-accent: #BEB4FD !default; /* LC violet-400 */
+$lab-accent-soft: #F8F7FF !default; /* LC violet-100 */
+$lab-on-accent: #1D3D3C !default; /* LC green-400 — text on violet CTA */
+$lab-accent-dark: mix($lab-white, $lab-accent, 12%) !default;
+
+/* System colors (LC) */
+$lab-success: #027A48 !default;
+$lab-success-soft: #ECFDF3 !default;
+$lab-warning: #D85522 !default; /* orange-400 */
+$lab-warning-soft: #FBEEE9 !default; /* orange-100 */
+$lab-danger: #B42318 !default;
+$lab-danger-soft: #FEF3F2 !default;
+
+/* Brand alphas + elevates (from $lab-blue only) */
+$lab-blue-dark: mix($lab-white, $lab-blue, 22%) !default; /* dark-theme brand */
+$lab-card-border: rgba($lab-blue, 0.14) !default;
+$lab-card-border-hover: rgba($lab-blue, 0.32) !default;
+$lab-card-border-hover-dark: rgba($lab-blue-dark, 0.45) !default;
+$lab-card-radius: 8px !default;
+$lab-card-shadow: 0 1px 2px rgba($lab-blue, 0.04), 0 2px 8px rgba($lab-blue, 0.05) !default;
+$lab-card-shadow-hover: 0 2px 4px rgba($lab-blue, 0.05), 0 8px 20px rgba($lab-blue, 0.09) !default;
+$lab-elevate-dark: 0 1px 3px rgba($lab-black, 0.45) !default;
+$lab-elevate-hover-dark: 0 8px 28px rgba($lab-black, 0.55) !default;
+
+/* ── Motion (calm; color/opacity only) ── */
+$lab-transition: 0.2s cubic-bezier(0.22, 1, 0.36, 1) !default;
+
+/* ── Spacing — LangChain padding/margin scale (ONLY these steps) ──
+   LC: tiny.25 · xxsmall.5 · xsmall1 · small1.5 · medium2 · large3 ·
+   xlarge4 · xxlarge5 · huge6 · xhuge7 · xxhuge10
+   Numeric $lab-space-* keep working; values ARE the LC steps. */
+$lab-space-1: 0.25rem !default; /* tiny */
+$lab-space-2: 0.5rem !default; /* xxsmall */
+$lab-space-3: 1rem !default; /* xsmall */
+$lab-space-4: 1.5rem !default; /* small */
+$lab-space-5: 2rem !default; /* medium */
+$lab-space-6: 3rem !default; /* large · = padding-section-small */
+$lab-space-7: 4rem !default; /* xlarge */
+$lab-space-8: 5rem !default; /* xxlarge · = padding-section-medium */
+$lab-space-9: 6rem !default; /* huge */
+$lab-space-10: 7rem !default; /* xhuge · = padding-section-large */
+$lab-space-11: 10rem !default; /* xxhuge */
+
+/* Semantic spacing — ONE rhythm for every page kind */
+$lab-space-inline: $lab-space-3 !default; /* 1rem chips/icons */
+$lab-space-stack: $lab-space-3 !default; /* 1rem title→body */
+$lab-space-block: $lab-space-4 !default; /* 1.5rem card/list gaps */
+$lab-space-section-sm: $lab-space-6 !default; /* 3rem section-small */
+$lab-space-section: $lab-space-8 !default; /* 5rem section-medium */
+$lab-space-section-lg: $lab-space-10 !default; /* 7rem section-large */
+$lab-space-page-end: $lab-space-section !default; /* same 5rem everywhere */
+
+/* ── Layout ── */
+$lab-content-width: 900px !default;
+$lab-home-content-width: $lab-content-width !default;
+$lab-detail-width: 700px !default;
+/* ONE gutter formula (LC padding-global ≈ 5.5rem on wide) */
+$lab-page-gutter: clamp(1.5rem, 5vw, 5.5rem) !default;
+$lab-gutter-home: $lab-page-gutter !default;
+$lab-gutter-list: $lab-page-gutter !default;
+$lab-gutter-detail: $lab-page-gutter !default;
+/* ONE page chrome — home hero stays flush; all other pages share top/end */
+$lab-page-top-home: 0 !default;
+$lab-page-top-list: $lab-space-section-sm !default; /* 3rem */
+$lab-page-top-detail: $lab-space-section-sm !default; /* same as list */
+$lab-page-end-home: $lab-space-page-end !default;
+$lab-page-end-list: $lab-space-page-end !default;
+$lab-page-end-detail: $lab-space-page-end !default;
+/* SCSS fallbacks (content measure). CSS vars add gutters for border-box shells. */
+$lab-page-width-home: $lab-content-width !default;
+$lab-page-width-list: $lab-content-width !default;
+$lab-card-gap: $lab-space-block !default;
+$lab-card-pad: $lab-space-3 $lab-space-4 !default;
+/* Content measures and component widths */
+$lab-measure-base: 16rem !default;
+$lab-measure-sm: 20rem !default;
+$lab-measure-md: 22rem !default;
+$lab-measure-lg: 28rem !default;
+$lab-measure-xl: 32rem !default;
+$lab-measure-2xl: 36rem !default;
+$lab-measure-3xl: 40rem !default;
+$lab-hero-mesh-width: 38rem !default;
+$lab-list-media-row-width: $lab-content-width !default;
+$lab-row-label-width: 7rem !default;
+$lab-story-label-width: 13rem !default;
+$lab-content-inset: 9.5rem !default;
+$lab-hero-control-min: 6rem !default;
+$lab-hero-visual-height: 14rem !default;
+$lab-grid-pattern-size: 120px !default;
+$lab-contact-map-height: 17.5rem !default;
+$lab-member-photo: 5.5rem !default;
+$lab-member-avatar-sm: 96px !default;
+$lab-member-avatar-lg: 168px !default;
+$lab-filter-control-min: 9rem !default;
+$lab-filter-search-flex: 11rem !default;
+$lab-menu-min-width: 8rem !default;
+$lab-touch-target: 2.75rem !default;
+$lab-control-min-height: 2.125rem !default;
+$lab-dropdown-note-min: 160px !default;
+$lab-dropdown-arrow-offset: 0.65rem !default;
+$lab-focus-ring-spread: 0.2rem !default;
+$lab-reveal-offset: 0.55rem !default;
+$lab-reveal-step: 30ms !default;
+$lab-reveal-max: 180ms !default;
+$lab-count-duration: 600ms !default;
+$lab-icon-dot: 7px !default;
+$lab-shadow-blur-sm: 8px !default;
+$lab-shadow-blur-lg: 28px !default;
+$lab-viewport-height: 100vh !default;
+$lab-viewport-height-dynamic: 100dvh !default;
+/* Lightbox chrome — image inset from viewport edges & caption width clamp */
+$lab-lightbox-inset: 10rem !default;
+$lab-lightbox-caption-vw: 90vw !default;
+$lab-z-base: 0 !default;
+$lab-z-raised: 1 !default;
+$lab-z-overlay: 2 !default;
+$lab-z-overlay-strong: 3 !default;
+$lab-z-sticky: 20 !default;
+$lab-z-back-to-top: 90 !default;
+$lab-z-nav: 1030 !default;
+$lab-z-nav-open: 1031 !default;
+$lab-z-skip: 1080 !default;
+$lab-z-progress: 1100 !default;
+$lab-z-lightbox: 2000 !default;
+$lab-z-modal: 9999 !default;
+$lab-lightbox-backdrop: rgba($lab-ink, 0.88) !default;
+$lab-lightbox-control: rgba($lab-white, 0.12) !default;
+$lab-lightbox-control-hover: rgba($lab-white, 0.28) !default;
+/* Relative type and em spacing */
+$lab-text-relative-xs: 0.8em !default;
+$lab-text-relative-sm: 0.9em !default;
+$lab-text-relative-md: 1.05em !default;
+$lab-text-relative-lg: 1.2em !default;
+$lab-space-em-xs: 0.25em !default;
+$lab-space-em-sm: 0.55em !default;
+/* (em ladder stops at sm — larger relative gaps resolve to $lab-space-* steps) */
+/* Motion — three REAL durations + semantic aliases (NO new durations).
+   quick 150ms = micro feedback · normal 200ms = transitions/reveals ·
+   slow 240ms = entrance animations. Aliases name the INTENT: retuning a
+   tier retunes every consumer; the old 0.18s "fast" tier merged into quick
+   and "pulse" into slow (≤50ms deltas, imperceptible). */
+$lab-duration-none: 0ms !default;
+$lab-duration-reduced: 0.01ms !default;
+$lab-duration-quick: 0.15s !default;
+$lab-duration-normal: 0.2s !default;
+$lab-duration-slow: 0.24s !default;
+/* Semantic aliases → duration tiers */
+$lab-duration-fast: $lab-duration-quick !default; /* legacy name, kept for call sites */
+$lab-duration-reveal: $lab-duration-normal !default;
+$lab-duration-avatar: $lab-duration-normal !default;
+$lab-duration-pulse: $lab-duration-slow !default;
+$lab-delay-1: 0.06s !default;
+$lab-delay-2: 0.07s !default;
+$lab-delay-3: 0.12s !default;
+$lab-delay-4: 0.14s !default;
+/* Compact filter controls and the hub tab group derived from them */
+/* Structural lines and focus rings */
+$lab-hairline: 1px !default;
+$lab-hairline-negative: -1px !default;
+$lab-border-width: $lab-hairline !default;
+$lab-border-emphasis: 3px !default;
+$lab-radius-hairline: $lab-hairline !default;
+$lab-radius-sm: 6px !default;
+$lab-radius-md: 12px !default;
+$lab-radius-pill: 999px !default;
+$lab-focus-width: 2px !default;
+$lab-focus-offset: 2px !default;
+$lab-optical-nudge: $lab-hairline !default;
+$lab-icon-xs: 12px !default;
+$lab-icon-sm: 18px !default;
+$lab-icon-md: 20px !default;
+$lab-icon-lg: 22px !default;
+$lab-blur-sm: 18px !default;
+$lab-blur-md: 20px !default;
+/* Sub-4px spacing is a token, not a magic number. */
+$lab-space-0-5: 0.125rem !default;
+$lab-space-0-75: 0.1875rem !default;
+$lab-space-1-5: 0.375rem !default;
+$lab-space-2-5: 0.625rem !default;
+$lab-control-height: 2.25rem !default;
+$lab-control-height-sm: 1.75rem !default;
+/* Footer label column (≈ 联系我们 / Contact width) */
+$lab-footer-label-width: 4.25rem !default;
+$lab-footer-label-width-md: 4.5rem !default;
+/* Mobile nav: leave room for hamburger */
+$lab-nav-mobile-reserve: 3.5rem !default;
+/* Nav link underline optical offset */
+$lab-nav-underline-nudge: 6px !default;
+$lab-filter-search-width: 13rem !default;
+$lab-filter-select-width: 6.75rem !default;
+/* Three-zone list row (media / text / meta): fixed outer rails so every
+   row's text column starts and ends at the same x */
+$lab-row-media-width: 10rem !default;
+$lab-row-meta-width: 12rem !default;
+/* List rows reuse the 900px card column. */
+$lab-read-width: $lab-list-media-row-width !default;
+/* Detail/article content column — 700px (not including side gutters). */
+$lab-read-width-detail: $lab-detail-width !default;
+/* SCSS fallback only; CSS var below adds gutters for border-box shells. */
+$lab-page-width-detail: $lab-detail-width !default;
+/* Navbar capsule — fixed size (not tied to content 900) */
+$lab-navbar-width: 1000px !default;
+$lab-navbar-height: 56px !default;
+$lab-navbar-height-sm: 48px !default; /* mobile only */
+$lab-navbar-height-scrolled: $lab-navbar-height !default; /* no shrink */
+$lab-navbar-height-sm-scrolled: $lab-navbar-height-sm !default;
+$lab-navbar-radius: 76px !default;
+$lab-navbar-gutter: 7px !default;
+
+/* ── Breakpoints (SCSS-only) ──
+   Media queries cannot read CSS custom properties, so breakpoints exist only
+   as SCSS tokens. Consume via the lab-bp-down / lab-bp-up mixins in _grid.scss
+   — never write a raw px value in a media query.
+   sm=576 (large phone) · md=768 (tablet portrait) · lg=992 (small desktop).
+   Values match the historical site breakpoints (575/767/991 max-width). */
+$lab-bp-sm: 576px !default;
+$lab-bp-md: 768px !default;
+$lab-bp-lg: 992px !default;
+$lab-bp-xl: 1200px !default;
+
+/* ── Optical alignment ──
+   Perceived alignment ≠ geometric alignment: shapes whose mass sits unevenly
+   (uppercase mono glyphs, arrows) need a sub-4px compensation nudge to LOOK
+   aligned. Consumed by .lab-align-* utilities in _grid.scss. */
+$lab-align-glyph-nudge: 0.03em !default; /* uppercase mono glyph sits high → nudge down */
+$lab-align-arrow-nudge: -0.03em !default; /* "→" glyph sits low → nudge up */
+
+/* Placeholder cover hues — reuse system / CTA seeds */
+$lab-ph-hue-violet: $lab-accent !default;
+$lab-ph-hue-green: $lab-on-accent !default;
+$lab-ph-hue-gold: $lab-warning !default;
+
+/* ═══ DARK · LC c-blue-dark ladder ═══ */
+$lab-night-page: #030710 !default; /* dark-900 */
+$lab-night-alt: #0D1322 !default; /* dark-800 */
+$lab-night-raised: #161F34 !default; /* dark-700 */
+$lab-night-line: #2F4B68 !default; /* dark-600 */
+$lab-night-edge: #40668D !default; /* dark-500 */
+$lab-night-ink: #FFFFFF !default; /* LC text-alternate = white */
+$lab-night-secondary: #AAAAAA !default; /* LC neutral-light */
+$lab-night-muted: #666666 !default; /* LC neutral */
+$lab-night-wash: #2F4B68 !default; /* dark-600 as brand-soft seat */
+$lab-night-navbar: $lab-night-raised !default;
+$lab-night-glass: $lab-night-raised !default;
+$lab-night-placeholder: #0D1322 !default;
+$lab-night-sheen: rgba($lab-white, 0.08) !default;
+/* Night neumorphic controls (theme-dropdown / lab-top-btn / pagination text):
+   inset top highlight · inset bottom shadow · outer drop — consumed in _dark.scss */
+$lab-night-inset-hi: rgba($lab-white, 0.06) !default;
+$lab-night-inset-hi-soft: rgba($lab-white, 0.05) !default;
+$lab-night-inset-lo: rgba($lab-black, 0.45) !default;
+$lab-night-drop: rgba($lab-black, 0.4) !default;
+$lab-night-drop-soft: rgba($lab-black, 0.35) !default;
+/* Night hero-mesh blob alphas (same hues as :root --lab-mesh-a/b, dimmed) */
+$lab-mesh-blue-dark: rgba($lab-blue-dark, 0.09) !default;
+$lab-mesh-green-dark: rgba($lab-ph-hue-green, 0.07) !default;
+$lab-mesh-blue-faint-dark: rgba($lab-blue-dark, 0.05) !default;
+
+/* ── Typography — LangChain blog text-size / heading-style (tonik CSS).
+   Faces: system+CJK (LC uses Manrope; we keep system for CJK).
+   LC: tiny.875 · small1 · regular1.25 · medium1.375 · large1.625 ·
+   h5/h4=2 · h3=3 · h2=3.5 · h1=5.5 (display capped below marketing h1). */
+$lab-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI",
+  "PingFang SC", "Microsoft YaHei", sans-serif !default;
+$lab-font-serif: $lab-font-sans !default;
+$lab-font-mono: $lab-font-sans !default;
+
+/* LC headings 400; labels 500; strong UI 600 */
+$lab-weight-display: 400 !default;
+$lab-weight-heading: 400 !default;
+$lab-weight-body: 400 !default;
+$lab-weight-medium: 500 !default;
+$lab-weight-semibold: 600 !default;
+
+$lab-tracking-display: -0.035em !default;
+$lab-tracking-heading: -0.025em !default;
+$lab-tracking-body: 0 !default;
+$lab-tracking-label: 0 !default;
+$lab-tracking-meta: 0.02em !default;
+$lab-tracking-ui: 0.02em !default;
+$lab-tracking-wide: 0.04em !default;
+$lab-tracking-caps: 0.06em !default;
+$lab-tracking-overline: 0.08em !default;
+$lab-tracking-overline-wide: 0.1em !default;
+$lab-tracking-xl: 0.12em !default;
+$lab-tracking-micro: 0 !default;
+
+$lab-text-xs: 0.875rem !default; /* LC tiny */
+$lab-text-sm: 1rem !default; /* LC small */
+$lab-text-base: 1.125rem !default; /* CJK body between small & regular */
+$lab-text-md: 1.25rem !default; /* LC regular */
+$lab-text-lg: 1.375rem !default; /* LC medium */
+$lab-text-xl: 1.625rem !default; /* LC large */
+$lab-text-heading: clamp(1.75rem, 2.5vw, 2rem) !default; /* LC h5/h4 */
+$lab-text-display: clamp(2.25rem, 4vw, 3.5rem) !default; /* LC h3→h2 cap */
+
+$lab-leading-none: 1 !default;
+$lab-leading-tight: 1.2 !default; /* LC h2/h3 */
+$lab-leading-heading: 1.3 !default; /* LC h4 */
+$lab-leading-display: 1.15 !default;
+$lab-leading-ui: 1.2 !default;
+$lab-leading-snug: 1.5 !default;
+$lab-leading-body: 1.5 !default;
+$lab-leading-prose: 1.6 !default;
+$lab-leading-loose: 1.6 !default;
+
+/* ---------- CSS custom properties ---------- */
+
+:root {
+  /* ═══ SEMANTIC · light (LC-aligned) — 17 roles ═══ */
+
+  --lab-color-bg: #{$lab-page-bg};
+  --lab-color-bg-subtle: #{$lab-surface-alt};
+  --lab-color-bg-raised: #{$lab-card-bg};
+  --lab-color-bg-brand-soft: #{$lab-blue-wash};
+
+  --lab-color-fg: #{$lab-ink};
+  --lab-color-fg-muted: #{$lab-muted};
+  --lab-color-on-brand: #{$lab-white};
+  --lab-color-on-overlay: #{$lab-white};
+  --lab-color-on-accent: #{$lab-on-accent};
+
+  --lab-color-brand: #{$lab-blue};
+  --lab-color-accent: #{$lab-accent};
+  --lab-color-accent-soft: #{$lab-accent-soft};
+
+  --lab-color-success: #{$lab-success};
+  --lab-color-success-soft: #{$lab-success-soft};
+  --lab-color-warning: #{$lab-warning};
+  --lab-color-warning-soft: #{$lab-warning-soft};
+  --lab-color-danger: #{$lab-danger};
+  --lab-color-danger-soft: #{$lab-danger-soft};
+
+  --lab-color-border: #{$lab-stroke};
+  --lab-color-border-strong: #{rgba($lab-ink, 0.28)};
+  --lab-color-border-brand: #{$lab-card-border-hover};
+
+  --lab-color-elevate: #{$lab-card-shadow};
+  --lab-color-elevate-hover: #{$lab-card-shadow-hover};
+  --lab-color-shadow: #{rgba($lab-ink, 0.08)};
+  --lab-color-overlay: #{rgba($lab-ink, 0.92)};
+  --lab-color-sheen: #{$lab-sheen};
+
+  --lab-mesh-a: #{rgba($lab-blue, 0.10)};
+  --lab-mesh-b: #{rgba($lab-blue, 0.06)};
+  --lab-ph-ink: #{$lab-ph-ink};
+  --lab-ph-ink-soft: #{$lab-ph-ink-soft};
+  --lab-card-radius: #{$lab-card-radius};
+
+  /* Spacing scale */
+  --lab-space-1: #{$lab-space-1};
+  --lab-space-2: #{$lab-space-2};
+  --lab-space-3: #{$lab-space-3};
+  --lab-space-4: #{$lab-space-4};
+  --lab-space-5: #{$lab-space-5};
+  --lab-space-6: #{$lab-space-6};
+  --lab-space-7: #{$lab-space-7};
+  --lab-space-8: #{$lab-space-8};
+  --lab-space-9: #{$lab-space-9};
+  --lab-space-10: #{$lab-space-10};
+  --lab-space-11: #{$lab-space-11};
+  --lab-space-inline: #{$lab-space-inline};
+  --lab-space-stack: #{$lab-space-stack};
+  --lab-space-block: #{$lab-space-block};
+  --lab-space-section: #{$lab-space-section};
+  --lab-space-section-sm: #{$lab-space-section-sm};
+  --lab-space-section-lg: #{$lab-space-section-lg};
+  --lab-space-page-end: #{$lab-space-page-end};
+
+  /* Layout */
+  --lab-content-width: #{$lab-content-width};
+  --lab-home-content-width: #{$lab-home-content-width};
+  --lab-detail-width: #{$lab-detail-width};
+  --lab-list-media-row-width: #{$lab-list-media-row-width};
+  --lab-page-gutter: #{$lab-page-gutter};
+  --lab-gutter-home: #{$lab-gutter-home};
+  --lab-gutter-list: #{$lab-gutter-list};
+  --lab-gutter-detail: #{$lab-gutter-detail};
+  --lab-page-top-home: #{$lab-page-top-home};
+  --lab-page-top-list: #{$lab-page-top-list};
+  --lab-page-top-detail: #{$lab-page-top-detail};
+  --lab-page-end-home: #{$lab-page-end-home};
+  --lab-page-end-list: #{$lab-page-end-list};
+  --lab-page-end-detail: #{$lab-page-end-detail};
+  /* Outer shells (border-box + side gutters) — content 900 main / 700 reading. */
+  --lab-page-width-home: calc(#{$lab-content-width} + 2 * var(--lab-gutter-home));
+  --lab-page-width-list: calc(#{$lab-content-width} + 2 * var(--lab-gutter-list));
+  --lab-page-width-detail: calc(#{$lab-detail-width} + 2 * var(--lab-gutter-detail));
+  --lab-page-width: var(--lab-page-width-list); /* page kinds override below */
+  --lab-card-gap: #{$lab-card-gap};
+  --lab-control-height-sm: #{$lab-control-height-sm};
+  --lab-filter-search-width: #{$lab-filter-search-width};
+  --lab-filter-select-width: #{$lab-filter-select-width};
+  --lab-row-media-width: #{$lab-row-media-width};
+  --lab-row-meta-width: #{$lab-row-meta-width};
+  --lab-read-width: #{$lab-read-width};
+  --lab-read-width-detail: #{$lab-read-width-detail};
+  --lab-reveal-step: #{$lab-reveal-step};
+  --lab-reveal-max: #{$lab-reveal-max};
+  --lab-count-duration: #{$lab-count-duration};
+  --lab-navbar-width: #{$lab-navbar-width};
+  --lab-navbar-height: #{$lab-navbar-height};
+  --lab-navbar-height-scrolled: #{$lab-navbar-height-scrolled};
+  --lab-navbar-height-sm: #{$lab-navbar-height-sm};
+  --lab-navbar-height-sm-scrolled: #{$lab-navbar-height-sm-scrolled};
+  --lab-navbar-gutter: #{$lab-navbar-gutter};
+
+  /* Type (CSS-accessible) */
+  --lab-font-sans: #{$lab-font-sans};
+  --lab-font-serif: #{$lab-font-serif};
+  --lab-font-mono: #{$lab-font-mono};
+  --lab-text-display: #{$lab-text-display};
+  --lab-text-heading: #{$lab-text-heading};
+  --lab-weight-display: #{$lab-weight-display};
+  --lab-weight-heading: #{$lab-weight-heading};
+  --lab-tracking-display: #{$lab-tracking-display};
+  --lab-tracking-heading: #{$lab-tracking-heading};
+
+  /* Kit / HugoBlox aliases — one binding, no !important overrides later */
+  --hb-color-background: var(--lab-color-bg);
+  --hb-color-foreground: var(--lab-color-fg);
+  --hb-color-primary: var(--lab-color-brand);
+}
+
+/* Dark: LC c-blue-dark ladder; brand = lightened #4176E6 */
+.dark {
+  --lab-color-bg: #{$lab-night-page};
+  --lab-color-bg-subtle: #{$lab-night-alt};
+  --lab-color-bg-raised: #{$lab-night-raised};
+  --lab-color-bg-brand-soft: #{$lab-night-wash};
+
+  --lab-color-fg: #{$lab-night-ink};
+  --lab-color-fg-muted: #{$lab-night-secondary};
+  --lab-color-on-brand: #{$lab-night-page};
+  --lab-color-on-accent: #{$lab-on-accent};
+
+  --lab-color-brand: #{$lab-blue-dark};
+  --lab-color-accent: #{$lab-accent-dark};
+  --lab-color-accent-soft: #{rgba($lab-accent, 0.16)};
+
+  --lab-color-success: #{$lab-success};
+  --lab-color-success-soft: #{rgba($lab-success, 0.18)};
+  --lab-color-warning: #{$lab-warning};
+  --lab-color-warning-soft: #{rgba($lab-warning, 0.18)};
+  --lab-color-danger: #{$lab-danger};
+  --lab-color-danger-soft: #{rgba($lab-danger, 0.18)};
+
+  --lab-color-border: #{$lab-night-line};
+  --lab-color-border-strong: #{$lab-night-edge};
+  --lab-color-border-brand: #{$lab-card-border-hover-dark};
+
+  --lab-color-elevate: #{$lab-elevate-dark};
+  --lab-color-elevate-hover: #{$lab-elevate-hover-dark};
+  --lab-color-shadow: #{rgba($lab-black, 0.45)};
+  --lab-color-overlay: #{rgba($lab-night-page, 0.92)};
+  --lab-color-sheen: #{$lab-night-sheen};
+
+  --lab-mesh-a: #{$lab-mesh-blue-dark};
+  --lab-mesh-b: #{rgba($lab-blue-dark, 0.06)};
+  --lab-ph-ink: #{rgba($lab-white, 0.16)};
+  --lab-ph-ink-soft: #{rgba($lab-white, 0.09)};
+}

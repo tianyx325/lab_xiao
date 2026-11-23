@@ -1,0 +1,11 @@
+{{- /* Default card skin for outcomes hub tabs.
+   Usage: {{ $skin := partial "functions/hub-skin.html" $sectionKey }}
+   Returns dict view card_style */ -}}
+{{- $sec := partial "functions/normalize-section.html" . -}}
+{{- if eq $sec "award" -}}
+  {{- return (dict "view" "card" "card_style" "") -}}
+{{- else if in (slice "publications" "patent") $sec -}}
+  {{- return (dict "view" "card" "card_style" "media-row") -}}
+{{- else -}}
+  {{- return (dict "view" "card" "card_style" "") -}}
+{{- end -}}

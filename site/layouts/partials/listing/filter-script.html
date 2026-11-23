@@ -1,0 +1,9 @@
+{{- /* Boot config for lab-list-filter-engine.js (loaded via custom_js). */ -}}
+<script type="application/json" id="lab-filter-i18n">{{ dict
+  "empty" (i18n "lab_filter_empty")
+  "clear" (i18n "lab_filter_clear")
+  "pagination" (i18n "lab_pagination")
+  "prev" (i18n "previous")
+  "next" (i18n "next")
+| jsonify | safeJS }}</script>
+{{- $.Page.Store.Set "lab_needs_list_filter" true -}}

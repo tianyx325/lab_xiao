@@ -1,0 +1,517 @@
+﻿/* Layer 4b · menus & page chrome: gutters, CTA, theme toggles
+   Source: template.scss lines 1352-1647 (order-preserving split). */
+/* Page gutters — tighter side margins so cards read larger */
+.page-body .container,
+.page-body .container-fluid,
+.lab-list-page > .container,
+.lab-list-body.container {
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
+}
+
+#navbar-main.navbar {
+  padding-left: 0;
+  padding-right: 0;
+  flex-wrap: nowrap;
+}
+
+/* Collapse without Bootstrap navbar: hidden until .show; desktop always open */
+#navbar-main .lab-navbar-menu.collapse:not(.show) {
+  display: none;
+}
+
+.lab-only-desktop {
+  display: none;
+}
+
+.lab-only-mobile {
+  display: block;
+}
+
+/*
+  ROOT CAUSE: Bootstrap .navbar-collapse sets flex-grow:1; flex-basis:100%
+  (and forces display:flex). That ate margin-left:auto / space-between.
+  Use grid for the shell; reset collapse flex inside .lab-navbar-end.
+*/
+#navbar-main .lab-navbar-inner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: var(--lab-space-3);
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: 0;
+  padding-left: var(--lab-navbar-gutter);
+  padding-right: var(--lab-navbar-gutter);
+  box-sizing: border-box;
+}
+
+#navbar-main .lab-navbar-brand-link {
+  grid-column: 1;
+  justify-self: start;
+}
+
+/* Right cluster: menu + 主题/语言 — always column 2, flush end */
+#navbar-main .lab-navbar-end {
+  grid-column: 2;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: none;
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  gap: var(--lab-space-2);
+}
+
+/* Kill Bootstrap collapse flex growth inside the right cluster */
+#navbar-main .lab-navbar-end > .navbar-collapse {
+  flex: 0 0 auto;
+  flex-grow: 0;
+  flex-basis: auto;
+  width: auto;
+  max-width: none;
+}
+
+#navbar-main .navbar-nav {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+}
+
+#navbar-main .navbar-nav .nav-item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+@include lab-bp-up(lg) {
+  #navbar-main .navbar-toggler,
+  #navbar-main .lab-navbar-toggler {
+    display: none;
+  }
+
+  .lab-only-desktop {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .lab-only-mobile {
+    display: none;
+  }
+
+  #navbar-main .lab-navbar-end > .lab-navbar-menu {
+    display: flex;
+    justify-content: flex-end;
+    overflow: visible;
+  }
+
+  #navbar-main .lab-navbar-menu.collapse:not(.show) {
+    display: flex; /* desktop: ignore collapsed state */
+  }
+
+  #navbar-main .lab-navbar-end > ul.nav-icons {
+    flex: 0 0 auto;
+    margin: 0;
+    padding-left: var(--lab-space-2);
+    padding-right: 0;
+  }
+
+  #navbar-main .lab-navbar-menu > .navbar-nav,
+  #navbar-main .lab-navbar-links {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    margin: 0;
+    overflow: visible;
+  }
+
+  #navbar-main .lab-navbar-menu .nav-item {
+    flex: 0 0 auto;
+  }
+
+  #navbar-main .navbar .nav-link {
+    padding-left: var(--lab-space-2);
+    padding-right: var(--lab-space-2);
+  }
+}
+
+@include lab-bp-down(lg) {
+  #navbar-main .lab-navbar-brand-link {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(100% - #{$lab-nav-mobile-reserve}); /* hamburger only */
+    order: 1;
+  }
+
+  #navbar-main .navbar-toggler {
+    order: 0;
+  }
+}
+
+/* Theme / Language — text triggers (no icons), same weight as nav links */
+#navbar-main .lab-nav-text-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: $lab-control-height;
+  padding: 0 $lab-space-2;
+  border: 0;
+  border-radius: var(--lab-card-radius);
+  background: transparent;
+  color: var(--lab-color-fg-muted);
+  font-family: $lab-font-sans;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-medium;
+  letter-spacing: $lab-tracking-label;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color $lab-transition, background-color $lab-transition;
+}
+
+/* Last control sits flush to the 7px gutter — no extra right pad */
+#navbar-main ul.nav-icons > li:last-child .lab-nav-text-btn,
+#navbar-main ul.nav-icons > li:last-child .nav-link {
+  padding-right: 0;
+}
+
+#navbar-main .lab-nav-text-btn:hover,
+#navbar-main .lab-nav-text-btn:focus-visible,
+#navbar-main .lab-nav-text-btn[aria-expanded="true"] {
+  color: color-mix(in srgb, var(--lab-color-brand) 86%, white);
+  background: var(--lab-color-bg-brand-soft);
+}
+
+#navbar-main ul.nav-icons .nav-link:not(.lab-nav-text-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $lab-space-6;
+  height: $lab-space-6;
+  padding: 0;
+  border-radius: 50%;
+  color: var(--lab-color-fg-muted);
+  transition: color $lab-transition, background-color $lab-transition;
+}
+
+#navbar-main .navbar-nav.ml-md-auto > .nav-item > .nav-link {
+  color: color-mix(in srgb, var(--lab-color-brand) 80%, white);
+  font-weight: $lab-weight-medium;
+}
+
+/* ---------- Navbar control cluster: theme / language ---------- */
+#navbar-main ul.nav-icons {
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--lab-space-1);
+  margin-left: var(--lab-space-4);
+  margin-right: 0;
+  padding: 0 0 0 var(--lab-space-4); /* left rule only; right = gutter */
+  border-left: $lab-hairline solid var(--lab-color-border);
+  font-size: inherit;
+}
+
+#navbar-main ul.nav-icons > li {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+/* One circular quiet button for every control */
+
+#navbar-main ul.nav-icons .nav-link::after {
+  display: none;
+}
+
+#navbar-main ul.nav-icons .nav-link:hover,
+#navbar-main ul.nav-icons .nav-link:focus-visible,
+#navbar-main ul.nav-icons .nav-link[aria-expanded="true"] {
+  color: color-mix(in srgb, var(--lab-color-brand) 86%, white);
+  background: var(--lab-color-bg-subtle);
+}
+
+/* Theme + language glyphs: one size, Tabler outline set */
+#navbar-main ul.nav-icons .lab-ic {
+  display: block;
+  width: $lab-icon-md;
+  height: $lab-icon-md;
+  flex: 0 0 auto;
+}
+
+#navbar-main .lab-nav-parent:hover::after,
+#navbar-main .lab-nav-parent[aria-expanded="true"]::after {
+  transform: scaleX(1);
+}
+
+/* Nav menus: hug trigger content; no fixed min width */
+#navbar-main .lab-nav-menu {
+  width: max-content;
+  min-width: 0;
+  margin-top: $lab-space-1;
+}
+
+/* Entrance — soft rise (no scale rubber) */
+@media (prefers-reduced-motion: no-preference) {
+  #navbar-main .dropdown-menu.show,
+  #navbar-main .dropdown.show .lab-nav-menu {
+    animation: lab-menu-in $lab-duration-normal cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes lab-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY($lab-nav-underline-nudge);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+#navbar-main .lab-nav-menu .dropdown-item {
+  font-family: $lab-font-sans;
+  width: auto;
+  white-space: nowrap;
+}
+
+#navbar-main .lab-nav-menu .dropdown-item::before {
+  display: none;
+}
+
+#navbar-main .lab-nav-menu .dropdown-item:hover,
+#navbar-main .lab-nav-menu .dropdown-item:focus,
+#navbar-main .lab-nav-menu .dropdown-item:focus-visible,
+#navbar-main .dropdown-menu button.dropdown-item:hover,
+#navbar-main .dropdown-menu button.dropdown-item:focus {
+  color: var(--lab-color-brand);
+  background: var(--lab-color-bg-brand-soft);
+  background-color: var(--lab-color-bg-brand-soft);
+  text-decoration: none;
+}
+
+#navbar-main .lab-nav-menu .dropdown-item-active {
+  color: var(--lab-color-brand);
+  font-weight: $lab-weight-medium;
+  background: var(--lab-color-bg-brand-soft);
+  background-color: var(--lab-color-bg-brand-soft);
+  cursor: default;
+}
+
+#navbar-main .lab-nav-menu .dropdown-item-active:hover,
+#navbar-main .lab-nav-menu .dropdown-item-active:focus {
+  background: var(--lab-color-bg-brand-soft);
+  background-color: var(--lab-color-bg-brand-soft);
+}
+
+/* Hamburger trigger — same quiet circular button language as the icon controls */
+#navbar-main .navbar-toggler {
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  color: var(--lab-color-fg-muted);
+  background: transparent;
+  transition: color $lab-transition, background-color $lab-transition;
+}
+
+#navbar-main .navbar-toggler:hover,
+#navbar-main .navbar-toggler:focus-visible {
+  color: color-mix(in srgb, var(--lab-color-brand) 86%, white);
+  background: var(--lab-color-bg-subtle);
+}
+
+/* Mobile: brand + hamburger; end unwraps so drawer still anchors to inner */
+@include lab-bp-down(lg) {
+  .page-header {
+    top: $lab-space-2;
+    left: $lab-space-2;
+    right: $lab-space-2;
+  }
+
+  #navbar-main .lab-navbar-inner {
+    position: relative;
+    grid-template-columns: auto 1fr auto;
+    padding-left: $lab-space-1;
+    padding-right: $lab-space-1;
+  }
+
+  #navbar-main .navbar-toggler {
+    grid-column: 1;
+  }
+
+  #navbar-main .lab-navbar-brand-link {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  /* Unwrap so absolute drawer still positions against .lab-navbar-inner */
+  #navbar-main .lab-navbar-end {
+    display: contents;
+  }
+
+  /* Tablet: brand returns to normal flow — drop the desktop indent */
+  #navbar-main .lab-navbar-brand {
+    padding-left: 0;
+  }
+
+  #navbar-main .navbar-toggler {
+    flex: 0 0 auto;
+    position: relative;
+    z-index: $lab-z-overlay;
+    /* Mobile-only control — hold the full $lab-touch-target (44px) */
+    min-width: $lab-touch-target;
+    min-height: $lab-touch-target;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: $lab-space-1;
+    padding-right: $lab-space-1;
+  }
+
+  /* Hide page chrome while menu open — absolute drawer can leave a 1–N px
+     gap at the fold (dvh vs layout viewport), which looked like footer/nav bleed.
+     body.lab-nav-open is the JS fallback for engines without :has() (see
+     lab-navbar-scroll.js); :has() covers JS-off modern engines. */
+  body:has(#navbar-content.show),
+  body.lab-nav-open {
+    overflow: hidden;
+  }
+
+  body:has(#navbar-content.show) .page-body,
+  body.lab-nav-open .page-body,
+  body:has(#navbar-content.show) .page-footer,
+  body.lab-nav-open .page-footer {
+    visibility: hidden;
+  }
+
+  /* Full-viewport solid drawer (positioning parent is .lab-navbar-inner) */
+  #navbar-main .navbar-collapse.main-menu-item.show,
+  #navbar-main .navbar-collapse.main-menu-item.collapsing {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    width: 100%;
+    /* vh line first — dvh-less engines must not lose the drawer height */
+    min-height: calc($lab-viewport-height - var(--lab-navbar-height-sm) + $lab-space-9); /* stylelint-disable-line declaration-block-no-duplicate-properties */
+    height: calc($lab-viewport-height - var(--lab-navbar-height-sm) + $lab-space-9); /* stylelint-disable-line declaration-block-no-duplicate-properties */
+    min-height: calc($lab-viewport-height-dynamic - var(--lab-navbar-height-sm) + $lab-space-9); /* +$lab-space-9: cover the fixed pill's top offset + breathing room (magic number kept intentional) */
+    height: calc($lab-viewport-height-dynamic - var(--lab-navbar-height-sm) + $lab-space-9);
+    max-height: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: $lab-z-nav-open;
+    margin: 0;
+    padding: $lab-space-1 0 $lab-space-3;
+    background: var(--lab-color-bg);
+    border-bottom: none;
+    box-shadow: none;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .navbar-nav {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .nav-item {
+    width: 100%;
+    margin: 0;
+    padding: $lab-space-1 $lab-space-4;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .nav-link {
+    display: block;
+    width: 100%;
+    padding: $lab-space-3 $lab-space-1;
+  }
+
+  #navbar-main .navbar-collapse.main-menu-item .dropdown-menu {
+    position: static;
+    float: none;
+    width: 100%;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  /* Drawer tools: theme + language as readable text rows */
+  #navbar-main .lab-nav-drawer-tools {
+    margin-top: $lab-space-4;
+    padding: $lab-space-4 $lab-space-4 $lab-space-2;
+    border-top: $lab-hairline solid var(--lab-color-border);
+  }
+
+  #navbar-main .lab-nav-drawer-label {
+    margin: 0 0 $lab-space-2;
+    font-size: $lab-text-xs;
+    font-weight: $lab-weight-semibold;
+    letter-spacing: $lab-tracking-label;
+    color: var(--lab-color-fg-muted);
+  }
+
+  #navbar-main .lab-nav-drawer-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $lab-space-2;
+    margin: 0 0 $lab-space-4;
+  }
+
+  #navbar-main .lab-nav-drawer-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: $lab-touch-target;
+    padding: 0 $lab-space-3;
+    border-radius: var(--lab-card-radius);
+    border: $lab-hairline solid var(--lab-color-border);
+    background: var(--lab-color-bg-raised);
+    color: var(--lab-color-fg);
+    font: inherit;
+    font-size: $lab-text-sm;
+    font-weight: $lab-weight-medium;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  #navbar-main .lab-nav-drawer-btn.is-current,
+  #navbar-main .lab-nav-drawer-btn.dropdown-item-active {
+    color: var(--lab-color-fg-muted);
+    background: var(--lab-color-bg-brand-soft);
+    border-color: transparent;
+    cursor: default;
+  }
+
+  #navbar-main a.lab-nav-drawer-btn:hover,
+  #navbar-main button.lab-nav-drawer-btn:hover {
+    color: var(--lab-color-brand);
+    border-color: var(--lab-color-border-brand);
+  }
+}
+
+/* ── Control semantics: actions are <button>, navigation is <a> ──
+   Search / theme / language triggers and theme options were converted
+   from <a href="#"> to real buttons. Strip UA button chrome so the
+   button siblings wear the exact same anatomy as the <a> nav-links. */
+#navbar-main ul.nav-icons button.nav-link {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+#navbar-main .dropdown-menu button.dropdown-item {
+  width: auto;
+  text-align: inherit;
+  /* Do not set background here — fights hover; UA button reset only: */
+  border: none;
+  cursor: pointer;
+}

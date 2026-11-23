@@ -1,0 +1,29 @@
+{{/*
+  Shadow of blox-core/v5/layouts/partials/functions/get_page_title.html.
+
+  One addition: paginated archives (/page/N/) previously emitted the exact
+  same <title>/og:title as page one, so crawlers saw duplicate titles across
+  the archive. Node pages on a page number > 1 now get a "Page N" suffix;
+  page one, singles, and taxonomies are untouched.
+*/}}
+{{ $title := "" }}
+{{ with .Params.seo.title }}
+  {{ $title = replace . "{brand}" site.Title }}
+{{ else }}
+  {{ $title = .Title | default site.Title }}
+  {{ if ne $title site.Title }}{{ $title = printf "%s | %s" $title site.Title }}{{ end }}
+{{ end }}
+{{ if hasPrefix $title "http" }}{{ $title = site.Title }}{{ end }}
+{{ if eq .Kind "term" }}
+  {{ $taxonomy := cond (eq .Type "tags") (i18n "lab_tag_page" | default "Tag") (i18n "lab_category_page" | default "Category") }}
+  {{ $title = printf "%s · %s" $title $taxonomy }}
+{{ end }}
+{{ if .IsBranch }}
+  {{/* .Paginator is only touched inside this guard: Hugo supports it on
+     node pages (home/section/taxonomy) and errors on regular pages. */}}
+  {{ $paginator := .Paginator }}
+  {{ if and (gt $paginator.TotalPages 1) (gt $paginator.PageNumber 1) }}
+    {{ $title = printf "%s – %d" $title $paginator.PageNumber }}
+  {{ end }}
+{{ end }}
+{{ return $title }}

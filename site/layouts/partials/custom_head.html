@@ -1,0 +1,27 @@
+{{- /* Taxonomy-only author terms (no content/authors page) → members list.
+       Canonical is intentionally NOT emitted here: seo_tags.html already
+       outputs the single canonical for every page. Emitting a second one
+       pointing at /people/ produced duplicate canonicals. noindex + refresh
+       still steer both users and crawlers to the members list. */ -}}
+{{- if and (eq .Type "authors") (not .File) -}}
+  {{/* Leading-slash input to relLangURL only prepends the language prefix,
+       NOT the baseURL subpath ("/people/" → "/en/people/" — broken under a
+       sub-path deployment). A slash-less input gets full treatment, so trim
+       the slash first. Verified against built output. */}}
+  {{- $people := strings.TrimPrefix "/" "/people/" | relLangURL -}}
+  <meta http-equiv="refresh" content="0;url={{ $people }}">
+  <meta name="robots" content="noindex, follow">
+{{- end -}}
+
+{{- /*
+  Local Leaflet for amap (高德瓦片).
+  Theme only CDN-injects Leaflet for mapnik/mapbox; shortcode <script>/<link>
+  inside markdown widgets are stripped — load here so wowchemy-map.js sees `L`.
+*/ -}}
+{{- $mapProvider := lower (site.Params.features.map.provider | default "") -}}
+{{- if and (eq $mapProvider "amap") (.HasShortcode "lab-contact") -}}
+  <link rel="stylesheet" href="{{ "vendor/leaflet/leaflet.css" | relURL }}">
+  <script src="{{ "vendor/leaflet/leaflet.js" | relURL }}"></script>
+{{- end -}}
+
+

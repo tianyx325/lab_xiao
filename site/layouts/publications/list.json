@@ -1,0 +1,20 @@
+{{- $records := slice -}}
+{{- range $section := slice "publications" "patent" "award" -}}
+  {{- $skin := partial "functions/hub-skin.html" $section -}}
+  {{- $style := $skin.card_style -}}
+  {{- $sectionPage := site.GetPage (printf "/%s" $section) -}}
+  {{- with $sectionPage -}}{{- $style = .Params.card_style | default $style -}}{{- end -}}
+  {{- $pages := sort (where site.RegularPages "Section" $section) "Date" "desc" -}}
+  {{- range $i, $item := $pages -}}
+    {{- $html := partial "views/card.html" (dict "page" ($sectionPage | default $) "item" $item "index" $i "card_style" $style) -}}
+    {{- $html = replaceRE "\\s+" " " $html -}}
+    {{- $records = $records | append (dict
+      "section" $section
+      "id" $item.RelPermalink
+      "classes" (partial "listing/item-classes.html" (dict "section" $section "item" $item))
+      "text" (partial "functions/search-text.html" $item)
+      "html" $html
+    ) -}}
+  {{- end -}}
+{{- end -}}
+{{- $records | jsonify -}}

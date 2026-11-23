@@ -1,11 +1,12 @@
 ---
-title: 论文
-view: card
-card_style: media-row
+title: 学术成果
+date: 2026-11-12
+type: publications
+hub_section: publications
+outputs: [HTML, JSON]
 summary: ''
-banner:
-  caption: ''
-  image: ''
 aliases:
-- /publication/
+  - /publication/
+  - /research/publications/
+  - /outcomes/
 ---

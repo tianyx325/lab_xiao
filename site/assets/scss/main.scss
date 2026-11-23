@@ -1,0 +1,89 @@
+{{- $scr := .Scratch -}}
+{{- $site := $scr.Get "site" -}}
+{{/* Shadowed from blox-bootstrap/v5/assets/scss/main.scss (vendor copy kept
+     as reference). Only change: the monolithic `@import "_vendor/bootstrap/bootstrap"`
+     is replaced by an audited module subset below — see "Bootstrap pruning". */}}
+{{- partial "functions/parse_theme" . -}}
+
+$sta-darken-percentage: 10%;
+$sta-lighten-percentage: 10%;
+
+$sta-font-size: {{ $scr.Get "font_size" }};
+$sta-font-size-small: {{ $scr.Get "font_size_small" }};
+
+$sta-font-body: "{{ $scr.Get "body_font" }}";
+$sta-font-heading: "{{ $scr.Get "heading_font" }}";
+$sta-font-nav: "{{ $scr.Get "nav_font" }}";
+$sta-font-mono: "{{ $scr.Get "mono_font" }}";
+
+$sta-primary: {{ $scr.Get "primary" }};
+$sta-primary-light: lighten($sta-primary, $sta-lighten-percentage);
+$sta-primary-dark: darken($sta-primary, $sta-darken-percentage);
+
+$sta-link: {{ $scr.Get "link" }};
+$sta-link-hover: {{ $scr.Get "link_hover" }};
+$sta-link-decoration: {{ $scr.Get "link_decoration" }};
+
+$sta-dark-link: {{ $scr.Get "dark_link" }};
+$sta-dark-link-hover: {{ $scr.Get "dark_link_hover" }};
+$sta-dark-link-decoration: {{ $scr.Get "dark_link_decoration" }};
+
+$sta-menu-primary: {{ $scr.Get "menu_primary" }};
+$sta-menu-text: {{ $scr.Get "menu_text" }};
+$sta-menu-text-active: {{ $scr.Get "menu_text_active" }};
+$sta-menu-title: {{ $scr.Get "menu_title" }};
+
+$sta-dark-menu-primary: {{ $scr.Get "dark_menu_primary" }};
+$sta-dark-menu-text: {{ $scr.Get "dark_menu_text" }};
+$sta-dark-menu-text-active: {{ $scr.Get "dark_menu_text_active" }};
+$sta-dark-menu-title: {{ $scr.Get "dark_menu_title" }};
+
+$sta-background: {{ $scr.Get "background" }};
+$sta-dark-background: {{ $scr.Get "dark_background" }};
+
+$sta-home-section-odd: {{ $scr.Get "home_section_odd" }};
+$sta-home-section-even: {{ $scr.Get "home_section_even" }};
+
+$sta-dark-home-section-odd: {{ $scr.Get "dark_home_section_odd" }};
+$sta-dark-home-section-even: {{ $scr.Get "dark_home_section_even" }};
+
+@import "bootstrap_variables";
+
+/* Vendor CSS in @layer so unlayered lab/* wins without !important or
+   post-Sass string splitting (which crashed on $style.Content when _gen raced). */
+@layer vendor {
+  /* ── Bootstrap pruning (lab owns chrome; vendor is thin host) ──
+     Kept: reboot/grid/forms/buttons/dropdown/nav/card/modal — content widgets.
+     Dropped: navbar (lab/_menus + _base own the capsule; BS navbar flex wars).
+     Still need utilities for legacy d-* in a few templates (narrow set).
+     Pruned: carousel, jumbotron, toasts, popover, tooltip, spinners, progress,
+       media, list-group, button-group, input-group, breadcrumb, pagination. */
+  @import "_vendor/bootstrap/functions";
+  @import "_vendor/bootstrap/variables";
+  @import "_vendor/bootstrap/mixins";
+  @import "_vendor/bootstrap/root";
+  @import "_vendor/bootstrap/reboot";
+  @import "_vendor/bootstrap/type";
+  @import "_vendor/bootstrap/images";
+  @import "_vendor/bootstrap/code";
+  @import "_vendor/bootstrap/grid";
+  @import "_vendor/bootstrap/tables";
+  @import "_vendor/bootstrap/forms";
+  @import "_vendor/bootstrap/buttons";
+  @import "_vendor/bootstrap/transitions";
+  @import "_vendor/bootstrap/dropdown";
+  @import "_vendor/bootstrap/nav";
+  /* navbar intentionally omitted — see lab/_menus.scss */
+  @import "_vendor/bootstrap/card";
+  @import "_vendor/bootstrap/badge";
+  @import "_vendor/bootstrap/alert";
+  @import "_vendor/bootstrap/close";
+  @import "_vendor/bootstrap/modal";
+  @import "_vendor/bootstrap/utilities";
+  @import "_vendor/bootstrap/print";
+
+  @import "wowchemy/wowchemy";
+}
+
+@import "template";
+@import "custom";

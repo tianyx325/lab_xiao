@@ -1,0 +1,12 @@
+{{- /* Plain searchable haystack for hub JSON index.
+   Usage: {{ partial "functions/search-text.html" $item }} */ -}}
+{{- $item := . -}}
+{{- $venue := partial "functions/pub-venue.html" $item -}}
+{{- $text := printf "%s %s %s %s %s"
+  $item.Title
+  ($item.Params.summary | default "")
+  (delimit ($item.Params.authors | default slice) " ")
+  ($item.Date.Format "2006")
+  $venue
+-}}
+{{- return ($text | plainify | lower) -}}

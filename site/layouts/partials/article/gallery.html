@@ -1,0 +1,51 @@
+{{- /* Bottom gallery: images in page-bundle folder gallery/ (excludes featured*). */ -}}
+{{- $images := (.Resources.ByType "image").Match "gallery/*" -}}
+{{- if not $images -}}
+  {{- $images = (.Resources.ByType "image").Match "gallery/**" -}}
+{{- end -}}
+{{- $gallery := slice -}}
+{{- range $images -}}
+  {{- $base := path.Base .Name -}}
+  {{- if not (strings.Contains (lower $base) "featured") -}}
+    {{- $gallery = $gallery | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- if $gallery -}}
+  {{- $album := printf "lab-%s" (.RelPermalink | anchorize) -}}
+  {{- $count := len $gallery -}}
+<section class="lab-article-gallery" aria-label="{{ i18n "lab_gallery" }}" data-lab-gallery-root{{ if le $count 3 }} data-lab-gallery-short{{ end }} data-lb-close="{{ i18n "lab_gallery_close" }}" data-lb-label="{{ i18n "lab_gallery" }}" data-lb-prev="{{ i18n "lab_gallery_prev" }}" data-lb-next="{{ i18n "lab_gallery_next" }}">
+  <div class="lab-gallery-head">
+    <h2 class="lab-article-media-title">{{ i18n "lab_gallery" }}</h2>
+    {{- if gt $count 3 -}}
+    <div class="lab-gallery-nav" role="group" aria-label="{{ i18n "lab_gallery_nav" }}">
+      <button type="button" class="lab-btn--icon lab-gallery-prev" aria-label="{{ i18n "lab_gallery_prev" }}" disabled>
+        <span aria-hidden="true">‹</span>
+      </button>
+      <button type="button" class="lab-btn--icon lab-gallery-next" aria-label="{{ i18n "lab_gallery_next" }}">
+        <span aria-hidden="true">›</span>
+      </button>
+    </div>
+    {{- end -}}
+  </div>
+  <div class="lab-gallery-viewport" data-lab-gallery-viewport tabindex="0">
+    <div class="lab-gallery-track">
+      {{- range $gallery -}}
+        {{- $thumb := . -}}
+        {{- $thumb2 := . -}}
+        {{- $lite := . -}}
+        {{- if ne .MediaType.SubType "gif" -}}
+          {{- $thumb = .Fill "480x360 Center webp q70" -}}
+          {{- $thumb2 = .Fill "720x540 Center webp q68" -}}
+          {{- $lite = .Resize "1400x webp q75" -}}
+        {{- end -}}
+        {{- $caption := .Title | default (path.Base .Name) -}}
+      <figure class="lab-gallery-item">
+        <a data-lab-lightbox="{{ $album }}" href="{{ $lite.RelPermalink }}" data-caption="{{ $caption | plainify }}">
+          <img src="{{ $thumb.RelPermalink }}" srcset="{{ $thumb.RelPermalink }} 480w, {{ $thumb2.RelPermalink }} 720w" sizes="(max-width: 767px) 90vw, 30vw" alt="{{ $caption | plainify }}" loading="lazy" decoding="async" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}">
+        </a>
+      </figure>
+      {{- end -}}
+    </div>
+  </div>
+</section>
+{{- end -}}

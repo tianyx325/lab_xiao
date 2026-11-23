@@ -1,0 +1,38 @@
+{{- /*
+  Shadow of blox-seo/layouts/_partials/jsonld/business.html.
+
+  Upstream emitted only @type/@id/name/logo/url because marketing.seo had no
+  address fields. Identity data now reads straight from `site.Params.lab`
+  (the declared single source of truth — no derived marketing.seo mirror to
+  keep in sync): lab.address / lab.latitude / lab.longitude / lab.email.
+  Geo is emitted for Organization too — upstream gated it to LocalBusiness,
+  which made the coordinates in lab.* unreachable at our site_type.
+*/ -}}
+{{- $lab := site.Params.lab | default dict -}}
+{{- $sharing_image := resources.GetMatch (path.Join "media" "sharing.*") -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": {{site.Params.marketing.seo.site_type | default site.Params.marketing.seo.site_type}},
+  "@id": {{site.BaseURL}},
+  "name": {{site.Params.marketing.seo.org_name | default site.Title}},
+  "logo": {{ partial "blox-core/functions/get_logo_url" . }},
+  {{with $sharing_image}}"image": {{.Permalink}},{{end}}
+  {{ with $lab.address }}
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": {{.}},
+    "addressCountry": "CN"
+  },
+  {{end}}
+  {{ with $lab.latitude }}
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": {{.}},
+    "longitude": {{ $lab.longitude }}
+  },
+  {{end}}
+  {{ with $lab.email }}"email": {{.}},{{end}}
+  "url": {{site.BaseURL}}
+}
+</script>

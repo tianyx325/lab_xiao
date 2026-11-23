@@ -35,21 +35,20 @@ jobs:
         with:
           go-version: '1.22'
 
-      - name: Setup Node.js
+      - name: Install Dart Sass
+        run: |
+          curl -fsSL https://github.com/sass/dart-sass/releases/download/1.77.8/dart-sass-1.77.8-linux-x64.tar.gz | tar -xz
+          echo "$PWD/dart-sass" >> "$GITHUB_PATH"
+
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: npm
-          cache-dependency-path: site/package-lock.json
+          node-version: "22"
 
-      - name: Install npm deps
-        run: |
-          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+      - name: Lab checks (theme / content / hardcodes)
+        run: npm run check
 
       - name: Build
         env:
           HUGO_ENVIRONMENT: production
         run: hugo --minify --cleanDestinationDir
-
-      - name: Pagefind
-        run: npx pagefind --site public

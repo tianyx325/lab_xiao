@@ -1,0 +1,31 @@
+{{- /* Metadata tags. items: flat slice → one row; slice of slices → one row per group. */ -}}
+{{- $items := .items | default slice -}}
+{{- $rows := slice -}}
+{{- if $items -}}
+  {{- $first := index $items 0 -}}
+  {{- if reflect.IsSlice $first -}}
+    {{- $rows = $items -}}
+  {{- else -}}
+    {{- $rows = slice $items -}}
+  {{- end -}}
+{{- end -}}
+{{- if $rows -}}
+<div class="lab-meta-tags{{ if gt (len $rows) 1 }} lab-meta-tags--rows{{ end }}">
+  {{- range $row := $rows }}
+  {{- if $row }}
+  <div class="lab-meta-tags-row">
+    {{- range $row }}
+    {{- if .href }}
+    <a class="lab-meta-tag lab-meta-tag-link lab-ext" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }}</a>
+    {{- else }}
+    <div class="lab-meta-tag">
+      <span class="lab-meta-tag-label">{{ .label }}</span>
+      <span class="lab-meta-tag-value">{{ .value | safeHTML }}</span>
+    </div>
+    {{- end }}
+    {{- end }}
+  </div>
+  {{- end }}
+  {{- end }}
+</div>
+{{- end -}}

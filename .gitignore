@@ -7,3 +7,6 @@ site/.hugo_build.lock
 .DS_Store
 Thumbs.db
 *.log
+__pycache__/
+*.pyc
+site/.tavily/

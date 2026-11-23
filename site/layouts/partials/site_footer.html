@@ -1,0 +1,35 @@
+{{ $lab := site.Params.lab | default dict }}
+{{ $ui := $lab.ui | default dict }}
+<footer class="lab-footer">
+  <div class="lab-footer-inner">
+    {{ if or $lab.email $lab.address }}
+    <div class="lab-footer-row">
+      <div class="lab-footer-heading">{{ i18n "lab_footer_contact" }}</div>
+      <div class="lab-footer-items">
+        {{ with $lab.email }}
+        <span class="lab-footer-meta">
+          <span class="lab-footer-meta-label">{{ $ui.email_label | default (i18n "lab_label_email") }}</span>
+          <a class="lab-footer-item lab-footer-item--mono" href="mailto:{{ . }}">{{ . }}</a>
+        </span>
+        {{ end }}
+        {{ with $lab.address }}
+        <span class="lab-footer-meta">
+          <span class="lab-footer-meta-label">{{ $ui.address_label | default (i18n "lab_label_address") }}</span>
+          <span class="lab-footer-item">{{ . }}</span>
+        </span>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+    {{ with $lab.friend_links }}
+    <div class="lab-footer-row">
+      <div class="lab-footer-heading">{{ i18n "lab_footer_links" }}</div>
+      <ul class="lab-footer-items">
+        {{ range . }}
+        <li><a class="lab-footer-item lab-ext" href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></li>
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+  </div>
+</footer>

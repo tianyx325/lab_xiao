@@ -1,6 +1,5 @@
 ---
-title: ''
-summary: ''
+title:
 date: 2022-10-24
 type: landing
 
@@ -8,61 +7,70 @@ sections:
   - block: markdown
     id: hero
     content:
-      title: Intelligent Perception & Decision Lab
-      subtitle: IPD Lab · Xi'an University of Technology
-      text: |-
-        Large models and agents, low-light vision, and depth estimation — perception and decision research that ships.
-
-        We welcome motivated students to join the lab.
+      title:
+      subtitle: ''
+      text: '{{< lab-hero >}}'
     design:
       columns: '1'
+      spacing:
+        padding: ['3rem', '1.5rem', '2.5rem', '1.5rem']
+      css_class: lab-hero-section
 
-  - block: team-showcase
-    id: advisors
+  - block: markdown
+    id: advisors-head
     content:
-      title: Faculty
+      title:
+      text: '{{< lab-section-head title="Advisors" >}}'
+    design:
+      columns: '1'
+      css_class: lab-block-head
+
+  - block: people
+    content:
+      title:
       user_groups:
-        - 导师
-      sort_by: weight
+        - Supervisor
+      sort_by: Params.last_name
       sort_ascending: true
     design:
-      show_role: true
-      show_organizations: false
       show_interests: false
-      show_social: true
-      max_columns: 3
-      show_empty_groups: false
+      show_role: true
+      show_social: false
+      css_class: lab-people-section
 
-  - block: collection
-    id: research
+  - block: markdown
+    id: outcomes-head
     content:
-      title: Research
-      filters:
-        folders:
-          - research
+      title:
+      text: '{{< lab-section-head title="Outcomes" >}}'
     design:
-      view: card
-      columns: 2
+      columns: '1'
+      css_class: lab-block-head
 
-  - block: collection
-    id: papers
+  - block: markdown
+    id: outcomes-grid
     content:
-      title: Featured Publications
-      filters:
-        folders:
-          - publications
-        featured_only: true
+      title:
+      text: '{{< lab-outcomes-grid count="3" >}}'
     design:
-      view: article-grid
-      columns: 2
+      columns: '1'
+      css_class: lab-outcomes-section
 
-  - block: collection
-    id: recent-papers
+  - block: markdown
+    id: news-head
     content:
-      title: Recent Publications
-      filters:
-        folders:
-          - publications
+      title:
+      text: '{{< lab-section-head title="News" >}}'
     design:
-      view: citation
+      columns: '1'
+      css_class: lab-row-head
+
+  - block: markdown
+    id: news-list
+    content:
+      title:
+      text: '{{< lab-news-list count="6" >}}'
+    design:
+      columns: '1'
+      css_class: lab-news-section lab-last
 ---

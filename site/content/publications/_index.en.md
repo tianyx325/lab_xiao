@@ -1,9 +1,12 @@
 ---
-title: Papers
-view: card
-card_style: media-row
+title: Research Outputs
+date: 2026-11-12
+type: publications
+hub_section: publications
+outputs: [HTML, JSON]
 summary: ''
-banner:
-  caption: ''
-  image: ''
+aliases:
+  - /publication/
+  - /research/publications/
+  - /outcomes/
 ---

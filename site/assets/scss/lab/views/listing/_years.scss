@@ -1,0 +1,44 @@
+﻿/* ---------- Year groups (list view: publications / patents / awards) ---------- */
+/* Year head scrolls with the list — not sticky. scroll-margin keeps year
+   quick-nav anchors clear of the title band. */
+.lab-year-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--lab-space-3);
+  padding: var(--lab-space-2) 0;
+  margin: var(--lab-space-5) 0 var(--lab-space-2);
+  background: var(--lab-color-bg);
+  scroll-margin-top: calc(var(--lab-navbar-height) + var(--lab-space-6) + var(--lab-sticky-h, 0));
+}
+
+.lab-year-head:first-child {
+  margin-top: 0;
+}
+
+.lab-year-title {
+  margin: 0;
+  font-family: $lab-font-serif;
+  font-size: $lab-text-lg;
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-ui;
+  line-height: $lab-leading-none;
+  color: var(--lab-color-fg);
+}
+
+.lab-year-count {
+  @include lab-type-mono;
+  font-size: $lab-text-xs;
+  line-height: $lab-leading-none;
+  color: var(--lab-color-fg-muted);
+}
+
+.lab-year-head[hidden] {
+  display: none;
+}
+
+@include lab-bp-down(lg) {
+  .lab-year-head {
+    scroll-margin-top: calc(var(--lab-navbar-height-sm) + var(--lab-space-4) + var(--lab-sticky-h, 0));
+  }
+}
+

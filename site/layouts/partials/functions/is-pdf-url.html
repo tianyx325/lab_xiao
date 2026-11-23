@@ -1,0 +1,4 @@
+{{- /* True if URL looks like a PDF endpoint.
+   Usage: {{ if partial "functions/is-pdf-url.html" $url }} */ -}}
+{{- $u := . | default "" | lower -}}
+{{- return (or (in $u ".pdf") (in $u "/pdf") (in $u "pdfdirect") (in $u "create_pdf") (in $u "type=pdf")) -}}

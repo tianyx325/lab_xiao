@@ -1,0 +1,55 @@
+{{- /*
+  Homepage hero. Brand/lead follow active language (site.Title + params.lead).
+  Intro body + build-time aggregated stats + dual CTAs.
+*/ -}}
+{{- $lab := site.Params.lab | default dict -}}
+{{- $name := site.Title | default ($lab.name | default "") -}}
+{{- $tagline := $lab.tagline | default "" -}}
+{{- $lead := site.Params.lead | default ($lab.lead | default "") -}}
+{{- $intro := site.Params.intro | default "" -}}
+{{- $is_en := eq site.Language.Lang "en" -}}
+<div class="lab-hero">
+  <h1 class="lab-hero-brand">{{- $name -}}</h1>
+  {{- with $tagline -}}
+  <p class="lab-hero-title">{{- . -}}</p>
+  {{- end -}}
+  {{- with $lead -}}
+  <p class="lab-hero-lead">{{- . -}}</p>
+  {{- end -}}
+  {{- with $intro -}}
+  <p class="lab-hero-intro">{{- . -}}</p>
+  {{- end -}}
+{{- /* Stats block is gated: hidden by default, enable via
+      params.lab.show_hero_stats: true (counts stay build-time aggregated) */ -}}
+{{- if site.Params.lab.show_hero_stats | default false -}}
+{{- $pubs := len (where site.RegularPages "Section" "publications") -}}
+{{- $pats := len (where site.RegularPages "Section" "patent") -}}
+{{- $awds := len (where site.RegularPages "Section" "award") -}}
+{{- $team := len (where site.Pages "Section" "authors") -}}
+  <dl class="lab-hero-stats">
+    {{- /* Count-up a11y: .sr-only span always holds the real value for screen
+        readers; the visible span (aria-hidden) is what lab-reveal.js animates
+        from 0 — AT never hears the intermediate counts. */ -}}
+    <div class="lab-hero-stat">
+      <dt class="lab-hero-stat-num"><span class="sr-only">{{ $pubs }}</span><span class="lab-hero-stat-count" aria-hidden="true">{{ $pubs }}</span></dt>
+      <dd class="lab-hero-stat-label">{{ cond $is_en "Papers" "论文" }}</dd>
+    </div>
+    <div class="lab-hero-stat">
+      <dt class="lab-hero-stat-num"><span class="sr-only">{{ $pats }}</span><span class="lab-hero-stat-count" aria-hidden="true">{{ $pats }}</span></dt>
+      <dd class="lab-hero-stat-label">{{ cond $is_en "Patents" "专利" }}</dd>
+    </div>
+    <div class="lab-hero-stat">
+      <dt class="lab-hero-stat-num"><span class="sr-only">{{ $awds }}</span><span class="lab-hero-stat-count" aria-hidden="true">{{ $awds }}</span></dt>
+      <dd class="lab-hero-stat-label">{{ cond $is_en "Awards" "获奖" }}</dd>
+    </div>
+    <div class="lab-hero-stat">
+      <dt class="lab-hero-stat-num"><span class="sr-only">{{ $team }}</span><span class="lab-hero-stat-count" aria-hidden="true">{{ $team }}</span></dt>
+      <dd class="lab-hero-stat-label">{{ cond $is_en "Members" "成员" }}</dd>
+    </div>
+  </dl>
+{{- end -}}
+  <div class="lab-hero-actions">
+    <a class="lab-btn--wash" href="{{ "research/" | relLangURL }}">{{ cond $is_en "Research" "研究方向" }}</a>
+    <a class="lab-btn--outline" href="{{ "contact/" | relLangURL }}">{{ cond $is_en "Join us" "加入我们" }}</a>
+  </div>
+</div>

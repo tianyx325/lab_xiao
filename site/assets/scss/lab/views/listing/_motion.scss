@@ -1,0 +1,333 @@
+﻿/* ---------- Motion & focus (academic, reduced-motion safe) ---------- */
+@keyframes lab-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY($lab-reveal-offset);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.lab-hero-brand,
+.lab-hero-title,
+.lab-hero-lead {
+  animation: lab-fade-up $lab-duration-slow ease both;
+}
+
+.lab-hero-title {
+  animation-delay: $lab-delay-2;
+}
+
+.lab-hero-lead {
+  animation-delay: $lab-delay-4;
+}
+
+.home-section.lab-major .lab-research-cards .lab-card {
+  /* backwards, not both: after the reveal the base transform applies again,
+     so the shared hover lift still works on these cards */
+  animation: lab-fade-up $lab-duration-pulse ease backwards;
+}
+
+.home-section.lab-major .lab-research-cards .lab-card:nth-child(1) {
+  animation-delay: $lab-delay-1;
+}
+
+.home-section.lab-major .lab-research-cards .lab-card:nth-child(2) {
+  animation-delay: $lab-delay-3;
+}
+
+.home-section.lab-major .lab-research-cards .lab-card:nth-child(3) {
+  /* delay ladder: 60ms → 70ms → 140ms; was $lab-duration-fast (duration
+     token misused as a delay) */
+  animation-delay: $lab-delay-4;
+}
+
+a.lab-member-card:focus-visible,
+a.lab-research-card:focus-visible,
+a.lab-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 $lab-focus-width var(--lab-color-brand);
+}
+
+.lab-meta-tag-value a {
+  @extend %lab-accent-link;
+  font-size: inherit;
+}
+
+.section-head a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 $lab-focus-width var(--lab-color-brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-hero-brand,
+  .lab-hero-title,
+  .lab-hero-lead,
+  .home-section.lab-major .lab-research-cards .lab-card {
+    animation: none;
+  }
+}
+
+/* ---------- Metadata: read-only labels vs underlined text-links ---------- */
+.lab-meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--lab-space-2) var(--lab-space-4);
+  margin: $lab-space-5 0 0;
+}
+
+.lab-meta-tags--rows {
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: var(--lab-space-3);
+}
+
+.lab-meta-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: var(--lab-space-2) var(--lab-space-4);
+  max-width: 100%;
+}
+
+/* Read-only fact label */
+div.lab-meta-tag {
+  display: inline-flex;
+  align-items: baseline;
+  gap: $lab-space-1;
+  padding: 0;
+  width: fit-content;
+  background: none;
+  border: none;
+  border-radius: 0;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-ui;
+}
+
+div.lab-meta-tag:hover {
+  background: none;
+  border: none;
+}
+
+.lab-meta-tag-label {
+  font-size: $lab-text-xs;
+  font-weight: $lab-weight-medium;
+  letter-spacing: $lab-tracking-caps;
+  color: var(--lab-color-fg-muted);
+  line-height: $lab-leading-none;
+}
+
+.lab-meta-tag-value {
+  font-weight: $lab-weight-body;
+  color: var(--lab-color-fg-muted);
+  line-height: $lab-leading-ui;
+}
+
+
+.lab-meta-tag-value a:hover {
+  @extend %lab-accent-link-hover;
+}
+
+/* DOI / PDF / code — text links, not chips */
+a.lab-meta-tag,
+a.lab-meta-tag.lab-meta-tag-link,
+.lab-article a.lab-meta-tag-link {
+  @extend %lab-accent-link;
+}
+
+a.lab-meta-tag:hover,
+a.lab-meta-tag.lab-meta-tag-link:hover,
+.lab-article a.lab-meta-tag-link:hover {
+  @extend %lab-accent-link-hover;
+  background: none;
+}
+
+/* ---------- Skip link (a11y) ---------- */
+.lab-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: $lab-hairline;
+  height: $lab-hairline;
+  overflow: hidden;
+  z-index: $lab-z-modal;
+  padding: $lab-space-3 $lab-space-5;
+  font-size: $lab-text-sm;
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-ui;
+  color: var(--lab-color-on-brand);
+  background: var(--lab-color-brand);
+  text-decoration: none;
+  border-radius: var(--lab-card-radius);
+}
+
+.lab-skip-link:focus {
+  position: fixed;
+  left: $lab-space-4;
+  top: $lab-space-4;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  outline: $lab-focus-width solid var(--lab-color-brand);
+  outline-offset: $lab-focus-offset;
+}
+
+/* ---------- View Transitions (progressive enhancement) ---------- */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: $lab-duration-normal ease-out both fade-out;
+}
+
+::view-transition-new(root) {
+  animation: $lab-duration-normal ease-in both fade-in;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---------- Filter animations ---------- */
+
+.lab-list-item.is-filtered-out,
+.lab-list-item.is-paged-out {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+/* ---------- Focus-visible improvements ---------- */
+.lab-filter-control:focus-visible {
+  outline: $lab-focus-width solid var(--lab-color-brand);
+  outline-offset: $lab-hairline;
+}
+
+a.lab-meta-tag-link:focus-visible {
+  outline: $lab-focus-width solid var(--lab-color-border-brand);
+  outline-offset: $lab-focus-offset;
+}
+
+/* Search modal title (override uses h2 so page h1 stays unique) */
+.search-header h2 {
+  margin: 0;
+  line-height: $lab-leading-none;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Touch: do not keep “hovered” chrome after tap */
+@media (hover: none), (pointer: coarse) {
+  .lab-card.view-card:hover .lab-card-title,
+  a.lab-card.view-card:hover .lab-card-title {
+    color: var(--lab-color-fg);
+  }
+
+  .lab-card.view-card:hover,
+  a.lab-card.view-card:hover {
+    transform: none;
+  }
+
+  .lab-card.view-card:hover .lab-card-media img {
+    opacity: 1;
+    transform: none;
+  }
+
+  .lab-card.view-card:hover .lab-card-ph-art {
+    opacity: 1;
+    transform: none;
+  }
+
+  a.lab-member-card:hover {
+    border-color: var(--lab-color-border);
+    box-shadow: var(--lab-color-elevate);
+    transform: none;
+  }
+
+  a.lab-member-card:hover .lab-member-card-name {
+    color: var(--lab-color-fg);
+  }
+
+  a.lab-member-card:hover .lab-member-card-avatar img,
+  a.lab-member-card:hover .lab-member-photo-initial {
+    transform: none;
+  }
+
+  .navbar .nav-link:hover {
+    color: var(--lab-color-fg);
+  }
+
+  .navbar .nav-link:hover::after {
+    transform: scaleX(0);
+  }
+
+  .navbar .nav-link.active:hover,
+  .navbar .nav-item.active .nav-link:hover {
+    color: var(--lab-color-brand);
+  }
+}
+
+
+/* ---------- Reduced motion: one global guard ----------
+   Every transform/transition/animation collapses to an instant state change;
+   functional feedback (focus, hover colour) is preserved. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: $lab-duration-reduced;
+    animation-iteration-count: 1;
+    transition-duration: $lab-duration-reduced;
+    transition-delay: $lab-duration-none;
+    scroll-behavior: auto;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}
+
+/* ---------- High-contrast / forced-colors ---------- */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: $lab-focus-width solid Highlight;
+    outline-offset: $lab-focus-offset;
+  }
+
+  .lab-logo::before {
+    border: $lab-hairline solid CanvasText;
+  }
+
+  .lab-footer::before,
+  .lab-list-header,
+  .lab-hub-sticky {
+    border-color: CanvasText;
+  }
+}
+
+@media (prefers-contrast: more) {
+  body {
+    --lab-color-fg-muted: var(--lab-color-fg);
+    --lab-color-border: var(--lab-color-border);
+    --lab-color-border-brand: var(--lab-color-brand);
+  }
+}

@@ -1,0 +1,54 @@
+  {{/* Load WC style */}}
+  {{ $license := printf "/*! Hugo Blox Builder v%s | https://hugoblox.com/ */\n" hugo.Data.hugoblox.version }}
+  {{ $license := $license | printf "%s/*! Copyright 2016-present George Cushen (https://georgecushen.com/) */\n" }}
+  {{ $license := $license | printf "%s/*! License: https://github.com/HugoBlox/hugo-blox-builder/blob/main/LICENSE.md */\n" }}
+  {{ $css_bundle_head := $license | resources.FromString "css/bundle-head.css" }}
+  {{/* Dart Sass: libsass is deprecated in Hugo 0.153+ and will be removed */}}
+  {{ $css_options := dict
+    "targetPath" "css/wowchemy.css"
+    "transpiler" "dartsass"
+    "silenceDeprecations" (slice "import" "global-builtin" "color-functions" "if-function" "abs-percent")
+  }}
+  {{- if hugo.IsProduction -}}
+    {{- $css_options = merge $css_options (dict "outputStyle" "compressed") -}}
+  {{- end -}}
+  {{ $sass_template := resources.Get "scss/main.scss" }}
+  {{ if not $sass_template }}
+    {{ errorf "missing assets/scss/main.scss" }}
+  {{ end }}
+  {{/* @layer vendor is applied in main.scss — do NOT read $style.Content
+       (Hugo resource cache can return "file does not exist" under race/_gen wipe). */}}
+  {{ $style := $sass_template | resources.ExecuteAsTemplate "main_parsed.scss" . | css.Sass $css_options }}
+  {{- if hugo.IsProduction -}}
+    {{- $style = $style | minify -}}
+  {{- end -}}
+  {{ $style := slice $css_bundle_head $style | resources.Concat "css/wowchemy.css" }}
+  {{- if eq (getenv "WC_POST_CSS") "true" -}}
+    {{- $style = $style | postCSS -}}
+  {{- end -}}
+  {{- if hugo.IsProduction -}}
+    {{- $style = $style | fingerprint "md5" -}}
+  {{- end -}}
+  {{- if eq (getenv "WC_POST_CSS") "true" -}}
+    {{/* PostProcess must be last action in the pipeline */}}
+    {{- $style = $style | resources.PostProcess -}}
+  {{- end -}}
+  {{/* Cache-bust in dev so SCSS iterations are not stuck on stale wowchemy.css */}}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}{{ if not hugo.IsProduction }}?v={{ now.Unix }}{{ end }}" />
+
+  {{/* Load WC community block styles */}}
+  {{ $wc_block_styles := resources.Match "scss/blocks/**.scss" }}
+  {{ with $wc_block_styles }}
+    {{ $wc_block_styles = $wc_block_styles | resources.Concat "css/wowchemy-blocks.scss" | css.Sass (dict "transpiler" "dartsass") }}
+    {{- if eq (getenv "WC_POST_CSS") "true" -}}
+      {{- $wc_block_styles = $wc_block_styles | postCSS -}}
+    {{- end -}}
+    {{- if hugo.IsProduction -}}
+      {{- $wc_block_styles = $wc_block_styles | minify | fingerprint "md5" -}}
+    {{- end -}}
+    {{- if eq (getenv "WC_POST_CSS") "true" -}}
+      {{/* PostProcess must be last action in the pipeline */}}
+      {{- $wc_block_styles = $wc_block_styles | resources.PostProcess -}}
+    {{- end -}}
+    <link rel="stylesheet" href="{{ $wc_block_styles.RelPermalink }}" />
+  {{ end }}

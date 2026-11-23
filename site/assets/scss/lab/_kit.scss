@@ -1,0 +1,39 @@
+/* Kit glue only — rules not owned by _base / _menus.
+   Navbar, dropdown, nav-link live in those files; do not restyle them here. */
+
+.page-wrapper,
+body {
+  background: var(--lab-color-bg);
+  color: var(--lab-color-fg);
+}
+
+/* Kit utility — --hb-color-background aliased to lab in _tokens.scss */
+.bg-\[var\(--hb-color-background\)\] {
+  background-color: var(--hb-color-background);
+}
+
+.page-header.sticky {
+  background: transparent;
+}
+
+/* Home hero: strip kit page chrome margin/padding above the mesh */
+main:has(.lab-hero),
+.page-body:has(.lab-hero) {
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.home-section {
+  position: relative;
+  width: 100%;
+}
+
+.home-section > .container {
+  width: 100%;
+  max-width: var(--lab-page-width-home);
+  margin-inline: auto;
+  padding-left: var(--lab-page-gutter);
+  padding-right: var(--lab-page-gutter);
+  box-sizing: border-box;
+}

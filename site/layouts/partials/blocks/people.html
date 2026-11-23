@@ -1,0 +1,37 @@
+{{/* Homepage people block — cards come from the shared people-groups partial */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $lab := site.Params.lab | default dict }}
+{{ $ui := $lab.ui | default dict }}
+{{ $peopleLead := $block.content.subtitle | default "" }}
+{{ if not $peopleLead }}
+  {{ with $ui.people_lead }}
+    {{ $peopleLead = . }}
+  {{ else }}
+    {{ with $lab.name }}
+      {{ $peopleLead = i18n "lab_people_lead" . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<div class="lab-people">
+  {{ with $block.content.title }}
+  <header class="lab-people-header">
+    <h1 class="lab-people-title">{{ . | markdownify | emojify }}</h1>
+    {{ with $peopleLead }}
+    <p class="lab-people-lead">{{ . | markdownify | emojify }}</p>
+    {{ end }}
+  </header>
+  {{ end }}
+
+  <div class="lab-people-body">
+  {{ with $block.content.text }}
+  <div class="lab-people-intro">{{ . | emojify | $page.RenderString }}</div>
+  {{ end }}
+
+  {{ partial "components/people-groups.html" (dict
+    "groups" ($block.content.user_groups | default slice)
+    "sort_ascending" ($block.content.sort_ascending | default true)
+  ) }}
+  </div>
+</div>

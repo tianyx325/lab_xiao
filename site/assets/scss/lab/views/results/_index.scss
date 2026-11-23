@@ -1,0 +1,158 @@
+﻿/* Layer 5a · result views: papers, news, projects, patents, awards
+   Source: template.scss lines 773-1351 (order-preserving split). */
+.lab-card-body,
+.lab-card-meta,
+.lab-card-title,
+.lab-card-summary {
+  position: relative;
+  z-index: $lab-z-overlay;
+  pointer-events: none;
+}
+
+.lab-card-body {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: var(--lab-space-2);
+  padding: var(--lab-space-3) var(--lab-space-4) var(--lab-space-4);
+  min-height: 0;
+}
+
+.lab-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $lab-space-1;
+  min-width: 0;
+  margin: 0;
+  @include lab-type-mono;
+  line-height: $lab-leading-ui;
+  letter-spacing: $lab-tracking-label;
+  color: var(--lab-color-fg-muted);
+}
+
+.lab-card-meta-sep {
+  opacity: 0.45;
+}
+
+/* Type glyph — mono "icon" slot of the three-part row (glyph / title / summary) */
+.lab-card-meta-glyph {
+  margin-right: var(--lab-space-1);
+  color: color-mix(in srgb, var(--lab-color-brand) 80%, white);
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-wide;
+  /* Optical alignment: uppercase mono mass sits high next to lowercase meta
+     text — nudge down to the perceived baseline (token: $lab-align-glyph-nudge) */
+  transform: translateY($lab-align-glyph-nudge);
+}
+
+/* Read-only meta text (not a chip) — inherits .lab-card-meta sizing,
+   guards long funding labels with ellipsis */
+.lab-card-meta-badge {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* Full author line — media-row cards (papers / patents) */
+.lab-card-authors {
+  margin: 0;
+  font-size: $lab-text-sm;
+  line-height: $lab-leading-snug;
+  color: var(--lab-color-fg-muted);
+}
+
+/* Shared name metrics so linked/unlinked authors share one baseline */
+.lab-card-author-name {
+  display: inline;
+  font: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  vertical-align: baseline;
+  color: inherit;
+}
+
+/* Member authors are clickable — same accent-link treatment as the detail
+   page byline (colour + soft underline, full underline on hover) */
+.lab-card-author-link {
+  position: relative;
+  z-index: $lab-z-overlay;
+  pointer-events: auto;
+  @extend %lab-accent-link;
+}
+
+.lab-card-author-link:hover {
+  @extend %lab-accent-link-hover;
+  /* Bootstrap's `a:hover { text-decoration: underline }` outspecifies the
+     base class, adding a second line under the accent border on hover */
+  text-decoration: none;
+}
+
+.lab-card[class*="lab-card--"] {
+  --lab-card-accent: var(--lab-color-brand);
+  --lab-card-wash: var(--lab-color-bg-brand-soft);
+}
+
+.lab-card-title {
+  margin: 0;
+  font-family: $lab-font-serif;
+  font-size: $lab-text-md;
+  font-weight: $lab-weight-heading;
+  letter-spacing: $lab-tracking-heading;
+  line-height: $lab-leading-tight;
+  color: var(--lab-color-fg);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  transition: color $lab-transition;
+}
+
+.lab-card.view-card:hover .lab-card-title {
+  color: color-mix(in srgb, var(--lab-color-brand) 86%, white);
+}
+
+/* Hovering a member-author link targets the profile, not the card — the
+   title must not light up as if the card itself were the target. */
+.lab-card:has(.lab-card-author-link:hover) .lab-card-title {
+  color: var(--lab-color-fg);
+}
+
+.lab-card-summary {
+  margin: 0;
+  font-size: $lab-text-sm;
+  line-height: $lab-summary-lh;
+  letter-spacing: $lab-tracking-micro;
+  color: var(--lab-color-fg-muted);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+}
+
+.portrait-title h2,
+.portrait-title h2 a {
+  font-size: $lab-text-lg;
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-meta;
+  line-height: $lab-leading-snug;
+  margin: $lab-space-1 0 $lab-space-2;
+}
+
+.pub-list-item {
+  @include lab-type-body;
+}
+
+.pub-list-item .li-cite-author {
+  opacity: 0.75;
+}

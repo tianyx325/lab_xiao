@@ -1,0 +1,196 @@
+{{/*
+  Compose HugoBlox SEO (description / OG / Twitter / canonical / JSON-LD)
+  with SVG-capable favicon/apple-touch-icon. Do not strip vendor meta.
+*/}}
+{{ $scr := .Scratch }}
+
+{{/* Request search engines not to index private pages. */}}
+{{ if .Params.private }}
+  <meta name="robots" content="noindex" />
+{{- end -}}
+
+{{/* Thin taxonomy pages: a term with fewer than two content pages is useful
+     for navigation but not as a standalone search result. */}}
+{{ if and (eq .Kind "term") (lt (len .Pages) 2) }}
+  <meta name="robots" content="noindex, follow" />
+{{- end -}}
+
+{{/* Attempt to load superuser (the main site author). */}}
+{{ $superuser := index (first 1 (where (where site.Pages "Section" "authors") "Params.superuser" true)) 0 }}
+{{ $superuser_name := "" }}
+{{ $superuser_username := "" }}
+{{ $superuser_role := "" }}
+{{ with $superuser }}
+  {{ $superuser_name = .Title }}
+  {{ $superuser_username = path.Base .File.Dir }}
+  {{ $superuser_role = .Params.role }}
+{{ end }}
+
+{{/* Set superuser globally for page_author.html. */}}
+{{ $scr.Set "superuser_username" $superuser_username }}
+
+{{ with $superuser_name }}
+  <meta name="author" content="{{ . }}" />
+{{ end }}
+
+{{/* Generate page description. */}}
+{{ $lab := site.Params.lab | default dict }}
+{{ $desc := "" }}
+{{ if .Params.summary }}
+  {{ $desc = .Params.summary }}
+{{ else if .Params.abstract }}
+  {{ $desc = .Params.abstract }}
+{{ else if .IsPage }}
+  {{ $desc = .Summary }}
+{{ else if site.Params.marketing.seo.description }}
+  {{ $desc = site.Params.marketing.seo.description }}
+{{ else if $lab.seo_description }}
+  {{ $desc = $lab.seo_description }}
+{{ else }}
+  {{ $desc = $superuser_role }}
+{{ end }}
+<meta name="description" content="{{ $desc }}" />
+
+{{/* Get all URL variations for the page. Use each page's Language.Locale so
+     every hreflang uses the same BCP 47 form (zh-Hans / en-US); mixing .Lang
+     (zh) with .Language.Locale (zh-Hans) made crawlers treat them as distinct. */}}
+{{ range .Translations }}
+  <link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}" />
+{{ end }}
+<link rel="alternate" hreflang="{{ .Language.Locale | default "zh-Hans" }}" href="{{ .Permalink }}" />
+{{/* x-default points at the default-language version. NOTE: site.Languages
+     is alphabetically sorted (en before zh), so index site.Languages 0 is NOT
+     the default language — use hugo.Sites.Default instead. */}}
+{{ $defaultLang := hugo.Sites.Default.Language.Lang }}
+{{ $defaultAlt := . }}
+{{ range .Translations }}
+  {{ if eq .Language.Lang $defaultLang }}{{ $defaultAlt = . }}{{ end }}
+{{ end }}
+{{ if eq .Language.Lang $defaultLang }}{{ $defaultAlt = . }}{{ end }}
+<link rel="alternate" hreflang="x-default" href="{{ $defaultAlt.Permalink }}" />
+{{/* Canonical: paginated list pages (page/N/) self-canonicalize so search
+     engines don't consolidate later archive pages into page one; page one and
+     all other pages use .Permalink. .Paginator is only touched on node pages,
+     where Hugo guarantees it exists. */}}
+{{ $canonical := .Permalink }}
+{{ if and .IsBranch (gt .Paginator.TotalPages 1) }}
+  {{ $canonical = .Paginator.URL | absURL }}
+{{ end }}
+<link rel="canonical" href="{{ $canonical }}" />
+{{/* Language-root and page/1 aliases duplicate the canonical home; keep them
+     out of search results while preserving the redirect/canonical path. */}}
+{{ if and .IsHome (ne .RelPermalink site.Home.RelPermalink) }}
+  <meta name="robots" content="noindex, follow" />
+{{ end }}
+
+{{/* Progressive Web App (PWA) Manifest */}}
+{{ with site.Home.OutputFormats.Get "WebAppManifest" }}
+  <link rel="manifest" href="{{ .RelPermalink }}" />
+{{ end }}
+
+{{/* Progressive Web App (PWA) Icon — SVG when available */}}
+{{ $icon := resources.GetMatch "media/icon.svg" | default (resources.GetMatch "media/icon.png") }}
+{{ if $icon }}
+  {{ if eq $icon.MediaType.SubType "svg" }}
+<link rel="icon" type="image/svg+xml" href="{{ $icon.RelPermalink }}" />
+  {{ else }}
+<link rel="icon" type="image/png" href="{{ (partial "blox-core/functions/get_icon.html" 32).RelPermalink }}" />
+  {{ end }}
+{{ else }}
+<link rel="icon" type="image/png" href="{{ (partial "blox-core/functions/get_icon.html" 32).RelPermalink }}" />
+{{ end }}
+
+{{ $icon_large := resources.GetMatch "media/icon.svg" | default (resources.GetMatch "media/icon.png") }}
+{{ if $icon_large }}
+  {{ if eq $icon_large.MediaType.SubType "svg" }}
+<link rel="apple-touch-icon" type="image/svg+xml" href="{{ $icon_large.RelPermalink }}" />
+  {{ else }}
+<link rel="apple-touch-icon" type="image/png" href="{{ (partial "blox-core/functions/get_icon.html" 180).RelPermalink }}" />
+  {{ end }}
+{{ else }}
+<link rel="apple-touch-icon" type="image/png" href="{{ (partial "blox-core/functions/get_icon.html" 180).RelPermalink }}" />
+{{ end }}
+
+{{ $theme_color := ($scr.Get "primary") | default site.Params.appearance.primary_color | default "#4176E6" }}
+<meta name="theme-color" content="{{ $theme_color }}" />
+
+{{/* Get page image for social sharing. */}}
+{{ $sharing_image := resources.GetMatch (path.Join "media" "sharing.*") }}
+{{ $featured_image := partial "blox-core/functions/get_featured_image.html" . }}
+{{ $avatar_image := (.Resources.ByType "image").GetMatch "avatar*" }}
+{{ $has_logo := fileExists "assets/media/logo.png" | or (fileExists "assets/media/logo.svg") }}
+{{ $og_image := "" }}
+{{ $twitter_card := "summary_large_image" }}
+{{ if (and (eq .Kind "term") $avatar_image) }}
+  {{ $og_image = ($avatar_image.Fill "270x270 Center").Permalink }}
+  {{ $twitter_card = "summary" }}
+{{ else if $featured_image }}
+  {{ $og_image = $featured_image.Permalink }}
+{{ else if $sharing_image }}
+  {{ $og_image = $sharing_image.Permalink }}
+{{ else if $has_logo }}
+  {{ $og_image = (partial "blox-core/functions/get_logo.html" (dict "constraint" "fit" "size" 300)).Permalink }}
+  {{ $twitter_card = "summary" }}
+{{ else }}
+  {{ $og_image = (partial "blox-core/functions/get_icon.html" 512).Permalink }}
+  {{ $twitter_card = "summary" }}
+{{ end }}
+{{ $scr.Set "og_image" $og_image }}
+
+{{ $title := partial "blox-core/functions/get_page_title.html" . }}
+
+{{/* Twitter metadata. */}}
+<meta property="twitter:card" content="{{ $twitter_card }}" />
+{{ with site.Params.marketing.seo.twitter }}
+  <meta property="twitter:site" content="@{{ . }}" />
+  <meta property="twitter:creator" content="@{{ . }}" />
+{{ end }}
+{{- with $og_image -}}
+  <meta property="twitter:image" content="{{ . }}" />
+{{- end -}}
+
+{{/* Open Graph metadata. */}}
+{{ $site_type := lower (site.Params.marketing.seo.site_type | default "Person") }}
+{{ $og_type := "website" }}
+{{ if .IsHome }}
+  {{ if eq $site_type "person" }}
+    {{ $og_type = "profile" }}
+    {{ with $superuser.Params.first_name }}<meta property="profile:first_name" content="{{ . }}">{{ end }}
+    {{ with $superuser.Params.last_name }}<meta property="profile:last_name" content="{{ . }}">{{ end }}
+  {{ else }}
+    {{ $og_type = "website" }}
+  {{ end }}
+{{ else if .IsPage | and (in (slice "post" "publication" "project" "book") .Type ) }}
+  {{ $og_type = "article" }}
+{{ else }}
+  {{ $og_type = "website" }}
+{{ end }}
+<meta property="og:type" content="{{ $og_type }}" />
+<meta property="og:site_name" content="{{ site.Title }}" />
+<meta property="og:url" content="{{ $canonical }}" />
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $desc }}" />
+{{- with $og_image -}}
+  <meta property="og:image" content="{{ . }}" />
+{{- end -}}
+<meta property="og:locale" content="{{ site.Language.Locale | default "en-us" }}" />
+{{ if .IsPage }}
+  {{ if not .PublishDate.IsZero }}
+    <meta
+      property="article:published_time"
+      content="{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }}"
+    />
+  {{ else if not .Date.IsZero }}
+    <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}" />
+  {{ end }}
+  {{ if not .Lastmod.IsZero }}
+    <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}">
+  {{ end }}
+{{ else }}
+  {{ if not .Date.IsZero }}
+    <meta property="og:updated_time" content="{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}" />
+  {{ end }}
+{{ end }}
+
+{{/* JSONLD page metadata. */}}
+{{ partial "jsonld/main.html" (dict "page" . "summary" $desc) }}

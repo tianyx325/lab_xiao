@@ -1,29 +1,41 @@
 # lab-xiao
 
-智能感知与决策实验室（IPD Lab）官网 — [HugoBlox Kit](https://github.com/HugoBlox/kit)（Tailwind）。
+智能感知与决策实验室官网。视觉栈：**Hugo Blox（薄宿主）+ lab SCSS（唯一视觉层）**。
 
-生产域名：`https://lab.xaut.edu.cn/` · GitHub Pages 镜像：`https://tianyx325.github.io/lab_xiao/`
+## 样式权威（必读）
+
+| 做 | 不做 |
+|---|---|
+| 改 [`site/assets/scss/lab/_tokens.scss`](site/assets/scss/lab/_tokens.scss) | 往 `assets/css/custom.css` 塞整包 lab |
+| 改 `site/assets/scss/lab/**` 组件 | 依赖 `npm run build:lab-css` 当线上 CSS |
+| 用 `npm run dev` 预览（会清 `_gen`） | 改完 SCSS 却不清缓存就断言「没生效」 |
+
+**真源管线**：`main.scss` → `template.scss` → `lab/*` → Hugo 打成 `/css/wowchemy.css`。
+
+## 本地预览
+
+```powershell
+cd D:\code-tyx\lab-xiao\lab-xiao\site
+npm run dev
+```
+
+需要仓库内 `tools/dart-sass` 与 `tools/go`（Hugo Extended 0.168）。  
+手动等价：`site/scripts/dev.ps1`（清 `resources/_gen` + `hugo server --disableFastRender`）。
+
+## 校验
+
+```powershell
+cd site
+npm run check   # theme sync + content schema + lab 裸值扫描
+```
 
 ## 结构
 
 | 路径 | 说明 |
 |---|---|
-| `site/` | Hugo 站点（内容、配置、`_vendor/`） |
-| `kit-main/` | 本地 Kit 源码（`go.mod` replace） |
-| `scripts/` | 一次性迁移 / 别名工具（内容已迁完，日常不用） |
-| `.github/workflows/` | PR 构建检查 + Pages 发布 |
+| `site/` | Hugo 站点（内容 + `_vendor` blox-bootstrap） |
+| `site/assets/scss/lab/` | **唯一**视觉层（tokens → chrome → views） |
+| `site/content/` | Markdown page bundles（契约见 [`site/CONTENT-SCHEMA.md`](site/CONTENT-SCHEMA.md)） |
+| `.github/workflows/` | 构建与发布 |
 
-## 本地预览
-
-```powershell
-$env:Path = "D:\code-tyx\lab-xiao\lab-xiao\tools\go\bin;" + $env:Path
-cd D:\code-tyx\lab-xiao\lab-xiao\site
-npm ci
-hugo server -D -p 1314
-```
-
-## 部署
-
-推送 `main` → `.github/workflows/publish.yaml` 构建并发布到 `gh-pages`（`SITE_BASE_URL` 覆盖为 Pages 子路径）。
-
-校内部署若指向同一产物，用 `baseURL: https://lab.xaut.edu.cn/`（见 `site/config/_default/hugo.yaml`）。
+生产：`https://lab.xaut.edu.cn/` · Pages：`https://tianyx325.github.io/lab_xiao/`

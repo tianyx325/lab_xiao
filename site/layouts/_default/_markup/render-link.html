@@ -1,0 +1,8 @@
+{{- /* Site-wide markdown link renderer.
+     External links (http/https) get class="lab-ext" — the ONE global
+     external affordance (NE arrow, see _abstracts.scss) — plus the
+     vendor's target="_blank" rel="noopener" behaviour. Internal
+     (relative) links render bare and stay visually quiet. */ -}}
+{{- $isExternal := strings.HasPrefix .Destination "http" -}}
+{{- /* No title= — site uses one floating panel only (.dropdown-menu glass); native title tips are banned. */ -}}
+<a href="{{ .Destination | safeURL }}"{{ if $isExternal }} class="lab-ext" target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>

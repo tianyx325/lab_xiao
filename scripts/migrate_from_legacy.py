@@ -2,36 +2,14 @@
 """Migrate authors/publications/projects/patents/awards/research (+ EN) into lab-xiao."""
 from __future__ import annotations
 
-import re
 import shutil
 from pathlib import Path
 
-import yaml
+from lab_io import dump_yaml, load_fm, normalize_section, write_page
 
 LEGACY = Path(r"D:\code-tyx\lab-xiao\theme-research-group\theme-research-group-main")
 SITE = Path(__file__).resolve().parents[1] / "site"
 AUTHORS_OUT = SITE / "data" / "authors"
-FM_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n?(.*)$", re.S)
-
-
-def load_fm(path: Path) -> tuple[dict, str]:
-    text = path.read_text(encoding="utf-8")
-    m = FM_RE.match(text)
-    if not m:
-        return {}, text
-    return yaml.safe_load(m.group(1)) or {}, m.group(2).strip()
-
-
-def dump_yaml(data: dict) -> str:
-    return yaml.safe_dump(data, allow_unicode=True, sort_keys=False, default_flow_style=False)
-
-
-def write_page(out_dir: Path, name: str, fm: dict, body: str = "") -> None:
-    out_dir.mkdir(parents=True, exist_ok=True)
-    text = "---\n" + dump_yaml(fm) + "---\n"
-    if body:
-        text += "\n" + body + "\n"
-    (out_dir / name).write_text(text, encoding="utf-8")
 
 
 def copy_assets(src: Path, dst: Path) -> None:
@@ -181,6 +159,7 @@ def migrate_section_bundles(
     convert=None,
     drop_samples: tuple[str, ...] = (),
 ) -> int:
+    out_section = normalize_section(out_section)
     src = LEGACY / "content" / legacy_section
     dst = SITE / "content" / out_section
     dst.mkdir(parents=True, exist_ok=True)
@@ -242,7 +221,7 @@ def migrate_research() -> int:
 
 def migrate_posts() -> int:
     src = LEGACY / "content" / "post"
-    dst = SITE / "content" / "blog"
+    dst = SITE / "content" / normalize_section("blog")
     dst.mkdir(parents=True, exist_ok=True)
     n = 0
     for md in sorted(src.glob("*/index.md")):

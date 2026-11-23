@@ -1,0 +1,18 @@
+/* Single lab cascade (Hugo compiles via main.scss → template).
+   Unlayered on purpose — vendor sits in @layer vendor (see main.scss).
+   Order: tokens → primitives → kit bridge → chrome → views → dark.
+   Do not import a second prebuilt lab.css — that double-defines :root. */
+@import "lab/tokens";
+@import "lab/type";
+@import "lab/grid";
+@import "lab/abstracts";
+@import "lab/kit";
+@import "lab/base";
+@import "lab/controls";
+@import "lab/views/results";
+@import "lab/menus";
+@import "lab/views/people";
+@import "lab/views/pages";
+@import "lab/views/home";
+@import "lab/views/listing";
+@import "lab/dark";

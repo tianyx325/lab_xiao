@@ -1,2 +1,23 @@
-# 默认菜单由 languages.yaml 按语言覆盖；此处保留兜底
-main: []
+# Fallback when a language block omits menu.main (languages.yaml normally wins).
+main:
+  - name: 首页
+    url: /
+    weight: 1
+  - name: 方向
+    url: /research/
+    weight: 10
+  - name: 成果
+    url: /publications/
+    weight: 20
+  - name: 项目
+    url: /projects/
+    weight: 30
+  - name: 成员
+    url: /people/
+    weight: 40
+  - name: 动态
+    url: /blog/
+    weight: 50
+  - name: 联系
+    url: /contact/
+    weight: 60

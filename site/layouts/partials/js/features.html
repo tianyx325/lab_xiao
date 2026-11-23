@@ -1,0 +1,40 @@
+{{/* Maps */}}
+{{ if and site.Params.features.map.provider (.HasShortcode "lab-contact") }}
+  {{ $js := resources.Get "js/wowchemy-map.js" | js.Build (dict "format" "esm" "minify" true) }}
+  {{- if hugo.IsProduction -}}
+    {{- $js = $js | fingerprint "md5" -}}
+  {{- end -}}
+  <script src="{{ $js.RelPermalink }}" type="module"></script>
+{{- end -}}
+
+{{/* Carousel */}}
+{{ $hasCarousel := where site.Pages "Params.widget" "slider" }}
+{{ if $hasCarousel }}
+  {{ $js := resources.Get "js/wowchemy-carousel.js" | js.Build (dict "format" "esm" "minify" true) }}
+  {{- if hugo.IsProduction -}}
+    {{- $js = $js | fingerprint "md5" -}}
+  {{- end -}}
+  <script src="{{ $js.RelPermalink }}" type="module"></script>
+{{- end -}}
+
+{{/* Publications */}}
+{{ $hasPublications := or (eq .Type "publication") (eq .Type "publications") (and .IsPage (eq .Section "publication")) }}
+{{ if $hasPublications }}
+  {{ partial "citation.html" . }}
+
+  {{ $js := resources.Get "js/wowchemy-publication.js" | js.Build (dict "format" "esm" "minify" true) }}
+  {{- if hugo.IsProduction -}}
+    {{- $js = $js | fingerprint "md5" -}}
+  {{- end -}}
+  <script src="{{ $js.RelPermalink }}" type="module"></script>
+{{- end -}}
+
+{{/* Announcement Bar */}}
+{{ $hasAnnouncement := .Params.announcement.text }}
+{{ if $hasAnnouncement }}
+  {{ $js := resources.Get "js/wowchemy-announcement.js" | js.Build (dict "format" "esm" "minify" true) }}
+  {{- if hugo.IsProduction -}}
+    {{- $js = $js | fingerprint "md5" -}}
+  {{- end -}}
+  <script src="{{ $js.RelPermalink }}" type="module"></script>
+{{- end -}}

@@ -1,0 +1,20 @@
+{{- /* Filter/isotope classes for one list item.
+   Usage: {{ partial "listing/item-classes.html" (dict "section" $sec "item" $item) }}
+   Accepts singular or plural section names. */ -}}
+{{- $section := partial "functions/normalize-section.html" .section -}}
+{{- $item := .item -}}
+{{- $classes := slice (printf "year-%s" ($item.Date.Format "2006")) -}}
+{{- if eq $section "publications" -}}
+  {{- $pubtype := "0" -}}
+  {{- with $item.Params.publication_types }}{{ $pubtype = index . 0 }}{{ end -}}
+  {{- $classes = $classes | append (printf "pubtype-%s" $pubtype) -}}
+{{- else if eq $section "projects" -}}
+  {{- with $item.Params.project_status }}{{ $classes = $classes | append (printf "status-%s" .) }}{{ end -}}
+{{- else if eq $section "patent" -}}
+  {{- with $item.Params.patent_status }}{{ $classes = $classes | append (printf "status-%s" .) }}{{ end -}}
+{{- else if eq $section "blog" -}}
+  {{- range ($item.Params.categories | default slice) -}}
+    {{- $classes = $classes | append (printf "cat-%s" (. | urlize)) -}}
+  {{- end -}}
+{{- end -}}
+{{- return (delimit $classes " ") -}}

@@ -1,3 +1,70 @@
-{{ define "main" }}
-{{ partial "lab/filtered-list.html" . }}
-{{ end }}
+{{- define "main" -}}
+{{- $.Page.Store.Set "has_isotope" false -}}
+{{- $all := .Pages.ByDate.Reverse -}}
+{{- $featured := first 3 (where $all "Params.featured" true) -}}
+{{- if not $featured -}}
+  {{- $featured = first 2 $all -}}
+{{- end -}}
+{{- $featKeys := dict -}}
+{{- range $featured -}}
+  {{- $featKeys = merge $featKeys (dict .RelPermalink true) -}}
+{{- end -}}
+{{- $recent := slice -}}
+{{- range $all -}}
+  {{- if not (index $featKeys .RelPermalink) -}}
+    {{- $recent = $recent | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $featCount := len $featured -}}
+
+<div class="lab-list-page lab-list-page--blog lab-blog-stream">
+  {{ partial "listing/header.html" (dict
+    "title" .Title
+    "lead" (partial "components/section-lead.html" (dict "page" . "key" "blog"))
+    "filters" false
+    "sticky" false
+  ) }}
+
+  <div class="lab-list-body container">
+    {{ with .Content }}
+      <div class="article-style lab-list-intro">{{ . }}</div>
+    {{ end }}
+
+    {{- if not $all -}}
+    {{ partial "listing/empty.html" (dict
+      "title" (i18n "lab_blog_empty_title")
+      "lead" (i18n "lab_blog_empty_lead")
+      "cta" (i18n "lab_blog_empty_cta")
+      "cta_href" ("publications/" | relLangURL)
+    ) }}
+    {{- else -}}
+
+    {{ with $featured }}
+    <section class="lab-blog-band" aria-labelledby="lab-blog-featured">
+      <h2 id="lab-blog-featured" class="lab-blog-band-title">{{ i18n "lab_blog_featured" }}</h2>
+      {{ partial "listing/card-grid.html" (dict
+        "page" $
+        "pages" .
+        "card_style" "poster"
+        "grid_class" (printf "lab-list-grid lab-blog-featured-grid lab-blog-featured-grid--%d" $featCount)
+        "lead_first" true
+      ) }}
+    </section>
+    {{ end }}
+
+    {{ with $recent }}
+    <section class="lab-blog-band" aria-labelledby="lab-blog-recent">
+      <h2 id="lab-blog-recent" class="lab-blog-band-title">{{ i18n "lab_blog_recent" }}</h2>
+      {{ partial "listing/card-grid.html" (dict
+        "page" $
+        "pages" .
+        "card_style" "poster"
+        "grid_class" "lab-list-grid"
+      ) }}
+    </section>
+    {{ end }}
+
+    {{- end -}}
+  </div>
+</div>
+{{- end -}}

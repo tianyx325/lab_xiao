@@ -1,0 +1,16 @@
+{{- /* Research / fallback meta. */ -}}
+{{- $meta := slice -}}
+{{- with .Date -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_date") "value" (.Format "2006-01")) -}}
+{{- end -}}
+{{- if .Params.authors -}}
+  {{- $authors := partial "components/detail-authors.html" . -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_authors") "value" ($authors | safeHTML)) -}}
+{{- end -}}
+{{- with .Params.categories -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_category") "value" (delimit . " · ")) -}}
+{{- end -}}
+{{- with .Params.tags -}}
+  {{- $meta = $meta | append (dict "label" (i18n "lab_label_keywords") "value" (delimit . " · ")) -}}
+{{- end -}}
+{{- return $meta -}}

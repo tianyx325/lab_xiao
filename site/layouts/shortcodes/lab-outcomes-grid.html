@@ -1,0 +1,15 @@
+{{- $count := int (.Get "count" | default 4) -}}
+{{- $pubs := first $count (sort (where site.RegularPages "Section" "publications") "Date" "desc") -}}
+<div class="lab-outcomes">
+  {{- if $pubs -}}
+  {{ partial "listing/card-grid.html" (dict
+    "page" .
+    "pages" $pubs
+    "card_style" "media-row"
+    "grid_class" "lab-list-grid lab-list-grid--media-rows"
+  ) }}
+  <a class="lab-outcomes-more" href="{{ "publications/" | relLangURL }}">{{ i18n "lab_more_papers" }}</a>
+  {{- else -}}
+  {{ partial "listing/empty.html" (dict "title" (i18n "lab_empty_none")) }}
+  {{- end -}}
+</div>

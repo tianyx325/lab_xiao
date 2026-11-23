@@ -1,0 +1,217 @@
+﻿/* Layer 5c · page views: contact, article reading
+   Source: template.scss lines 2403-3062 (order-preserving split). */
+/* Contact */
+.fa-ul.mb-0 li,
+.contact-widget li {
+  line-height: $lab-leading-body;
+}
+
+.lab-contact-ways-item p {
+  margin: 0;
+  @include lab-type-body;
+  color: var(--lab-color-fg);
+}
+
+.home-section .contact-widget p {
+  line-height: $lab-leading-body;
+  /* Semantic secondary ink — opacity would dip below AA contrast on page bg */
+  color: var(--lab-color-fg-muted);
+}
+
+/* ---------- Contact page ----------
+   Open editorial layout: no nested cards. Premium = ink + whitespace +
+   hairline rules (same language as list pages / deepseek-style tokens). */
+.lab-contact {
+  /* Content measure 900; outer shell = content + 2× list gutter */
+  --lab-page-width: calc(#{$lab-list-media-row-width} + 2 * var(--lab-gutter-list));
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lab-contact .lab-list-body {
+  max-width: var(--lab-page-width);
+  /* Bottom gap comes from .lab-list-page { padding-bottom: var(--lab-page-end) } */
+}
+
+.lab-contact-section {
+  margin: 0 0 $lab-space-8;
+  padding: 0;
+}
+
+.lab-contact-section:last-child {
+  margin-bottom: 0;
+}
+
+.lab-contact-section-title {
+  @include lab-font-serif;
+  margin: 0 0 $lab-space-5;
+  font-size: $lab-text-lg;
+  font-weight: $lab-weight-heading;
+  letter-spacing: $lab-tracking-heading;
+  line-height: $lab-leading-tight;
+  color: var(--lab-color-fg);
+}
+
+/* Subgrid: title / lead / list share one row track across columns so
+   content baselines match even when copy lengths differ. */
+.lab-contact-admit-grid {
+  display: grid;
+  @include lab-grid-cols(3);
+  grid-template-rows: auto auto 1fr;
+  align-items: stretch;
+  column-gap: $lab-space-6;
+  row-gap: $lab-space-3;
+}
+
+.lab-contact-admit-col {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+  min-width: 0;
+  padding: 0;
+}
+
+.lab-contact-admit-title {
+  @include lab-font-sans;
+  margin: 0;
+  font-size: $lab-text-md;
+  font-weight: $lab-weight-semibold;
+  letter-spacing: $lab-tracking-label;
+  line-height: $lab-leading-ui;
+  color: var(--lab-color-fg);
+}
+
+.lab-contact-admit-lead {
+  @include lab-type-body;
+  margin: 0;
+  color: var(--lab-color-fg-muted);
+}
+
+.lab-contact-admit-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-self: stretch;
+}
+
+.lab-contact-admit-list li {
+  position: relative;
+  margin: 0;
+  padding: $lab-space-2 0 $lab-space-2 $lab-space-4;
+  @include lab-type-body;
+  color: var(--lab-color-fg);
+}
+
+.lab-contact-admit-list li + li {
+  margin-top: $lab-space-1;
+}
+
+.lab-contact-admit-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(#{$lab-space-2} + $lab-space-em-sm);
+  width: $lab-space-1;
+  height: $lab-space-1;
+  border-radius: 50%;
+  background: var(--lab-color-fg-muted);
+}
+
+.lab-mailto-toast {
+  position: fixed;
+  left: 50%;
+  bottom: $lab-space-6;
+  z-index: $lab-z-skip;
+  max-width: $lab-measure-lg;
+  width: 90%;
+  padding: $lab-space-3 $lab-space-4;
+  @include lab-type-ui;
+  color: var(--lab-color-on-overlay);
+  background: var(--lab-color-overlay);
+  border-radius: var(--lab-card-radius);
+  box-shadow: 0 $lab-space-2 $lab-space-5 var(--lab-color-shadow);
+  transform: translate(-50%, $lab-space-3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $lab-transition, transform $lab-transition;
+}
+
+.lab-mailto-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.lab-contact-mail {
+  margin: 0;
+  @include lab-type-body;
+  font-weight: $lab-weight-medium;
+  letter-spacing: $lab-tracking-micro;
+  @extend %lab-accent-link;
+  word-break: break-all;
+}
+
+.lab-contact-mail:hover {
+  @extend %lab-accent-link-hover;
+}
+
+.lab-contact-ways-meta {
+  display: grid;
+  @include lab-grid-cols(2);
+  gap: $lab-space-6;
+  margin: 0 0 $lab-space-5;
+}
+
+.lab-contact-ways-item {
+  min-width: 0;
+  padding: 0;
+}
+
+.lab-contact-info-label {
+  display: block;
+  margin-bottom: $lab-space-2;
+  @include lab-type-caption;
+  letter-spacing: $lab-tracking-xl;
+  text-transform: uppercase;
+  color: var(--lab-color-fg-muted);
+}
+
+
+.lab-contact-ways-map #map {
+  /* Map stage height — not on the 8px spacing scale; keep restrained vs copy */
+  height: $lab-contact-map-height;
+  width: 100%;
+  margin: 0;
+  border: $lab-hairline solid var(--lab-color-border);
+  border-radius: var(--lab-card-radius);
+  overflow: hidden;
+  background: var(--lab-color-bg-brand-soft);
+}
+
+@include lab-bp-down(lg) {
+  .lab-contact-admit-grid,
+  .lab-contact-ways-meta {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: 0;
+  }
+
+  .lab-contact-admit-col {
+    display: flex;
+    flex-direction: column;
+    grid-row: auto;
+    row-gap: $lab-space-3;
+    padding: 0 0 $lab-space-5;
+    margin: 0 0 $lab-space-5;
+  }
+
+  .lab-contact-admit-col:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .lab-contact-ways-meta {
+    gap: $lab-space-5;
+  }
+}
+

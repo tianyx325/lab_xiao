@@ -1,0 +1,17 @@
+{{- /* Canonical content section key (plural folders in this repo).
+   Usage: {{ $sec := partial "functions/normalize-section.html" .Section }}
+   Also accepts a bare string. */ -}}
+{{- $s := . | default "" | string -}}
+{{- if in (slice "publication" "publications") $s -}}
+  {{- return "publications" -}}
+{{- else if in (slice "project" "projects") $s -}}
+  {{- return "projects" -}}
+{{- else if in (slice "post" "blog") $s -}}
+  {{- return "blog" -}}
+{{- else if eq $s "patent" -}}
+  {{- return "patent" -}}
+{{- else if eq $s "award" -}}
+  {{- return "award" -}}
+{{- else -}}
+  {{- return $s -}}
+{{- end -}}

@@ -1,0 +1,51 @@
+{{ $js := hugo.Data.assets.js }}
+
+{{ partial "js/vendor.html" . }}
+
+{{/* Charts */}}
+{{ if .HasShortcode "chart" }}
+  {{ printf "<script src=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\"></script>" (printf $js.plotly.url $js.plotly.version) $js.plotly.sri | safeHTML }}
+{{ end }}
+
+{{/* Disqus Comment Count JS. */}}
+{{/* Note: count can appear both in listing previews and on the content page itself. */}}
+{{ $comments_provider := trim (site.Params.features.comment.provider | lower) " " }}
+{{ if eq $comments_provider "disqus" | and (site.Params.features.comment.disqus.show_count | default true) }}
+  <script id="dsq-count-scr" src="https://{{site.Params.features.comment.disqus.shortname}}.disqus.com/count.js" async></script>
+{{end}}
+
+{{ partial "js/headroom.html" . }}
+
+{{ partial "js/mindmaps.html" . }}
+
+{{ $js_license := printf "/*! Hugo Blox Builder v%s | https://hugoblox.com/ */\n" hugo.Data.hugoblox.version }}
+{{ $js_license := $js_license | printf "%s/*! Copyright 2016-present George Cushen (https://georgecushen.com/) */\n" }}
+{{ $js_license := $js_license | printf "%s/*! License: https://github.com/HugoBlox/hugo-blox-builder/blob/main/LICENSE.md */\n" }}
+{{ $js_bundle_head := $js_license | resources.FromString "js/bundle-head.js" }}
+{{ $i18n := dict "copy" (i18n "btn_copy") "copied" (i18n "btn_copied" | default "Copied") }}
+{{ $js_params := dict "hugoEnvironment" hugo.Environment "searchEnabled" false "i18n" $i18n }}
+{{ $js_academic := resources.Get "js/wowchemy.js" | js.Build (dict "targetPath" (printf "%s/js/wow-core.js" .Lang ) "params" $js_params) }}
+{{ $js_bundle := slice $js_academic }}
+{{ range site.Params.plugins_js }}
+  {{ $js_bundle = $js_bundle | append (resources.Get (printf "js/%s.js" .)) }}
+{{ end }}
+{{ $js_bundle = $js_bundle | resources.Concat (printf "%s/js/wowchemy-bundle.js" .Lang) }}
+{{- if hugo.IsProduction -}}
+  {{- $js_bundle = $js_bundle | js.Build (dict "format" "iife") | minify -}}
+{{- else -}}
+  {{- $js_bundle = $js_bundle | js.Build (dict "format" "iife" "sourceMap" "inline") -}}
+{{- end -}}
+{{ $js_bundle = slice $js_bundle_head $js_bundle | resources.Concat (printf "%s/js/wowchemy.min.js" .Lang) }}
+{{- if hugo.IsProduction -}}
+  {{ $js_bundle = $js_bundle | fingerprint "md5" }}
+{{- end -}}
+<script src="{{ $js_bundle.RelPermalink }}" defer></script>
+
+{{ partial "js/features.html" . }}
+
+{{/* EXTENSIBILITY HOOK: BODY-END */}}
+{{/* Deprecated custom_js hook */}}
+{{ if templates.Exists "partials/custom_js.html" }}
+  {{ partial "custom_js.html" . }}
+{{ end }}
+{{ partial "blox-core/functions/get_hook.html" (dict "hook" "body-end" "context" .) }}

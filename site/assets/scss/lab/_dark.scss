@@ -1,0 +1,39 @@
+﻿/* Dark mode — only rules that CHANGE structure/recipe vs light.
+   Components already using var(--lab-color-*) do NOT need re-listing here:
+   .dark in _tokens.scss flips those vars once. */
+
+/* Hero mesh — night alphas (not expressible as light semantic vars) */
+.dark .home-section.lab-hero-section::before {
+  background:
+    radial-gradient($lab-hero-mesh-width $lab-measure-md at 16% 8%, $lab-mesh-blue-dark, transparent 70%),
+    radial-gradient($lab-measure-xl $lab-measure-sm at 84% 16%, $lab-mesh-green-dark, transparent 72%),
+    radial-gradient($lab-read-width-detail $lab-measure-base at 50% 0%, $lab-mesh-blue-faint-dark, transparent 75%);
+}
+
+/* Dropdown hover wash — stronger brand tint on dark ground */
+.dark #navbar-main .lab-nav-menu .dropdown-item:hover,
+.dark #navbar-main .lab-nav-menu .dropdown-item:focus,
+.dark #navbar-main .lab-nav-menu .dropdown-item:focus-visible,
+.dark .dropdown-item:hover,
+.dark .dropdown-item:focus,
+.dark .dropdown-item:focus-visible {
+  color: var(--lab-color-brand);
+  background: color-mix(in srgb, var(--lab-color-brand) 22%, transparent);
+  background-color: color-mix(in srgb, var(--lab-color-brand) 22%, transparent);
+  text-decoration: none;
+}
+
+/* Neumorphic controls — night inset recipe (light uses sheen/shadow vars) */
+.dark .lab-top-btn {
+  box-shadow:
+    inset $lab-hairline $lab-hairline $lab-space-0-5 $lab-night-inset-hi,
+    inset $lab-hairline-negative $lab-hairline-negative $lab-space-0-5 $lab-night-inset-lo,
+    0 $lab-hairline $lab-space-0-5 $lab-night-drop;
+}
+
+.dark .lab-pagination-link--text {
+  box-shadow:
+    inset $lab-hairline $lab-hairline $lab-hairline $lab-night-inset-hi-soft,
+    inset $lab-hairline-negative $lab-hairline-negative $lab-hairline $lab-night-drop,
+    0 $lab-hairline $lab-space-0-5 $lab-night-drop-soft;
+}

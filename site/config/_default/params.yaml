@@ -1,286 +1,188 @@
-# ══════════════════════════════════════════════════════════════════════════════
-# HUGO BLOX CONFIGURATION
-# Schema: hugoblox.com/schema/v2
-# Tutorial: https://docs.hugoblox.com/tutorial/
+# SITE SETUP
+# Guide: https://docs.hugoblox.com/tutorial/
 # Documentation: https://docs.hugoblox.com/
-# ══════════════════════════════════════════════════════════════════════════════
-hugoblox:
-  schema: "2.0"
+# This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # IDENTITY
-  # 站点品牌（成员档案见 data/authors/*.yaml）
-  # ────────────────────────────────────────────────────────────────────────────
-  identity:
-    name: "智能感知与决策实验室"
-    organization: "西安理工大学计算机科学与技术学院"
-    type: organization # person | organization | local_business
-    tagline: "IPD Lab"
-    description: "本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。"
-    social:
-      twitter: ""
+# ---------------------------------------------------------------------------
+# Lab identity — SINGLE SOURCE OF TRUTH for branding / contact / UI chrome
+# After editing `lab:`, run:  py -3 scripts/sync_lab_identity.py
+# (syncs hugo.yaml title, languages.yaml, marketing.seo, footer.copyright)
+# Theme primary: keep data/themes/minimal.toml primary == assets/scss/lab/_tokens.scss $lab-blue
+# ---------------------------------------------------------------------------
+lab:
+  name: 智能感知与决策实验室
+  name_en: IPD Lab
+  org_name: 西安理工大学计算机科学与技术学院
+  org_url: https://jsj.xaut.edu.cn/
+  email: zhaolin.xiao@xaut.edu.cn
+  address: 西安理工大学金花校区教3楼417室
+  latitude: '34.2560'
+  longitude: '108.9880'
+  tagline: ''
+  lead: 聚焦大模型与智能体、弱光视觉、深度估计，做能落地的感知与决策研究
+  seo_description: 本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。
+  admit_lead: 欢迎有志于智能感知与决策研究的同学加入实验室
+  research_home_count: 3
+  # Client-side list page size; keep in sync with hugo.yaml pagination.pagerSize.
+  page_size: 12
+  friend_links:
+    - name: 西安理工大学
+      url: https://www.xaut.edu.cn/
+    - name: 计算机科学与技术学院
+      url: https://jsj.xaut.edu.cn/
+    - name: 西安理工大学研究生院
+      url: https://yjsy.xaut.edu.cn/index.htm
+  ui:
+    # 空则自动为「{name}团队成员」
+    people_lead: ''
+    contact_title: 联系与招生
+    admit_kind: 招生信息
+    contact_kind: 联系方式
+    email_label: 邮箱
+    address_label: 地址
+    map_aria: 实验室位置地图
+  admit:
+    sections:
+      - title: 硕士 / 博士
+        lead: 计算机视觉、图像处理、人工智能方向，常年招募。
+        bullets:
+          - 提升意愿强，能迎难而上
+          - 扎实数学基础与英语读写
+          - 较强编程实践能力
+          - 本硕 / 本博连读优先
+      - title: 优秀本科生
+        lead: 欢迎低年级同学参与科研与竞赛。
+        bullets:
+          - 面向 1–3 年级
+          - 每年约 3–5 名
+          - 可参与课题与竞赛辅导
+          - 邮件联系并附简要自我介绍
+      - title: 申请方式
+        lead: 将材料发至导师邮箱，我们会尽快回复。
+        bullets:
+          - 标题：报考咨询-姓名-学校
+          - 必附：个人简历、成绩单
+          - 可选：论文、项目或竞赛经历
 
+# Appearance
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # THEME
-  # Color and visual design system
-  # ────────────────────────────────────────────────────────────────────────────
-  theme:
-    # Mode: 'light', 'dark', or 'system' (follows OS preference)
-    mode: light
-    # Theme pack: name from data/themes/ or { light: "x", dark: "y" } for mix-and-match
-    pack: "lab"
-    # Optional: Override theme pack colors
-    colors:
-      primary: "#4176E6"
-      secondary: "#1E232C"
-      neutral: "#1E232C"
+appearance:
+  theme_day: minimal
+  # Same theme file’s [dark] block — required for the navbar day/night control
+  theme_night: minimal
+  # data/fonts/lab.toml — system sans + Georgia/宋体 serif (CJK-aware, no webfonts)
+  font: lab
+  font_size: M
 
-    # Optional: Mode-specific color overrides
-    colors_light: {}
-    colors_dark: {}
-    # Optional: Semantic surface color overrides
-    surfaces:
-      background: ""
-      foreground: ""
-      header:
-        background: ""
-        foreground: ""
-      footer:
-        background: ""
-        foreground: ""
+# SEO
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # TYPOGRAPHY
-  # Font and text sizing
-  # ────────────────────────────────────────────────────────────────────────────
-  typography:
-    # Theme pack: name from data/fonts/
-    pack: "academic"
+marketing:
+  seo:
+    site_type: Organization
+    local_business_type: ''
+    # DERIVED from lab.* — do not edit by hand; run sync_lab_identity.py
+    org_name: '智能感知与决策实验室'
+    description: '本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。'
+    twitter: ''
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # LAYOUT
-  # Spacing and shape tokens
-  # ────────────────────────────────────────────────────────────────────────────
-  layout:
-    # Border radius: 'none', 'sm', 'md', 'lg', or 'full'
-    radius: "md"
-    # Spacing density: 'compact', 'comfortable', or 'spacious'
-    spacing: "spacious"
-    # Avatar shape in author profiles
-    avatar_shape: circle # circle | square | rounded
+  analytics:
+    google_analytics: ''
+    baidu_tongji: ''
+    google_tag_manager: ''
+    microsoft_clarity: ''
+  verification:
+    google: ''
+    baidu: ''
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # HEADER
-  # Site header and navigation bar
-  # ────────────────────────────────────────────────────────────────────────────
-  header:
+# Site header
+
+header:
+  # stay = navbar always visible; disables vendor Headroom entirely
+  # (our CSS forces transform:none, so Headroom was running for nothing)
+  on_scroll: stay
+  navbar:
     enable: true
-    # Header style variant
-    style: navbar # navbar | navbar-simple | minimal
-    # Stick to top on scroll
-    sticky: true
-    # Menu alignment
-    align: center # left | center | right
-    # Feature toggles
-    search: true
-    theme_toggle: true
-    theme_picker: true
-    language_switcher: true
-    # Call-to-action button
-    cta:
-      enable: false
-      text: ""
-      url: ""
+    # r: logo left, destination links + theme/lang on the right
+    align: r
+    show_logo: true
+    show_day_night: true
+    show_translations: true
+    highlight_active_link: true
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # FOOTER
-  # Site footer
-  # ────────────────────────────────────────────────────────────────────────────
-  footer:
-    # Footer style variant
-    style: minimal # minimal | columns | centered
-    language_switcher: true
-    # Custom footer text (HTML supported)
-    text: ""
+# Hide "Published with Hugo Blox Builder" footer text
+i_am_a_sponsor: true
+power_ups:
+  hide_published_with: true
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # COPYRIGHT
-  # Legal notices and licensing
-  # ────────────────────────────────────────────────────────────────────────────
+# Site footer
+
+footer:
   copyright:
-    # Copyright notice - supports {year}, {name}, {license} placeholders
-    notice: "© {year} {name} · 西安理工大学"
+    # DERIVED from lab.* — do not edit by hand; run sync_lab_identity.py
+    notice: '智能感知与决策实验室'
     license:
-      type: custom
-      custom_text: ""
+      enable: false
       allow_derivatives: false
-      share_alike: false
+      share_alike: true
       allow_commercial: false
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # SEO
-  # Search engine optimization - overrides and technical settings
-  # ────────────────────────────────────────────────────────────────────────────
-  seo:
-    # Browser tab title override (defaults to identity.name if not set)
-    title: ""
-    # For local_business identity type only
-    location:
-      address:
-        street: ""
-        city: ""
-        region: ""
-        postal_code: ""
-        country: ""
-      coordinates:
-        latitude: null
-        longitude: null
-      phone: ""
-    # AI/LLM crawler guidance (llms.txt)
-    ai:
-      allow:
-        - /
-      disallow: []
-      note: "Guidance for AI crawlers - customize to match your public content."
-      contact: ""
+# Localization
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # CONTENT
-  # Content rendering and behavior
-  # ────────────────────────────────────────────────────────────────────────────
-  content:
-    # Math rendering
-    math:
-      enable: false
-    # Table of contents
-    toc:
-      enable: true
-    # Reading time estimates
-    reading_time:
-      enable: true
-    # Academic citations
-    citations:
-      style: apa # apa | mla | chicago | ieee
+locale:
+  date_format: '2006-01-02'
+  time_format: '15:04'
+  address_format: en-us
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # SEARCH
-  # Site search
-  # ────────────────────────────────────────────────────────────────────────────
-  search:
-    enable: true
-    # Trending/suggested search terms
-    suggestions: []
-    # Quick action shortcuts in search modal
-    quick_actions: []
+# Site features
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # COMMENTS
-  # User comments system
-  # ────────────────────────────────────────────────────────────────────────────
-  comments:
+features:
+  syntax_highlighter:
     enable: false
-    provider: "" # giscus | disqus
-    giscus:
-      repo: ""
-      repo_id: ""
-      category: ""
-      category_id: ""
-    disqus:
-      shortname: ""
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # ANALYTICS
-  # Traffic and behavior analytics
-  # ────────────────────────────────────────────────────────────────────────────
-  analytics:
-    google:
-      measurement_id: "" # Google Analytics 4: G-XXXXXXXXXX
-    google_tag_manager:
-      container_id: "" # GTM-XXXXXXX
-    plausible:
-      domain: ""
-    fathom:
-      site_id: ""
-    pirsch:
-      site_id: ""
-    clarity:
-      project_id: ""
-    baidu:
-      site_id: ""
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # VERIFICATION
-  # Search engine site verification codes
-  # ────────────────────────────────────────────────────────────────────────────
-  verification:
-    google: ""
-    bing: ""
-    baidu: ""
-    yandex: ""
-    pinterest: ""
-    naver: ""
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # REPOSITORY
-  # Source code repository for "Edit this page" links
-  # ────────────────────────────────────────────────────────────────────────────
+    extra_languages:
+      - r
+      - latex
+  math:
+    enable: false
+  privacy_pack:
+    enable: false
   repository:
-    enable: false
-    url: "" # e.g., https://github.com/username/repo
-    branch: main
+    # 上线前改为真实仓库地址；不需要可留空
+    url: ''
     content_dir: content
+    branch: main
+  avatar:
+    gravatar: false
+    shape: square
+  comment:
+    provider: ''
+    disqus:
+      shortname: ''
+      show_count: true
+    commento:
+      url: ''
+    giscus:
+      repo: ''
+      repo_id: ''
+      category: ''
+      category_id: ''
+  map:
+    # amap：custom_head 注入本地 Leaflet + wowchemy-map.js 用高德瓦片
+    # （主题仅对 mapnik/mapbox 拉 CDN；短代码内 script 会被 markdown 丢掉）
+    provider: 'amap'
+    api_key: ''
+    zoom: 15
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # LOCALE
-  # Regional formatting preferences
-  # ────────────────────────────────────────────────────────────────────────────
-  locale:
-    date_format: "Jan 2, 2006" # Go time format
-    time_format: "3:04 PM"
-    address_format: en-us
+# Extensions
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # SECURITY
-  # Security headers and policies (requires Netlify integration)
-  # ────────────────────────────────────────────────────────────────────────────
-  security:
-    csp:
-      policy: ""
-      report_only: false
-    frame_options: allow # deny | sameorigin | allow - allow enables iframe embedding
-    permissions_policy: ""
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # PRIVACY
-  # Privacy and compliance features
-  # ────────────────────────────────────────────────────────────────────────────
-  privacy:
+extensions:
+  decap_cms:
+    branch: main
+    local_backend: false
+  academicons:
     enable: false
-    anonymize_analytics: true
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # DEBUG
-  # Development and debugging (hidden in production)
-  # ────────────────────────────────────────────────────────────────────────────
-  debug:
-    enable: false
-    hud:
-      position: bottom-left # top-left | top-right | bottom-left | bottom-right
-      opacity: 1.0
-    export_logs: true
+# Citation style
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # PREMIUM
-  # Premium features and creator program (affiliates)
-  # ────────────────────────────────────────────────────────────────────────────
-  pro:
-    # Hide "Powered by HugoBlox" attribution
-    # Requires: HugoBlox Premium to support HugoBlox via alternative means
-    # Note: Even with Premium, you can keep this false to support open source!
-    # Get Premium: https://hugoblox.com/premium
-    hide_attribution: false
-
-    # Affiliate referral code for rewards program
-    # Join affiliate program: https://hugoblox.com/affiliates
-    affiliate_code: ""
+publications:
+  date_format: '2006年1月'
+  citation_style: apa

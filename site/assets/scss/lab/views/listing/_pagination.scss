@@ -1,0 +1,99 @@
+﻿/* List pagination — clear prev/numbers/next; accent follows section */
+.lab-pagination {
+  display: flex;
+  justify-content: center;
+  margin: $lab-space-section 0 0;
+  padding: 0;
+}
+
+.lab-pagination-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: $lab-space-1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lab-pagination-item {
+  margin: 0;
+  padding: 0;
+}
+
+.lab-pagination-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: $lab-control-height-sm;
+  min-height: $lab-control-height-sm;
+  padding: 0 $lab-space-2;
+  box-sizing: border-box;
+  font-size: $lab-text-sm;
+  letter-spacing: $lab-tracking-ui;
+  line-height: $lab-leading-none;
+  color: var(--lab-color-fg-muted);
+  text-decoration: none;
+  border: 0;
+  border-radius: var(--lab-card-radius);
+  background: transparent;
+  transition: color $lab-transition, background-color $lab-transition;
+}
+
+.lab-pagination-link--text {
+  min-width: auto;
+  padding-left: $lab-space-3;
+  padding-right: $lab-space-3;
+  letter-spacing: $lab-tracking-caps;
+}
+
+.lab-pagination-link:focus-visible {
+  outline: $lab-focus-width solid color-mix(in srgb, var(--lab-list-accent, var(--lab-color-brand)) 45%, transparent);
+  outline-offset: $lab-focus-offset;
+}
+
+.lab-pagination-link:hover:not(.is-disabled):not(.is-current) {
+  color: var(--lab-list-accent, var(--lab-color-brand));
+  background: var(--lab-list-wash, var(--lab-color-bg-brand-soft));
+}
+
+.lab-pagination-link.is-current {
+  color: var(--lab-color-fg);
+  background: var(--lab-color-bg-brand-soft);
+  font-weight: $lab-weight-semibold;
+  pointer-events: none;
+}
+
+.lab-pagination-link.is-disabled {
+  color: var(--lab-color-fg-muted);
+  background: transparent;
+  cursor: default;
+}
+
+
+/* Card-grid down-steps (2-col / 1-col) now live in the lab-card-grid mixin
+   (lab/_grid.scss) — see the base rules near the top of this file. */
+
+@include lab-bp-down(md) {
+  .lab-list-header {
+    min-height: 0;
+    padding: var(--lab-page-top) 0 var(--lab-space-block);
+    margin-bottom: var(--lab-space-section-sm);
+  }
+
+  .lab-list-filters .filter-search,
+  .lab-list-filters .form-control {
+    min-width: 100%;
+  }
+
+  /* iOS Safari auto-zooms the viewport when focusing an input below 16px;
+     the app-shell scroller shifts badly, so phone controls get 1rem. */
+  .lab-list-filters .lab-filter-control,
+  .lab-list-header .lab-list-filters .lab-filter-control,
+  .lab-hub-filters .lab-hub-filter .lab-list-filters .lab-filter-control,
+  .lab-list-header-aside select.lab-filter-control {
+    font-size: $lab-text-base;
+  }
+}
+

@@ -1,0 +1,211 @@
+{{ $show_navbar := ((site.Params.header.navbar.enable | default true) | and (ne .Params.header.navbar.enable false)) | or .Params.header.navbar.enable }}
+{{ if $show_navbar }}
+
+{{ $current_page := . }}
+{{ $highlight_active_link := site.Params.header.navbar.highlight_active_link | default true }}
+{{ $show_logo := site.Params.header.navbar.show_logo | default true }}
+{{ $show_day_night := site.Params.header.navbar.show_day_night | default true }}
+{{ $has_day_night_themes := (and site.Params.appearance.theme_day site.Params.appearance.theme_night) }}
+{{ $show_translations := site.Params.header.navbar.show_translations | default true }}
+{{ $align_menu := site.Params.header.navbar.align | default "l" }}
+{{ $is_multilingual := gt (len site.Languages) 1 }}
+{{ $show_lang := and $is_multilingual $show_translations }}
+
+{{/* Language targets: same page if translated, else that language's home */}}
+{{ $zhPage := index (where .AllTranslations "Lang" "zh") 0 }}
+{{ $enPage := index (where .AllTranslations "Lang" "en") 0 }}
+{{ if not $zhPage }}
+  {{ range where site.Sites "Language.Lang" "zh" }}{{ $zhPage = .Home }}{{ end }}
+{{ end }}
+{{ if not $enPage }}
+  {{ range where site.Sites "Language.Lang" "en" }}{{ $enPage = .Home }}{{ end }}
+{{ end }}
+
+<header>
+  <nav class="navbar lab-navbar compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl lab-navbar-inner">
+
+      {{ if site.Menus.main }}
+      <button type="button" class="navbar-toggler lab-navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="{{ i18n "toggle_navigation" }}">
+        <span aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
+      </button>
+      {{ end }}
+
+      {{ if $show_logo }}
+      <a class="navbar-brand lab-navbar-brand-link" href="{{ site.Home.RelPermalink }}">
+        <span class="lab-logo" aria-hidden="true"></span>
+        <span class="lab-navbar-brand">{{ site.Title }}</span>
+      </a>
+      {{ end }}
+
+      {{/* Right cluster: menu + theme/lang — grid column 2 */}}
+      <div class="lab-navbar-end">
+      <div class="navbar-collapse main-menu-item collapse lab-navbar-menu" id="navbar-content">
+        <ul class="navbar-nav lab-navbar-links">
+          {{ range site.Menus.main }}
+          {{ if .HasChildren }}
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{- .Pre -}}<span>{{ .Name | safeHTML }}</span>{{- .Post -}}
+              <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu">
+              {{ range .Children }}
+                <a class="dropdown-item" href="{{ partial "lab-menu-url.html" .URL }}"{{ if $.IsHome }} data-target="{{ .URL }}"{{ end }}>
+                  {{- .Pre -}}<span>{{ .Name | safeHTML }}</span>{{- .Post -}}
+                </a>
+              {{ end }}
+            </div>
+          </li>
+          {{ else }}
+          {{ $.Scratch.Set "target" "" }}
+          {{ if gt (len .URL) 4 }}
+            {{ if eq "http" (slicestr .URL 0 4) }}
+              {{ $.Scratch.Set "target" " target=\"_blank\" rel=\"noopener\"" }}
+            {{ end }}
+          {{ end }}
+
+          {{ $is_link_in_current_path := false }}
+          {{ $is_widget_page := or $current_page.IsHome (eq $current_page.Type "widget_page") }}
+          {{ $is_same_page := false }}
+          {{ $hash := findRE "#(.+)" .URL }}
+
+          {{ if or (eq .URL "/") (eq .URL "") (eq .URL "./") }}
+            {{/* Home: active only on home — never via substring match */}}
+            {{ $is_link_in_current_path = $current_page.IsHome }}
+            {{ $is_same_page = $current_page.IsHome }}
+          {{ else }}
+            {{ if gt (len .URL) 1 }}
+              {{ $is_link_in_current_path = in $current_page.RelPermalink .URL }}
+              {{ $is_same_page = $is_link_in_current_path }}
+            {{ end }}
+            {{ if gt (len $hash) 0 }}
+              {{ $hash = index $hash 0 }}
+              {{ $hash_removed := replace .URL $hash "" }}
+              {{ if eq (len $hash_removed) 0 }}{{ $hash_removed = "/" }}{{ end }}
+              {{ $is_same_page = eq (path.Dir $current_page.RelPermalink) (path.Dir (partial "lab-menu-url.html" $hash_removed)) }}
+            {{ end }}
+          {{ end }}
+
+          <li class="nav-item">
+            <a class="nav-link {{ if and $highlight_active_link $is_link_in_current_path }}active{{ end }}" href="{{ partial "lab-menu-url.html" .URL }}"{{ if and $is_widget_page $is_same_page }} data-target="{{ $hash }}"{{ end }}{{ ($.Scratch.Get "target") | safeHTMLAttr }}>
+              {{- .Pre -}}<span>{{ .Name | safeHTML }}</span>{{- .Post -}}
+            </a>
+          </li>
+          {{ end }}
+          {{ end }}
+
+        {{ if site.Menus.main_right | and (eq $align_menu "l") }}
+        </ul>
+        <ul class="navbar-nav ml-md-auto">
+        {{ end }}
+          {{ range site.Menus.main_right }}
+          {{ $.Scratch.Set "target" "" }}
+          {{ if gt (len .URL) 4 }}
+          {{ if eq "http" (slicestr .URL 0 4) }}
+          {{ $.Scratch.Set "target" " target=\"_blank\" rel=\"noopener\"" }}
+          {{ end }}
+          {{ end }}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ partial "lab-menu-url.html" .URL }}"{{ if $.IsHome }} data-target="{{ .URL }}"{{ end }}{{ ($.Scratch.Get "target") | safeHTMLAttr }}>
+              {{- .Pre -}}<span>{{ .Name | safeHTML }}</span>{{- .Post -}}
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+
+        {{/* Mobile drawer only: theme + language */}}
+        <div class="lab-nav-drawer-tools lab-only-mobile">
+          {{ if and $has_day_night_themes $show_day_night }}
+          <p class="lab-nav-drawer-label">{{ i18n "lab_nav_theme" }}</p>
+          <div class="lab-nav-drawer-row" role="group" aria-label="{{ i18n "lab_nav_theme" }}">
+            <button type="button" class="lab-nav-drawer-btn js-set-theme-light">{{ i18n "lab_theme_light" }}</button>
+            <button type="button" class="lab-nav-drawer-btn js-set-theme-dark">{{ i18n "lab_theme_dark" }}</button>
+            <button type="button" class="lab-nav-drawer-btn js-set-theme-auto">{{ i18n "lab_theme_auto" }}</button>
+          </div>
+          {{ end }}
+          {{ if $show_lang }}
+          <p class="lab-nav-drawer-label">{{ i18n "lab_nav_lang" }}</p>
+          <div class="lab-nav-drawer-row" role="group" aria-label="{{ i18n "lab_nav_lang" }}">
+            {{ with $zhPage }}
+              {{ if eq $.Lang "zh" }}
+              <span class="lab-nav-drawer-btn is-current" aria-current="true">{{ i18n "lab_lang_zh_full" }}</span>
+              {{ else }}
+              <a class="lab-nav-drawer-btn" href="{{ .RelPermalink }}" hreflang="zh" lang="zh" data-lang="zh">{{ i18n "lab_lang_zh_full" }}</a>
+              {{ end }}
+            {{ end }}
+            {{ with $enPage }}
+              {{ if eq $.Lang "en" }}
+              <span class="lab-nav-drawer-btn is-current" aria-current="true">{{ i18n "lab_lang_en_full" }}</span>
+              {{ else }}
+              <a class="lab-nav-drawer-btn" href="{{ .RelPermalink }}" hreflang="en" lang="en" data-lang="en">{{ i18n "lab_lang_en_full" }}</a>
+              {{ end }}
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+
+      {{/* Desktop-only control cluster — mobile uses drawer tools */}}
+      <ul class="nav-icons navbar-nav lab-only-desktop">
+        {{ range where (where (where site.Pages "Section" "authors") ".Params.superuser" true) ".Params.social" "!=" nil }}
+          {{ range where .Params.social ".display.header" true }}
+            {{ $social_link := partial "functions/get_social_link.html" . }}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ $social_link.link | safeURL }}"{{ $social_link.target | safeHTMLAttr }} aria-label="{{ $social_link.aria_label | default $social_link.tooltip }}">
+                <i class="{{ $social_link.icon_pack }} {{ $social_link.pack_prefix }}-{{ $social_link.icon }}" aria-hidden="true"></i>
+              </a>
+            </li>
+          {{ end }}
+        {{ end }}
+
+        {{ if and $has_day_night_themes $show_day_night }}
+        <li class="nav-item dropdown theme-dropdown">
+          <button type="button" class="nav-link lab-nav-text-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="{{ i18n "theme_selector" | default "Display preferences" }}">
+            {{ i18n "lab_nav_theme" }}
+          </button>
+          <div class="dropdown-menu lab-nav-menu dropdown-menu-right">
+            <button type="button" class="dropdown-item js-set-theme-light">
+              <span>{{ i18n "lab_theme_light" }}</span>
+            </button>
+            <button type="button" class="dropdown-item js-set-theme-dark">
+              <span>{{ i18n "lab_theme_dark" }}</span>
+            </button>
+            <button type="button" class="dropdown-item js-set-theme-auto">
+              <span>{{ i18n "lab_theme_auto" }}</span>
+            </button>
+          </div>
+        </li>
+        {{ end }}
+
+        {{ if $show_lang }}
+        <li class="nav-item dropdown i18n-dropdown">
+          <button type="button" class="nav-link lab-nav-text-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="{{ i18n "languages" | default "Languages" }}">
+            {{ i18n "lab_nav_lang" }}
+          </button>
+          <div class="dropdown-menu lab-nav-menu dropdown-menu-right">
+            {{ with $zhPage }}
+              {{ if eq $.Lang "zh" }}
+              <div class="dropdown-item dropdown-item-active" aria-current="true"><span>{{ i18n "lab_lang_zh_full" }}</span></div>
+              {{ else }}
+              <a class="dropdown-item" href="{{ .RelPermalink }}" hreflang="zh" lang="zh" data-lang="zh"{{ if $.IsHome }} data-target="{{ .RelPermalink }}"{{ end }}><span>{{ i18n "lab_lang_zh_full" }}</span></a>
+              {{ end }}
+            {{ end }}
+            {{ with $enPage }}
+              {{ if eq $.Lang "en" }}
+              <div class="dropdown-item dropdown-item-active" aria-current="true"><span>{{ i18n "lab_lang_en_full" }}</span></div>
+              {{ else }}
+              <a class="dropdown-item" href="{{ .RelPermalink }}" hreflang="en" lang="en" data-lang="en"{{ if $.IsHome }} data-target="{{ .RelPermalink }}"{{ end }}><span>{{ i18n "lab_lang_en_full" }}</span></a>
+              {{ end }}
+            {{ end }}
+          </div>
+        </li>
+        {{ end }}
+      </ul>
+      </div>{{/* /.lab-navbar-end */}}
+
+    </div>
+  </nav>
+</header>
+{{ end }}

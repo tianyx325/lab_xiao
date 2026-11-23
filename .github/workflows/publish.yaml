@@ -2,7 +2,6 @@ name: Deploy to GitHub Pages
 
 env:
   HUGO_VERSION: '0.168.0'
-  # Override for project Pages; keep hugo.yaml baseURL localhost-friendly.
   SITE_BASE_URL: 'https://tianyx325.github.io/lab_xiao/'
 
 on:
@@ -45,24 +44,15 @@ jobs:
         with:
           go-version: '1.22'
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: npm
-          cache-dependency-path: site/package-lock.json
-
-      - name: Install npm deps
+      - name: Install Dart Sass
         run: |
-          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          curl -fsSL https://github.com/sass/dart-sass/releases/download/1.77.8/dart-sass-1.77.8-linux-x64.tar.gz | tar -xz
+          echo "$PWD/dart-sass" >> "$GITHUB_PATH"
 
       - name: Build
         env:
           HUGO_ENVIRONMENT: production
         run: hugo --minify --cleanDestinationDir --baseURL "${{ env.SITE_BASE_URL }}"
-
-      - name: Pagefind
-        run: npx pagefind --site public
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4

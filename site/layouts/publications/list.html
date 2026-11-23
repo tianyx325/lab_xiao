@@ -1,3 +1,59 @@
-{{ define "main" }}
-{{ partial "lab/filtered-list.html" . }}
+{{- define "main" -}}
+{{/* Server-paginated outcomes hub; JSON index only when filtering. */}}
+{{ $sectionKey := partial "functions/normalize-section.html" (.Params.hub_section | default "publications") }}
+{{ $hubLead := partial "components/section-lead.html" (dict "page" . "key" "publications") }}
+{{ $sectionPage := site.GetPage (printf "/%s" $sectionKey) }}
+{{ if not $sectionPage }}{{ $sectionPage = site.GetPage (printf "/%s" (.Params.hub_section | default "publications")) }}{{ end }}
+{{ $pages := sort (where site.RegularPages "Section" $sectionKey) "Date" "desc" }}
+{{ $cfg := partial "listing/filter-config.html" (dict "section" $sectionKey "pages" $pages) }}
+{{ $skin := partial "functions/hub-skin.html" $sectionKey }}
+{{ $view := $skin.view }}
+{{ $style := $skin.card_style }}
+{{ $gridClass := partial "listing/grid-class.html" (dict "view" $view "cardStyle" $style) }}
+{{ $pageSize := site.Params.lab.page_size | default 12 }}
+{{ $paginator := .Paginate $pages $pageSize }}
+{{ $cardPages := $paginator.Pages }}
+{{ if and (not $cardPages) $pages }}
+  {{ $cardPages = first $pageSize $pages }}
 {{ end }}
+
+<div class="lab-list-page lab-list-page--overview">
+  {{ partial "listing/hub-header.html" (dict
+    "title" .Title
+    "lead" $hubLead
+    "section" $sectionKey
+    "cfg" $cfg
+  ) }}
+
+  <div class="lab-list-body container">
+    {{ with .Content }}
+    <div class="article-style lab-list-intro">{{ . }}</div>
+    {{ end }}
+
+    <div class="lab-list-scope" data-lab-list-scope>
+      <div
+        class="{{ $gridClass }}"
+        data-hub-grid
+        data-hub-section="{{ $sectionKey }}"
+        data-hub-json="{{ "publications/index.json" | relLangURL }}"
+        data-hub-prev="{{ i18n "previous" }}"
+        data-hub-next="{{ i18n "next" }}"
+        data-hub-empty="{{ i18n "lab_filter_empty" }}"
+        data-hub-error="{{ i18n "lab_filter_error" }}"
+        data-hub-count-format="{{ i18n "lab_filter_count" }}"
+        data-hub-page-size="{{ $pageSize }}"
+        data-hub-pat-url="{{ "publications/patents/" | relLangURL }}"
+        data-hub-award-url="{{ "publications/awards/" | relLangURL }}"
+      >
+        {{ range $i, $item := $cardPages }}
+        <div class="lab-list-item {{ partial "listing/item-classes.html" (dict "section" $sectionKey "item" $item) }}">
+          {{ partial "views/card.html" (dict "page" $ "item" $item "index" $i "card_style" $style) }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+    {{ partial "pagination.html" . }}
+  </div>
+</div>
+{{- end -}}
