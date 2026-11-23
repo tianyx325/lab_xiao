@@ -525,6 +525,12 @@ body.page-wrapper {
   width: 100%;
 }
 
+/* The theme's site_footer always emits an empty powered-by paragraph
+   (suppressed by params but not omitted); keep it from adding space. */
+footer.site-footer > .powered-by:empty {
+  display: none;
+}
+
 /* Detail pages without an article shell (404) get the same content→footer gap */
 body.lab-page--detail:has(.page-body > .universal-wrapper) .page-body > .universal-wrapper {
   padding-bottom: var(--lab-page-end);

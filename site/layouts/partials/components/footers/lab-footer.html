@@ -1,6 +1,8 @@
+{{- /* Footer block content — the outer <footer> is supplied by the
+       theme's site_footer partial via site.Params.footer.block. */ -}}
 {{ $lab := site.Params.lab | default dict }}
 {{ $ui := $lab.ui | default dict }}
-<footer class="lab-footer">
+<div class="lab-footer">
   <div class="lab-footer-inner">
     {{ if or $lab.email $lab.address }}
     <div class="lab-footer-row">
@@ -32,4 +34,4 @@
     </div>
     {{ end }}
   </div>
-</footer>
+</div>

@@ -119,6 +119,8 @@ power_ups:
 # Site footer
 
 footer:
+  # Custom footer block (partials/components/footers/lab-footer.html)
+  block: lab-footer
   copyright:
     # Keep in sync with lab.* (no sync script — edit both places).
     notice: '智能感知与决策实验室'
