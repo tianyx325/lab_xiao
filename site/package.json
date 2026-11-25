@@ -3,15 +3,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev.ps1",
+    "dev": "node scripts/hugo.mjs server -D -p 1314 --bind 127.0.0.1 -b http://127.0.0.1:1314/ --disableFastRender",
     "check:theme": "node scripts/check-theme-sync.mjs",
     "check:content": "node scripts/check-content-schema.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs",
+    "check:links": "node scripts/check-links.mjs",
     "check:tokens": "node scripts/check-lab-hardcodes.mjs",
-    "check": "npm run check:theme && npm run check:content && npm run check:tokens",
+    "check": "npm run check:theme && npm run check:content && npm run check:i18n && npm run check:tokens",
+    "test": "npm run check",
     "build:lab-css": "node scripts/check-lab-compile.mjs && node scripts/merge-lab-css.mjs",
-    "build": "hugo --minify"
+    "build": "node scripts/hugo.mjs --minify"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "devDependencies": {
-    "sass": "^1.93.2"
+    "sass": "^1.93.2",
+    "sass-embedded": "^1.77.8"
   }
 }

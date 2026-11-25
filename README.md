@@ -14,27 +14,30 @@
 
 ## 本地预览
 
-```powershell
-cd D:\code-tyx\lab-xiao\lab-xiao\site
-npm run dev
-```
-
-需要 Hugo Extended 0.168 和 Dart Sass 1.77.8（仓库内 `tools/dart-sass` 已自带）。  
-`dev.ps1` 会自动把 `tools/dart-sass` 加入 PATH；在 Bash 下直接跑 `hugo` 前需手动：
+前置：Node.js 20+、Hugo Extended 0.168（Dart Sass 无需单独安装）。
 
 ```bash
-export PATH="$PWD/tools/dart-sass/dart-sass:$PATH"
+cd site
+npm ci
+npm run dev     # http://127.0.0.1:1314/
 ```
 
-手动预览等价：清 `site/resources/_gen` 后 `hugo server --disableFastRender`。
-`tools/go` 仅在改动 `go.mod` 重新 `hugo mod vendor` 时需要。
+`npm ci` 会安装自带 Dart Sass 的 `sass-embedded`；`scripts/hugo.mjs` 负责把它加入 PATH、清理 `resources/_gen`，再启动 Hugo。
+
+构建：`npm run build`。
+
+可选：仓库外存在 `tools/dart-sass` 时会优先使用；`tools/go` 仅在改动 `go.mod` 后执行 `hugo mod vendor` 时需要。
 
 ## 校验
 
-```powershell
+```bash
 cd site
-npm run check   # theme sync + content schema + lab 裸值扫描
+npm run check        # theme sync + content schema + i18n 键一致性 + lab 裸值扫描
+npm run build        # 产出 public/
+npm run check:links  # 构建后校验站内链接与锚点
 ```
+
+`npm test` 等价于 `npm run check`；CI 在构建后还会跑 `check:links`。
 
 ## 结构
 

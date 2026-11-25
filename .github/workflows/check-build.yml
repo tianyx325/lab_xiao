@@ -35,15 +35,15 @@ jobs:
         with:
           go-version: '1.22'
 
-      - name: Install Dart Sass
-        run: |
-          curl -fsSL https://github.com/sass/dart-sass/releases/download/1.77.8/dart-sass-1.77.8-linux-x64.tar.gz | tar -xz
-          echo "$PWD/dart-sass" >> "$GITHUB_PATH"
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install dependencies (Dart Sass comes with sass-embedded)
+        run: npm ci
 
       - name: Lab checks (theme / content / hardcodes)
         run: npm run check
@@ -51,4 +51,7 @@ jobs:
       - name: Build
         env:
           HUGO_ENVIRONMENT: production
-        run: hugo --minify --cleanDestinationDir
+        run: npm run build -- --cleanDestinationDir
+
+      - name: Check internal links
+        run: npm run check:links
