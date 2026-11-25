@@ -19,7 +19,7 @@
 ```bash
 cd site
 npm ci
-npm run dev     # http://127.0.0.1:1314/
+npm run dev     # http://127.0.0.1:1314/lab_xiao/
 ```
 
 `npm ci` 会安装自带 Dart Sass 的 `sass-embedded`；`scripts/hugo.mjs` 负责把它加入 PATH、清理 `resources/_gen`，再启动 Hugo。

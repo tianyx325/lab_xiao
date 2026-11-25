@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node scripts/hugo.mjs server -D -p 1314 --bind 127.0.0.1 -b http://127.0.0.1:1314/ --disableFastRender",
+    "dev": "node scripts/hugo.mjs server -D -p 1314 --bind 127.0.0.1 --baseURL http://127.0.0.1:1314/lab_xiao/ -d resources/_dev-server --disableFastRender",
     "check:theme": "node scripts/check-theme-sync.mjs",
     "check:content": "node scripts/check-content-schema.mjs",
     "check:i18n": "node scripts/check-i18n.mjs",

@@ -37,6 +37,9 @@ function sassDirs() {
 
 if (args[0] === "server") {
   rmSync(join(siteRoot, "resources", "_gen"), { recursive: true, force: true });
+  // Keep the dev server away from a stale production public/ directory,
+  // which Hugo serves statically and would shadow the in-memory pages.
+  rmSync(join(siteRoot, "resources", "_dev-server"), { recursive: true, force: true });
 }
 
 const sep = process.platform === "win32" ? ";" : ":";
