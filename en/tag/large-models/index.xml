@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Large Models | IPD Lab</title><link>https://tianyx325.github.io/lab_xiao/en/tag/large-models/</link><atom:link href="https://tianyx325.github.io/lab_xiao/en/tag/large-models/index.xml" rel="self" type="application/rss+xml"/><description>本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-US</language><lastBuildDate>Tue, 13 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/icon_hu_60ce1059faf1d6a9.png</url><title>Large Models</title><link>https://tianyx325.github.io/lab_xiao/en/tag/large-models/</link></image><item><title>Large Models and Agent Applications</title><link>https://tianyx325.github.io/lab_xiao/en/research/agent/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/en/research/agent/</guid><description>&lt;p&gt;Focusing on large language models and agents, this direction centers on building decision-making capabilities within the closed loop of &amp;ldquo;perception — planning — execution&amp;rdquo;: enabling models to understand task goals, invoke external tools and knowledge, and deliver measurable, deployable intelligent applications in vertical scenarios.&lt;/p&gt;
+&lt;h3 id="direction-overview"&gt;Direction Overview&lt;/h3&gt;
+&lt;p&gt;The lab treats large models as composable cognitive and decision-making components, conducting research on single-agent capability enhancement, multi-agent collaboration, and domain knowledge injection, with systematic validation in scenarios such as culture and tourism and education. Related practice includes application explorations such as the university culture-and-tourism large model &amp;ldquo;Yijian Boguan: Zhihui Wanxiang&amp;rdquo; (a large model for culture and tourism).&lt;/p&gt;
+&lt;h3 id="research-topics"&gt;Research Topics&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Model vertical applications&lt;/strong&gt;: application modeling, prompt engineering, and effectiveness evaluation of large models&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Enhance single agents&lt;/strong&gt;: task planning, tool use, and external knowledge retrieval augmentation&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Organize multi-agent collaboration&lt;/strong&gt;: role division, task allocation, and negotiation mechanisms&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Control reasoning processes&lt;/strong&gt;: multi-step reasoning, decision trajectories, and controllable generation for complex tasks&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Integrate deployable systems&lt;/strong&gt;: interface specifications, safety boundaries, and human-agent collaboration workflows&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="key-challenges"&gt;Key Challenges&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Planning failures&lt;/strong&gt;: ambiguous task goals and heterogeneous tool interfaces in open environments&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Collaboration consistency&lt;/strong&gt;: conflict resolution and cost control across multi-agent systems&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Knowledge fusion&lt;/strong&gt;: integrating domain knowledge with general capabilities and suppressing hallucinations&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Missing evaluation&lt;/strong&gt;: lack of unified, reproducible protocols for application effectiveness&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="technical-approach"&gt;Technical Approach&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Characterize task graphs&lt;/strong&gt;: express planning with task graphs / workflows, reduce hallucinations via retrieval and tool use&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Build evaluation loops&lt;/strong&gt;: design observable execution logs and evaluation metrics to support iterative optimization&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Construct demonstration systems&lt;/strong&gt;: connect data, models, and user interfaces in vertical scenarios&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

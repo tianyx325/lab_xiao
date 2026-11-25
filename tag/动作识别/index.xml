@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>动作识别 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/</link><atom:link href="https://tianyx325.github.io/lab_xiao/tag/%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/index.xml" rel="self" type="application/rss+xml"/><description>本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Tue, 13 Oct 2026 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/icon_hu_60ce1059faf1d6a9.png</url><title>动作识别</title><link>https://tianyx325.github.io/lab_xiao/tag/%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB/</link></image><item><title>人体动作识别</title><link>https://tianyx325.github.io/lab_xiao/research/action/</link><pubDate>Tue, 13 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/research/action/</guid><description>&lt;p&gt;面向人体行为理解，本方向研究从视频与骨骼序列中识别、分析动作的方法，强调时空建模与真实场景下的鲁棒性，服务人机交互、智能监控与行为分析等应用。&lt;/p&gt;
+&lt;h3 id="方向简介"&gt;方向简介&lt;/h3&gt;
+&lt;p&gt;人体动作识别需要同时刻画外观、姿态与时间动态。实验室围绕骨骼点表征与视觉特征两条路径开展工作：骨骼序列计算高效、对外观变化相对稳健；视觉特征则保留更丰富的场景与交互信息。两者可单独建模，也可互补融合，以提升复杂动作与遮挡条件下的识别能力。&lt;/p&gt;
+&lt;h3 id="研究内容"&gt;研究内容&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;建模骨骼序列&lt;/strong&gt;：基于骨骼点的人体动作识别与图卷积 / 时序建模&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;学习时空特征&lt;/strong&gt;：动作序列的时空特征学习与长时依赖建模&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;融合双路特征&lt;/strong&gt;：视觉特征与骨骼特征的互补识别框架&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;增强鲁棒表征&lt;/strong&gt;：遮挡、视角变化与噪声干扰下的行为理解&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;验证真实场景&lt;/strong&gt;：面向实际部署的数据采集、评测与系统演示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="关键问题"&gt;关键问题&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;细粒度判别&lt;/strong&gt;：类间相似动作易混淆，区分困难&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;表征稳定性&lt;/strong&gt;：遮挡、多视角与背景干扰导致表征漂移&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;长时依赖&lt;/strong&gt;：动作时间跨度大，关键帧稀疏&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分布差异&lt;/strong&gt;：实验室数据与真实部署环境不一致&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="技术路线"&gt;技术路线&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;刻画图结构&lt;/strong&gt;：以骨骼图表达关节关系，结合时序网络捕捉动作动态&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;引入注意力&lt;/strong&gt;：结合关键帧选择，提升长序列建模效率&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;推进多模态融合&lt;/strong&gt;：通过特征互补与数据增广，增强真实场景泛化能力&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>面向旷场实验视频分类的特征拼接矩阵学习方法</title><link>https://tianyx325.github.io/lab_xiao/publications/2022-open-field-feature-matrix/</link><pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publications/2022-open-field-feature-matrix/</guid><description/></item><item><title>小鼠视频多维特征值的提取方法及视频分类方法</title><link>https://tianyx325.github.io/lab_xiao/patent/zl-2018104727899/</link><pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/patent/zl-2018104727899/</guid><description/></item><item><title>Behavioral features fusion for ethological CNN classification of open field test videos</title><link>https://tianyx325.github.io/lab_xiao/publications/2021-open-field-behavior-cnn/</link><pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publications/2021-open-field-behavior-cnn/</guid><description/></item><item><title>Classification for Human Balance Capacity Based on Visual Stimulation under a Virtual Reality Environment</title><link>https://tianyx325.github.io/lab_xiao/publications/2019-vr-balance-classification/</link><pubDate>Mon, 17 Jun 2019 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publications/2019-vr-balance-classification/</guid><description/></item><item><title>Barycentric Shift Model Based VR Application for Detection and Classification on Body Balance Disorders</title><link>https://tianyx325.github.io/lab_xiao/publications/2018-vr-balance-detection/</link><pubDate>Thu, 28 Jun 2018 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publications/2018-vr-balance-detection/</guid><description/></item><item><title>基于时间维度局部特征的人体行为识别</title><link>https://tianyx325.github.io/lab_xiao/publications/2017-temporal-action-recognition/</link><pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/publications/2017-temporal-action-recognition/</guid><description/></item></channel></rss>

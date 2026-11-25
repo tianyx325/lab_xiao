@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>News | IPD Lab</title><link>https://tianyx325.github.io/lab_xiao/en/blog/</link><atom:link href="https://tianyx325.github.io/lab_xiao/en/blog/index.xml" rel="self" type="application/rss+xml"/><description>本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-US</language><lastBuildDate>Sat, 14 Nov 2026 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/icon_hu_60ce1059faf1d6a9.png</url><title>News</title><link>https://tianyx325.github.io/lab_xiao/en/blog/</link></image><item><title>Enhance-Then-Deblur Accepted at ACM MM 2026</title><link>https://tianyx325.github.io/lab_xiao/en/blog/2026-acm-mm-enhance-then-deblur/</link><pubDate>Sat, 14 Nov 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/en/blog/2026-acm-mm-enhance-then-deblur/</guid><description>&lt;p&gt;From November 10–14, 2026, ACM Multimedia 2026 was held in Rio de Janeiro. Our paper “Enhance-Then-Deblur: Revealing the Sequential Inductive Bias in Joint Low-Light Image Enhancement and Deblurring” was accepted and published.&lt;/p&gt;
+&lt;h2 id="authors"&gt;Authors&lt;/h2&gt;
+&lt;p&gt;Guangbin Zhou (Ph.D. student / first author), Zhaolin Xiao (advisor / corresponding author), Wengai Li, Haonan Su, and Lifeng He (Aichi Prefectural University).&lt;/p&gt;
+&lt;h2 id="key-finding"&gt;Key finding&lt;/h2&gt;
+&lt;p&gt;Joint low-light detail enhancement and deblurring exhibits a Sequential Inductive Bias: enhance-then-deblur is theoretically preferable to deblur-then-enhance.&lt;/p&gt;
+&lt;p&gt;
+&lt;figure class="lab-content-figure" id="figure-figure-1-sequential-inductive-bias-in-joint-low-light-image-detail-enhancement-and-deblurring"&gt;
+&lt;div class="d-flex justify-content-center"&gt;
+&lt;div class="w-100"&gt;&lt;img alt="Sequential inductive bias in joint low-light enhancement and deblurring"
+srcset="https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/01_hu_7df8acb3a975985d.webp 400w, https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/01_hu_7cba8e696778b550.webp 760w, https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/01_hu_5ba023a8659ee2c2.webp 1200w"
+sizes="(max-width: 760px) 100vw, 760px"
+src="https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/01_hu_7cba8e696778b550.webp"
+width="760"
+height="181"
+loading="eager"
+fetchpriority="high"
+decoding="async"
+data-zoomable /&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;figcaption&gt;Figure 1. Sequential inductive bias in joint low-light image detail enhancement and deblurring&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;The result drew interest from researchers during the conference.&lt;/p&gt;
+&lt;p&gt;
+&lt;figure class="lab-content-figure" id="figure-figure-2-conference-photo-of-the-paper-authors"&gt;
+&lt;div class="d-flex justify-content-center"&gt;
+&lt;div class="w-100"&gt;&lt;img alt="Conference photo of the paper authors"
+srcset="https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/02_hu_9d0d042bf3b53ff7.webp 400w, https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/02_hu_36ea55f9c7249d7e.webp 760w, https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/02_hu_a21326c3c7ca44a8.webp 1200w"
+sizes="(max-width: 760px) 100vw, 760px"
+src="https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/02_hu_36ea55f9c7249d7e.webp"
+width="760"
+height="190"
+loading="lazy"
+decoding="async"
+data-zoomable /&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;figcaption&gt;Figure 2. Conference photo of the paper authors&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id="venue-and-funding"&gt;Venue and funding&lt;/h2&gt;
+&lt;p&gt;ACM MM is a premier multimedia venue (CCF-A). This edition received 7,103 valid submissions and accepted 1,703 papers (23.9%). Supported by NSFC 62371389 and Shaanxi Education Department grant 25JK0382.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Paper:&lt;/strong&gt; &lt;a href="https://doi.org/10.1145/3767308.3836239" class="lab-ext" target="_blank" rel="noopener"&gt;https://doi.org/10.1145/3767308.3836239&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Code:&lt;/strong&gt; &lt;a href="https://github.com/simpleOnly1/DDSNet" class="lab-ext" target="_blank" rel="noopener"&gt;https://github.com/simpleOnly1/DDSNet&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Citation:&lt;/strong&gt; Guangbin Zhou, Zhaolin Xiao, Wengai Li, Haonan Su, and Lifeng He. Enhance-Then-Deblur: Revealing the Sequential Inductive Bias in Joint Low-Light Image Enhancement and Deblurring [C]. In Proceedings of the 34th ACM International Conference on Multimedia (MM &amp;lsquo;26). Rio de Janeiro, Brazil, 2026, pp. 15852–15860.&lt;/p&gt;</description></item><item><title>South Wutai Team Building — Climb Zhongnan</title><link>https://tianyx325.github.io/lab_xiao/en/blog/2026-south-wutai-team-building/</link><pubDate>Thu, 15 Oct 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/en/blog/2026-south-wutai-team-building/</guid><description>&lt;p&gt;
+&lt;figure class="lab-content-figure" &gt;
+&lt;div class="d-flex justify-content-center"&gt;
+&lt;div class="w-100"&gt;&lt;img alt="Group photo on the climb"
+srcset="https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/01_hu_1812b9a17a1dc9e.webp 400w, https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/01_hu_860faba69adca498.webp 760w, https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/01_hu_6149cb16ed0476d2.webp 1200w"
+sizes="(max-width: 760px) 100vw, 760px"
+src="https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/01_hu_860faba69adca498.webp"
+width="760"
+height="570"
+loading="eager"
+fetchpriority="high"
+decoding="async"
+data-zoomable /&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id="autumn-ascent"&gt;Autumn ascent&lt;/h2&gt;
+&lt;p&gt;South Wutai is known for its peaks, temples, cloud seas, and autumn color. Under a clear sky, members encouraged one another along the trail toward the summit.&lt;/p&gt;
+&lt;p&gt;
+&lt;figure class="lab-content-figure" &gt;
+&lt;div class="d-flex justify-content-center"&gt;
+&lt;div class="w-100"&gt;&lt;img alt="Scenery 1"
+srcset="https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/02_hu_8791c3dd547609de.webp 400w, https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/02_hu_e22df956d64abfcb.webp 760w, https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/02_hu_e4d4abeefaa1ce3b.webp 1200w"
+sizes="(max-width: 760px) 100vw, 760px"
+src="https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/02_hu_e22df956d64abfcb.webp"
+width="760"
+height="570"
+loading="lazy"
+decoding="async"
+data-zoomable /&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;From the heights: layered ridges, autumn leaves, and summit buildings set against evergreen and gold.&lt;/p&gt;
+&lt;p&gt;
+&lt;figure class="lab-content-figure" &gt;
+&lt;div class="d-flex justify-content-center"&gt;
+&lt;div class="w-100"&gt;&lt;img alt="Scenery 2"
+srcset="https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/03_hu_d9f46700d76223f3.webp 400w, https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/03_hu_d701c124d1c2790a.webp 760w, https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/03_hu_a3378f7f0278f228.webp 1200w"
+sizes="(max-width: 760px) 100vw, 760px"
+src="https://tianyx325.github.io/lab_xiao/blog/2026-south-wutai-team-building/gallery/03_hu_d701c124d1c2790a.webp"
+width="760"
+height="570"
+loading="lazy"
+decoding="async"
+data-zoomable /&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id="group-photo"&gt;Group photo&lt;/h2&gt;
+&lt;p&gt;A full-team photo at the “Zhongnan Mountains · South Wutai” landmark.&lt;/p&gt;
+&lt;h2 id="moving-forward"&gt;Moving forward&lt;/h2&gt;
+&lt;p&gt;A day to rest, harden will, and climb together — on the mountain and in research.&lt;/p&gt;</description></item></channel></rss>

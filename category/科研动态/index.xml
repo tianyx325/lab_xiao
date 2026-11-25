@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>科研动态 | 智能感知与决策实验室</title><link>https://tianyx325.github.io/lab_xiao/category/%E7%A7%91%E7%A0%94%E5%8A%A8%E6%80%81/</link><atom:link href="https://tianyx325.github.io/lab_xiao/category/%E7%A7%91%E7%A0%94%E5%8A%A8%E6%80%81/index.xml" rel="self" type="application/rss+xml"/><description>本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>zh-Hans</language><lastBuildDate>Sat, 14 Nov 2026 00:00:00 +0000</lastBuildDate><image><url>https://tianyx325.github.io/lab_xiao/media/icon_hu_60ce1059faf1d6a9.png</url><title>科研动态</title><link>https://tianyx325.github.io/lab_xiao/category/%E7%A7%91%E7%A0%94%E5%8A%A8%E6%80%81/</link></image><item><title>ACM MM 2026 录用：Enhance-Then-Deblur</title><link>https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/</link><pubDate>Sat, 14 Nov 2026 00:00:00 +0000</pubDate><guid>https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/</guid><description>&lt;p&gt;2026年11月10日至11月14日，第34届ACM国际多媒体会议（ACM Multimedia 2026）在巴西里约热内卢举行。实验室成果“Enhance-Then-Deblur: Revealing the Sequential Inductive Bias in Joint Low-Light Image Enhancement and Deblurring”被大会录用并发表。&lt;/p&gt;
+&lt;h2 id="作者与贡献"&gt;作者与贡献&lt;/h2&gt;
+&lt;p&gt;论文由周广彬（博士生/第一作者）、肖照林（导师/通讯作者）、李文改、苏浩楠、何立风（日本爱知县立大学教授）共同完成。&lt;/p&gt;
+&lt;h2 id="主要发现"&gt;主要发现&lt;/h2&gt;
+&lt;p&gt;弱光图像细节增强与去模糊联合任务存在次序偏置（Sequential Inductive Bias）：“先增强再去模糊”在理论上优于“先去模糊再增强”。&lt;/p&gt;
+&lt;p&gt;
+&lt;figure class="lab-content-figure" id="figure-图1-弱光图像细节增强与去模糊联合任务的次序偏置"&gt;
+&lt;div class="d-flex justify-content-center"&gt;
+&lt;div class="w-100"&gt;&lt;img alt="弱光图像细节增强与去模糊联合任务的次序偏置"
+srcset="https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/01_hu_7df8acb3a975985d.webp 400w, https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/01_hu_7cba8e696778b550.webp 760w, https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/01_hu_5ba023a8659ee2c2.webp 1200w"
+sizes="(max-width: 760px) 100vw, 760px"
+src="https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/01_hu_7cba8e696778b550.webp"
+width="760"
+height="181"
+loading="eager"
+fetchpriority="high"
+decoding="async"
+data-zoomable /&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;figcaption&gt;图1 弱光图像细节增强与去模糊联合任务的次序偏置&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;该发现为弱光增强网络设计提供了参考，大会期间亦受到多家机构学者关注。&lt;/p&gt;
+&lt;p&gt;
+&lt;figure class="lab-content-figure" id="figure-图2-论文作者参会照片"&gt;
+&lt;div class="d-flex justify-content-center"&gt;
+&lt;div class="w-100"&gt;&lt;img alt="论文作者参会照片"
+srcset="https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/02_hu_9d0d042bf3b53ff7.webp 400w, https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/02_hu_36ea55f9c7249d7e.webp 760w, https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/02_hu_a21326c3c7ca44a8.webp 1200w"
+sizes="(max-width: 760px) 100vw, 760px"
+src="https://tianyx325.github.io/lab_xiao/blog/2026-acm-mm-enhance-then-deblur/gallery/02_hu_36ea55f9c7249d7e.webp"
+width="760"
+height="190"
+loading="lazy"
+decoding="async"
+data-zoomable /&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;figcaption&gt;图2 论文作者参会照片&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id="会议与资助"&gt;会议与资助&lt;/h2&gt;
+&lt;p&gt;ACM MM 为多媒体领域顶级会议（CCF-A）。本届有效投稿 7103 篇，录用 1703 篇，录取率 23.9%。工作获国家自然科学基金面上项目（62371389）与陕西省教育厅科学研究计划项目（25JK0382）资助。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;论文链接：&lt;/strong&gt; &lt;a href="https://doi.org/10.1145/3767308.3836239" class="lab-ext" target="_blank" rel="noopener"&gt;https://doi.org/10.1145/3767308.3836239&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;论文代码：&lt;/strong&gt; &lt;a href="https://github.com/simpleOnly1/DDSNet" class="lab-ext" target="_blank" rel="noopener"&gt;https://github.com/simpleOnly1/DDSNet&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;论文引用：&lt;/strong&gt; Guangbin Zhou, Zhaolin Xiao, Wengai Li, Haonan Su, and Lifeng He. Enhance-Then-Deblur: Revealing the Sequential Inductive Bias in Joint Low-Light Image Enhancement and Deblurring [C]. In Proceedings of the 34th ACM International Conference on Multimedia (MM &amp;lsquo;26). Rio de Janeiro, Brazil, 2026, pp. 15852–15860.&lt;/p&gt;</description></item></channel></rss>
