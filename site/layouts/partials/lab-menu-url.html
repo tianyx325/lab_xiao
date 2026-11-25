@@ -7,7 +7,12 @@
 {{- if or (strings.HasPrefix $u "http://") (strings.HasPrefix $u "https://") (strings.HasPrefix $u "//") -}}
   {{- return $u -}}
 {{- end -}}
-{{- if not (strings.HasPrefix $u "/") -}}
-  {{- $u = printf "/%s" $u -}}
+{{- /* Hugo already applies the base path to menu URLs (/lab_xiao/research/),
+       so strip it before calling relLangURL. relLangURL only handles a
+       sub-path baseURL correctly for slash-less input. */ -}}
+{{- $base := (urls.Parse site.BaseURL).Path -}}
+{{- if and $base (ne $base "/") -}}
+  {{- $u = strings.TrimPrefix $base $u -}}
 {{- end -}}
+{{- $u = strings.TrimPrefix "/" $u -}}
 {{- return ($u | relLangURL) -}}

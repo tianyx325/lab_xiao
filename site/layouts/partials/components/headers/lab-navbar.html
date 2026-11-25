@@ -8,17 +8,17 @@
 {{ $has_day_night_themes := (and site.Params.appearance.theme_day site.Params.appearance.theme_night) }}
 {{ $show_translations := site.Params.header.navbar.show_translations | default true }}
 {{ $align_menu := site.Params.header.navbar.align | default "l" }}
-{{ $is_multilingual := gt (len site.Languages) 1 }}
+{{ $is_multilingual := gt (len hugo.Sites) 1 }}
 {{ $show_lang := and $is_multilingual $show_translations }}
 
 {{/* Language targets: same page if translated, else that language's home */}}
 {{ $zhPage := index (where .AllTranslations "Lang" "zh") 0 }}
 {{ $enPage := index (where .AllTranslations "Lang" "en") 0 }}
 {{ if not $zhPage }}
-  {{ range where site.Sites "Language.Lang" "zh" }}{{ $zhPage = .Home }}{{ end }}
+  {{ range where hugo.Sites "Language.Lang" "zh" }}{{ $zhPage = .Home }}{{ end }}
 {{ end }}
 {{ if not $enPage }}
-  {{ range where site.Sites "Language.Lang" "en" }}{{ $enPage = .Home }}{{ end }}
+  {{ range where hugo.Sites "Language.Lang" "en" }}{{ $enPage = .Home }}{{ end }}
 {{ end }}
 
 <header>

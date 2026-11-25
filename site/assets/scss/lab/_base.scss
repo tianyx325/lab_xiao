@@ -525,6 +525,14 @@ body.page-wrapper {
   width: 100%;
 }
 
+/* Citation modal title is an h2 for heading order; keep the visual size
+   it had when it was an h5. */
+#modal .modal-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 /* The theme's site_footer always emits an empty powered-by paragraph
    (suppressed by params but not omitted); keep it from adding space. */
 footer.site-footer > .powered-by:empty {

@@ -159,14 +159,16 @@
 .lab-research-cards {
   @include lab-card-grid;
 
-  margin: var(--lab-space-block) auto 0;
-  max-width: var(--lab-page-width);
-  align-items: stretch;
-  padding-left: var(--lab-page-gutter);
-  padding-right: var(--lab-page-gutter);
-  box-sizing: border-box;
-  container-type: inline-size;
-  container-name: lab-cards;
+  & {
+    margin: var(--lab-space-block) auto 0;
+    max-width: var(--lab-page-width);
+    align-items: stretch;
+    padding-left: var(--lab-page-gutter);
+    padding-right: var(--lab-page-gutter);
+    box-sizing: border-box;
+    container-type: inline-size;
+    container-name: lab-cards;
+  }
 }
 
 .lab-research-cards > .lab-card {

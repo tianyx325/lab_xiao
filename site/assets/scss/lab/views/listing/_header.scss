@@ -242,11 +242,14 @@
 .lab-list-grid {
   /* Vertical / poster cards: 3 → 2 → 1 (lab-card-grid default) */
   @include lab-card-grid;
-  align-items: stretch;
-  max-width: var(--lab-page-width);
-  margin: 0 auto;
-  container-type: inline-size;
-  container-name: lab-grid;
+
+  & {
+    align-items: stretch;
+    max-width: var(--lab-page-width);
+    margin: 0 auto;
+    container-type: inline-size;
+    container-name: lab-grid;
+  }
 }
 
 

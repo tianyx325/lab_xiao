@@ -7,7 +7,6 @@
   {{ $css_options := dict
     "targetPath" "css/wowchemy.css"
     "transpiler" "dartsass"
-    "silenceDeprecations" (slice "import" "global-builtin" "color-functions" "if-function" "abs-percent")
   }}
   {{- if hugo.IsProduction -}}
     {{- $css_options = merge $css_options (dict "outputStyle" "compressed") -}}
