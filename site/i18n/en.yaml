@@ -123,9 +123,6 @@
 - id: lab_label_keywords
   translation: Keywords
 
-- id: lab_label_project_code
-  translation: Grant no.
-
 - id: lab_label_period
   translation: Period
 
@@ -144,9 +141,6 @@
 - id: lab_label_level
   translation: Level
 
-- id: lab_label_patent_no
-  translation: Patent no.
-
 - id: lab_label_filed
   translation: Filed
 
@@ -164,6 +158,30 @@
 
 - id: lab_label_awardees
   translation: Awardees
+
+- id: lab_label_rank
+  translation: Prize
+
+- id: lab_award_level_national
+  translation: National
+
+- id: lab_award_level_provincial
+  translation: Provincial
+
+- id: lab_award_level_municipal
+  translation: Municipal
+
+- id: lab_award_level_school
+  translation: University
+
+- id: lab_award_rank_first
+  translation: First Prize
+
+- id: lab_award_rank_second
+  translation: Second Prize
+
+- id: lab_award_rank_third
+  translation: Third Prize
 
 - id: lab_label_category
   translation: Category
@@ -244,12 +262,6 @@
 
 - id: lab_category_page
   translation: Category
-
-- id: lab_blog_featured
-  translation: Featured
-
-- id: lab_blog_recent
-  translation: Recent
 
 - id: lab_blog_empty_title
   translation: No posts yet

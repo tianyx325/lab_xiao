@@ -39,6 +39,11 @@
   "lab-card--project" "PRJ"
 }}
 
+{{ $pubLinks := slice }}
+{{ if eq $typeClass "lab-card--publication" }}
+  {{ $pubLinks = partial "functions/pub-links.html" $item }}
+{{ end }}
+
 {{ $mediaData := partial "components/featured-image.html" $item }}
 {{ $mediaURL := $mediaData.src | default "" }}
 
@@ -76,11 +81,14 @@
   <div class="lab-card-body">
     {{- if eq $typeClass "lab-card--post" }}
     <div class="lab-card-text">
-      {{- with $category -}}
-      <span class="lab-card-chip">{{ . }}</span>
-      {{- end -}}
+      <div class="lab-card-meta lab-card-meta--post">
+        <time class="lab-card-date" datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $dateLabel }}</time>
+        {{- with $category -}}
+        <span class="lab-card-meta-sep" aria-hidden="true">·</span>
+        <span class="lab-card-chip">{{ . }}</span>
+        {{- end -}}
+      </div>
       <div class="lab-card-title"{{ if $vtActive }} style="view-transition-name:{{ $vtName }}"{{ end }}>{{ $item.Title }}</div>
-      <time class="lab-card-date" datetime="{{ $item.Date.Format "2006-01-02" }}">{{ $dateLabel }}</time>
       <div class="lab-card-summary">
         {{ with $summary }}{{ . }}{{ else }}&nbsp;{{ end }}
       </div>
@@ -98,6 +106,9 @@
         <span class="lab-card-meta-sep" aria-hidden="true">·</span>
         <span class="lab-card-meta-badge">{{ . }}</span>
       {{- end -}}
+      {{- range $pubLinks }}
+      <a class="lab-card-link-pill lab-ext" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }}</a>
+      {{- end }}
     </div>
     {{- end }}
 

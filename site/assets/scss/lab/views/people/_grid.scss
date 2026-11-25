@@ -102,7 +102,7 @@ a.lab-member-card,
   align-items: center;
   box-sizing: border-box;
   width: $lab-row-media-width;
-  padding: var(--lab-space-4) var(--lab-space-3);
+  padding: var(--lab-space-3);
   text-align: center;
   text-decoration: none;
   color: var(--lab-color-fg);
@@ -157,11 +157,11 @@ a.lab-member-card:hover {
 }
 
 .lab-member-card-name {
-  margin: var(--lab-space-3) 0 0;
+  margin: var(--lab-space-2) 0 0;
   max-width: 100%;
   font-size: $lab-text-base;
   font-weight: $lab-weight-medium;
-  line-height: $lab-leading-snug;
+  line-height: $lab-leading-tight;
   color: var(--lab-color-fg);
   transition: color $lab-duration-quick ease;
 }
@@ -173,7 +173,7 @@ a.lab-member-card:hover .lab-member-card-name {
 .lab-member-card-role {
   margin: var(--lab-space-1) 0 0;
   max-width: 100%;
-  font-size: $lab-text-sm;
+  font-size: $lab-text-2xs;
   line-height: $lab-leading-ui;
   color: var(--lab-color-fg-muted);
 }

@@ -1,21 +1,6 @@
 {{- define "main" -}}
 {{- $.Page.Store.Set "has_isotope" false -}}
 {{- $all := .Pages.ByDate.Reverse -}}
-{{- $featured := first 3 (where $all "Params.featured" true) -}}
-{{- if not $featured -}}
-  {{- $featured = first 2 $all -}}
-{{- end -}}
-{{- $featKeys := dict -}}
-{{- range $featured -}}
-  {{- $featKeys = merge $featKeys (dict .RelPermalink true) -}}
-{{- end -}}
-{{- $recent := slice -}}
-{{- range $all -}}
-  {{- if not (index $featKeys .RelPermalink) -}}
-    {{- $recent = $recent | append . -}}
-  {{- end -}}
-{{- end -}}
-{{- $featCount := len $featured -}}
 
 <div class="lab-list-page lab-list-page--blog lab-blog-stream">
   {{ partial "listing/header.html" (dict
@@ -38,32 +23,12 @@
       "cta_href" ("publications/" | relLangURL)
     ) }}
     {{- else -}}
-
-    {{ with $featured }}
-    <section class="lab-blog-band" aria-labelledby="lab-blog-featured">
-      <h2 id="lab-blog-featured" class="lab-blog-band-title">{{ i18n "lab_blog_featured" }}</h2>
-      {{ partial "listing/card-grid.html" (dict
-        "page" $
-        "pages" .
-        "card_style" "poster"
-        "grid_class" (printf "lab-list-grid lab-blog-featured-grid lab-blog-featured-grid--%d" $featCount)
-        "lead_first" true
-      ) }}
-    </section>
-    {{ end }}
-
-    {{ with $recent }}
-    <section class="lab-blog-band" aria-labelledby="lab-blog-recent">
-      <h2 id="lab-blog-recent" class="lab-blog-band-title">{{ i18n "lab_blog_recent" }}</h2>
-      {{ partial "listing/card-grid.html" (dict
-        "page" $
-        "pages" .
-        "card_style" "poster"
-        "grid_class" "lab-list-grid"
-      ) }}
-    </section>
-    {{ end }}
-
+    {{ partial "listing/card-grid.html" (dict
+      "page" $
+      "pages" $all
+      "card_style" "poster"
+      "grid_class" "lab-list-grid"
+    ) }}
     {{- end -}}
   </div>
 </div>

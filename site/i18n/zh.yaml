@@ -123,9 +123,6 @@
 - id: lab_label_keywords
   translation: 关键词
 
-- id: lab_label_project_code
-  translation: 编号
-
 - id: lab_label_period
   translation: 起止时间
 
@@ -144,9 +141,6 @@
 - id: lab_label_level
   translation: 级别
 
-- id: lab_label_patent_no
-  translation: 专利号
-
 - id: lab_label_filed
   translation: 申请日
 
@@ -164,6 +158,30 @@
 
 - id: lab_label_awardees
   translation: 获奖人
+
+- id: lab_label_rank
+  translation: 奖项等级
+
+- id: lab_award_level_national
+  translation: 国家级
+
+- id: lab_award_level_provincial
+  translation: 省级
+
+- id: lab_award_level_municipal
+  translation: 市级
+
+- id: lab_award_level_school
+  translation: 校级
+
+- id: lab_award_rank_first
+  translation: 一等奖
+
+- id: lab_award_rank_second
+  translation: 二等奖
+
+- id: lab_award_rank_third
+  translation: 三等奖
 
 - id: lab_label_category
   translation: 类别
@@ -244,12 +262,6 @@
 
 - id: lab_category_page
   translation: 分类
-
-- id: lab_blog_featured
-  translation: 精选
-
-- id: lab_blog_recent
-  translation: 最新
 
 - id: lab_blog_empty_title
   translation: 暂无动态

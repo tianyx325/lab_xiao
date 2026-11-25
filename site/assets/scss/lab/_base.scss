@@ -161,7 +161,7 @@ body {
 
 .article-style a,
 .portrait-title a,
-.page-body a:not(.btn):not(.nav-link):not(.dropdown-item):not(.lab-card):not(.lab-member-card):not(.lab-meta-tag-link):not(.lab-hub-tab) {
+.page-body a:not(.btn):not(.lab-btn--wash):not(.lab-card-link-pill):not(.nav-link):not(.dropdown-item):not(.lab-card):not(.lab-member-card):not(.lab-meta-tag-link):not(.lab-hub-tab) {
   color: var(--lab-color-brand);
 }
 

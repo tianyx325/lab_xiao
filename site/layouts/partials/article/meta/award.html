@@ -1,20 +1,23 @@
-{{- $meta := slice -}}
-{{- with .Date -}}
-  {{- $meta = $meta | append (dict "label" (i18n "lab_label_award_year") "value" (.Format "2006")) -}}
-{{- end -}}
+{{- /* Award meta: awardees · year/level/prize — same row shape as papers. */ -}}
+{{- $authorRow := slice -}}
+{{- $factRow := slice -}}
+{{- $linkRow := slice -}}
+
 {{- if .Params.authors -}}
   {{- $authors := partial "components/detail-authors.html" . -}}
-  {{- $meta = $meta | append (dict "label" (i18n "lab_label_awardees") "value" ($authors | safeHTML)) -}}
+  {{- $authorRow = $authorRow | append (dict "label" (i18n "lab_label_awardees") "value" ($authors | safeHTML)) -}}
 {{- end -}}
-{{- $levelKeys := slice "国家级" "省级" "市级" "校级" -}}
-{{- with .Params.tags -}}
-  {{- range . -}}
-    {{- $label := i18n "lab_label_category" -}}
-    {{- if in $levelKeys . -}}
-      {{- $label = i18n "lab_label_level" -}}
-    {{- end -}}
-    {{- $meta = $meta | append (dict "label" $label "value" .) -}}
-  {{- end -}}
-{{- end -}}
-{{- return $meta -}}
 
+{{- with .Date -}}
+  {{- $factRow = $factRow | append (dict "label" (i18n "lab_label_award_year") "value" (.Format "2006")) -}}
+{{- end -}}
+{{- with .Params.level -}}
+  {{- $level := i18n (printf "lab_award_level_%s" .) | default . -}}
+  {{- $factRow = $factRow | append (dict "label" (i18n "lab_label_level") "value" $level) -}}
+{{- end -}}
+{{- with .Params.rank -}}
+  {{- $rank := i18n (printf "lab_award_rank_%s" .) | default . -}}
+  {{- $factRow = $factRow | append (dict "label" (i18n "lab_label_rank") "value" $rank) -}}
+{{- end -}}
+
+{{- return (slice $authorRow $factRow $linkRow) -}}

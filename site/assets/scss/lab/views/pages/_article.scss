@@ -22,16 +22,23 @@
 }
 
 .lab-article-title {
-  /* Narrow column + large title (reading pages) */
+  /* Narrow column + title (reading pages) */
   @include lab-display-title;
+  font-size: $lab-text-display-sm;
   margin: 0;
   color: var(--lab-color-fg);
   text-align: center;
   text-wrap: balance;
 }
 
+/* Detail titles may run wider than the 700px reading column so most
+   headlines stay on one line; the body column is unchanged. */
+.lab-page--detail .lab-article-header > .container {
+  max-width: min(100%, 68rem);
+}
+
 .lab-page--detail .lab-article-title {
-  max-width: $lab-measure-md;
+  max-width: min(100%, 62rem);
   margin-left: auto;
   margin-right: auto;
 }

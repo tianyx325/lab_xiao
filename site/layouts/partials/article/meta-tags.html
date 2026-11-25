@@ -19,7 +19,7 @@
     <a class="lab-meta-tag lab-meta-tag-link lab-ext" href="{{ .href }}" target="_blank" rel="noopener">{{ .label }}</a>
     {{- else }}
     <div class="lab-meta-tag">
-      <span class="lab-meta-tag-label">{{ .label }}</span>
+      {{- with .label }}<span class="lab-meta-tag-label">{{ . }}</span>{{ end }}
       <span class="lab-meta-tag-value">{{ .value | safeHTML }}</span>
     </div>
     {{- end }}

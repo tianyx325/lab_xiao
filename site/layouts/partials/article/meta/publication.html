@@ -9,7 +9,6 @@
 
 {{- $authorRow := slice -}}
 {{- $factRow := slice -}}
-{{- $linkRow := slice -}}
 {{- if .Params.authors -}}
   {{- $authors := partial "components/detail-authors.html" . -}}
   {{- $authorRow = $authorRow | append (dict "label" (i18n "lab_label_authors") "value" ($authors | safeHTML)) -}}
@@ -42,39 +41,7 @@
 {{- if $pub_type_display -}}
   {{- $factRow = $factRow | append (dict "label" (i18n "lab_label_type") "value" $pub_type_display) -}}
 {{- end -}}
-{{- with .Params.tags -}}
-  {{- $factRow = $factRow | append (dict "label" (i18n "lab_label_keywords") "value" (delimit . " · ")) -}}
-{{- end -}}
 
-{{- $paperHref := "" -}}
-{{- $pdfHref := "" -}}
-{{- with .Params.url_html -}}
-  {{- $paperHref = . -}}
-{{- end -}}
-{{- with .Params.url_pdf -}}
-  {{- if partial "functions/is-pdf-url.html" . -}}
-    {{- $pdfHref = . -}}
-  {{- else if not $paperHref -}}
-    {{- $paperHref = . -}}
-  {{- end -}}
-{{- end -}}
-{{- with $paperHref -}}
-  {{- $linkRow = $linkRow | append (dict "label" (i18n "lab_label_paper") "href" .) -}}
-{{- end -}}
-{{- with $pdfHref -}}
-  {{- $linkRow = $linkRow | append (dict "label" "PDF" "href" .) -}}
-{{- end -}}
-{{- range $pair := slice
-  (dict "key" "url_code" "label" (i18n "lab_label_code"))
-  (dict "key" "url_dataset" "label" (i18n "lab_label_dataset"))
-  (dict "key" "url_poster" "label" (i18n "lab_label_poster"))
--}}
-  {{- with index $.Params $pair.key -}}
-    {{- $linkRow = $linkRow | append (dict "label" $pair.label "href" .) -}}
-  {{- end -}}
-{{- end -}}
-{{- if and .Params.doi (ne .Params.doi "") -}}
-  {{- $linkRow = $linkRow | append (dict "label" "DOI" "href" (printf "https://doi.org/%s" .Params.doi)) -}}
-{{- end -}}
+{{- $links := partial "functions/pub-links.html" . -}}
 
-{{- return (slice $authorRow $factRow $linkRow) -}}
+{{- return (slice $authorRow $factRow $links) -}}

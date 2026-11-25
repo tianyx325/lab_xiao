@@ -147,6 +147,68 @@ a.lab-meta-tag.lab-meta-tag-link:hover,
   background: none;
 }
 
+/* ---------- Detail metadata (no rules, no shell) ---------- */
+/* Three centered lines: authors · facts (middot separated) · link pills. */
+.lab-meta-tags--rows {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 48rem;
+  margin: $lab-space-4 auto 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  gap: var(--lab-space-3);
+}
+
+.lab-meta-tags--rows .lab-meta-tags-row {
+  align-items: center;
+  gap: var(--lab-space-1) var(--lab-space-4);
+}
+
+.lab-meta-tags--rows div.lab-meta-tag {
+  flex-direction: row;
+  align-items: baseline;
+  gap: $lab-space-1;
+}
+
+/* Facts share one line, separated by a middot rather than a rule. */
+.lab-meta-tags--rows div.lab-meta-tag:not(:last-child)::after {
+  content: "·";
+  margin-left: var(--lab-space-2);
+  color: var(--lab-color-fg-muted);
+  opacity: 0.55;
+}
+
+.lab-meta-tags--rows .lab-meta-tag-label {
+  font-size: $lab-text-2xs;
+  text-transform: uppercase;
+  letter-spacing: $lab-tracking-caps;
+}
+
+.lab-meta-tags--rows .lab-meta-tag-value {
+  color: var(--lab-color-fg);
+}
+
+.lab-meta-tags--rows a.lab-meta-tag-link {
+  padding: 0.25rem 0.75rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--lab-color-bg-brand-soft);
+  color: var(--lab-color-brand);
+  font-size: $lab-text-2xs;
+  line-height: $lab-leading-ui;
+  letter-spacing: $lab-tracking-caps;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.lab-meta-tags--rows a.lab-meta-tag-link:hover {
+  background: var(--lab-color-brand);
+  color: var(--lab-color-on-brand);
+  text-decoration: none;
+}
+
 /* ---------- Skip link (a11y) ---------- */
 .lab-skip-link {
   position: absolute;

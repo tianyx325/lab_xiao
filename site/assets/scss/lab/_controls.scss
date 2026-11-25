@@ -1,7 +1,7 @@
 ﻿/* Layer 4 · shared controls: buttons, page titles, card chrome
    Source: template.scss lines 592-772 (order-preserving split). */
-/* Buttons — 3 variants: wash (= LC violet CTA) · outline · icon + .btn-sm.
-   .btn-primary → wash. Outline stays brand blue. */
+/* Buttons — 3 variants: wash (solid brand blue CTA) · outline · icon + .btn-sm.
+   The violet accent is never used for .lab-btn--wash. */
 .lab-btn--wash,
 .lab-btn--outline,
 .lab-btn--icon,
@@ -30,15 +30,27 @@
     background-color $lab-transition, opacity $lab-transition;
 }
 
-/* Primary CTA — LC violet #BEB4FD + green-400 label */
-.lab-btn--wash,
+/* Primary CTA (homepage 研究方向) — brand blue, never the violet accent. */
+.lab-btn--wash {
+  background-color: var(--lab-color-brand);
+  border-color: var(--lab-color-brand);
+  color: var(--lab-color-on-brand);
+}
+
+.lab-btn--wash:hover {
+  background-color: var(--lab-color-brand);
+  border-color: var(--lab-color-brand);
+  color: var(--lab-color-on-brand);
+  opacity: 0.92;
+}
+
+/* Vendor primary buttons keep the theme accent. */
 .btn-primary {
   background-color: var(--lab-color-accent);
   border-color: var(--lab-color-accent);
   color: var(--lab-color-on-accent);
 }
 
-.lab-btn--wash:hover,
 .btn-primary:hover {
   background-color: var(--lab-color-accent);
   border-color: var(--lab-color-accent);

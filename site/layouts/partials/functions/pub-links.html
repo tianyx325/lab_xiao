@@ -1,0 +1,66 @@
+{{- /* Publication action links → slice of {label, href}.
+   Reads legacy url_html/url_pdf/url_code/... and content `links`
+   ([{type: url|pdf|code|dataset|poster, url: ...}]), de-duplicated. */ -}}
+{{- $page := . -}}
+{{- $links := slice -}}
+
+{{- $paperHref := "" -}}
+{{- $pdfHref := "" -}}
+{{- with $page.Params.url_html -}}
+  {{- $paperHref = . -}}
+{{- end -}}
+{{- with $page.Params.url_pdf -}}
+  {{- if partial "functions/is-pdf-url.html" . -}}
+    {{- $pdfHref = . -}}
+  {{- else if not $paperHref -}}
+    {{- $paperHref = . -}}
+  {{- end -}}
+{{- end -}}
+{{- with $paperHref -}}
+  {{- $links = $links | append (dict "label" (i18n "lab_label_paper") "href" .) -}}
+{{- end -}}
+{{- with $pdfHref -}}
+  {{- $links = $links | append (dict "label" "PDF" "href" .) -}}
+{{- end -}}
+{{- range $pair := slice
+  (dict "key" "url_code" "label" (i18n "lab_label_code"))
+  (dict "key" "url_dataset" "label" (i18n "lab_label_dataset"))
+  (dict "key" "url_poster" "label" (i18n "lab_label_poster"))
+-}}
+  {{- with index $page.Params $pair.key -}}
+    {{- $links = $links | append (dict "label" $pair.label "href" .) -}}
+  {{- end -}}
+{{- end -}}
+{{- if and $page.Params.doi (ne $page.Params.doi "") -}}
+  {{- $links = $links | append (dict "label" "DOI" "href" (printf "https://doi.org/%s" $page.Params.doi)) -}}
+{{- end -}}
+
+{{- range $page.Params.links -}}
+  {{- $href := .url | default "" -}}
+  {{- $kind := lower (.type | default "url") -}}
+  {{- if $href -}}
+    {{- $label := i18n "lab_label_paper" -}}
+    {{- if eq $kind "pdf" -}}
+      {{- $label = "PDF" -}}
+    {{- else if eq $kind "code" -}}
+      {{- $label = i18n "lab_label_code" -}}
+    {{- else if eq $kind "dataset" -}}
+      {{- $label = i18n "lab_label_dataset" -}}
+    {{- else if eq $kind "poster" -}}
+      {{- $label = i18n "lab_label_poster" -}}
+    {{- else if hasPrefix $href "https://doi.org/" -}}
+      {{- $label = "DOI" -}}
+    {{- end -}}
+    {{- $links = $links | append (dict "label" $label "href" $href) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $seen := dict -}}
+{{- $out := slice -}}
+{{- range $links -}}
+  {{- if not (index $seen .href) -}}
+    {{- $seen = merge $seen (dict .href true) -}}
+    {{- $out = $out | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

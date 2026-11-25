@@ -117,7 +117,7 @@ $lab-hero-control-min: 6rem !default;
 $lab-hero-visual-height: 14rem !default;
 $lab-grid-pattern-size: 120px !default;
 $lab-contact-map-height: 17.5rem !default;
-$lab-member-photo: 5.5rem !default;
+$lab-member-photo: 5rem !default;
 $lab-member-avatar-sm: 96px !default;
 $lab-member-avatar-lg: 168px !default;
 $lab-filter-control-min: 9rem !default;
@@ -314,6 +314,7 @@ $lab-tracking-overline-wide: 0.1em !default;
 $lab-tracking-xl: 0.12em !default;
 $lab-tracking-micro: 0 !default;
 
+$lab-text-2xs: 0.8125rem !default; /* 13px — compact meta */
 $lab-text-xs: 0.875rem !default; /* LC tiny */
 $lab-text-sm: 1rem !default; /* LC small */
 $lab-text-base: 1.125rem !default; /* CJK body between small & regular */
@@ -322,6 +323,7 @@ $lab-text-lg: 1.375rem !default; /* LC medium */
 $lab-text-xl: 1.625rem !default; /* LC large */
 $lab-text-heading: clamp(1.75rem, 2.5vw, 2rem) !default; /* LC h5/h4 */
 $lab-text-display: clamp(2.25rem, 4vw, 3.5rem) !default; /* LC h3→h2 cap */
+$lab-text-display-sm: clamp(1.875rem, 2.4vw, 2.5rem) !default; /* detail page titles */
 
 $lab-leading-none: 1 !default;
 $lab-leading-tight: 1.2 !default; /* LC h2/h3 */
