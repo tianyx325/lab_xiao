@@ -27,9 +27,6 @@
 - id: lab_search_papers
   translation: 搜索论文…
 
-- id: lab_search_news
-  translation: 搜索新闻…
-
 - id: lab_search_projects
   translation: 搜索项目…
 
@@ -44,9 +41,6 @@
 
 - id: lab_filter_year
   translation: 年份
-
-- id: lab_filter_category
-  translation: 分类
 
 - id: lab_filter_status
   translation: 状态
@@ -216,12 +210,6 @@
 - id: lab_more
   translation: 查看更多
 
-- id: lab_breadcrumb
-  translation: 面包屑
-
-- id: lab_home
-  translation: 首页
-
 - id: lab_prev_next
   translation: 上一篇与下一篇
 
@@ -322,12 +310,6 @@
 
 - id: lab_theme_auto
   translation: 跟随系统
-
-- id: lab_lang_zh
-  translation: 中
-
-- id: lab_lang_en
-  translation: EN
 
 - id: lab_lang_zh_full
   translation: 简体中文

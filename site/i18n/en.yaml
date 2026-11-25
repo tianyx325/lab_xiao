@@ -27,9 +27,6 @@
 - id: lab_search_papers
   translation: Search papers…
 
-- id: lab_search_news
-  translation: Search news…
-
 - id: lab_search_projects
   translation: Search projects…
 
@@ -44,9 +41,6 @@
 
 - id: lab_filter_year
   translation: Year
-
-- id: lab_filter_category
-  translation: Category
 
 - id: lab_filter_status
   translation: Status
@@ -216,12 +210,6 @@
 - id: lab_more
   translation: Show more
 
-- id: lab_breadcrumb
-  translation: Breadcrumb
-
-- id: lab_home
-  translation: Home
-
 - id: lab_prev_next
   translation: Previous and next
 
@@ -322,12 +310,6 @@
 
 - id: lab_theme_auto
   translation: System
-
-- id: lab_lang_zh
-  translation: 中
-
-- id: lab_lang_en
-  translation: EN
 
 - id: lab_lang_zh_full
   translation: 简体中文
