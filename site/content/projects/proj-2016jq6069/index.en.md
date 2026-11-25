@@ -13,8 +13,8 @@ image:
 project_code: 2016JQ6069
 project_status: completed
 project_type: vertical
-funding: 陕西省自然科学基础研究计划
+funding: Natural Science Basic Research Program of Shaanxi Province
 tags:
-- 光场成像
-- 深度估计
+- Light-field imaging
+- Depth estimation
 ---

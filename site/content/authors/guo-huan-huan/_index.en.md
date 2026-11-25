@@ -14,11 +14,10 @@ email: "3360230153@qq.com"
 social:
 enroll_year: 2024
 ---
+**Huanhuan Guo** is an **M.S. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**郭欢欢**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
+**Research:** Skeleton-based action recognition.
 
-**研究方向：** 基于骨骼点的动作识别
+**Personal**
 
-**个人**
-
-- 好好吃饭，好好睡觉，好好学习，好好运动
+- Eat well, sleep well, study well, exercise well.

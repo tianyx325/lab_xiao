@@ -13,12 +13,11 @@ user_groups:
   - "Ph.D. Students"
 email: "liwengai@foxmail.com"
 ---
+**Wengai Li** is a **Ph.D. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**李文改**，西安理工大学计算机科学与技术学院**博士研究生**，导师：肖照林教授。
+**Research:** Low-light image enhancement and low-light depth estimation.
 
-**研究方向：** 弱光图像增强与弱光深度估计
+**Publications**
 
-**学习与研究**
-
-- 李文改，桂柯，肖照林，等. 频域特征优化与截断采样的条件扩散模型弱光图像增强方法[J]. *中国图象图形学报*，2026, 31(9): 3352-3367.
+- Li Wengai, Gui Ke, Xiao Zhaolin, et al. Conditional diffusion model for low-light image enhancement with frequency-domain feature optimization and truncated sampling. *Journal of Image and Graphics*, 2026, 31(9): 3352-3367. (in Chinese)
 - Li W, Xiao Z, Su H, et al. FEDD-Net: A Frequency Diagonal Feature Enhanced Dual-Branch Diffusion Network for Low-Light Image Enhancement[C]//*ICASSP 2026*. IEEE, 2026: 8757-8761.

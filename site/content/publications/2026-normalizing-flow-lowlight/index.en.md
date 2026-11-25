@@ -38,8 +38,8 @@ abstract: 'Low Light Image Enhancement (LLIE) focuses on improving the quality o
   '
 featured: false
 tags:
-- 弱光增强
-- 深度学习
+- Low-light enhancement
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1007/s00530-026-02241-w

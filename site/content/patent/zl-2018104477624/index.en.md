@@ -17,5 +17,5 @@ url_patent: https://patents.google.com/patent/CN108627241B/zh
 url_pdf: https://patentimages.storage.googleapis.com/26/86/ea/c1f4cd2c027e4b/CN108627241B.pdf
 patent_type: invention
 tags:
-- 声学成像
+- Acoustic imaging
 ---

@@ -15,6 +15,6 @@ project_type: horizontal
 aliases:
 - /project/guang-chang-te-zheng-ti-qu-yu-ying-yong-fang-fa-yan-jiu/
 tags:
-- 光场成像
-- 计算机视觉
+- Light-field imaging
+- Computer vision
 ---

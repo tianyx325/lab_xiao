@@ -14,11 +14,10 @@ email: "2241221106@stu.xaut.edu.cn"
 social:
 enroll_year: 2024
 ---
+**Kun Du** is an **M.S. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**杜坤**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
+**Research:** Monocular depth estimation.
 
-**研究方向：** 单目深度估计
+**Personal**
 
-**个人**
-
-- 1998 年生
+- Born in 1998.

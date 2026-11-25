@@ -13,12 +13,11 @@ user_groups:
   - "Ph.D. Students"
 email: "alexgbzhou@gmail.com"
 ---
+**Guangbin Zhou** is a **Ph.D. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**周广彬**，西安理工大学计算机科学与技术学院**博士研究生**，导师：肖照林教授。
+**Research:** Low-light enhancement and monocular depth estimation.
 
-**研究方向：** 弱光增强与单目深度估计
+**Personal**
 
-**个人**
-
-- 爱好：羽毛球 / 乒乓球 / 篮球、骑行、美食
-- MBTI：*ENTJ-A*
+- Interests: badminton, table tennis, basketball, cycling, and good food.
+- MBTI: *ENTJ-A*.

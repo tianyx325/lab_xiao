@@ -14,7 +14,6 @@ email: "1448556079@qq.com"
 social:
 enroll_year: 2025
 ---
+**Xinle Wang** is an **M.S. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**王新乐**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
-
-**研究方向：** 大模型应用
+**Research:** Large-model applications.

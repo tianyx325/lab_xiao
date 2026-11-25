@@ -32,7 +32,7 @@ abstract: 'Aiming at the detection and segmentation of underwater Continuous wav
   '
 featured: false
 tags:
-- 声学成像
+- Acoustic imaging
 hugoblox:
   ids:
     doi: 10.1016/j.jvcir.2019.02.036

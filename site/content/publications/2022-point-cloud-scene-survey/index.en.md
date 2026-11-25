@@ -10,7 +10,7 @@ date: '2022-08-25T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 光学精密工程
+  name: Optics and Precision Engineering
   volume: '30'
   issue: '16'
   pages: 1988-2005
@@ -40,10 +40,10 @@ abstract: 'Driven by the demand for intelligent robots to replace humans in perf
   '
 featured: false
 tags:
-- 特征匹配
-- 点云
-- 计算机视觉
-- 深度学习
+- Feature matching
+- Point cloud
+- Computer vision
+- Deep learning
 hugoblox:
   ids:
     doi: 10.37188/OPE.20223016.1988

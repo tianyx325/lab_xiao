@@ -13,8 +13,8 @@ image:
 project_code: '62031023'
 project_status: completed
 project_type: vertical
-funding: 国家自然科学基金·重点项目
+funding: National Natural Science Foundation of China (Key Program)
 tags:
-- 光场成像
-- 计算成像
+- Light-field imaging
+- Computational imaging
 ---

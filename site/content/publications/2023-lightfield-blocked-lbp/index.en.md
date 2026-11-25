@@ -36,8 +36,8 @@ abstract: 'Image feature detection and matching are still important to many appl
   '
 featured: false
 tags:
-- 光场成像
-- 特征匹配
+- Light-field imaging
+- Feature matching
 hugoblox:
   ids:
     doi: 10.1117/12.2661525

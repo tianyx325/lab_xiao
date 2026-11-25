@@ -26,8 +26,8 @@ abstract: 'Image fusion technology can effectively improve the utilization ratio
   '
 featured: false
 tags:
-- 图像融合
-- 优化算法
+- Image fusion
+- Optimization
 hugoblox:
   ids:
     doi: 10.1109/CCDC.2019.8833079

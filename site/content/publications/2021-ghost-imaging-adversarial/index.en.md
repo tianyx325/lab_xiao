@@ -15,11 +15,11 @@ publication:
   volume: '492'
   pages: '126982'
 summary: Realizes computational ghost imaging with a conditional adversarial network.
-abstract: 用条件对抗网络实现计算鬼成像。
+abstract: Computational ghost imaging via a conditional adversarial network.
 featured: false
 tags:
-- 计算成像
-- 深度学习
+- Computational imaging
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1016/j.optcom.2021.126982

@@ -16,6 +16,6 @@ url_patent: https://patents.google.com/patent/CN113191369B/zh
 url_pdf: https://patentimages.storage.googleapis.com/5d/16/65/b0df6bc51e740f/CN113191369B.pdf
 patent_type: invention
 tags:
-- 光场成像
-- 特征匹配
+- Light-field imaging
+- Feature matching
 ---

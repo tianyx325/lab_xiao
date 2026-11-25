@@ -9,7 +9,7 @@ date: '2024-01-01T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 激光与光电子学进展
+  name: Laser & Optoelectronics Progress
   volume: '61'
   issue: '16'
   pages: '1611012'
@@ -39,8 +39,8 @@ abstract: 'Existing image feature matching methods still have considerable limit
   '
 featured: false
 tags:
-- 光场成像
-- 特征匹配
+- Light-field imaging
+- Feature matching
 hugoblox:
   ids:
     doi: 10.3788/lop241287

@@ -35,8 +35,8 @@ abstract: 'In low-light conditions, images often suffer from poor quality and un
   '
 featured: false
 tags:
-- 弱光增强
-- 深度学习
+- Low-light enhancement
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1007/978-3-031-72335-3_25

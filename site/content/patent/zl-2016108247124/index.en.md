@@ -18,6 +18,6 @@ url_patent: https://patents.google.com/patent/CN106384361B/zh
 url_pdf: https://patentimages.storage.googleapis.com/55/60/aa/d9be7be638f4db/CN106384361B.pdf
 patent_type: invention
 tags:
-- 三维重建
-- 计算机视觉
+- 3D reconstruction
+- Computer vision
 ---

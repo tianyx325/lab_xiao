@@ -35,9 +35,9 @@ abstract: 'In order to generate a denser focal stack, a cooperative generative a
   '
 featured: false
 tags:
-- 光场成像
-- 图像超分辨率
-- 深度学习
+- Light-field imaging
+- Image super-resolution
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1049/ipr2.12460

@@ -37,9 +37,9 @@ abstract: 'Due to the loss of 3D information, accurate and robust 2D image featu
   '
 featured: false
 tags:
-- 光场成像
-- 特征匹配
-- 深度学习
+- Light-field imaging
+- Feature matching
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/tip.2026.3662579

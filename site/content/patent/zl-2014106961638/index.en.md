@@ -17,6 +17,6 @@ url_patent: https://patents.google.com/patent/CN104469110B/zh
 url_pdf: https://patentimages.storage.googleapis.com/cf/6b/be/f17bbaa20bb386/CN104469110B.pdf
 patent_type: invention
 tags:
-- 光场成像
-- 计算成像
+- Light-field imaging
+- Computational imaging
 ---

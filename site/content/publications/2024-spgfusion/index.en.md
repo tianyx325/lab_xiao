@@ -32,8 +32,8 @@ abstract: 'Infrared and visible image fusion is an important multimodal image pr
   '
 featured: true
 tags:
-- 图像融合
-- 深度学习
+- Image fusion
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/icassp48485.2024.10448503

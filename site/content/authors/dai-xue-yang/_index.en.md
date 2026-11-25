@@ -15,11 +15,10 @@ email: "15993220432@163.com"
 social:
 enroll_year: 2026
 ---
+**Xueyang Dai** is an **M.S. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**代雪洋**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
+**Research:** Low-light depth estimation.
 
-**研究方向：** 弱光深度估计
+**Personal**
 
-**个人**
-
-- 来自河南省周口市
+- From Zhoukou, Henan Province.

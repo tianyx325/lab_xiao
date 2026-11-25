@@ -15,6 +15,6 @@ project_type: horizontal
 aliases:
 - /project/xiang-ji-zhen-lie-guang-chang-cai-ji-ji-zi-you-shi-dian-guan/
 tags:
-- 光场成像
-- 三维重建
+- Light-field imaging
+- 3D reconstruction
 ---

@@ -16,7 +16,7 @@ url_patent: https://patents.google.com/patent/CN113192008B/zh
 url_pdf: https://patentimages.storage.googleapis.com/3b/81/90/247f9478316395/CN113192008B.pdf
 patent_type: invention
 tags:
-- 光场成像
-- 计算成像
-- 图像安全
+- Light-field imaging
+- Computational imaging
+- Image security
 ---

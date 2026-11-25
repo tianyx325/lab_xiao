@@ -13,13 +13,12 @@ user_groups:
   - "Ph.D. Students"
 email: "juliochinaone@gmail.com"
 ---
+**Julianno** is a **Ph.D. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**Julianno**，西安理工大学计算机科学与技术学院**博士研究生**，导师：肖照林教授。
+**Research:** Monocular depth estimation in low-light environments.
 
-**研究方向：** Monocular depth estimation in low-light environments
+**Study & Research**
 
-**学习与研究**
-
-- 持有计算机科学硕士学位
-- 具备人工智能与深度学习基础
-- 致力于通过严谨研究推进相关方向的学术工作
+- Holds an M.S. degree in Computer Science.
+- Background in artificial intelligence and deep learning.
+- Committed to advancing the field through rigorous research.

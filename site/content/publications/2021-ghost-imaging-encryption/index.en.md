@@ -19,11 +19,11 @@ publication:
   pages: '106627'
 summary: Studies optical image encryption based on computational ghost imaging with
   sparse reconstruction.
-abstract: 基于稀疏重建的计算鬼成像，研究光学图像加密。
+abstract: Computational ghost imaging based on sparse reconstruction, applied to optical image encryption.
 featured: false
 tags:
-- 计算成像
-- 图像安全
+- Computational imaging
+- Image security
 hugoblox:
   ids:
     doi: 10.1016/j.optlaseng.2021.106627

@@ -36,8 +36,8 @@ abstract: 'Accurate activation and optimization of autofocus (AF) functions are 
   '
 featured: false
 tags:
-- 图像处理
-- 深度学习
+- Image processing
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1007/s11063-025-11788-0

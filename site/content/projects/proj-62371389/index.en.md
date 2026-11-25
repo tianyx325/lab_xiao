@@ -12,8 +12,8 @@ image:
 project_code: '62371389'
 project_status: ongoing
 project_type: vertical
-funding: 国家自然科学基金·面上项目
+funding: National Natural Science Foundation of China (General Program)
 tags:
-- 光场成像
-- 弱光增强
+- Light-field imaging
+- Low-light enhancement
 ---

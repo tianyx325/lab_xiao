@@ -15,5 +15,5 @@ project_type: horizontal
 aliases:
 - /project/bao-zha-chang-bian-ma-zhao-ming-xi-tong-zhuang-zhi-ji-biao-d/
 tags:
-- 计算成像
+- Computational imaging
 ---

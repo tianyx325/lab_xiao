@@ -35,8 +35,8 @@ abstract: 'Mainstream diffusion-based low-light image enhancement (LLIE) still s
   '
 featured: true
 tags:
-- 弱光增强
-- 深度学习
+- Low-light enhancement
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/icassp55912.2026.11462537

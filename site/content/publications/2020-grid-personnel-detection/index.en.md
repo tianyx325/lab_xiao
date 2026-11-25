@@ -35,8 +35,8 @@ abstract: 'In recent years, deep learning theory and applications have been grow
   '
 featured: false
 tags:
-- 目标检测
-- 深度学习
+- Object detection
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1007/s11063-019-10159-w

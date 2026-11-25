@@ -16,6 +16,6 @@ url_patent: https://patents.google.com/patent/CN110599400B/zh
 url_pdf: https://patentimages.storage.googleapis.com/95/9b/88/a20f708e534af6/CN110599400B.pdf
 patent_type: invention
 tags:
-- 光场成像
-- 图像超分辨率
+- Light-field imaging
+- Image super-resolution
 ---

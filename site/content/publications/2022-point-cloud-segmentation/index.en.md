@@ -33,9 +33,9 @@ abstract: 'In this paper, we propose an attention-based instance and semantic se
   '
 featured: false
 tags:
-- 点云
-- 三维重建
-- 深度学习
+- Point cloud
+- 3D reconstruction
+- Deep learning
 hugoblox:
   ids:
     doi: 10.4316/AECE.2022.02003

@@ -31,7 +31,7 @@ abstract: 'When using plenoptic camera for digital refocusing, angular undersamp
   '
 featured: false
 tags:
-- 光场成像
+- Light-field imaging
 hugoblox:
   ids:
     doi: 10.1109/TIP.2017.2668613

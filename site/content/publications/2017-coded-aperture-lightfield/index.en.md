@@ -32,9 +32,9 @@ abstract: 'In the past decade, light field imaging has greatly extended the imag
   '
 featured: false
 tags:
-- 光场成像
-- 计算成像
-- 深度学习
+- Light-field imaging
+- Computational imaging
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/icip.2017.8296840

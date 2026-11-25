@@ -32,8 +32,8 @@ abstract: 'In light field imaging, axial refocusing precision corresponds to the
   '
 featured: false
 tags:
-- 光场成像
-- 深度估计
+- Light-field imaging
+- Depth estimation
 hugoblox:
   ids:
     doi: 10.1016/j.image.2022.116721

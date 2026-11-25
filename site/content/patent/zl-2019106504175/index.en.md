@@ -17,7 +17,7 @@ url_patent: https://patents.google.com/patent/CN110490968B/zh
 url_pdf: https://patentimages.storage.googleapis.com/74/9c/72/eb771e39a294ce/CN110490968B.pdf
 patent_type: invention
 tags:
-- 光场成像
-- 图像超分辨率
-- 深度学习
+- Light-field imaging
+- Image super-resolution
+- Deep learning
 ---

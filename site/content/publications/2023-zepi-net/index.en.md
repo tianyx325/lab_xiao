@@ -37,10 +37,10 @@ abstract: 'Many applications of light field (LF) imaging have been limited by th
   '
 featured: false
 tags:
-- 光场成像
-- 特征匹配
-- 图像超分辨率
-- 深度学习
+- Light-field imaging
+- Feature matching
+- Image super-resolution
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1007/s11063-022-10955-x

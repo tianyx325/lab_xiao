@@ -31,8 +31,8 @@ abstract: 'Axial light field resolution refers to the ability to distinguish fea
   '
 featured: false
 tags:
-- 光场成像
-- 深度学习
+- Light-field imaging
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1016/j.neucom.2021.05.056

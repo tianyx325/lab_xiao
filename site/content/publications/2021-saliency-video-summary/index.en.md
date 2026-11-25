@@ -9,7 +9,7 @@ date: '2021-03-20T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 北京航空航天大学学报
+  name: Journal of Beijing University of Aeronautics and Astronautics
   volume: '47'
   issue: '3'
   pages: 441-450
@@ -34,9 +34,9 @@ abstract: 'How to efficiently extract video content, i.e., video summarization, 
   '
 featured: false
 tags:
-- 显著性检测
-- 图像处理
-- 计算机视觉
+- Saliency detection
+- Image processing
+- Computer vision
 hugoblox:
   ids:
     doi: 10.13700/j.bh.1001-5965.2020.0479

@@ -31,9 +31,9 @@ abstract: 'In low-light images, contrast and brightness are corrupted, making it
   '
 featured: false
 tags:
-- 弱光增强
-- 图像融合
-- 深度学习
+- Low-light enhancement
+- Image fusion
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/icip49359.2023.10222611

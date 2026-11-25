@@ -9,7 +9,7 @@ date: '2014-01-01T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 计算机辅助设计与图形学学报
+  name: Journal of Computer-Aided Design & Computer Graphics
   volume: '26'
   issue: '7'
   pages: 1126-1134
@@ -32,8 +32,8 @@ abstract: 'To address the aliasing problem in existing light field images, a mul
   '
 featured: false
 tags:
-- 光场成像
-- 图像处理
+- Light-field imaging
+- Image processing
 links:
 - type: url
   url: https://www.jcad.cn/cn/article/id/34b08dff-b5ef-4bde-ad4f-abdacc24132c

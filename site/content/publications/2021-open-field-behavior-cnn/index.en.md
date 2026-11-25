@@ -31,8 +31,8 @@ abstract: 'In both ethological and pharmacological experiments, open field test 
   '
 featured: false
 tags:
-- 动作识别
-- 深度学习
+- Action recognition
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1007/s11042-020-08858-x

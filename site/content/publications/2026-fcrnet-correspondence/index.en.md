@@ -38,8 +38,8 @@ abstract: 'This article addresses the critical challenge of false correspondence
   '
 featured: false
 tags:
-- 特征匹配
-- 深度学习
+- Feature matching
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1016/j.patcog.2025.111903

@@ -15,6 +15,6 @@ project_type: horizontal
 aliases:
 - /project/duo-yuan-guang-chang-cheng-xiang-xi-tong-biao-ding-fang-fa/
 tags:
-- 光场成像
-- 计算成像
+- Light-field imaging
+- Computational imaging
 ---

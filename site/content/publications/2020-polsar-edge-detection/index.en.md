@@ -35,7 +35,7 @@ abstract: 'The edge detection plays an important role in post-processing of PolS
   '
 featured: false
 tags:
-- 图像处理
+- Image processing
 hugoblox:
   ids:
     doi: 10.1109/access.2020.2963989

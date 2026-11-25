@@ -16,6 +16,6 @@ url_patent: https://patents.google.com/patent/CN113128518B/zh
 url_pdf: https://patentimages.storage.googleapis.com/38/34/97/48272fde239e59/CN113128518B.pdf
 patent_type: invention
 tags:
-- 特征匹配
-- 深度学习
+- Feature matching
+- Deep learning
 ---

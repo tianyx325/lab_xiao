@@ -16,6 +16,6 @@ url_patent: https://patents.google.com/patent/CN111784633B/zh
 url_pdf: https://patentimages.storage.googleapis.com/a8/85/6d/6bb883447f0850/CN111784633B.pdf
 patent_type: invention
 tags:
-- 目标检测
-- 深度学习
+- Object detection
+- Deep learning
 ---

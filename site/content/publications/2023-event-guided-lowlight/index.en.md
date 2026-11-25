@@ -35,8 +35,8 @@ abstract: 'In the low-light conditions, images are corrupted by low contrast and
   '
 featured: false
 tags:
-- 弱光增强
-- 深度学习
+- Low-light enhancement
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/ijcnn54540.2023.10191272

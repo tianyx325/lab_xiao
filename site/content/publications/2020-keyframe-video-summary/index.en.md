@@ -30,8 +30,8 @@ abstract: 'The spread of insecure online video has been a serious social problem
   '
 featured: false
 tags:
-- 图像处理
-- 计算机视觉
+- Image processing
+- Computer vision
 hugoblox:
   ids:
     doi: 10.1002/ett.3940

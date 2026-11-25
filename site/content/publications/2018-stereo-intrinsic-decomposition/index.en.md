@@ -28,8 +28,8 @@ abstract: 'An intrinsic co-decomposition model is presented for stereoscopic ima
   '
 featured: false
 tags:
-- 深度估计
-- 图像处理
+- Depth estimation
+- Image processing
 hugoblox:
   ids:
     doi: 10.1007/978-3-030-23712-7_20

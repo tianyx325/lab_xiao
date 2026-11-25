@@ -9,7 +9,7 @@ date: '2013-01-01T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 西北工业大学学报
+  name: Journal of Northwestern Polytechnical University
   volume: '31'
   issue: '2'
   pages: 311-316
@@ -30,8 +30,8 @@ abstract: 'The disparity method and the focus-zoom method are two image-based th
   '
 featured: false
 tags:
-- 光场成像
-- 深度估计
+- Light-field imaging
+- Depth estimation
 publication_short: Journal of Northwestern Polytechnical University
 research:
 - depth

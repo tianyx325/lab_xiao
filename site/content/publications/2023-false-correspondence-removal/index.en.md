@@ -30,8 +30,8 @@ abstract: 'False correspondence removal remains a challenge for many feature-mat
   '
 featured: false
 tags:
-- 特征匹配
-- 深度学习
+- Feature matching
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/icip49359.2023.10222704

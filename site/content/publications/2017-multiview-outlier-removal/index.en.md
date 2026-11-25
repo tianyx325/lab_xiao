@@ -12,11 +12,11 @@ publication:
   volume: '267'
   pages: 455-465
 summary: Removes outliers in multi-view geometry using penalized linear regression.
-abstract: 用惩罚线性回归剔除多视几何中的离群点。
+abstract: Outlier removal in multi-view geometry via penalized linear regression.
 featured: false
 tags:
-- 三维重建
-- 计算机视觉
+- 3D reconstruction
+- Computer vision
 hugoblox:
   ids:
     doi: 10.1016/j.neucom.2017.06.043

@@ -28,8 +28,8 @@ abstract: 'Foreground occlusion is a significant challenge in 3D reconstruction.
   '
 featured: false
 tags:
-- 光场成像
-- 三维重建
+- Light-field imaging
+- 3D reconstruction
 hugoblox:
   ids:
     doi: 10.1109/ICIP.2014.7025007

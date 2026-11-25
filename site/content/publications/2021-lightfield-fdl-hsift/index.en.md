@@ -29,8 +29,8 @@ abstract: 'Many computer vision applications rely on feature matching, hence the
   '
 featured: false
 tags:
-- 光场成像
-- 特征匹配
+- Light-field imaging
+- Feature matching
 hugoblox:
   ids:
     doi: 10.1109/ICIP42928.2021.9506361

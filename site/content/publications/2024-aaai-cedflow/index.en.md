@@ -31,9 +31,9 @@ abstract: 'Accurately computing optical flow in low-contrast and noisy dark imag
   '
 featured: true
 tags:
-- 弱光增强
-- 光流估计
-- 深度学习
+- Low-light enhancement
+- Optical flow
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1609/aaai.v38i7.28627

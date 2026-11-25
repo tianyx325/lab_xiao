@@ -30,9 +30,9 @@ abstract: 'Multi-sensor image fusion is always an important and opening problem,
   '
 featured: false
 tags:
-- 特征匹配
-- 图像融合
-- 优化算法
+- Feature matching
+- Image fusion
+- Optimization
 hugoblox:
   ids:
     doi: 10.1177/1550147718815841

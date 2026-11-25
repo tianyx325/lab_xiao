@@ -13,8 +13,8 @@ image:
 project_code: BUAA-VR-16KF-10
 project_status: completed
 project_type: vertical
-funding: 虚拟现实技术与系统国家重点实验课题
+funding: State Key Laboratory of Virtual Reality Technology and Systems
 tags:
-- 光场成像
-- 图像处理
+- Light-field imaging
+- Image processing
 ---

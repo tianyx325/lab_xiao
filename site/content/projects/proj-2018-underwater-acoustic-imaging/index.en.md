@@ -15,6 +15,6 @@ project_type: horizontal
 aliases:
 - /project/hai-sheng-cheng-xiang-shu-ju-chu-li-ji-mu-biao-jian-ce-fang/
 tags:
-- 目标检测
-- 声学成像
+- Object detection
+- Acoustic imaging
 ---

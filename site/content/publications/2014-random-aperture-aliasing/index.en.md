@@ -9,7 +9,7 @@ date: '2014-02-20T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 自动化学报
+  name: Acta Automatica Sinica
 summary: The coefficient of variation of the point set imaged through a randomly masked
   aperture is used to detect light field aliasing without requiring scene depth or
   texture priors, and the aliasing is then corrected according to the detection results.
@@ -28,7 +28,7 @@ abstract: 'Existing light field acquisition systems suffer from undersampled ang
   '
 featured: false
 tags:
-- 光场成像
+- Light-field imaging
 hugoblox:
   ids:
     doi: 10.3724/SP.J.1004.2014.00247

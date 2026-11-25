@@ -40,8 +40,8 @@ abstract: 'Infrared and visible image fusion is currently an important research 
   '
 featured: false
 tags:
-- 图像融合
-- 深度学习
+- Image fusion
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/tmm.2024.3521848

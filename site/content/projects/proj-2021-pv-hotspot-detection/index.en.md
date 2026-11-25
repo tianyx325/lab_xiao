@@ -15,6 +15,6 @@ project_type: horizontal
 aliases:
 - /project/guang-fu-mian-ban-hong-wai-cheng-xiang-de-re-ban-que-xian-ji/
 tags:
-- 目标检测
-- 图像处理
+- Object detection
+- Image processing
 ---

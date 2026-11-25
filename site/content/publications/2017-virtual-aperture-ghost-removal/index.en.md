@@ -7,7 +7,7 @@ date: '2017-01-01T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 西北工业大学学报
+  name: Journal of Northwestern Polytechnical University
   issue: '1'
   pages: 154-159
 summary: To address ghosting artifacts in defocused regions of synthetic aperture
@@ -26,7 +26,7 @@ abstract: To address ghosting artifacts in defocused regions of synthetic apertu
   as much as possible.
 featured: false
 tags:
-- 光场成像
+- Light-field imaging
 publication_short: Journal of Northwestern Polytechnical University
 research:
 - depth

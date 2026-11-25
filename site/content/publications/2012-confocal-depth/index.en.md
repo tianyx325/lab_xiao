@@ -9,7 +9,7 @@ date: '2012-12-01T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 计算机应用与软件
+  name: Computer Applications and Software
   volume: '29'
   issue: '12'
   pages: 43-46
@@ -30,8 +30,8 @@ abstract: 'A depth estimation method based on confocal images is proposed. Virtu
   '
 featured: false
 tags:
-- 光场成像
-- 深度估计
+- Light-field imaging
+- Depth estimation
 publication_short: Computer Applications and Software
 research:
 - depth

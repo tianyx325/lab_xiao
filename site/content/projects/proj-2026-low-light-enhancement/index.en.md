@@ -15,7 +15,7 @@ project_type: horizontal
 aliases:
 - /project/ruo-guang-tu-xiang-zeng-qiang-suan-fa-ding-zhi-kai-fa/
 tags:
-- 弱光增强
-- 图像处理
-- 深度学习
+- Low-light enhancement
+- Image processing
+- Deep learning
 ---

@@ -14,11 +14,10 @@ email: "wlh2312087@163.com"
 social:
 enroll_year: 2025
 ---
+**Longhao Wang** is an **M.S. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**王龙豪**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
+**Research:** Skeleton-based human action recognition.
 
-**研究方向：** 基于骨骼的人体动作识别
+**Personal**
 
-**个人**
-
-- 座右铭：宠辱不惊，闲看庭前花开花落；去留无意，漫随天外云卷云舒。
+- Motto: Stay calm through praise and disgrace and watch the flowers bloom and fall in the courtyard; let go of comings and goings and follow the clouds drift across the sky.

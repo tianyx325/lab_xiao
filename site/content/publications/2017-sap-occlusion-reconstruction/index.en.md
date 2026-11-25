@@ -33,9 +33,9 @@ abstract: 'Foreground occlusion is a significant challenge in three-dimensional 
   '
 featured: false
 tags:
-- 光场成像
-- 深度估计
-- 三维重建
+- Light-field imaging
+- Depth estimation
+- 3D reconstruction
 hugoblox:
   ids:
     doi: 10.1109/JSTSP.2017.2715012

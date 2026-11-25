@@ -15,6 +15,6 @@ project_type: horizontal
 aliases:
 - /project/ji-dong-che-xing-shi-zheng-dian-zi-cuan-gai-jian-ce-suan-fa/
 tags:
-- 计算机视觉
-- 图像安全
+- Computer vision
+- Image security
 ---

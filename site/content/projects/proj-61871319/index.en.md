@@ -13,8 +13,8 @@ image:
 project_code: '61871319'
 project_status: completed
 project_type: vertical
-funding: 国家自然科学基金·面上项目
+funding: National Natural Science Foundation of China (General Program)
 tags:
-- 光场成像
-- 特征匹配
+- Light-field imaging
+- Feature matching
 ---

@@ -19,6 +19,6 @@ url_patent: https://patents.google.com/patent/CN101963751B/zh
 url_pdf: https://patentimages.storage.googleapis.com/17/6c/a3/d4f68612b4d87d/CN101963751B.pdf
 patent_type: invention
 tags:
-- 计算成像
-- 图像处理
+- Computational imaging
+- Image processing
 ---

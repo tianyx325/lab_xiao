@@ -10,13 +10,13 @@ date: '2017-01-01T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 西安理工大学学报
+  name: Journal of Xi'an University of Technology
   issue: '1'
 summary: Human actions are recognized using local features along the temporal dimension.
 abstract: Human actions are recognized using local features along the temporal dimension.
 featured: false
 tags:
-- 动作识别
+- Action recognition
 publication_short: Journal of Xi'an University of Technology
 research:
 - action

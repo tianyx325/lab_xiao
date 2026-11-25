@@ -32,8 +32,8 @@ abstract: 'In this paper, we propose a novel depth recovery method from multi-vi
   '
 featured: false
 tags:
-- 光场成像
-- 深度估计
+- Light-field imaging
+- Depth estimation
 hugoblox:
   ids:
     doi: 10.1109/icvrv.2013.34

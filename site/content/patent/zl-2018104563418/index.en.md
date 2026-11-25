@@ -15,6 +15,6 @@ url_patent: https://patents.google.com/patent/CN108600865B/zh
 url_pdf: https://patentimages.storage.googleapis.com/c1/d6/f7/fad021a64ee810/CN108600865B.pdf
 patent_type: invention
 tags:
-- 图像处理
-- 计算机视觉
+- Image processing
+- Computer vision
 ---

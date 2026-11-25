@@ -29,7 +29,7 @@ abstract: 'The depth resolution of synthetic aperture photography (SAP) is signi
   '
 featured: false
 tags:
-- 光场成像
+- Light-field imaging
 hugoblox:
   ids:
     doi: 10.1109/ICSPCC.2013.6664115

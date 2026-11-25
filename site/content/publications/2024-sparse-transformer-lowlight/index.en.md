@@ -32,8 +32,8 @@ abstract: 'Dark Image Enhancement (DIE) aims to improve contrast and restore det
   '
 featured: false
 tags:
-- 弱光增强
-- 深度学习
+- Low-light enhancement
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/icme57554.2024.10687442

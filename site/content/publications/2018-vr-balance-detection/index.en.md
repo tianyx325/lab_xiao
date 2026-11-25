@@ -30,7 +30,7 @@ abstract: 'Virtual reality technology shows serious potential in many fields, su
   '
 featured: false
 tags:
-- 动作识别
+- Action recognition
 hugoblox:
   ids:
     doi: 10.1007/978-3-030-23712-7_1

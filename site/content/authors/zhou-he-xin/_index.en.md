@@ -14,7 +14,6 @@ email: "zhx_291217@163.com"
 social:
 enroll_year: 2025
 ---
+**Hexin Zhou** is an **M.S. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**周贺鑫**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
-
-**研究方向：** 大模型应用
+**Research:** Large-model applications.

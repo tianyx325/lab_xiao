@@ -16,6 +16,6 @@ url_patent: https://patents.google.com/patent/CN108664942B/zh
 url_pdf: https://patentimages.storage.googleapis.com/e3/b3/35/5284ad9383ab19/CN108664942B.pdf
 patent_type: invention
 tags:
-- 动作识别
-- 图像处理
+- Action recognition
+- Image processing
 ---

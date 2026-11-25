@@ -33,8 +33,8 @@ abstract: 'False correspondence removal is a persistent challenge in image featu
   '
 featured: false
 tags:
-- 特征匹配
-- 深度学习
+- Feature matching
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/icassp49660.2025.10887571

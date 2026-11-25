@@ -40,7 +40,7 @@ abstract: 'The normal and disordered people balance ability classification is a 
   '
 featured: false
 tags:
-- 动作识别
+- Action recognition
 hugoblox:
   ids:
     doi: 10.3390/s19122738

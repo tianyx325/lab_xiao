@@ -14,13 +14,12 @@ email: "2903465406@qq.com"
 social:
 enroll_year: 2026
 ---
+**Yirui Xue** is an **M.S. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**薛奕瑞**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
+**Research:** Agents.
 
-**研究方向：** 智能体
+**Study & Research**
 
-**学习与研究**
-
-- 研究兴趣：人工智能、大语言模型与智能体
-- 具备 Python 编程基础
-- 关注深度学习与智能体开发的实践应用
+- Interests: artificial intelligence, large language models, and agents.
+- Working knowledge of Python.
+- Focused on practical applications of deep learning and agent development.

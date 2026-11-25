@@ -46,7 +46,7 @@ abstract: 'Partial differential equations (PDEs) have emerged as a useful tool f
   '
 featured: false
 tags:
-- 图像处理
+- Image processing
 hugoblox:
   ids:
     doi: 10.1016/j.image.2018.02.006

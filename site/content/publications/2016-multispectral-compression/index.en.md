@@ -38,7 +38,7 @@ abstract: 'We propose that both colorimetric and spectral distortion in compress
   '
 featured: false
 tags:
-- 图像处理
+- Image processing
 hugoblox:
   ids:
     doi: 10.1117/1.jei.25.4.043026

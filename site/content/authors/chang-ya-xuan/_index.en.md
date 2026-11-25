@@ -14,7 +14,6 @@ email: "yaoyao-002@163.com"
 social:
 enroll_year: 2025
 ---
+**Yaxuan Chang** is an **M.S. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**常雅璇**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
-
-**研究方向：** 事件相机弱光深度估计
+**Research:** Event-camera low-light depth estimation.

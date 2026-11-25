@@ -13,8 +13,8 @@ image:
 project_code: '61501370'
 project_status: completed
 project_type: vertical
-funding: 国家自然科学基金·青年项目
+funding: National Natural Science Foundation of China (Young Scientists Fund)
 tags:
-- 光场成像
-- 图像超分辨率
+- Light-field imaging
+- Image super-resolution
 ---

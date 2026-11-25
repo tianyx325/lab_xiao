@@ -36,7 +36,7 @@ abstract: 'In the low light image enhancement, single exposure images contains a
   '
 featured: false
 tags:
-- 弱光增强
+- Low-light enhancement
 hugoblox:
   ids:
     doi: 10.1109/ijcnn60899.2024.10650454

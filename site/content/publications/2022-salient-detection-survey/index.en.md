@@ -9,7 +9,7 @@ date: '2022-09-10T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 计算机技术与发展
+  name: Computer Technology and Development
   volume: '32'
   issue: 09
   pages: 1-7
@@ -36,11 +36,11 @@ abstract: 'Salient object detection aims to quickly and effectively extract usef
   '
 featured: false
 tags:
-- 特征匹配
-- 图像融合
-- 显著性检测
-- 深度学习
-- 多模态
+- Feature matching
+- Image fusion
+- Saliency detection
+- Deep learning
+- Multimodal
 hugoblox:
   ids:
     doi: 10.3969/j.issn.1673-629X.2022.09.001

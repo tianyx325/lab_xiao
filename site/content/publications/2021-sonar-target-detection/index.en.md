@@ -9,7 +9,7 @@ date: '2021-01-01T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 中国科技论文
+  name: China Sciencepaper
   issue: '7'
   pages: 695-700, 714
 summary: Fractal enhancement is combined with the isolation forest algorithm to detect
@@ -18,7 +18,7 @@ abstract: Fractal enhancement is combined with the isolation forest algorithm to
   targets in sonar data.
 featured: false
 tags:
-- 目标检测
-- 声学成像
+- Object detection
+- Acoustic imaging
 publication_short: China Sciencepaper
 ---

@@ -37,8 +37,8 @@ abstract: 'An optical watermarking method is presented based on computational gh
   '
 featured: false
 tags:
-- 计算成像
-- 图像安全
+- Computational imaging
+- Image security
 hugoblox:
   ids:
     doi: 10.1007/s00340-022-07855-2

@@ -15,6 +15,6 @@ url_patent: https://patents.google.com/patent/CN117037246B/zh
 url_pdf: https://patentimages.storage.googleapis.com/ee/78/bd/29ad7b1d81c421/CN117037246A.pdf
 patent_type: invention
 tags:
-- 计算机视觉
-- 深度学习
+- Computer vision
+- Deep learning
 ---

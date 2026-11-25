@@ -14,7 +14,6 @@ email: "2667703062@qq.com"
 social:
 enroll_year: 2026
 ---
+**Qianlin Zhai** is an **M.S. student** in the School of Computer Science and Technology, Xi'an University of Technology, advised by Prof. Zhaolin Xiao.
 
-**翟乾林**，西安理工大学计算机科学与技术学院**硕士研究生**，导师：肖照林教授。
-
-**研究方向：** 动作识别
+**Research:** Action recognition.

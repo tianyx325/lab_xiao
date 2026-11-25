@@ -34,8 +34,8 @@ abstract: 'Low-light image enhancement methods based on diffusion models, though
   '
 featured: false
 tags:
-- 弱光增强
-- 深度学习
+- Low-light enhancement
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/icassp49660.2025.10888098

@@ -9,7 +9,7 @@ date: '2015-12-01T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 计算机学报
+  name: Chinese Journal of Computers
   volume: '38'
   issue: '12'
   pages: 2437-2449
@@ -36,9 +36,9 @@ abstract: 'Inspired by the depth perception mechanism of human vision and incorp
   '
 featured: false
 tags:
-- 光场成像
-- 深度估计
-- 图像融合
+- Light-field imaging
+- Depth estimation
+- Image fusion
 hugoblox:
   ids:
     doi: 10.11897/SP.J.1016.2015.02437

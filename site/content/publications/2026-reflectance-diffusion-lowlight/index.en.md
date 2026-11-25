@@ -37,8 +37,8 @@ abstract: 'Balancing illumination enhancement and noise suppression represents a
   '
 featured: false
 tags:
-- 弱光增强
-- 深度学习
+- Low-light enhancement
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1016/j.jvcir.2026.104819

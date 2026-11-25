@@ -8,7 +8,7 @@ date: '2014-03-01T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 计算机应用研究
+  name: Application Research of Computers
   volume: '31'
   issue: '3'
   pages: 942-945
@@ -31,7 +31,7 @@ abstract: 'In order to relieve the jump effects of the height fields caused by v
   '
 featured: false
 tags:
-- 图像处理
-- 计算机视觉
+- Image processing
+- Computer vision
 publication_short: Application Research of Computers
 ---

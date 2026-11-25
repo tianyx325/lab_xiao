@@ -35,8 +35,8 @@ abstract: 'Photographs taken in low-light conditions have a low signal-to-noise 
   '
 featured: false
 tags:
-- 弱光增强
-- 深度学习
+- Low-light enhancement
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1109/icip51287.2024.10648195

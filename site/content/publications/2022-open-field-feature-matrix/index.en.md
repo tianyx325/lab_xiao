@@ -9,7 +9,7 @@ date: '2022-01-01T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 中国图象图形学报
+  name: Journal of Image and Graphics
   volume: '27'
   issue: '3'
   pages: 988-1000
@@ -52,9 +52,9 @@ abstract: '**Purpose**　The open field test (OFT) is a commonly used experiment
   '
 featured: false
 tags:
-- 特征匹配
-- 动作识别
-- 深度学习
+- Feature matching
+- Action recognition
+- Deep learning
 hugoblox:
   ids:
     doi: 10.11834/jig.210606

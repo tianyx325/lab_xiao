@@ -28,8 +28,8 @@ abstract: 'In this paper, we use contrast pyramid to decompose the image; and th
   '
 featured: false
 tags:
-- 图像融合
-- 优化算法
+- Image fusion
+- Optimization
 hugoblox:
   ids:
     doi: 10.1109/hpcc/smartcity/dss.2018.00169

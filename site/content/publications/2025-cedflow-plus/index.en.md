@@ -39,9 +39,9 @@ abstract: 'CEDFlow introduces a latent contour enhancement method into dark opti
   '
 featured: true
 tags:
-- 弱光增强
-- 光流估计
-- 深度学习
+- Low-light enhancement
+- Optical flow
+- Deep learning
 hugoblox:
   ids:
     doi: 10.1007/s11263-025-02528-x

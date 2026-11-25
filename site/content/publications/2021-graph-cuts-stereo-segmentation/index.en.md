@@ -9,7 +9,7 @@ date: '2021-08-10T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 计算机科学
+  name: Computer Science
   volume: '48'
   issue: '8'
   pages: 150-156
@@ -35,8 +35,8 @@ abstract: 'Stereo image segmentation is essential for subsequent applications su
   '
 featured: false
 tags:
-- 三维重建
-- 计算机视觉
+- 3D reconstruction
+- Computer vision
 hugoblox:
   ids:
     doi: 10.11896/jsjkx.200800221

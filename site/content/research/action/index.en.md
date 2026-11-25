@@ -7,7 +7,7 @@ summary: Focusing on human behavior understanding, this direction studies skelet
   and visual-feature-based action recognition methods, covering spatio-temporal modeling,
   robust representation, and behavior understanding applications in real-world scenarios.
 tags:
-- 动作识别
+- Action recognition
 ---
 
 Focusing on human behavior understanding, this direction studies methods for recognizing and analyzing actions from videos and skeleton sequences, emphasizing spatio-temporal modeling and robustness in real-world scenarios, serving applications such as human-computer interaction, intelligent surveillance, and behavior analysis.

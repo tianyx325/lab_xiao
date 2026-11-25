@@ -8,7 +8,7 @@ date: '2012-01-01T00:00:00Z'
 publication_types:
 - article-journal
 publication:
-  name: 系统仿真学报
+  name: Journal of System Simulation
   volume: '24'
   issue: '1'
   pages: 188-191
@@ -29,6 +29,6 @@ abstract: 'With the aim to recover the planar underwater scenes from a video seq
   '
 featured: false
 tags:
-- 图像处理
+- Image processing
 publication_short: Journal of System Simulation
 ---

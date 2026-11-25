@@ -39,7 +39,7 @@ abstract: 'In low-light image enhancement, single-exposure images contain a limi
   '
 featured: false
 tags:
-- 弱光增强
+- Low-light enhancement
 hugoblox:
   ids:
     doi: 10.1016/j.jvcir.2024.104127

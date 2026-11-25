@@ -16,6 +16,6 @@ url_patent: https://patents.google.com/patent/CN117079106B/zh
 url_pdf: https://patentimages.storage.googleapis.com/33/cc/18/5abb9ae4a3689e/CN117079106A.pdf
 patent_type: invention
 tags:
-- 光场成像
-- 图像融合
+- Light-field imaging
+- Image fusion
 ---

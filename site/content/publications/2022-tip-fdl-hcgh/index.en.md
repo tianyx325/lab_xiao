@@ -30,8 +30,8 @@ abstract: 'Many computer vision applications rely on feature detection and descr
   '
 featured: true
 tags:
-- 光场成像
-- 特征匹配
+- Light-field imaging
+- Feature matching
 hugoblox:
   ids:
     doi: 10.1109/tip.2022.3202099
