@@ -44,7 +44,10 @@
 {{- $projects = sort $projects "Date" "desc" -}}
 
 {{- $labOrg := "" -}}
-{{- with site.Params.lab -}}{{- $labOrg = .org_name | default "" -}}{{- end -}}
+{{- with site.Params.lab -}}
+  {{- $labOrg = .org_name | default "" -}}
+  {{- if eq site.Language.Lang "en" }}{{ $labOrg = .org_name_en | default $labOrg }}{{ end -}}
+{{- end -}}
 
 {{- $ug := .Params.user_groups | default slice -}}
 {{- $isAdvisor := or (in $ug "导师") (in $ug "Supervisor") (in $ug "Advisors") -}}

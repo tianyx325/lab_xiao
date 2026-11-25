@@ -1,10 +1,12 @@
 {{- /* Footer block content — the outer <footer> is supplied by the
        theme's site_footer partial via site.Params.footer.block. */ -}}
 {{ $lab := site.Params.lab | default dict }}
-{{ $ui := $lab.ui | default dict }}
+{{ $isEn := eq site.Language.Lang "en" }}
+{{ $ui := cond $isEn ($lab.ui_en | default ($lab.ui | default dict)) ($lab.ui | default dict) }}
+{{ $address := cond $isEn ($lab.address_en | default $lab.address) $lab.address }}
 <div class="lab-footer">
   <div class="lab-footer-inner">
-    {{ if or $lab.email $lab.address }}
+    {{ if or $lab.email $address }}
     <div class="lab-footer-row">
       <div class="lab-footer-heading">{{ i18n "lab_footer_contact" }}</div>
       <div class="lab-footer-items">
@@ -14,7 +16,7 @@
           <a class="lab-footer-item lab-footer-item--mono" href="mailto:{{ . }}">{{ . }}</a>
         </span>
         {{ end }}
-        {{ with $lab.address }}
+        {{ with $address }}
         <span class="lab-footer-meta">
           <span class="lab-footer-meta-label">{{ $ui.address_label | default (i18n "lab_label_address") }}</span>
           <span class="lab-footer-item">{{ . }}</span>
@@ -28,7 +30,7 @@
       <div class="lab-footer-heading">{{ i18n "lab_footer_links" }}</div>
       <ul class="lab-footer-items">
         {{ range . }}
-        <li><a class="lab-footer-item lab-ext" href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></li>
+        <li><a class="lab-footer-item lab-ext" href="{{ .url }}" target="_blank" rel="noopener">{{ if and $isEn .name_en }}{{ .name_en }}{{ else }}{{ .name }}{{ end }}</a></li>
         {{ end }}
       </ul>
     </div>

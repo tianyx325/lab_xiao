@@ -48,5 +48,7 @@ npm run check:links  # 构建后校验站内链接与锚点
 | `site/content/` | Markdown page bundles（契约见 [`site/CONTENT-SCHEMA.md`](site/CONTENT-SCHEMA.md)） |
 | `.github/workflows/` | 构建与发布 |
 
+`site/_vendor` 是 `hugo mod vendor` 的产物，随仓库提交；修改 `go.mod` 后执行 `hugo mod vendor` 重新生成并一起提交。
+
 部署：GitHub Pages `https://tianyx325.github.io/lab_xiao/`（`baseURL` 在 `site/config/_default/hugo.yaml`）。
 包管理：npm（`site/package-lock.json`）。Hugo 版本统一定在 `0.168.0`。

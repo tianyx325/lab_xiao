@@ -13,13 +13,16 @@ lab:
   name: 智能感知与决策实验室
   name_en: IPD Lab
   org_name: 西安理工大学计算机科学与技术学院
+  org_name_en: School of Computer Science and Technology, Xi'an University of Technology
   org_url: https://jsj.xaut.edu.cn/
   email: zhaolin.xiao@xaut.edu.cn
   address: 西安理工大学金花校区教3楼417室
+  address_en: Room 417, Teaching Building 3, Jinhua Campus, Xi'an University of Technology
   latitude: '34.2560'
   longitude: '108.9880'
   tagline: ''
   lead: 聚焦大模型与智能体、弱光视觉、深度估计，做能落地的感知与决策研究
+  lead_en: Research on large models and agents, low-light vision, and depth estimation — building perception and decision systems that work in the real world.
   seo_description: 本实验室面向大模型和智能体应用、弱光视觉增强、深度估计与人体动作识别，开展感知前端与自主决策相关研究。
   admit_lead: 欢迎有志于智能感知与决策研究的同学加入实验室
   research_home_count: 3
@@ -27,10 +30,13 @@ lab:
   page_size: 12
   friend_links:
     - name: 西安理工大学
+      name_en: Xi'an University of Technology
       url: https://www.xaut.edu.cn/
     - name: 计算机科学与技术学院
+      name_en: School of Computer Science and Technology
       url: https://jsj.xaut.edu.cn/
     - name: 西安理工大学研究生院
+      name_en: Graduate School, Xi'an University of Technology
       url: https://yjsy.xaut.edu.cn/index.htm
   ui:
     # 空则自动为「{name}团队成员」
@@ -41,6 +47,14 @@ lab:
     email_label: 邮箱
     address_label: 地址
     map_aria: 实验室位置地图
+  ui_en:
+    people_lead: ''
+    contact_title: Contact & Admissions
+    admit_kind: Admissions
+    contact_kind: Contact
+    email_label: Email
+    address_label: Address
+    map_aria: Lab location map
   admit:
     sections:
       - title: 硕士 / 博士
@@ -63,6 +77,28 @@ lab:
           - 标题：报考咨询-姓名-学校
           - 必附：个人简历、成绩单
           - 可选：论文、项目或竞赛经历
+  admit_en:
+    sections:
+      - title: M.S. / Ph.D.
+        lead: Computer vision, image processing, and artificial intelligence; rolling admissions.
+        bullets:
+          - Strong motivation and willingness to take on challenges
+          - Solid mathematics foundation and English reading/writing
+          - Good programming skills
+          - Priority for combined B.S.–M.S. / B.S.–Ph.D. programs
+      - title: Outstanding Undergraduates
+        lead: Early-year students are welcome to join research and competitions.
+        bullets:
+          - Open to years 1–3
+          - About 3–5 students per year
+          - Participate in projects and competition coaching
+          - Contact us by email with a short self-introduction
+      - title: How to Apply
+        lead: Send your materials to the advisor's email; we will reply as soon as possible.
+        bullets:
+          - "Subject: Application inquiry – Name – University"
+          - "Required: CV and transcripts"
+          - "Optional: papers, projects, or competition experience"
 
 # Appearance
 

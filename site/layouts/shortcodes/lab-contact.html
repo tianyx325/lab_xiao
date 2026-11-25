@@ -6,6 +6,11 @@
 {{- $lat := printf "%v" ($lab.latitude | default "0") -}}
 {{- $lng := printf "%v" ($lab.longitude | default "0") -}}
 {{- $isEn := eq site.Language.Lang "en" -}}
+{{- if $isEn -}}
+  {{- $ui = $lab.ui_en | default $ui -}}
+  {{- $admit = $lab.admit_en | default $admit -}}
+  {{- $address = $lab.address_en | default $address -}}
+{{- end -}}
 {{- $pageTitle := $ui.contact_title | default (cond $isEn "Contact & Admissions" "联系与招生") -}}
 {{- $admitKind := $ui.admit_kind | default (cond $isEn "Admissions" "招生信息") -}}
 {{- $contactKind := $ui.contact_kind | default (cond $isEn "Contact" "联系方式") -}}

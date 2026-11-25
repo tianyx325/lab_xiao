@@ -3,11 +3,12 @@
   Intro body + build-time aggregated stats + dual CTAs.
 */ -}}
 {{- $lab := site.Params.lab | default dict -}}
+{{- $is_en := eq site.Language.Lang "en" -}}
 {{- $name := site.Title | default ($lab.name | default "") -}}
 {{- $tagline := $lab.tagline | default "" -}}
-{{- $lead := site.Params.lead | default ($lab.lead | default "") -}}
+{{- $leadDefault := cond $is_en ($lab.lead_en | default ($lab.lead | default "")) ($lab.lead | default "") -}}
+{{- $lead := site.Params.lead | default $leadDefault -}}
 {{- $intro := site.Params.intro | default "" -}}
-{{- $is_en := eq site.Language.Lang "en" -}}
 <div class="lab-hero">
   <h1 class="lab-hero-brand">{{- $name -}}</h1>
   {{- with $tagline -}}

@@ -9,16 +9,19 @@
   which made the coordinates in lab.* unreachable at our site_type.
 */ -}}
 {{- $lab := site.Params.lab | default dict -}}
+{{- $isEn := eq site.Language.Lang "en" -}}
+{{- $orgName := cond $isEn ($lab.org_name_en | default site.Params.marketing.seo.org_name) (site.Params.marketing.seo.org_name | default site.Title) -}}
+{{- $address := cond $isEn ($lab.address_en | default $lab.address) $lab.address -}}
 {{- $sharing_image := resources.GetMatch (path.Join "media" "sharing.*") -}}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": {{site.Params.marketing.seo.site_type | default site.Params.marketing.seo.site_type}},
   "@id": {{site.BaseURL}},
-  "name": {{site.Params.marketing.seo.org_name | default site.Title}},
+  "name": {{ $orgName }},
   "logo": {{ partial "blox-core/functions/get_logo_url" . }},
   {{with $sharing_image}}"image": {{.Permalink}},{{end}}
-  {{ with $lab.address }}
+  {{ with $address }}
   "address": {
     "@type": "PostalAddress",
     "streetAddress": {{.}},

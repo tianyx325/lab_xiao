@@ -42,6 +42,8 @@
   {{ $desc = .Params.abstract }}
 {{ else if .IsPage }}
   {{ $desc = .Summary }}
+{{ else if site.Language.Params.description }}
+  {{ $desc = site.Language.Params.description }}
 {{ else if site.Params.marketing.seo.description }}
   {{ $desc = site.Params.marketing.seo.description }}
 {{ else if $lab.seo_description }}
