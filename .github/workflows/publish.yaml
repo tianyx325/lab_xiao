@@ -38,21 +38,18 @@ jobs:
           hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
 
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: npm
-          cache-dependency-path: site/package-lock.json
 
-      - name: Install dependencies (Dart Sass comes with sass-embedded)
-        run: npm ci
+      - name: Install Dart Sass
+        run: echo "$(bash scripts/install-dart-sass.sh)" >> "$GITHUB_PATH"
 
       - name: Build
         env:
           HUGO_ENVIRONMENT: production
-        run: npm run build -- --cleanDestinationDir
+        run: hugo --minify --cleanDestinationDir
 
       - name: Check internal links
         run: npm run check:links
